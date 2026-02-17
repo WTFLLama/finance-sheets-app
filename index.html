@@ -1,0 +1,412 @@
+
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Finance Sheets App</title>
+
+  <!-- PWA basics -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#111827" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- Minimal styling -->
+  <style>
+    body { margin:0; font-family: -apple-system, system-ui, Segoe UI, Roboto, Arial; background:#0b1220; color:#e5e7eb; }
+    .app { max-width: 480px; margin: 0 auto; min-height: 100vh; display:flex; flex-direction:column; }
+    .header { padding: 18px 16px 10px; font-weight: 700; font-size: 18px; }
+    .content { flex:1; padding: 12px 16px 84px; }
+    .grid { display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .card { background:#111827; border:1px solid #1f2937; border-radius: 16px; padding: 12px; }
+    .label { font-size: 12px; color:#9ca3af; }
+    .value { margin-top: 6px; font-size: 18px; font-weight: 700; }
+    .row { display:flex; gap:12px; }
+    .btn { flex:1; background:#2563eb; border:none; color:white; padding: 12px 14px; border-radius: 14px; font-weight:700; }
+    .btn.secondary { background:#16a34a; }
+    .btn.ghost { background: transparent; border: 1px solid #374151; }
+    .nav { position: fixed; bottom: 0; left: 0; right: 0; background:#0b1220; border-top:1px solid #1f2937; }
+    .nav-inner { max-width:480px; margin:0 auto; display:flex; }
+    .tab { flex:1; padding: 12px 10px; text-align:center; font-weight:700; color:#9ca3af; }
+    .tab.active { color:#e5e7eb; }
+    input, select { width:100%; background:#0b1220; border:1px solid #334155; color:#e5e7eb; padding: 10px 12px; border-radius: 12px; }
+    .field { margin-top: 10px; }
+    .help { font-size: 12px; color:#9ca3af; margin-top:6px; }
+    .error { background:#7f1d1d; border:1px solid #991b1b; padding:10px 12px; border-radius:12px; margin-top:10px;}
+    .ok { background:#064e3b; border:1px solid #065f46; padding:10px 12px; border-radius:12px; margin-top:10px;}
+  </style>
+
+  <!-- React from CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+<script>
+const { useEffect, useMemo, useState } = React;
+
+// ✅ PUT YOUR APPS SCRIPT WEB APP URL HERE:
+const API_BASE = "https://script.google.com/macros/s/AKfycbzHGj8SDBjfTkSOk4HP9wsCZfT_hjY5h_vkXenr1RDC80SYUEPoofHin8zEdPVLfcPD2A/exec; // ends with /exec
+
+async function apiGet(path) {
+  const url = API_BASE + "?path=" + encodeURIComponent(path);
+  const res = await fetch(url, { method: "GET" });
+  const json = await res.json();
+  if (!json.ok) throw new Error(json.error || "API error");
+  return json.data;
+}
+
+async function apiPost(path, payload) {
+  const res = await fetch(API_BASE, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({ path, ...payload })
+  });
+  const json = await res.json();
+  if (!json.ok) throw new Error(json.error || "API error");
+  return json.data;
+}
+
+function BottomNav({ tab, setTab }) {
+  return (
+    React.createElement("div", { className:"nav" },
+      React.createElement("div", { className:"nav-inner" },
+        ["Overview","Add","Subledger","Reports"].map(t =>
+          React.createElement("div", {
+            key:t, className:"tab" + (tab===t ? " active" : ""),
+            onClick: () => setTab(t)
+          }, t)
+        )
+      )
+    )
+  );
+}
+
+function Overview() {
+  const [data, setData] = useState(null);
+  const [err, setErr] = useState("");
+
+  async function load() {
+    setErr("");
+    try {
+      const d = await apiGet("overview");
+      setData(d);
+    } catch (e) {
+      setErr(String(e.message || e));
+    }
+  }
+
+  useEffect(() => { load(); }, []);
+
+  return React.createElement(React.Fragment, null,
+    React.createElement("div", { className:"header" }, "Overview"),
+    React.createElement("div", { className:"content" },
+      err ? React.createElement("div", { className:"error" }, err) : null,
+      !data ? React.createElement("div", { className:"help" }, "Loading...") : null,
+      data ? React.createElement("div", { className:"grid" },
+        React.createElement("div", { className:"card" },
+          React.createElement("div", { className:"label" }, "Bank balance"),
+          React.createElement("div", { className:"value" }, data.bankBalance)
+        ),
+        React.createElement("div", { className:"card" },
+          React.createElement("div", { className:"label" }, "Credit card remaining limit"),
+          React.createElement("div", { className:"value" }, data.cardRemainingLimit)
+        ),
+        React.createElement("div", { className:"card" },
+          React.createElement("div", { className:"label" }, "Credit card liability"),
+          React.createElement("div", { className:"value" }, data.cardLiability)
+        ),
+        React.createElement("div", { className:"card" },
+          React.createElement("div", { className:"label" }, "Investment balance"),
+          React.createElement("div", { className:"value" }, data.investmentBalance)
+        ),
+      ) : null,
+      data ? React.createElement("div", { className:"card", style:{marginTop:"12px"} },
+        React.createElement("div", { className:"label" }, "Expenses this month"),
+        React.createElement("div", { className:"value" }, data.currentMonthExpense),
+        React.createElement("div", { className:"help" }, "As of: " + data.asOf)
+      ) : null,
+      React.createElement("div", { className:"row", style:{marginTop:"12px"} },
+        React.createElement("button", { className:"btn ghost", onClick: load }, "Refresh")
+      )
+    )
+  );
+}
+
+function Add({ modeDefault="expense" }) {
+  const [lists, setLists] = useState(null);
+  const [err, setErr] = useState("");
+  const [ok, setOk] = useState("");
+
+  const [mode, setMode] = useState(modeDefault); // "expense" | "income"
+
+  const [description, setDescription] = useState("");
+  const [posName, setPosName] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const [transactionDate, setTransactionDate] = useState("");
+  const [recognizeLater, setRecognizeLater] = useState(false);
+  const [recognitionDate, setRecognitionDate] = useState("");
+  const [amount, setAmount] = useState("");
+
+  const [useSplit, setUseSplit] = useState(false);
+
+  const [category1, setCategory1] = useState("");
+  const [amount1, setAmount1] = useState("");
+  const [category2, setCategory2] = useState("");
+  const [amount2, setAmount2] = useState("");
+  const [category3, setCategory3] = useState("");
+  const [amount3, setAmount3] = useState("");
+
+  const categories = useMemo(() => {
+    if (!lists) return [];
+    return mode === "expense" ? lists.expenseCategories : lists.incomeCategories;
+  }, [lists, mode]);
+
+  async function loadLists() {
+    setErr(""); setOk("");
+    try {
+      const d = await apiGet("lists");
+      setLists(d);
+      // defaults
+      if (!paymentMethod && d.paymentMethods[0]) setPaymentMethod(d.paymentMethods[0]);
+      if (!category1 && (mode === "expense" ? d.expenseCategories[0] : d.incomeCategories[0])) {
+        setCategory1((mode === "expense" ? d.expenseCategories[0] : d.incomeCategories[0]) || "");
+      }
+    } catch (e) {
+      setErr(String(e.message || e));
+    }
+  }
+
+  useEffect(() => { loadLists(); }, []);
+
+  useEffect(() => {
+    // when mode switches, reset categories to first available
+    if (!lists) return;
+    const first = (mode === "expense" ? lists.expenseCategories[0] : lists.incomeCategories[0]) || "";
+    setCategory1(first);
+    setCategory2("");
+    setCategory3("");
+    setAmount1("");
+    setAmount2("");
+    setAmount3("");
+    setUseSplit(false);
+  }, [mode]);
+
+  function validate() {
+    setErr(""); setOk("");
+    const amt = Number(amount);
+    if (!description.trim()) return "Description required.";
+    if (!posName.trim()) return "POS/Business name required.";
+    if (!paymentMethod) return "Payment method required.";
+    if (!transactionDate) return "Transaction date required.";
+    if (!Number.isFinite(amt) || amt <= 0) return "Amount must be a positive number.";
+    if (recognizeLater && !recognitionDate) return "Recognition date required when Recognize later is ON.";
+    if (!category1) return "Category I required.";
+
+    // split logic
+    if (!useSplit) {
+      // allocate all to cat1
+      return null;
+    } else {
+      const a1 = Number(amount1 || 0);
+      const a2 = Number(amount2 || 0);
+      const a3 = Number(amount3 || 0);
+      const sum = a1 + a2 + a3;
+      if (Math.abs(sum - amt) > 0.01) return `Split amounts must sum to total amount. total=${amt}, splits=${sum}`;
+      if (a1 < 0 || a2 < 0 || a3 < 0) return "Split amounts must be >= 0.";
+      if (!category2 && a2 > 0) return "Category II required if Amount II > 0.";
+      if (!category3 && a3 > 0) return "Category III required if Amount III > 0.";
+      return null;
+    }
+  }
+
+  async function submit() {
+    const v = validate();
+    if (v) { setErr(v); return; }
+
+    const amt = Number(amount);
+    let a1 = useSplit ? Number(amount1 || 0) : amt;
+    let a2 = useSplit ? Number(amount2 || 0) : "";
+    let a3 = useSplit ? Number(amount3 || 0) : "";
+
+    const payload = {
+      transactionDate,
+      recognitionDate: recognizeLater ? recognitionDate : "",
+      paymentMethod,
+      posName,
+      amount: amt,
+      description,
+      category1,
+      amount1: a1,
+      category2: useSplit ? category2 : "",
+      amount2: a2,
+      category3: useSplit ? category3 : "",
+      amount3: a3
+    };
+
+    setErr(""); setOk("");
+    try {
+      const r = await apiPost("append", payload);
+      setOk("Saved ✅ (Row " + r.appendedRow + ")");
+      // reset minimal fields but keep payment method
+      setDescription("");
+      setPosName("");
+      setAmount("");
+      setRecognizeLater(false);
+      setRecognitionDate("");
+      setUseSplit(false);
+      setAmount1(""); setAmount2(""); setAmount3("");
+      setCategory2(""); setCategory3("");
+    } catch (e) {
+      setErr(String(e.message || e));
+    }
+  }
+
+  const modeBtnStyle = (m) => "btn " + (mode===m ? "" : "ghost");
+
+  return React.createElement(React.Fragment, null,
+    React.createElement("div", { className:"header" }, "Add"),
+    React.createElement("div", { className:"content" },
+      err ? React.createElement("div", { className:"error" }, err) : null,
+      ok ? React.createElement("div", { className:"ok" }, ok) : null,
+
+      React.createElement("div", { className:"row" },
+        React.createElement("button", { className: modeBtnStyle("expense"), onClick: () => setMode("expense") }, "Expense"),
+        React.createElement("button", { className: modeBtnStyle("income"), onClick: () => setMode("income") }, "Income")
+      ),
+
+      React.createElement("div", { className:"field" },
+        React.createElement("div", { className:"label" }, "Amount (TL)"),
+        React.createElement("input", { value: amount, onChange: e=>setAmount(e.target.value), inputMode:"decimal", placeholder:"e.g. 500" })
+      ),
+
+      React.createElement("div", { className:"field" },
+        React.createElement("div", { className:"label" }, "POS / Business name"),
+        React.createElement("input", { value: posName, onChange: e=>setPosName(e.target.value), placeholder:"e.g. Migros / Pegasus" })
+      ),
+
+      React.createElement("div", { className:"field" },
+        React.createElement("div", { className:"label" }, "Description"),
+        React.createElement("input", { value: description, onChange: e=>setDescription(e.target.value), placeholder:"e.g. Istanbul–Budapest ticket" })
+      ),
+
+      React.createElement("div", { className:"field" },
+        React.createElement("div", { className:"label" }, "Category I"),
+        React.createElement("select", { value: category1, onChange: e=>setCategory1(e.target.value) },
+          (categories || []).map(c => React.createElement("option", { key:c, value:c }, c))
+        )
+      ),
+
+      React.createElement("div", { className:"field" },
+        React.createElement("label", null,
+          React.createElement("input", { type:"checkbox", checked: useSplit, onChange: e=>setUseSplit(e.target.checked) }),
+          "  Additional categories"
+        ),
+        React.createElement("div", { className:"help" }, "If ON, allocate amounts to up to 3 categories (must sum to total).")
+      ),
+
+      useSplit ? React.createElement(React.Fragment, null,
+        React.createElement("div", { className:"field" },
+          React.createElement("div", { className:"label" }, "Amount allocated to Category I"),
+          React.createElement("input", { value: amount1, onChange: e=>setAmount1(e.target.value), inputMode:"decimal", placeholder:"e.g. 7000" })
+        ),
+        React.createElement("div", { className:"field" },
+          React.createElement("div", { className:"label" }, "Category II"),
+          React.createElement("select", { value: category2, onChange: e=>setCategory2(e.target.value) },
+            React.createElement("option", { value:"" }, "(optional)"),
+            (categories || []).map(c => React.createElement("option", { key:c, value:c }, c))
+          )
+        ),
+        React.createElement("div", { className:"field" },
+          React.createElement("div", { className:"label" }, "Amount allocated to Category II"),
+          React.createElement("input", { value: amount2, onChange: e=>setAmount2(e.target.value), inputMode:"decimal", placeholder:"e.g. 3000" })
+        ),
+        React.createElement("div", { className:"field" },
+          React.createElement("div", { className:"label" }, "Category III"),
+          React.createElement("select", { value: category3, onChange: e=>setCategory3(e.target.value) },
+            React.createElement("option", { value:"" }, "(optional)"),
+            (categories || []).map(c => React.createElement("option", { key:c, value:c }, c))
+          )
+        ),
+        React.createElement("div", { className:"field" },
+          React.createElement("div", { className:"label" }, "Amount allocated to Category III"),
+          React.createElement("input", { value: amount3, onChange: e=>setAmount3(e.target.value), inputMode:"decimal", placeholder:"e.g. 0" })
+        ),
+      ) : null,
+
+      React.createElement("div", { className:"field" },
+        React.createElement("div", { className:"label" }, "Payment method"),
+        React.createElement("select", { value: paymentMethod, onChange: e=>setPaymentMethod(e.target.value) },
+          (lists?.paymentMethods || []).map(p => React.createElement("option", { key:p, value:p }, p))
+        )
+      ),
+
+      React.createElement("div", { className:"field" },
+        React.createElement("div", { className:"label" }, "Transaction date"),
+        React.createElement("input", { type:"date", value: transactionDate, onChange: e=>setTransactionDate(e.target.value) })
+      ),
+
+      React.createElement("div", { className:"field" },
+        React.createElement("label", null,
+          React.createElement("input", { type:"checkbox", checked: recognizeLater, onChange: e=>setRecognizeLater(e.target.checked) }),
+          "  Recognize later"
+        )
+      ),
+
+      recognizeLater ? React.createElement("div", { className:"field" },
+        React.createElement("div", { className:"label" }, "Recognition date"),
+        React.createElement("input", { type:"date", value: recognitionDate, onChange: e=>setRecognitionDate(e.target.value) })
+      ) : null,
+
+      React.createElement("div", { className:"row", style:{marginTop:"14px"} },
+        React.createElement("button", { className:"btn", onClick: submit }, "Save")
+      ),
+
+      React.createElement("div", { className:"row", style:{marginTop:"12px"} },
+        React.createElement("button", { className:"btn ghost", onClick: loadLists }, "Reload lists")
+      )
+    )
+  );
+}
+
+function Placeholder({ title }) {
+  return React.createElement(React.Fragment, null,
+    React.createElement("div", { className:"header" }, title),
+    React.createElement("div", { className:"content" },
+      React.createElement("div", { className:"card" },
+        React.createElement("div", { className:"label" }, "Coming next"),
+        React.createElement("div", { className:"help" }, "We’ll add read-only views for this tab after overview + entry are stable.")
+      )
+    )
+  );
+}
+
+function App() {
+  const [tab, setTab] = useState("Overview");
+
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js").catch(()=>{});
+    }
+  }, []);
+
+  let screen = null;
+  if (tab === "Overview") screen = React.createElement(Overview);
+  if (tab === "Add") screen = React.createElement(Add);
+  if (tab === "Subledger") screen = React.createElement(Placeholder, { title:"Subledger" });
+  if (tab === "Reports") screen = React.createElement(Placeholder, { title:"Reports (BS & P&L)" });
+
+  return React.createElement("div", { className:"app" },
+    screen,
+    React.createElement(BottomNav, { tab, setTab })
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
+</script>
+</body>
+</html>
