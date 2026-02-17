@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Finance Sheets App</title>
+
+<script crossorigin src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
+
+<style>
+body { margin:0; font-family: system-ui; background:#111827; color:white; }
+.container { padding:20px; max-width:500px; margin:auto; }
+.card { background:#1f2937; padding:20px; border-radius:12px; margin-bottom:15px; }
+button { padding:10px 15px; border-radius:8px; border:none; background:#2563eb; color:white; font-weight:bold; }
+</style>
+</head>
+<body>
+
+<div id="root"></div>
+
+<script>
+
+const API_BASE = "https://script.google.com/macros/s/AKfycbzHGj8SDBjfTkSOk4HP9wsCZfT_hjY5h_vkXenr1RDC80SYUEPoofHin8zEdPVLfcPD2A/exec";
+
+const { useState, useEffect } = React;
+
+function App() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState("");
+
+  async function load() {
+    try {
+      const res = await fetch(API_BASE + "?path=overview");
+      const json = await res.json();
+      if (!json.ok) throw new Error(json.error);
+      setData(json.data);
+    } catch (e) {
+      setError(e.message);
+    }
+  }
+
+  useEffect(() => { load(); }, []);
+
+  return React.createElement("div", { className:"container" },
+    React.createElement("h2", null, "Finance App Test"),
+    error && React.createElement("div", { className:"card" }, "Error: " + error),
+    data && React.createElement("div", { className:"card" },
+      React.createElement("div", null, "Bank: " + data.bankBalance),
+      React.createElement("div", null, "Card Limit: " + data.cardRemainingLimit),
+      React.createElement("div", null, "Card Liability: " + data.cardLiability),
+      React.createElement("div", null, "Investments: " + data.investmentBalance),
+      React.createElement("div", null, "Month Expense: " + data.currentMonthExpense)
+    ),
+    React.createElement("button", { onClick: load }, "Reload")
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  React.createElement(App)
+);
+
+</script>
+
+</body>
+</html>
