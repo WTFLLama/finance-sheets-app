@@ -31,6 +31,10 @@
       box-sizing: border-box;
     }
 
+    html {
+      background: var(--bg);
+    }
+
     body {
       margin: 0;
       font-family: -apple-system, system-ui, Segoe UI, Roboto, Arial;
@@ -47,7 +51,11 @@
     }
 
     .header {
-      padding: 18px 16px 10px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg);
+      padding: calc(18px + env(safe-area-inset-top, 0px)) 16px 10px;
       font-weight: 800;
       font-size: 20px;
     }
@@ -268,6 +276,42 @@
       border-radius: 12px;
       padding: 12px;
     }
+
+    .donut {
+      position: relative;
+      width: 240px;
+      max-width: 100%;
+      margin: 8px auto 0;
+    }
+
+    .donut-center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 56%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      line-height: 1.25;
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .legend-row:first-child {
+      border-top: none;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex: none;
+    }
   </style>
 </head>
 
@@ -285,7 +329,7 @@ const { useEffect, useMemo, useState } = React;
  ************************************************/
 
 const API_BASE =
-  "https://script.google.com/macros/s/AKfycbyxSj5NiSuGcP1-ieqva0K1_MOAouAhCsOIDbKnoxpfsd76YmvvovYZWmEfqKIcPKE-fg/exec";
+  "https://script.google.com/macros/s/AKfycbwLxwVxuLbf3fyOjdvUko9TLdjt_gNDTxUgzpLKty33azanu7dkJ8sUZunt8hOzDSqo9A/exec";
 
 
 async function apiGet(path, params = {}) {
@@ -339,6 +383,37 @@ async function apiPost(path, payload = {}) {
 
 
 /************************************************
+ * CACHES (speed: dropdown lists load once,
+ * screens show last data while refreshing)
+ ************************************************/
+
+let LISTS_PROMISE = null;
+let LISTS_DATA = null;
+let OVERVIEW_CACHE = null;
+let INVEST_CACHE = null;
+let SUBLEDGER_CACHE = null;
+
+function getLists() {
+
+  if (!LISTS_PROMISE) {
+
+    LISTS_PROMISE = apiGet("lists").then(d => {
+      LISTS_DATA = d;
+      return d;
+    }).catch(e => {
+      LISTS_PROMISE = null;
+      throw e;
+    });
+  }
+
+  return LISTS_PROMISE;
+}
+
+// Start loading the dropdown lists as soon as the app opens
+getLists().catch(() => {});
+
+
+/************************************************
  * BOTTOM NAV
  ************************************************/
 
@@ -352,7 +427,7 @@ function BottomNav({ tab, setTab }) {
       "div",
       { className: "nav-inner" },
 
-      ["Overview", "Add", "Subledger", "Reports"].map(t =>
+      ["Overview", "Add", "Subledger", "Investments"].map(t =>
         React.createElement(
           "div",
           {
@@ -374,7 +449,7 @@ function BottomNav({ tab, setTab }) {
 
 function Overview() {
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(OVERVIEW_CACHE);
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -387,6 +462,8 @@ function Overview() {
     try {
 
       const d = await apiGet("overview");
+
+      OVERVIEW_CACHE = d;
 
       setData(d);
 
@@ -442,38 +519,18 @@ function Overview() {
             "div",
             { className: "grid" },
 
-            metricCard("Bank balance", data.bankBalance),
-            metricCard("Card remaining limit", data.cardRemainingLimit),
-            metricCard("Card liability", data.cardLiability),
-            metricCard("Investments", data.investmentBalance)
+            metricCard("Cash", data.cash),
+            metricCard("Credit card debt", data.cardDebt),
+            metricCard("Expenses this month", data.currentMonthExpense),
+            metricCard("Budget left today", data.budgetLeftToday)
           )
         : null,
 
       data
         ? React.createElement(
             "div",
-            {
-              className: "card",
-              style: { marginTop: "12px" }
-            },
-
-            React.createElement(
-              "div",
-              { className: "label" },
-              "Expenses this month"
-            ),
-
-            React.createElement(
-              "div",
-              { className: "value" },
-              data.currentMonthExpense
-            ),
-
-            React.createElement(
-              "div",
-              { className: "help" },
-              "As of: " + data.asOf
-            )
+            { className: "help" },
+            "As of: " + data.asOf
           )
         : null,
 
@@ -546,6 +603,8 @@ function Add({
   const [recognizeLater, setRecognizeLater] = useState(false);
   const [recognitionDate, setRecognitionDate] = useState("");
 
+  const [installments, setInstallments] = useState(1);
+
 
   /******** NORMAL TRANSACTIONS ********/
 
@@ -587,7 +646,7 @@ function Add({
 
     try {
 
-      const d = await apiGet("lists");
+      const d = await getLists();
 
       setLists(d);
 
@@ -761,6 +820,7 @@ function Add({
     setAmount3("");
 
     setUseSplit(false);
+    setInstallments(1);
 
     if (lists) {
 
@@ -857,7 +917,7 @@ function Add({
       return "POS / Business name is required.";
     }
 
-    if (!description.trim()) {
+    if (mode === "expense" && !description.trim()) {
       return "Description is required.";
     }
 
@@ -866,7 +926,7 @@ function Add({
     }
 
 
-    if (!useSplit) {
+    if (!useSplit || mode === "income") {
       return null;
     }
 
@@ -924,6 +984,7 @@ function Add({
     try {
 
       let payload;
+      let items = null;
 
 
       /******** TRANSFER ********/
@@ -998,6 +1059,8 @@ function Add({
 
       else {
 
+        const splitOn = useSplit && mode === "expense";
+
         payload = {
 
           transactionType: mode,
@@ -1015,22 +1078,29 @@ function Add({
 
           amount: Number(amount),
 
-          description,
+          description:
+            mode === "income"
+              ? (
+                  isEditing && description.trim()
+                    ? description
+                    : posName
+                )
+              : description,
 
           category1,
 
           amount1:
-            useSplit
+            splitOn
               ? Number(amount1 || 0)
               : Number(amount),
 
           category2:
-            useSplit
+            splitOn
               ? category2
               : "",
 
           amount2:
-            useSplit
+            splitOn
               ? (
                   amount2 === ""
                     ? ""
@@ -1039,12 +1109,12 @@ function Add({
               : "",
 
           category3:
-            useSplit
+            splitOn
               ? category3
               : "",
 
           amount3:
-            useSplit
+            splitOn
               ? (
                   amount3 === ""
                     ? ""
@@ -1052,18 +1122,63 @@ function Add({
                 )
               : ""
         };
+
+
+        /******** INSTALLMENTS ********/
+
+        const n = Number(installments);
+
+        if (mode === "expense" && !isEditing && n > 1) {
+
+          const total = Number(amount);
+
+          const s1 = splitCents(splitOn ? Number(amount1 || 0) : total, n);
+          const s2 = splitCents(splitOn ? Number(amount2 || 0) : 0, n);
+          const s3 = splitCents(splitOn ? Number(amount3 || 0) : 0, n);
+
+          items = s1.map((_, i) => ({
+
+            ...payload,
+
+            // Column C is the same for every installment,
+            // column B starts at column C and moves one month at a time.
+            transactionDate: addMonths(recognition, i),
+            recognitionDate: recognition,
+
+            amount: Math.round((s1[i] + s2[i] + s3[i]) * 100) / 100,
+
+            amount1: s1[i],
+
+            amount2:
+              payload.amount2 === "" ? "" : s2[i],
+
+            amount3:
+              payload.amount3 === "" ? "" : s3[i]
+          }));
+        }
       }
 
 
-      const result = isEditing
-        ? await apiPost("edit", payload)
-        : await apiPost("append", payload);
+      if (items) {
+
+        await apiPost("append_batch", { items });
+
+      } else if (isEditing) {
+
+        await apiPost("edit", payload);
+
+      } else {
+
+        await apiPost("append", payload);
+      }
 
 
       setOk(
         isEditing
           ? "Updated successfully ✅"
-          : "Saved successfully ✅"
+          : items
+            ? "Saved " + items.length + " installments ✅"
+            : "Saved successfully ✅"
       );
 
 
@@ -1096,6 +1211,8 @@ function Add({
 
     setRecognizeLater(false);
     setRecognitionDate("");
+
+    setInstallments(1);
 
     setPosName("");
     setDescription("");
@@ -1480,10 +1597,9 @@ function Add({
       ),
 
 
-      /******** RECOGNITION ********/
+      /******** RECOGNITION + INSTALLMENTS (expense only) ********/
 
-      mode !== "transfer" &&
-      mode !== "invest"
+      mode === "expense"
         ? React.createElement(
             React.Fragment,
             null,
@@ -1535,6 +1651,51 @@ function Add({
                     }
                   )
                 )
+              : null,
+
+            !isEditing
+              ? React.createElement(
+                  "div",
+                  { className: "field" },
+
+                  React.createElement(
+                    "div",
+                    { className: "label" },
+                    "Installments"
+                  ),
+
+                  React.createElement(
+                    "select",
+                    {
+                      value: installments,
+                      onChange:
+                        e => setInstallments(
+                          Number(e.target.value)
+                        )
+                    },
+
+                    Array.from({ length: 12 }, (_, i) => i + 1).map(n =>
+                      React.createElement(
+                        "option",
+                        {
+                          key: n,
+                          value: n
+                        },
+                        n === 1
+                          ? "No installments"
+                          : n + " installments"
+                      )
+                    )
+                  ),
+
+                  installments > 1
+                    ? React.createElement(
+                        "div",
+                        { className: "help" },
+                        "Total is split evenly. Recognition date is the same for every installment; transaction dates move forward one month at a time."
+                      )
+                    : null
+                )
               : null
           )
         : null,
@@ -1569,6 +1730,30 @@ function Add({
               )
             ),
 
+            mode === "expense"
+              ? React.createElement(
+                  "div",
+                  { className: "field" },
+
+                  React.createElement(
+                    "div",
+                    { className: "label" },
+                    "Description"
+                  ),
+
+                  React.createElement(
+                    "input",
+                    {
+                      value: description,
+                      onChange:
+                        e => setDescription(e.target.value),
+                      placeholder:
+                        "e.g. Ticket / groceries / salary"
+                    }
+                  )
+                )
+              : null,
+
             React.createElement(
               "div",
               { className: "field" },
@@ -1576,29 +1761,7 @@ function Add({
               React.createElement(
                 "div",
                 { className: "label" },
-                "Description"
-              ),
-
-              React.createElement(
-                "input",
-                {
-                  value: description,
-                  onChange:
-                    e => setDescription(e.target.value),
-                  placeholder:
-                    "e.g. Ticket / groceries / salary"
-                }
-              )
-            ),
-
-            React.createElement(
-              "div",
-              { className: "field" },
-
-              React.createElement(
-                "div",
-                { className: "label" },
-                "Category I"
+                mode === "income" ? "Category" : "Category I"
               ),
 
               React.createElement(
@@ -1622,37 +1785,39 @@ function Add({
               )
             ),
 
-            React.createElement(
-              "div",
-              { className: "field" },
+            mode === "expense"
+              ? React.createElement(
+                  "div",
+                  { className: "field" },
 
-              React.createElement(
-                "label",
-                null,
+                  React.createElement(
+                    "label",
+                    null,
 
-                React.createElement(
-                  "input",
-                  {
-                    type: "checkbox",
-                    checked: useSplit,
-                    onChange:
-                      e => setUseSplit(
-                        e.target.checked
-                      )
-                  }
-                ),
+                    React.createElement(
+                      "input",
+                      {
+                        type: "checkbox",
+                        checked: useSplit,
+                        onChange:
+                          e => setUseSplit(
+                            e.target.checked
+                          )
+                      }
+                    ),
 
-                " Additional categories"
-              ),
+                    " Additional categories"
+                  ),
 
-              React.createElement(
-                "div",
-                { className: "help" },
-                "Allocate the total across up to 3 categories."
-              )
-            ),
+                  React.createElement(
+                    "div",
+                    { className: "help" },
+                    "Allocate the total across up to 3 categories."
+                  )
+                )
+              : null,
 
-            useSplit
+            mode === "expense" && useSplit
               ? React.createElement(
                   React.Fragment,
                   null,
@@ -1897,7 +2062,7 @@ function Subledger({
   onEdit
 }) {
 
-  const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState(SUBLEDGER_CACHE || []);
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -1912,6 +2077,8 @@ function Subledger({
 
     try {
 
+      await getLists().catch(() => {});
+
       const d =
         await apiGet("subledger_last");
 
@@ -1925,6 +2092,8 @@ function Subledger({
 
       loadedRows =
         enrichRows(loadedRows);
+
+      SUBLEDGER_CACHE = loadedRows;
 
       setRows(loadedRows);
 
@@ -2111,13 +2280,17 @@ function Subledger({
                 className:
                   "value " +
                   (
-                    Number(
-                      String(r.amount)
-                        .replace(/,/g, "")
-                        .replace(/[^\d.-]/g, "")
-                    ) < 0
+                    r.transactionType === "expense"
                       ? "amount-expense"
-                      : "amount-income"
+                      : r.transactionType === "income"
+                        ? "amount-income"
+                        : Number(
+                            String(r.amount)
+                              .replace(/,/g, "")
+                              .replace(/[^\d.-]/g, "")
+                          ) < 0
+                          ? "amount-expense"
+                          : "amount-income"
                   )
               },
 
@@ -2226,10 +2399,148 @@ function Subledger({
 
 
 /************************************************
- * REPORTS
+ * INVESTMENTS
  ************************************************/
 
-function Reports() {
+function Donut({ slices, children }) {
+
+  const R = 76;
+  const C = 2 * Math.PI * R;
+
+  const sum = slices.reduce(
+    (s, x) => s + Math.max(x.value, 0),
+    0
+  );
+
+  let cum = 0;
+
+  const arcs = sum > 0
+    ? slices.map(x => {
+
+        const len = (Math.max(x.value, 0) / sum) * C;
+
+        const el = React.createElement(
+          "circle",
+          {
+            key: x.label,
+            cx: 100,
+            cy: 100,
+            r: R,
+            fill: "none",
+            stroke: x.color,
+            strokeWidth: 30,
+            strokeDasharray:
+              Math.max(len - 1.5, 0) + " " + (C - Math.max(len - 1.5, 0)),
+            strokeDashoffset: -cum,
+            transform: "rotate(-90 100 100)"
+          }
+        );
+
+        cum += len;
+
+        return el;
+      })
+    : [
+        React.createElement(
+          "circle",
+          {
+            key: "empty",
+            cx: 100,
+            cy: 100,
+            r: R,
+            fill: "none",
+            stroke: "#1f2937",
+            strokeWidth: 30
+          }
+        )
+      ];
+
+  return React.createElement(
+    "div",
+    { className: "donut" },
+
+    React.createElement(
+      "svg",
+      {
+        viewBox: "0 0 200 200",
+        width: "100%"
+      },
+      arcs
+    ),
+
+    React.createElement(
+      "div",
+      { className: "donut-center" },
+      children
+    )
+  );
+}
+
+
+function Investments() {
+
+  const [data, setData] = useState(INVEST_CACHE);
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
+
+
+  async function load() {
+
+    setErr("");
+    setLoading(true);
+
+    try {
+
+      const d = await apiGet("investments");
+
+      INVEST_CACHE = d;
+
+      setData(d);
+
+    } catch (e) {
+
+      setErr(String(e.message || e));
+
+    } finally {
+
+      setLoading(false);
+    }
+  }
+
+
+  useEffect(() => {
+    load();
+  }, []);
+
+
+  const slices = data
+    ? [
+        {
+          label: "Stocks",
+          value: data.stocksRaw,
+          display: data.stocksPct,
+          color: "#2563eb"
+        },
+        {
+          label: "FX & Commodities",
+          value: data.fxRaw,
+          display: data.fxPct,
+          color: "#f59e0b"
+        },
+        {
+          label: "Crypto",
+          value: data.cryptoRaw,
+          display: data.cryptoPct,
+          color: "#a855f7"
+        }
+      ]
+    : [];
+
+  const plClass =
+    data && data.profitLossRaw < 0
+      ? "amount-expense"
+      : "amount-income";
+
 
   return React.createElement(
     React.Fragment,
@@ -2239,27 +2550,142 @@ function Reports() {
     React.createElement(
       "div",
       { className: "header" },
-      "Reports"
+      "Investments"
     ),
 
     React.createElement(
       "div",
       { className: "content" },
 
+      err
+        ? React.createElement(
+            "div",
+            { className: "error" },
+            err
+          )
+        : null,
+
+      !data && loading
+        ? React.createElement(
+            "div",
+            { className: "help" },
+            "Loading..."
+          )
+        : null,
+
+      data
+        ? React.createElement(
+            "div",
+            { className: "card" },
+
+            React.createElement(
+              Donut,
+              { slices },
+
+              React.createElement(
+                "div",
+                { className: "label" },
+                "Total balance"
+              ),
+
+              React.createElement(
+                "div",
+                {
+                  style: {
+                    fontSize: "18px",
+                    fontWeight: 800,
+                    marginTop: "2px"
+                  }
+                },
+                data.totalBalance
+              ),
+
+              React.createElement(
+                "div",
+                {
+                  className: plClass,
+                  style: {
+                    fontSize: "12px",
+                    fontWeight: 700,
+                    marginTop: "6px"
+                  }
+                },
+                data.profitLoss
+              ),
+
+              React.createElement(
+                "div",
+                {
+                  className: plClass,
+                  style: {
+                    fontSize: "12px",
+                    fontWeight: 700
+                  }
+                },
+                data.profitLossPct
+              )
+            ),
+
+            React.createElement(
+              "div",
+              { style: { marginTop: "14px" } },
+
+              slices.map(s =>
+                React.createElement(
+                  "div",
+                  {
+                    key: s.label,
+                    className: "legend-row"
+                  },
+
+                  React.createElement(
+                    "span",
+                    {
+                      className: "dot",
+                      style: { background: s.color }
+                    }
+                  ),
+
+                  React.createElement(
+                    "div",
+                    { style: { flex: 1, fontWeight: 700 } },
+                    s.label
+                  ),
+
+                  React.createElement(
+                    "div",
+                    { style: { fontWeight: 800 } },
+                    s.display
+                  )
+                )
+              )
+            )
+          )
+        : null,
+
+      data
+        ? React.createElement(
+            "div",
+            { className: "help" },
+            "As of: " + data.asOf
+          )
+        : null,
+
       React.createElement(
         "div",
-        { className: "card" },
+        {
+          className: "row",
+          style: { marginTop: "12px" }
+        },
 
         React.createElement(
-          "div",
-          { className: "label" },
-          "Next"
-        ),
-
-        React.createElement(
-          "div",
-          { className: "help" },
-          "Read-only BS & P&L snapshots can be added here."
+          "button",
+          {
+            className: "btn ghost",
+            onClick: load,
+            disabled: loading
+          },
+          loading ? "Refreshing..." : "Refresh"
         )
       )
     )
@@ -2329,7 +2755,7 @@ function App() {
 
     screen =
       React.createElement(
-        Reports
+        Investments
       );
   }
 
@@ -2378,6 +2804,42 @@ function today() {
       .padStart(2, "0");
 
   return `${y}-${m}-${day}`;
+}
+
+
+// Adds k months to a yyyy-mm-dd string (day is clamped to month end).
+function addMonths(dateStr, k) {
+
+  const p = String(dateStr).split("-").map(Number);
+
+  const y = p[0];
+  const m = p[1] - 1;
+  const d = p[2];
+
+  const lastDay = new Date(y, m + k + 1, 0).getDate();
+
+  const t = new Date(y, m + k, Math.min(d, lastDay));
+
+  return (
+    t.getFullYear() + "-" +
+    String(t.getMonth() + 1).padStart(2, "0") + "-" +
+    String(t.getDate()).padStart(2, "0")
+  );
+}
+
+
+// Splits a total into n parts in cents; leftover cents go to the first parts.
+function splitCents(total, n) {
+
+  const c = Math.round(Number(total || 0) * 100);
+
+  const base = Math.floor(c / n);
+  const rem = c - base * n;
+
+  return Array.from(
+    { length: n },
+    (_, i) => (base + (i < rem ? 1 : 0)) / 100
+  );
 }
 
 
@@ -2463,6 +2925,28 @@ function inferTransactionType(r) {
       .toLowerCase() === "investment"
   ) {
     return "invest";
+  }
+
+  /*
+    Amount sign no longer identifies the type (a card expense is
+    positive), so the category lists decide first.
+  */
+
+  if (LISTS_DATA) {
+
+    const inExpense =
+      (LISTS_DATA.expenseCategories || []).includes(r.category1);
+
+    const inIncome =
+      (LISTS_DATA.incomeCategories || []).includes(r.category1);
+
+    if (inExpense && !inIncome) {
+      return "expense";
+    }
+
+    if (inIncome && !inExpense) {
+      return "income";
+    }
   }
 
   const n =
