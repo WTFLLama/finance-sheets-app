@@ -329,7 +329,7 @@ const { useEffect, useMemo, useState } = React;
  ************************************************/
 
 const API_BASE =
-  "https://script.google.com/macros/s/AKfycbwjaJq8t0yUwRbOnXI80Vb0P2cffkMG3d3F75CWMwieBTBDTs0JE0cWBI_eDb1tQg4j4g/exec";
+  "https://script.google.com/macros/s/AKfycbwD7S-pFUqbf0tCoPYIxoj6VV-C1xmu4iAxPGqRXOeMDsTVZ4d0fGD7Poj-08Hh3BG4JA/exec";
 
 
 async function apiGet(path, params = {}) {
@@ -566,7 +566,9 @@ function Overview({ onOpenSettings }) {
                   React.createElement(
                     "div",
                     { className: "help", style: { marginTop: "2px" } },
-                    "Cut-off: " + c.cutOff
+                    c.cutOff
+                      ? "Cut-off: " + c.cutOff
+                      : "No cut-off date"
                   )
                 ),
 
