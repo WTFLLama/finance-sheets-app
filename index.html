@@ -329,7 +329,7 @@ const { useEffect, useMemo, useState } = React;
  ************************************************/
 
 const API_BASE =
-  "https://script.google.com/macros/s/AKfycbxaBRBOh86Gyjj2bTnnxFopm8cQUm6FfN_KWCBh8XvbfndogR1qfKIr1kKPAZzifRwq/exec";
+  "https://script.google.com/macros/s/AKfycbxzkIVhXZcM1I-RlyyIfPM35HsDXzMGZJgQK46P-MH-KFuYss7OnCA67Xk8Z6XY_zjDuw/exec";
 
 
 async function apiGet(path, params = {}) {
@@ -629,6 +629,7 @@ function Add({
   const [instrument, setInstrument] = useState("");
   const [units, setUnits] = useState("");
   const [investCategory, setInvestCategory] = useState("");
+  const [commission, setCommission] = useState("");
 
 
   /******** TRANSFER ********/
@@ -660,6 +661,16 @@ function Add({
 
       if (!toAccount && d.paymentMethods?.[1]) {
         setToAccount(d.paymentMethods[1]);
+      }
+
+      // The dropdown showed the first category but the state stayed empty,
+      // so an untouched Category I (e.g. Market) failed validation.
+      if (d.expenseCategories?.[0]) {
+        setCategory1(prev => prev || d.expenseCategories[0]);
+      }
+
+      if (d.investmentCategories?.[0]) {
+        setInvestCategory(prev => prev || d.investmentCategories[0]);
       }
 
     } catch (e) {
@@ -766,8 +777,13 @@ function Add({
           .match(/^Units:\s*(.*)$/i);
 
       setUnits(
-        unitsMatch ? unitsMatch[1] : ""
+        unitsMatch
+          ? unitsMatch[1]
+          : String(absNumber(r.description))
       );
+
+      // Column I holds the unit cost for investment rows.
+      setAmount(absNumber(r.amount1));
 
       setInvestCategory(
         r.category1 || ""
@@ -821,6 +837,7 @@ function Add({
 
     setUseSplit(false);
     setInstallments(1);
+    setCommission("");
 
     if (lists) {
 
@@ -903,6 +920,14 @@ function Add({
 
       if (!investCategory) {
         return "Investment category is required.";
+      }
+
+      if (!(Number(units) > 0)) {
+        return "Amount (units) must be a positive number.";
+      }
+
+      if (commission !== "" && !(Number(commission) >= 0)) {
+        return "Commission must be 0 or more.";
       }
 
       return null;
@@ -1027,29 +1052,20 @@ function Add({
 
           transactionDate,
 
-          recognitionDate: "",
-
-          paymentMethod: "Investment",
-
           posName: instrument,
 
-          amount: Number(amount),
+          cost: Number(amount),
 
-          description:
-            units
-              ? "Units: " + units
-              : "Investment purchase",
+          units: Number(units),
 
           category1:
             investCategory || category1,
 
-          amount1: Number(amount),
+          category2: category2,
 
-          category2: "",
-          amount2: "",
+          category3: category3,
 
-          category3: "",
-          amount3: ""
+          commission: Number(commission || 0)
         };
 
       }
@@ -1227,6 +1243,7 @@ function Add({
 
     setInstrument("");
     setUnits("");
+    setCommission("");
 
     if (lists) {
 
@@ -1349,7 +1366,7 @@ function Add({
           "div",
           { className: "label" },
           mode === "invest"
-            ? "Cost (TL)"
+            ? "Cost (TL per unit)"
             : "Amount (TRY)"
         ),
 
@@ -1504,35 +1521,126 @@ function Add({
                 "Category"
               ),
 
-              React.createElement(
-                "select",
-                {
-                  value:
-                    investCategory || category1,
-                  onChange: e => {
-
-                    setInvestCategory(
-                      e.target.value
-                    );
-
-                    setCategory1(
-                      e.target.value
-                    );
-                  }
-                },
-
-                (lists?.investmentCategories || []).map(c =>
-                  React.createElement(
-                    "option",
+              (lists?.investmentCategories || []).length > 0
+                ? React.createElement(
+                    "select",
                     {
-                      key: c,
-                      value: c
+                      value:
+                        investCategory || category1,
+                      onChange: e => {
+
+                        setInvestCategory(
+                          e.target.value
+                        );
+
+                        setCategory1(
+                          e.target.value
+                        );
+                      }
                     },
-                    c
+
+                    lists.investmentCategories.map(c =>
+                      React.createElement(
+                        "option",
+                        {
+                          key: c,
+                          value: c
+                        },
+                        c
+                      )
+                    )
+                  )
+                : React.createElement(
+                    "input",
+                    {
+                      value: investCategory,
+                      onChange: e => {
+
+                        setInvestCategory(
+                          e.target.value
+                        );
+
+                        setCategory1(
+                          e.target.value
+                        );
+                      },
+                      placeholder: "e.g. Stocks"
+                    }
+                  )
+            ),
+
+            React.createElement(
+              "div",
+              { className: "field" },
+
+              React.createElement(
+                "div",
+                { className: "label" },
+                "Category II"
+              ),
+
+              React.createElement(
+                "input",
+                {
+                  value: category2,
+                  onChange:
+                    e => setCategory2(e.target.value)
+                }
+              )
+            ),
+
+            React.createElement(
+              "div",
+              { className: "field" },
+
+              React.createElement(
+                "div",
+                { className: "label" },
+                "Category III"
+              ),
+
+              React.createElement(
+                "input",
+                {
+                  value: category3,
+                  onChange:
+                    e => setCategory3(e.target.value)
+                }
+              )
+            ),
+
+            !isEditing
+              ? React.createElement(
+                  "div",
+                  { className: "field" },
+
+                  React.createElement(
+                    "div",
+                    { className: "label" },
+                    "Commission (TL, optional)"
+                  ),
+
+                  React.createElement(
+                    "input",
+                    {
+                      value: commission,
+                      onChange:
+                        e => setCommission(e.target.value),
+                      inputMode: "decimal",
+                      placeholder: "e.g. 15"
+                    }
                   )
                 )
-              )
-            )
+              : null,
+
+            Number(amount) > 0 && Number(units) > 0
+              ? React.createElement(
+                  "div",
+                  { className: "help" },
+                  "Total cost: " +
+                  Math.round(Number(amount) * Number(units) * 100) / 100
+                )
+              : null
           )
         : null,
 
@@ -2369,15 +2477,17 @@ function Subledger({
                   "transaction-actions"
               },
 
-              React.createElement(
-                "button",
-                {
-                  className: "small-btn",
-                  onClick:
-                    () => onEdit(r)
-                },
-                "Edit"
-              ),
+              r.category1 === "Komisyon"
+                ? null
+                : React.createElement(
+                    "button",
+                    {
+                      className: "small-btn",
+                      onClick:
+                        () => onEdit(r)
+                    },
+                    "Edit"
+                  ),
 
               React.createElement(
                 "button",
@@ -2923,6 +3033,13 @@ function inferTransactionType(r) {
   if (
     String(r.paymentMethod)
       .toLowerCase() === "investment"
+  ) {
+    return "invest";
+  }
+
+  if (
+    LISTS_DATA &&
+    (LISTS_DATA.investmentCategories || []).includes(r.category1)
   ) {
     return "invest";
   }
