@@ -329,7 +329,7 @@ const { useEffect, useMemo, useState } = React;
  ************************************************/
 
 const API_BASE =
-  "https://script.google.com/macros/s/AKfycbxzkIVhXZcM1I-RlyyIfPM35HsDXzMGZJgQK46P-MH-KFuYss7OnCA67Xk8Z6XY_zjDuw/exec";
+  "https://script.google.com/macros/s/AKfycbzO8ecD8eWnHl_e9tlXaiJBqSAB8VRpVx57POFK1u_4Azmdrn7VdnJowtNRJY20Wb3RZg/exec";
 
 
 async function apiGet(path, params = {}) {
@@ -409,6 +409,11 @@ function getLists() {
   return LISTS_PROMISE;
 }
 
+function setListsCache(d) {
+  LISTS_DATA = d;
+  LISTS_PROMISE = Promise.resolve(d);
+}
+
 // Start loading the dropdown lists as soon as the app opens
 getLists().catch(() => {});
 
@@ -447,7 +452,7 @@ function BottomNav({ tab, setTab }) {
  * OVERVIEW
  ************************************************/
 
-function Overview() {
+function Overview({ onOpenSettings }) {
 
   const [data, setData] = useState(OVERVIEW_CACHE);
   const [err, setErr] = useState("");
@@ -549,6 +554,15 @@ function Overview() {
             disabled: loading
           },
           loading ? "Refreshing..." : "Refresh"
+        ),
+
+        React.createElement(
+          "button",
+          {
+            className: "btn ghost",
+            onClick: onOpenSettings
+          },
+          "Settings"
         )
       )
     )
@@ -2804,6 +2818,359 @@ function Investments() {
 
 
 /************************************************
+ * SETTINGS (add / remove list items in Siniflandirma)
+ ************************************************/
+
+const LIST_KINDS_UI = [
+  { key: "payment", label: "Payment methods", names: "paymentMethods", hasType: true },
+  { key: "expense", label: "Expense categories", names: "expenseCategories", hasType: true },
+  { key: "income", label: "Income categories", names: "incomeCategories", hasType: true },
+  { key: "investment", label: "Invest categories", names: "investmentCategories", hasType: false }
+];
+
+
+function Settings({ onBack }) {
+
+  const [lists, setLists] = useState(LISTS_DATA);
+  const [kind, setKind] = useState("payment");
+  const [name, setName] = useState("");
+  const [type, setType] = useState("Debit");
+  const [err, setErr] = useState("");
+  const [ok, setOk] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [confirm, setConfirm] = useState(null);
+
+
+  useEffect(() => {
+
+    apiGet("lists")
+      .then(d => {
+        setListsCache(d);
+        setLists(d);
+      })
+      .catch(e => setErr(String(e.message || e)));
+
+  }, []);
+
+
+  const cfg = LIST_KINDS_UI.find(k => k.key === kind);
+
+  const items = lists?.[cfg.names] || [];
+
+
+  async function addItem() {
+
+    setErr("");
+    setOk("");
+
+    if (!name.trim()) {
+      setErr("Name is required.");
+      return;
+    }
+
+    setBusy(true);
+
+    try {
+
+      const d = await apiPost(
+        "list_add",
+        {
+          kind,
+          name: name.trim(),
+          type
+        }
+      );
+
+      setListsCache(d);
+      setLists(d);
+      setName("");
+      setOk("Added ✅");
+
+    } catch (e) {
+
+      setErr(String(e.message || e));
+
+    } finally {
+
+      setBusy(false);
+    }
+  }
+
+
+  async function deleteItem() {
+
+    if (!confirm) {
+      return;
+    }
+
+    setErr("");
+    setOk("");
+    setBusy(true);
+
+    try {
+
+      const d = await apiPost(
+        "list_delete",
+        {
+          kind,
+          name: confirm
+        }
+      );
+
+      setListsCache(d);
+      setLists(d);
+      setConfirm(null);
+      setOk("Deleted ✅");
+
+    } catch (e) {
+
+      setErr(String(e.message || e));
+
+    } finally {
+
+      setBusy(false);
+    }
+  }
+
+
+  return React.createElement(
+    React.Fragment,
+
+    null,
+
+    React.createElement(
+      "div",
+      { className: "header" },
+      "Settings"
+    ),
+
+    React.createElement(
+      "div",
+      { className: "content" },
+
+      React.createElement(
+        "div",
+        { className: "row" },
+
+        React.createElement(
+          "button",
+          {
+            className: "btn ghost",
+            onClick: onBack
+          },
+          "← Back"
+        )
+      ),
+
+      err
+        ? React.createElement("div", { className: "error" }, err)
+        : null,
+
+      ok
+        ? React.createElement("div", { className: "ok" }, ok)
+        : null,
+
+
+      React.createElement(
+        "div",
+        { className: "pillrow" },
+
+        LIST_KINDS_UI.map(k =>
+          React.createElement(
+            "button",
+            {
+              key: k.key,
+              className:
+                "pill" +
+                (kind === k.key ? " active" : ""),
+              onClick: () => {
+                setKind(k.key);
+                setConfirm(null);
+                setErr("");
+                setOk("");
+              }
+            },
+            k.label
+          )
+        )
+      ),
+
+
+      React.createElement(
+        "div",
+        {
+          className: "card",
+          style: { marginTop: "12px" }
+        },
+
+        React.createElement(
+          "div",
+          { className: "label" },
+          "Add to " + cfg.label.toLowerCase()
+        ),
+
+        React.createElement(
+          "div",
+          { className: "field" },
+
+          React.createElement(
+            "input",
+            {
+              value: name,
+              onChange: e => setName(e.target.value),
+              placeholder: "Name"
+            }
+          )
+        ),
+
+        cfg.hasType
+          ? React.createElement(
+              "div",
+              { className: "field" },
+
+              React.createElement(
+                "select",
+                {
+                  value: type,
+                  onChange: e => setType(e.target.value)
+                },
+
+                React.createElement("option", { value: "Debit" }, "Debit"),
+                React.createElement("option", { value: "Credit" }, "Credit")
+              )
+            )
+          : null,
+
+        React.createElement(
+          "div",
+          {
+            className: "row",
+            style: { marginTop: "12px" }
+          },
+
+          React.createElement(
+            "button",
+            {
+              className: "btn",
+              onClick: addItem,
+              disabled: busy
+            },
+            busy ? "Working..." : "Add"
+          )
+        )
+      ),
+
+
+      confirm
+        ? React.createElement(
+            "div",
+            { className: "confirm-box" },
+
+            React.createElement(
+              "div",
+              { style: { fontWeight: 800 } },
+              "Delete \"" + confirm + "\"?"
+            ),
+
+            React.createElement(
+              "div",
+              { className: "help" },
+              "It is removed from the Siniflandirma sheet. Existing Muavin rows keep their text."
+            ),
+
+            React.createElement(
+              "div",
+              {
+                className: "row",
+                style: { marginTop: "10px" }
+              },
+
+              React.createElement(
+                "button",
+                {
+                  className: "btn danger",
+                  onClick: deleteItem,
+                  disabled: busy
+                },
+                "Delete"
+              ),
+
+              React.createElement(
+                "button",
+                {
+                  className: "btn ghost",
+                  onClick: () => setConfirm(null)
+                },
+                "Cancel"
+              )
+            )
+          )
+        : null,
+
+
+      React.createElement(
+        "div",
+        {
+          className: "card",
+          style: { marginTop: "12px" }
+        },
+
+        React.createElement(
+          "div",
+          { className: "label" },
+          cfg.label + " (" + items.length + ")"
+        ),
+
+        items.length === 0
+          ? React.createElement(
+              "div",
+              { className: "help" },
+              lists ? "No items." : "Loading..."
+            )
+          : null,
+
+        items.map(item =>
+          React.createElement(
+            "div",
+            {
+              key: item,
+              className: "legend-row"
+            },
+
+            React.createElement(
+              "div",
+              { style: { flex: 1, fontWeight: 700 } },
+              item
+            ),
+
+            cfg.hasType
+              ? React.createElement(
+                  "div",
+                  { className: "help", style: { margin: 0 } },
+                  (lists?.types?.[kind]?.[item] || "") === "credit"
+                    ? "Credit"
+                    : "Debit"
+                )
+              : null,
+
+            React.createElement(
+              "button",
+              {
+                className: "small-btn delete",
+                style: { flex: "none" },
+                onClick: () => setConfirm(item)
+              },
+              "Delete"
+            )
+          )
+        )
+      )
+    )
+  );
+}
+
+
+/************************************************
  * APP
  ************************************************/
 
@@ -2837,7 +3204,10 @@ function App() {
 
     screen =
       React.createElement(
-        Overview
+        Overview,
+        {
+          onOpenSettings: () => setTab("Settings")
+        }
       );
 
   } else if (tab === "Add") {
@@ -2858,6 +3228,16 @@ function App() {
         Subledger,
         {
           onEdit: startEdit
+        }
+      );
+
+  } else if (tab === "Settings") {
+
+    screen =
+      React.createElement(
+        Settings,
+        {
+          onBack: () => setTab("Overview")
         }
       );
 
