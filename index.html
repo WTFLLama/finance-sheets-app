@@ -329,7 +329,7 @@ const { useEffect, useMemo, useState } = React;
  ************************************************/
 
 const API_BASE =
-  "https://script.google.com/macros/s/AKfycbzO8ecD8eWnHl_e9tlXaiJBqSAB8VRpVx57POFK1u_4Azmdrn7VdnJowtNRJY20Wb3RZg/exec";
+  "https://script.google.com/macros/s/AKfycbwjaJq8t0yUwRbOnXI80Vb0P2cffkMG3d3F75CWMwieBTBDTs0JE0cWBI_eDb1tQg4j4g/exec";
 
 
 async function apiGet(path, params = {}) {
@@ -528,6 +528,66 @@ function Overview({ onOpenSettings }) {
             metricCard("Credit card debt", data.cardDebt),
             metricCard("Expenses this month", data.currentMonthExpense),
             metricCard("Budget left today", data.budgetLeftToday)
+          )
+        : null,
+
+      data && data.cards && data.cards.length
+        ? React.createElement(
+            "div",
+            {
+              className: "card",
+              style: { marginTop: "12px" }
+            },
+
+            React.createElement(
+              "div",
+              { className: "label" },
+              "Credit cards"
+            ),
+
+            data.cards.map(c =>
+              React.createElement(
+                "div",
+                {
+                  key: c.name,
+                  className: "legend-row"
+                },
+
+                React.createElement(
+                  "div",
+                  { style: { flex: 1 } },
+
+                  React.createElement(
+                    "div",
+                    { style: { fontWeight: 700 } },
+                    c.name
+                  ),
+
+                  React.createElement(
+                    "div",
+                    { className: "help", style: { marginTop: "2px" } },
+                    "Cut-off: " + c.cutOff
+                  )
+                ),
+
+                React.createElement(
+                  "div",
+                  { style: { textAlign: "right" } },
+
+                  React.createElement(
+                    "div",
+                    { className: "label" },
+                    "Limit"
+                  ),
+
+                  React.createElement(
+                    "div",
+                    { style: { fontWeight: 800 } },
+                    c.limit
+                  )
+                )
+              )
+            )
           )
         : null,
 
