@@ -145,13 +145,14 @@
     }
 
     .tab {
-      flex: 1;
-      padding: 13px 8px;
+      flex: 1 1 auto;
+      white-space: nowrap;
+      padding: 13px 6px;
       text-align: center;
       font-weight: 800;
       color: var(--muted);
       cursor: pointer;
-      font-size: 13px;
+      font-size: 10.5px;
     }
 
     .tab.active {
@@ -277,6 +278,46 @@
       padding: 12px;
     }
 
+    .tbl {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .tbl td,
+    .tbl th {
+      padding: 8px 10px;
+      white-space: nowrap;
+      border-top: 1px solid var(--border);
+      text-align: right;
+    }
+
+    .tbl td:first-child,
+    .tbl th:first-child {
+      text-align: left;
+      position: sticky;
+      left: 0;
+      background: var(--card);
+    }
+
+    .tbl .tot td {
+      font-weight: 800;
+      background: #1f2937;
+    }
+
+    .bar {
+      height: 6px;
+      border-radius: 3px;
+      background: #2563eb;
+    }
+
+    .badge {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+
     .donut {
       position: relative;
       width: 240px;
@@ -329,7 +370,7 @@ const { useEffect, useMemo, useState } = React;
  ************************************************/
 
 const API_BASE =
-  "https://script.google.com/macros/s/AKfycbwD7S-pFUqbf0tCoPYIxoj6VV-C1xmu4iAxPGqRXOeMDsTVZ4d0fGD7Poj-08Hh3BG4JA/exec";
+  "https://script.google.com/macros/s/AKfycbx2I8qEb_1b5PMmRJlBRze8fIf6_tgQDTw1_t-vRxvn-GTY0X8DbIkVF-cKBEQUh1DzdA/exec";
 
 
 async function apiGet(path, params = {}) {
@@ -432,7 +473,7 @@ function BottomNav({ tab, setTab }) {
       "div",
       { className: "nav-inner" },
 
-      ["Overview", "Add", "Subledger", "Investments"].map(t =>
+      ["Overview", "Add", "Subledger", "Investments", "Diligence", "Reports"].map(t =>
         React.createElement(
           "div",
           {
@@ -2880,6 +2921,816 @@ function Investments() {
 
 
 /************************************************
+ * DILIGENCE (one-offs, adjusted KPIs, budget)
+ ************************************************/
+
+let DILIGENCE_CACHE = null;
+
+function tl(n) {
+  return Number(n || 0).toLocaleString("tr-TR", { maximumFractionDigits: 0 }) + " ₺";
+}
+
+
+function MonthBars({ months }) {
+
+  const W = 300;
+  const H = 100;
+  const bw = W / months.length;
+  const max = Math.max(1, ...months.map(m => m.total));
+
+  return React.createElement(
+    "svg",
+    { viewBox: "0 0 " + W + " " + (H + 18), width: "100%" },
+
+    months.map((m, i) => {
+
+      const h = (m.total - m.oneOff) / max * H;
+      const ho = m.oneOff / max * H;
+      const x = i * bw + bw * 0.15;
+      const w = bw * 0.7;
+
+      return React.createElement(
+        "g",
+        { key: m.m },
+        React.createElement("rect", { x, y: H - h, width: w, height: h, fill: "#2563eb", rx: 3 }),
+        React.createElement("rect", { x, y: H - h - ho, width: w, height: ho, fill: "#f59e0b", rx: 3 }),
+        React.createElement(
+          "text",
+          { x: x + w / 2, y: H + 13, fontSize: 9, fill: "#9ca3af", textAnchor: "middle" },
+          m.m.slice(2)
+        )
+      );
+    })
+  );
+}
+
+
+function DiligenceSpend({ nav }) {
+
+  const [data, setData] = useState(DILIGENCE_CACHE);
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [target, setTarget] = useState("");
+
+
+  async function run(fn) {
+
+    setErr("");
+    setLoading(true);
+
+    try {
+
+      const d = await fn();
+
+      DILIGENCE_CACHE = d;
+      setData(d);
+
+      if (d.budget.target) {
+        setTarget(String(d.budget.target));
+      }
+
+    } catch (e) {
+
+      setErr(String(e.message || e));
+
+    } finally {
+
+      setLoading(false);
+    }
+  }
+
+
+  useEffect(() => {
+    run(() => apiGet("diligence"));
+  }, []);
+
+
+  const el = React.createElement;
+  const b = data && data.budget;
+  const k = data && data.kpi;
+
+  return el(
+    React.Fragment,
+    null,
+
+    el("div", { className: "header" }, "Diligence"),
+
+    el(
+      "div",
+      { className: "content" },
+
+      nav,
+
+      err ? el("div", { className: "error" }, err) : null,
+
+      !data && loading ? el("div", { className: "help" }, "Loading...") : null,
+
+      data
+        ? el(
+            React.Fragment,
+            null,
+
+            el(
+              "div",
+              { className: "grid" },
+              metricCard("Monthly spend (reported)", tl(k.avgReported)),
+              metricCard("Monthly spend (ex one-offs)", tl(k.avgAdjusted)),
+              metricCard("One-offs (period)", tl(k.oneOffTotal) + " · " + Math.round(k.oneOffShare * 100) + "%"),
+              metricCard("Daily run-rate (adjusted)", tl(k.dailyAdjusted))
+            ),
+
+            el(
+              "div",
+              { className: "card", style: { marginTop: "12px" } },
+              el("div", { className: "label" }, "Monthly spend · blue = recurring, amber = one-off"),
+              el(MonthBars, { months: data.months })
+            ),
+
+            el(
+              "div",
+              { className: "card", style: { marginTop: "12px" } },
+              el("div", { className: "label" }, "Budget"),
+
+              el(
+                "div",
+                { className: "field" },
+                el("input", {
+                  value: target,
+                  onChange: e => setTarget(e.target.value),
+                  inputMode: "decimal",
+                  placeholder: "Monthly target (₺)"
+                })
+              ),
+
+              el(
+                "div",
+                { className: "row", style: { marginTop: "10px" } },
+                el(
+                  "button",
+                  {
+                    className: "btn",
+                    disabled: loading,
+                    onClick: () => run(() => apiPost("budget_set", { target: Number(target || 0) }))
+                  },
+                  loading ? "Saving..." : "Save target"
+                )
+              ),
+
+              b.target
+                ? el(
+                    "div",
+                    { className: "list", style: { marginTop: "12px" } },
+                    el("div", { className: "help" }, "Spent this month: " + tl(b.mtd) + " · Left: " + tl(b.remaining)),
+                    el(
+                      "div",
+                      { className: "value" },
+                      "Today's limit: " + tl(b.dailyAllowance) + " (" + b.daysLeft + " days left)"
+                    ),
+                    el(
+                      "div",
+                      { className: b.projected > b.target ? "amount-expense" : "amount-income", style: { fontWeight: 700 } },
+                      "Projected month-end: " + tl(b.projected)
+                    )
+                  )
+                : el("div", { className: "help" }, "Set a target to see your daily limit.")
+            ),
+
+            el(
+              "div",
+              { className: "card", style: { marginTop: "12px" } },
+              el("div", { className: "label" }, "Where to cut (10% = saving per month)"),
+              data.categories.map(c =>
+                el(
+                  "div",
+                  { key: c.category, className: "legend-row" },
+                  el("div", { style: { flex: 1, fontWeight: 700 } }, c.category),
+                  el("div", { className: "help", style: { margin: 0 } }, tl(c.avg) + "/mo"),
+                  el("div", { className: "amount-income", style: { fontWeight: 800 } }, "−" + tl(c.cut10))
+                )
+              )
+            ),
+
+            el(
+              "div",
+              { className: "card", style: { marginTop: "12px" } },
+              el("div", { className: "label" }, "Detected one-offs"),
+              data.oneOffs.length === 0
+                ? el("div", { className: "help" }, "None detected.")
+                : data.oneOffs.map((o, i) =>
+                    el(
+                      "div",
+                      { key: i, className: "legend-row" },
+                      el(
+                        "div",
+                        { style: { flex: 1 } },
+                        el("div", { style: { fontWeight: 700 } }, o.pos || o.category),
+                        el("div", { className: "help", style: { marginTop: "2px" } }, o.date + " · " + o.category)
+                      ),
+                      el("div", { style: { fontWeight: 800 } }, tl(o.amount))
+                    )
+                  )
+            )
+          )
+        : null,
+
+      el(
+        "div",
+        { className: "row", style: { marginTop: "12px" } },
+        el(
+          "button",
+          {
+            className: "btn ghost",
+            disabled: loading,
+            onClick: () => run(() => apiGet("diligence"))
+          },
+          loading ? "Refreshing..." : "Refresh"
+        )
+      )
+    )
+  );
+}
+
+
+/************************************************
+ * DILIGENCE WRAPPER + RECEIVABLES / PAYABLES
+ ************************************************/
+
+const h = React.createElement;
+let RP_CACHE = null;
+
+
+function Diligence() {
+
+  const [view, setView] = useState("spend");
+
+  const nav = h(
+    "div",
+    { className: "pillrow" },
+
+    [["spend", "Spend & budget"], ["plan", "Cashflow & capex"], ["ar", "Receivables"], ["ap", "Payables"]].map(([k, l]) =>
+      h(
+        "button",
+        {
+          key: k,
+          className: "pill" + (view === k ? " active" : ""),
+          onClick: () => setView(k)
+        },
+        l
+      )
+    )
+  );
+
+  return view === "spend"
+    ? h(DiligenceSpend, { nav })
+    : view === "plan"
+      ? h(Plan, { nav })
+      : h(Recv, { kind: view, nav });
+}
+
+
+function Recv({ kind, nav }) {
+
+  const [data, setData] = useState(RP_CACHE);
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function load() {
+
+    setErr("");
+    setLoading(true);
+
+    try {
+
+      const d = await apiGet("receivables");
+
+      RP_CACHE = d;
+      setData(d);
+
+    } catch (e) {
+
+      setErr(String(e.message || e));
+
+    } finally {
+
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  const isAr = kind === "ar";
+  const d = data && data[kind];
+  const max = d ? Math.max(1, ...d.buckets.map(b => b.amount)) : 1;
+
+  return h(
+    React.Fragment,
+    null,
+
+    h("div", { className: "header" }, isAr ? "Receivables" : "Payables"),
+
+    h(
+      "div",
+      { className: "content" },
+
+      nav,
+
+      err ? h("div", { className: "error" }, err) : null,
+
+      !d && loading ? h("div", { className: "help" }, "Loading...") : null,
+
+      d
+        ? h(
+            React.Fragment,
+            null,
+
+            h(
+              "div",
+              { className: "grid", style: { marginTop: "12px" } },
+              metricCard("Outstanding", tl(d.outstanding)),
+              metricCard("Overdue", tl(d.overdue)),
+              metricCard(isAr ? "Receivable days" : "Payable days", Math.round(d.days) + " days"),
+              metricCard(
+                isAr ? "Avg. collection time" : "Avg. payment time",
+                d.avgCollect === null ? "-" : Math.round(d.avgCollect) + " days"
+              )
+            ),
+
+            h(
+              "div",
+              { className: "card", style: { marginTop: "12px" } },
+              h("div", { className: "label" }, "Aging (days since transaction)"),
+
+              d.buckets.map(b =>
+                h(
+                  "div",
+                  { key: b.label, style: { marginTop: "10px" } },
+                  h(
+                    "div",
+                    { className: "row", style: { justifyContent: "space-between", fontSize: "13px" } },
+                    h("span", null, b.label),
+                    h("b", null, tl(b.amount))
+                  ),
+                  h("div", {
+                    className: "bar",
+                    style: {
+                      width: (b.amount / max * 100) + "%",
+                      background: b.label === "90+ days" ? "#dc2626" : "#2563eb"
+                    }
+                  })
+                )
+              )
+            ),
+
+            h(
+              "div",
+              { className: "card", style: { marginTop: "12px" } },
+              h("div", { className: "label" }, "Open items · due: " + data.rules),
+
+              d.items.length === 0
+                ? h("div", { className: "help" }, "Nothing outstanding.")
+                : d.items.map((i, n) =>
+                    h(
+                      "div",
+                      { key: n, className: "legend-row" },
+                      h(
+                        "div",
+                        { style: { flex: 1 } },
+                        h("div", { style: { fontWeight: 700 } }, i.cari || i.category),
+                        h("div", { className: "help", style: { marginTop: "2px" } }, i.date + " → " + i.due + " · " + i.category + (i.desc ? " · " + i.desc : ""))
+                      ),
+                      h(
+                        "div",
+                        { style: { textAlign: "right" } },
+                        h("div", { style: { fontWeight: 800 } }, tl(i.open)),
+                        h(
+                          "span",
+                          {
+                            className: "badge",
+                            style: i.overdueDays > 0
+                              ? { background: "#7f1d1d", color: "#fca5a5" }
+                              : { background: "#064e3b", color: "#4ade80" }
+                          },
+                          i.overdueDays > 0 ? "Overdue " + i.overdueDays + "d" : "Due in " + (-i.overdueDays) + "d"
+                        )
+                      )
+                    )
+                  )
+            )
+          )
+        : null,
+
+      h(
+        "div",
+        { className: "row", style: { marginTop: "12px" } },
+        h("button", { className: "btn ghost", disabled: loading, onClick: load }, loading ? "Refreshing..." : "Refresh")
+      )
+    )
+  );
+}
+
+
+/************************************************
+ * CASHFLOW + CAPEX PLAN
+ ************************************************/
+
+let PLAN_CACHE = null;
+const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function mlabel(k) {
+  const p = k.split("-");
+  return MON[Number(p[1]) - 1] + " " + p[0].slice(2);
+}
+
+
+function ClosingBars({ rows }) {
+
+  const W = 300;
+  const H = 110;
+  const bw = W / rows.length;
+  const hi = Math.max(0, ...rows.map(r => r.closing));
+  const lo = Math.min(0, ...rows.map(r => r.closing));
+  const span = Math.max(1, hi - lo);
+  const zero = hi / span * H;
+
+  return h(
+    "svg",
+    { viewBox: "0 0 " + W + " " + (H + 18), width: "100%" },
+
+    h("line", { x1: 0, x2: W, y1: zero, y2: zero, stroke: "#334155" }),
+
+    rows.map((r, i) => {
+
+      const bh = Math.abs(r.closing) / span * H;
+      const x = i * bw + bw * 0.15;
+
+      return h(
+        "g",
+        { key: r.m },
+        h("rect", {
+          x, y: r.closing >= 0 ? zero - bh : zero, width: bw * 0.7, height: Math.max(bh, 1),
+          fill: r.closing >= 0 ? "#2563eb" : "#dc2626", rx: 2
+        }),
+        h("text", { x: x + bw * 0.35, y: H + 13, fontSize: 8, fill: "#9ca3af", textAnchor: "middle" }, mlabel(r.m).slice(0, 3))
+      );
+    })
+  );
+}
+
+
+function Plan({ nav }) {
+
+  const [data, setData] = useState(PLAN_CACHE);
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [income, setIncome] = useState("");
+  const [spend, setSpend] = useState("");
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [date, setDate] = useState(today());
+  const [n, setN] = useState(1);
+  const [rate, setRate] = useState("");
+
+  async function run(fn) {
+
+    setErr("");
+    setLoading(true);
+
+    try {
+
+      const d = await fn();
+
+      PLAN_CACHE = d;
+      setData(d);
+      setIncome(d.assumptions.incomeSet ? String(d.assumptions.incomeSet) : "");
+      setSpend(d.assumptions.spendSet ? String(d.assumptions.spendSet) : "");
+
+    } catch (e) {
+
+      setErr(String(e.message || e));
+
+    } finally {
+
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    run(() => apiGet("plan"));
+  }, []);
+
+  const a = data && data.assumptions;
+  const s = data && data.summary;
+
+  return h(
+    React.Fragment,
+    null,
+
+    h("div", { className: "header" }, "Cashflow & capex"),
+
+    h(
+      "div",
+      { className: "content" },
+
+      nav,
+
+      err ? h("div", { className: "error" }, err) : null,
+
+      !data && loading ? h("div", { className: "help" }, "Loading...") : null,
+
+      data
+        ? h(
+            React.Fragment,
+            null,
+
+            h(
+              "div",
+              { className: "grid", style: { marginTop: "12px" } },
+              metricCard("Net position today", tl(a.opening)),
+              metricCard("Cash − card debt", tl(a.cash) + " − " + tl(a.card)),
+              metricCard("Free cash flow / month", tl(s.freeCashFlow)),
+              metricCard("Capex committed", tl(s.capexLeft)),
+              metricCard("Lowest point (12 mo)", tl(s.lowest) + " · " + mlabel(s.lowestMonth)),
+              metricCard("Net position ≥ 0", s.breakEven ? mlabel(s.breakEven) : "Beyond 5 years")
+            ),
+
+            h(
+              "div",
+              { className: "card", style: { marginTop: "12px" } },
+              h("div", { className: "label" }, "Projected net position (cash − card debt), month-end"),
+              h(ClosingBars, { rows: data.months })
+            ),
+
+            h(
+              "div",
+              { className: "card", style: { marginTop: "12px" } },
+              h("div", { className: "label" }, "Assumptions (leave empty to use automatic values)"),
+              h("div", { className: "field" }, h("input", {
+                value: income, inputMode: "decimal", onChange: e => setIncome(e.target.value),
+                placeholder: "Monthly income · auto " + tl(a.incomeAuto)
+              })),
+              h("div", { className: "field" }, h("input", {
+                value: spend, inputMode: "decimal", onChange: e => setSpend(e.target.value),
+                placeholder: "Monthly spend · auto " + tl(a.spendAuto)
+              })),
+              h(
+                "div",
+                { className: "row", style: { marginTop: "10px" } },
+                h("button", {
+                  className: "btn", disabled: loading,
+                  onClick: () => run(() => apiPost("plan_set", { income: Number(income || 0), spend: Number(spend || 0) }))
+                }, loading ? "Saving..." : "Save assumptions")
+              ),
+              h("div", { className: "help" }, "Also included: receivables at their due dates, payables due, and every capex instalment below.")
+            ),
+
+            h(
+              "div",
+              { className: "card", style: { marginTop: "12px" } },
+              h("div", { className: "label" }, "Planned capex"),
+
+              data.items.length === 0 ? h("div", { className: "help" }, "Nothing planned yet.") : null,
+
+              data.items.map(it =>
+                h(
+                  "div",
+                  { key: it.id, className: "legend-row" },
+                  h(
+                    "div",
+                    { style: { flex: 1 } },
+                    h("div", { style: { fontWeight: 700 } }, it.name),
+                    h(
+                      "div",
+                      { className: "help", style: { marginTop: "2px" } },
+                      it.n + " × " + tl(it.pmt) + " from " + mlabel(it.date.slice(0, 7)) +
+                      (it.interest > 1 ? " · interest " + tl(it.interest) : "")
+                    )
+                  ),
+                  h("div", { style: { fontWeight: 800 } }, tl(it.total)),
+                  h("button", {
+                    className: "small-btn delete", style: { flex: "none" }, disabled: loading,
+                    onClick: () => run(() => apiPost("capex_delete", { id: it.id }))
+                  }, "Delete")
+                )
+              ),
+
+              h("div", { className: "field" }, h("input", { value: name, onChange: e => setName(e.target.value), placeholder: "Item (e.g. Phone)" })),
+              h("div", { className: "field" }, h("input", { value: price, inputMode: "decimal", onChange: e => setPrice(e.target.value), placeholder: "Price (₺)" })),
+              h("div", { className: "field" }, h("div", { className: "label" }, "First payment date"), h("input", { type: "date", value: date, onChange: e => setDate(e.target.value) })),
+              h(
+                "div",
+                { className: "field" },
+                h("div", { className: "label" }, "Instalments"),
+                h("select", { value: n, onChange: e => setN(Number(e.target.value)) },
+                  [1, 2, 3, 4, 6, 9, 12, 18, 24, 36].map(x => h("option", { key: x, value: x }, x === 1 ? "Single payment" : x + " instalments")))
+              ),
+              n > 1
+                ? h("div", { className: "field" }, h("input", { value: rate, inputMode: "decimal", onChange: e => setRate(e.target.value), placeholder: "Monthly interest % (optional)" }))
+                : null,
+              h(
+                "div",
+                { className: "row", style: { marginTop: "10px" } },
+                h("button", {
+                  className: "btn", disabled: loading,
+                  onClick: () => run(async () => {
+                    const d = await apiPost("capex_save", { name, price: Number(price), date, n, rate: Number(rate || 0) });
+                    setName(""); setPrice(""); setN(1); setRate("");
+                    return d;
+                  })
+                }, "Add to plan")
+              )
+            ),
+
+            h(
+              "div",
+              { className: "card", style: { marginTop: "12px", padding: "12px 0" } },
+              h("div", { className: "label", style: { padding: "0 12px 8px" } }, "Monthly projection"),
+              h(
+                "div",
+                { style: { overflowX: "auto" } },
+                h(
+                  "table",
+                  { className: "tbl" },
+                  h("thead", null, h("tr", null, ["Month", "In", "Out", "Capex", "Closing"].map(c => h("th", { key: c, className: "label" }, c)))),
+                  h(
+                    "tbody",
+                    null,
+                    data.months.map(r =>
+                      h(
+                        "tr",
+                        { key: r.m },
+                        h("td", null, mlabel(r.m)),
+                        h("td", null, tl(r.income + r.collections)),
+                        h("td", null, tl(r.spend + r.payables)),
+                        h("td", null, r.capex ? tl(r.capex) : "-"),
+                        h("td", { className: r.closing < 0 ? "amount-expense" : "amount-income" }, tl(r.closing))
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          )
+        : null,
+
+      h(
+        "div",
+        { className: "row", style: { marginTop: "12px" } },
+        h("button", { className: "btn ghost", disabled: loading, onClick: () => run(() => apiGet("plan")) }, loading ? "Refreshing..." : "Refresh")
+      )
+    )
+  );
+}
+
+
+/************************************************
+ * REPORTS (IS / BS / ONCA sheets)
+ ************************************************/
+
+const STATEMENT_CACHE = {};
+
+const STATEMENTS = [
+  { key: "is", label: "IS", title: "Income statement" },
+  { key: "bs", label: "BS", title: "Balance sheet" },
+  { key: "onca", label: "ONCA", title: "Other non-current assets" }
+];
+
+
+function StatementTable({ rows, hideZero }) {
+
+  const filled = c => String(c).trim() !== "";
+  const hi = Math.max(0, rows.findIndex(r => r.filter(filled).length >= 2));
+  const head = rows[hi] || [];
+  const body = rows.slice(hi + 1);
+
+  const cols = head
+    .map((_, i) => i)
+    .filter(i =>
+      String(head[i]).trim() !== "Mapping" &&
+      (!hideZero || i === 0 || body.some(r => /[1-9]/.test(String(r[i]))))
+    );
+
+  const isTotal = l => filled(l) && l === String(l).toUpperCase() && l !== String(l).toLowerCase();
+
+  return h(
+    "div",
+    { style: { overflowX: "auto" } },
+    h(
+      "table",
+      { className: "tbl" },
+
+      h(
+        "thead",
+        null,
+        h("tr", null, cols.map(i => h("th", { key: i, className: "label" }, head[i])))
+      ),
+
+      h(
+        "tbody",
+        null,
+        body.map((r, n) =>
+          h(
+            "tr",
+            { key: n, className: isTotal(r[0]) ? "tot" : "" },
+            cols.map(i => h("td", { key: i }, r[i]))
+          )
+        )
+      )
+    )
+  );
+}
+
+
+function Reports() {
+
+  const [key, setKey] = useState("is");
+  const [rows, setRows] = useState(null);
+  const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function load(k, force) {
+
+    setErr("");
+
+    if (STATEMENT_CACHE[k] && !force) {
+      setRows(STATEMENT_CACHE[k]);
+      return;
+    }
+
+    setRows(STATEMENT_CACHE[k] || null);
+    setLoading(true);
+
+    try {
+
+      const d = await apiGet("statement", { name: k });
+
+      STATEMENT_CACHE[k] = d.rows;
+      setRows(d.rows);
+
+    } catch (e) {
+
+      setErr(String(e.message || e));
+
+    } finally {
+
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    load(key, false);
+  }, [key]);
+
+  const cfg = STATEMENTS.find(s => s.key === key);
+
+  return h(
+    React.Fragment,
+    null,
+
+    h("div", { className: "header" }, "Reports"),
+
+    h(
+      "div",
+      { className: "content" },
+
+      h(
+        "div",
+        { className: "pillrow" },
+        STATEMENTS.map(s =>
+          h(
+            "button",
+            {
+              key: s.key,
+              className: "pill" + (key === s.key ? " active" : ""),
+              onClick: () => setKey(s.key)
+            },
+            s.label
+          )
+        )
+      ),
+
+      err ? h("div", { className: "error" }, err) : null,
+
+      h(
+        "div",
+        { className: "card", style: { marginTop: "12px", padding: "12px 0" } },
+        h("div", { className: "label", style: { padding: "0 12px 8px" } }, cfg.title),
+        !rows && loading ? h("div", { className: "help", style: { padding: "0 12px" } }, "Loading...") : null,
+        rows ? h(StatementTable, { rows, hideZero: key !== "onca" }) : null
+      ),
+
+      h(
+        "div",
+        { className: "row", style: { marginTop: "12px" } },
+        h("button", { className: "btn ghost", disabled: loading, onClick: () => load(key, true) }, loading ? "Refreshing..." : "Refresh")
+      )
+    )
+  );
+}
+
+
+/************************************************
  * SETTINGS (add / remove list items in Siniflandirma)
  ************************************************/
 
@@ -3292,6 +4143,14 @@ function App() {
           onEdit: startEdit
         }
       );
+
+  } else if (tab === "Reports") {
+
+    screen = React.createElement(Reports);
+
+  } else if (tab === "Diligence") {
+
+    screen = React.createElement(Diligence);
 
   } else if (tab === "Settings") {
 
