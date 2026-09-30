@@ -370,7 +370,7 @@ const { useEffect, useMemo, useState } = React;
  ************************************************/
 
 const API_BASE =
-  "https://script.google.com/macros/s/AKfycbwlIthldwGU6Etng1XwnTanSRF8n0SOiYS65CDJO0peB2tpboOTI5uxrCugyJ06W0NQ1A/exec";
+  "https://script.google.com/macros/s/AKfycbzYRfC4LhS2qCN8PmaatOktB_n7iQ1zgs18L8nfy735DYcCpT0PN6pFXhn_HqICUvvTtg/exec";
 
 
 async function apiGet(path, params = {}) {
@@ -474,14 +474,8 @@ function BottomNav({ tab, setTab }) {
       { className: "nav-inner" },
 
       ["Overview", "Add", "Subledger", "Investments", "Diligence", "Reports"].map(t =>
-        React.createElement(
-          "div",
-          {
-            key: t,
-            className: "tab" + (tab === t ? " active" : ""),
-            onClick: () => setTab(t)
-          },
-          t
+        React.createElement("div", { key: t, className: "tab" + (tab === t ? " active" : ""), onClick: () => setTab(t) },
+          t === "Subledger" ? "Transactions" : t
         )
       )
     )
@@ -492,6 +486,34 @@ function BottomNav({ tab, setTab }) {
 /************************************************
  * OVERVIEW
  ************************************************/
+
+function ExpensePieChart({ items }) {
+  const [selected, setSelected] = useState(null);
+  const colors = ["#60a5fa", "#34d399", "#fbbf24", "#f87171", "#a78bfa", "#22d3ee", "#fb923c", "#f472b6", "#a3e635", "#94a3b8", "#e879f9", "#2dd4bf", "#c084fc", "#facc15", "#38bdf8", "#4ade80", "#fb7185", "#818cf8"];
+  const values = (items || []).filter(x => Number(x.amount) > 0);
+  const total = values.reduce((s, x) => s + Number(x.amount || 0), 0);
+  const topNames = new Set(values.slice().sort((a, b) => b.amount - a.amount).slice(0, 5).map(x => x.category));
+  const cx = 120, cy = 120, radius = 104; let angle = -Math.PI / 2;
+  const wedges = values.map((item, index) => {
+    const fraction = Number(item.amount) / (total || 1), next = angle + fraction * Math.PI * 2;
+    const x1 = cx + radius * Math.cos(angle), y1 = cy + radius * Math.sin(angle), x2 = cx + radius * Math.cos(next), y2 = cy + radius * Math.sin(next);
+    const d = `M ${cx} ${cy} L ${x1} ${y1} A ${radius} ${radius} 0 ${fraction > 0.5 ? 1 : 0} 1 ${x2} ${y2} Z`;
+    const mid = (angle + next) / 2, lr = radius * 0.66, lx = cx + lr * Math.cos(mid), ly = cy + lr * Math.sin(mid); angle = next;
+    return React.createElement(React.Fragment, { key: item.category },
+      fraction > 0.999
+        ? React.createElement("circle", { cx, cy, r: radius, fill: colors[index % colors.length], stroke: "#0b1220", strokeWidth: 1.5, onClick: () => setSelected(item), style: { cursor: "pointer" } })
+        : React.createElement("path", { d, fill: colors[index % colors.length], stroke: "#0b1220", strokeWidth: 1.5, onClick: () => setSelected(item), style: { cursor: "pointer" } }),
+      topNames.has(item.category) ? React.createElement("text", { x: lx, y: ly - 3, textAnchor: "middle", fill: "#07111f", fontSize: 7.5, fontWeight: 800, style: { pointerEvents: "none" } }, String(item.category).slice(0, 13)) : null,
+      topNames.has(item.category) ? React.createElement("text", { x: lx, y: ly + 6, textAnchor: "middle", fill: "#07111f", fontSize: 6.5, fontWeight: 700, style: { pointerEvents: "none" } }, tl(item.amount)) : null
+    );
+  });
+  return React.createElement("div", { className: "card", style: { marginTop: 12, textAlign: "center", padding: "10px 12px" } },
+    React.createElement("div", { className: "label", style: { textAlign: "left" } }, "Expenses this month by category"),
+    total ? React.createElement("div", { style: { width: 224, maxWidth: "100%", margin: "0 auto" } }, React.createElement("svg", { viewBox: "0 0 240 240", width: "100%", role: "img", "aria-label": "Monthly expense category pie chart" }, wedges)) : React.createElement("div", { className: "help", style: { padding: 20 } }, "No expense data available."),
+    selected ? React.createElement("div", { className: "help", style: { marginTop: 0, fontWeight: 700 } }, selected.category + " \u00b7 " + tl(selected.amount)) : null,
+    React.createElement("div", { className: "help", style: { marginTop: 2 } }, "Select a slice to see its category and amount.")
+  );
+}
 
 function Overview({ onOpenSettings }) {
 
@@ -570,6 +592,10 @@ function Overview({ onOpenSettings }) {
             metricCard("Expenses this month", data.currentMonthExpense),
             metricCard("Budget left today", data.budgetLeftToday)
           )
+        : null,
+
+      data && data.expenseBreakdown
+        ? React.createElement(ExpensePieChart, { items: data.expenseBreakdown })
         : null,
 
       data && data.cards && data.cards.length
@@ -1822,9 +1848,9 @@ function Add({
       ),
 
 
-      /******** RECOGNITION + INSTALLMENTS (expense only) ********/
+      /******** RECOGNITION (expense and income) + INSTALLMENTS (expense only) ********/
 
-      mode === "expense"
+      mode === "expense" || mode === "income"
         ? React.createElement(
             React.Fragment,
             null,
@@ -1878,7 +1904,7 @@ function Add({
                 )
               : null,
 
-            !isEditing
+            mode === "expense" && !isEditing
               ? React.createElement(
                   "div",
                   { className: "field" },
@@ -2291,9 +2317,9 @@ function Subledger({
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const [deleteTarget, setDeleteTarget] =
-    useState(null);
-
+  const [deleteTarget, setDeleteTarget] = useState(null);
+  const [paymentFilter, setPaymentFilter] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("");
 
   async function load() {
 
@@ -2315,8 +2341,7 @@ function Subledger({
         transfer counterpart.
       */
 
-      loadedRows =
-        enrichRows(loadedRows);
+      loadedRows = groupTransactions(enrichRows(loadedRows));
 
       SUBLEDGER_CACHE = loadedRows;
 
@@ -2375,7 +2400,7 @@ function Subledger({
     React.createElement(
       "div",
       { className: "header" },
-      "Subledger (last 100)"
+      "Transactions (latest 100)"
     ),
 
     React.createElement(
@@ -2391,21 +2416,17 @@ function Subledger({
         : null,
 
 
-      React.createElement(
-        "div",
-        {
-          className: "row",
-          style: { marginBottom: "12px" }
-        },
-
-        React.createElement(
-          "button",
-          {
-            className: "btn ghost",
-            onClick: load,
-            disabled: loading
-          },
-          loading ? "Refreshing..." : "Refresh"
+      React.createElement("div", { className: "row", style: { marginBottom: "12px" } },
+        React.createElement("button", { className: "btn ghost", onClick: load, disabled: loading }, loading ? "Refreshing..." : "Refresh")
+      ),
+      React.createElement("div", { className: "row", style: { gap: 8, marginBottom: 12 } },
+        React.createElement("select", { value: paymentFilter, onChange: e => setPaymentFilter(e.target.value), style: { flex: 1, minWidth: 0 } },
+          React.createElement("option", { value: "" }, "All payment methods"),
+          Array.from(new Set(rows.map(r => r.paymentMethod).filter(Boolean))).sort().map(x => React.createElement("option", { key: x, value: x }, x))
+        ),
+        React.createElement("select", { value: categoryFilter, onChange: e => setCategoryFilter(e.target.value), style: { flex: 1, minWidth: 0 } },
+          React.createElement("option", { value: "" }, "All expense types"),
+          Array.from(new Set(rows.flatMap(r => r.categories || []).map(c => c.category).filter(Boolean))).sort().map(x => React.createElement("option", { key: x, value: x }, x))
         )
       ),
 
@@ -2476,7 +2497,9 @@ function Subledger({
         "div",
         { className: "list" },
 
-        rows.map((r) =>
+        rows.filter(r => !paymentFilter || r.paymentMethod === paymentFilter)
+          .filter(r => !categoryFilter || (r.categories || []).some(c => c.category === categoryFilter))
+          .map((r) =>
           React.createElement(
             "div",
             {
@@ -2488,7 +2511,7 @@ function Subledger({
               "div",
               { className: "label" },
 
-              r.transactionDate,
+              r.installmentCount > 1 ? r.installmentCount + " installments - " + r.dateRange : r.transactionDate,
 
               r.recognitionDate &&
               r.recognitionDate !==
@@ -2519,8 +2542,8 @@ function Subledger({
                   )
               },
 
-              r.amount +
-              " • " +
+              r.installmentCount > 1 ? r.totalAmount : r.amount,
+              " \u2022 ",
               r.paymentMethod
             ),
 
@@ -2543,25 +2566,7 @@ function Subledger({
               "div",
               { className: "help mono" },
 
-              r.category1
-                ? r.category1 +
-                  ":" +
-                  (r.amount1 || "")
-                : "",
-
-              r.category2
-                ? " | " +
-                  r.category2 +
-                  ":" +
-                  (r.amount2 || "")
-                : "",
-
-              r.category3
-                ? " | " +
-                  r.category3 +
-                  ":" +
-                  (r.amount3 || "")
-                : ""
+              (r.categories || []).map(c => c.category + ":" + (r.installmentCount > 1 ? tl(c.amount) : c.amount)).join(" | ")
             ),
 
 
@@ -2594,7 +2599,7 @@ function Subledger({
                   "transaction-actions"
               },
 
-              r.category1 === "Komisyon"
+              r.category1 === "Komisyon" || r.installmentCount > 1
                 ? null
                 : React.createElement(
                     "button",
@@ -4387,6 +4392,44 @@ function cleanTransferDescription(description) {
     .trim();
 }
 
+
+function transactionDateValue(value) {
+  const s = String(value || "");
+  let m = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (m) return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])).getTime();
+  m = s.match(/^(\d{1,2})[./](\d{1,2})[./](\d{4})/);
+  return m ? new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1])).getTime() : 0;
+}
+function amountValue(value) {
+  let s = String(value == null ? "" : value).replace(/[^0-9,.-]/g, "");
+  const comma = s.lastIndexOf(","), dot = s.lastIndexOf(".");
+  if (comma >= 0 && dot >= 0) {
+    const decimal = comma > dot ? "," : ".";
+    s = s.replace(decimal === "," ? /\./g : /,/g, "").replace(decimal, ".");
+  } else if (comma >= 0) {
+    s = /,\d{1,2}$/.test(s) ? s.replace(",", ".") : s.replace(/,/g, "");
+  } else if (dot >= 0 && /\.\d{3}$/.test(s)) {
+    s = s.replace(/\./g, "");
+  }
+  const n = Number(s);
+  return Number.isFinite(n) ? Math.abs(n) : 0;
+}
+
+function groupTransactions(rows) {
+  const groups = new Map();
+  rows.forEach(r => { const id = String(r.transactionId || r.row); if (!groups.has(id)) groups.set(id, []); groups.get(id).push(r); });
+  return Array.from(groups.values()).map(group => {
+    group.sort((a,b) => transactionDateValue(b.transactionDate)-transactionDateValue(a.transactionDate));
+    const base={...group[0]}, dates=group.map(r=>r.transactionDate).filter(Boolean), categories=new Map();
+    group.forEach(r => [[r.category1,r.amount1],[r.category2,r.amount2],[r.category3,r.amount3]].forEach(([name,amount])=>{if(name)categories.set(name,(categories.get(name)||0)+amountValue(amount));}));
+    base.installmentCount=new Set(dates).size;
+    base.dateRange=dates.length>1?dates[dates.length-1]+" - "+dates[0]:(dates[0]||"");
+    base.totalAmount=new Intl.NumberFormat("tr-TR",{maximumFractionDigits:2}).format(group.reduce((s,r)=>s+amountValue(r.amount),0))+" \u20ba";
+    base.categories=Array.from(categories,([category,amount])=>({category,amount}));
+    base._sortDate=Math.max(...group.map(r=>transactionDateValue(r.transactionDate)));
+    return base;
+  }).sort((a,b)=>b._sortDate-a._sortDate);
+}
 
 function enrichRows(rows) {
 
