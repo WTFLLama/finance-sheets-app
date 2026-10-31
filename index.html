@@ -9,7 +9,7 @@
 <script crossorigin src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
 <script crossorigin src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
 <style>
-:root{--bg:#f3f4fa;--card:#fff;--txt:#121826;--mut:#6b7280;--bd:#e6e8f0;--in:#f1f2f8;--ac:#5b5bf0;--ac2:#8b5cf6;--gn:#16a34a;--rd:#e11d48;--sh:0 4px 18px rgba(30,40,90,.07)}
+:root{--bg:#f3f4fa;--card:#fff;--txt:#121826;--mut:#6b7280;--bd:#e6e8f0;--in:#f1f2f8;--ac:#5b5bf0;--ac2:#8b5cf6;--gn:#16a34a;--rd:#e11d48;--am:#f59e0b;--sh:0 4px 18px rgba(30,40,90,.07)}
 @media(prefers-color-scheme:dark){:root{--bg:#0b0f1a;--card:#141a29;--txt:#eef1f8;--mut:#8b94a8;--bd:#222b3f;--in:#1b2336;--sh:none}}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,system-ui,"Segoe UI",Roboto,sans-serif}
@@ -54,10 +54,23 @@ input:focus,select:focus{border-color:var(--ac)}input[type=checkbox]{width:auto;
 .tbl{width:100%;border-collapse:collapse;font-size:12px}.tbl td,.tbl th{padding:8px 10px;white-space:nowrap;border-top:1px solid var(--bd);text-align:right}
 .tbl td:first-child,.tbl th:first-child{text-align:left;position:sticky;left:0;background:var(--card)}.tbl .tot td{font-weight:800;background:var(--in)}
 .pr{filter:blur(7px)}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}.g3 .card{margin:0;padding:12px}
+.br{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid var(--bd);font-size:14px}.br:first-of-type{border-top:0}
+.sb.on{background:var(--rd);color:#fff}.sb.ok{background:var(--ac);color:#fff}
+.tx{display:flex;gap:10px;align-items:center;padding:11px 14px;border-top:1px solid var(--bd)}
+.cg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.tile{background:var(--card);border-radius:14px;padding:10px 9px 9px;box-shadow:var(--sh);cursor:pointer;position:relative;min-width:0;border:1.5px solid transparent}
+.tile.sel{border-color:var(--ac)}.tile.exd{opacity:.6}
+.tile .nm{font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:20px}
+.tile .am{font-size:14px;font-weight:800;margin-top:5px;letter-spacing:-.3px}
+.tile .sub{font-size:10px;color:var(--mut);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tile .x{position:absolute;top:6px;right:6px;width:18px;height:18px;border-radius:50%;border:0;background:var(--in);color:var(--mut);font-size:12px;line-height:18px;padding:0}
+.tile .x.on{background:var(--rd);color:#fff}
+.pn{grid-column:1/-1;padding:0;overflow:hidden;margin:0}
 </style></head><body><div id="root"></div>
 <script>
 const h=React.createElement,{useState,useEffect,useMemo}=React;
-const API="https://script.google.com/macros/s/AKfycbzczCLKDP05ouETTpIN63pLGitpGvzCge70Wh4DyWcgLkPjAVi5vC3iuS2v6WerehFX9g/exec";
+const API="https://script.google.com/macros/s/AKfycbzVbckFFZ5iUitJSHhSx_4vj1xKVw-ZhlrPoLyKZqJalmH5Ld31ZsXNYduifZgmFvQLuA/exec";
 async function api(path,body,params){
   const r=body?await fetch(API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({path,...body})}):await fetch(API+"?"+new URLSearchParams({path,...params}));
   const j=await r.json();if(!j.ok)throw new Error(j.error||"API error");return j.data}
@@ -74,6 +87,8 @@ let LD=null;
 const INV_ACC="Sarf Malzemeler";
 const tl=n=>Number(n||0).toLocaleString("tr-TR",{maximumFractionDigits:0})+" ₺";
 const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const ms=k=>{const p=k.split("-");return MON[p[1]-1]+p[0].slice(2)};
+const mn=k=>MON[k.split("-")[1]-1];
 const ml=k=>{const p=k.split("-");return MON[p[1]-1]+" "+p[0].slice(2)};
 const pad=n=>String(n).padStart(2,"0");
 const today=()=>{const d=new Date();return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())};
@@ -269,19 +284,121 @@ function MonthBars({months}){const W=300,H=100,bw=W/months.length,mx=Math.max(1,
 function ClosingBars({rows}){const W=300,H=110,bw=W/rows.length,hi=Math.max(0,...rows.map(r=>r.closing)),lo=Math.min(0,...rows.map(r=>r.closing)),sp=Math.max(1,hi-lo),z=hi/sp*H;
   return h("svg",{viewBox:"0 0 "+W+" "+(H+18),width:"100%"},h("line",{x1:0,x2:W,y1:z,y2:z,stroke:"#8b94a8",opacity:.4}),rows.map((r,i)=>{const bh=Math.abs(r.closing)/sp*H,x=i*bw+bw*.15;
     return h("g",{key:r.m},h("rect",{x,y:r.closing>=0?z-bh:z,width:bw*.7,height:Math.max(bh,1),fill:r.closing>=0?"#5b5bf0":"#e11d48",rx:2}),h("text",{x:x+bw*.35,y:H+13,fontSize:8,fill:"#8b94a8",textAnchor:"middle"},ml(r.m).slice(0,3)))}))}
+function SpendChart({stats,sel,onSel}){
+  const W=300,H=84,bw=W/stats.length,mx=Math.max(1,...stats.map(s=>Math.max(s.rep,s.bud))),y=v=>H-v/mx*H;
+  const path=stats.map((s,i)=>s.bud?(i&&stats[i-1].bud?"L":"M")+(i*bw)+" "+y(s.bud)+" L"+((i+1)*bw)+" "+y(s.bud):"").join(" "),last=stats[stats.length-1];
+  return h("svg",{viewBox:"0 0 "+W+" "+(H+20),width:"100%"},
+    stats.map((s,i)=>{const x=i*bw+bw*.18,w=bw*.64,a=s.rep/mx*H,b=s.nrm/mx*H,on=s.k===sel;
+      return h("g",{key:s.k,onClick:()=>onSel(s.k),style:{cursor:"pointer"},opacity:on?1:.55},
+        h("rect",{x,y:H-a,width:w,height:a,rx:4,fill:"var(--am)",opacity:.35}),
+        h("rect",{x,y:H-b,width:w,height:b,rx:4,fill:"var(--ac)"}),
+        h("text",{x:x+w/2,y:H+14,fontSize:9,fontWeight:on?800:500,fill:"currentColor",textAnchor:"middle"},ms(s.k)))}),
+    path.trim()?h("path",{d:path,fill:"none",stroke:"var(--rd)",strokeWidth:1.5,strokeDasharray:"4 3"}):null,
+    last.bud?h("text",{x:W,y:y(last.bud)-3,fontSize:8,fill:"var(--rd)",textAnchor:"end",fontWeight:800,style:{paintOrder:"stroke",stroke:"var(--card)",strokeWidth:3}},"Budget "+tl(last.bud)):null)}
 function Spend({nav}){
-  const x=useData("dil","diligence"),d=x.d,[t,setT]=useState("");
-  useEffect(()=>{if(d&&d.budget.target)setT(String(d.budget.target))},[d]);
-  const k=d&&d.kpi,b=d&&d.budget;
-  return h(React.Fragment,null,nav,h(Er,{e:x.e}),!d&&x.l?h(Sk):null,
-    d?h(React.Fragment,null,
-      h("div",{className:"g2"},M("Monthly spend (reported)",tl(k.avgReported)),M("Monthly spend (ex one-offs)",tl(k.avgAdjusted)),M("One-offs (period)",tl(k.oneOffTotal)+" · "+Math.round(k.oneOffShare*100)+"%"),M("Daily run-rate (adjusted)",tl(k.dailyAdjusted))),
-      h("div",{className:"card"},h("div",{className:"lb"},"Monthly spend · blue = recurring, amber = one-off"),h(MonthBars,{months:d.months})),
-      h("div",{className:"card"},h("div",{className:"lb"},"Budget"),F("Monthly target (₺)",I(t,setT,{inputMode:"decimal",placeholder:"Monthly target (₺)"})),
-        h("div",{className:"row",style:{marginTop:10}},h("button",{className:"btn",disabled:x.l,onClick:()=>x.act(()=>api("budget_set",{target:Number(t||0)}))},x.l?"Saving...":"Save target")),
-        b.target?h("div",{style:{marginTop:12}},h("div",{className:"help"},"Spent this month: "+tl(b.mtd)+" · Left: "+tl(b.remaining)),h("div",{className:"v"},"Today's limit: "+tl(b.dailyAllowance)+" ("+b.daysLeft+" days left)"),h("div",{className:b.projected>b.target?"dn":"up",style:{fontWeight:700,marginTop:4}},"Projected month-end: "+tl(b.projected))):h("div",{className:"help"},"Set a target to see your daily limit.")),
-      h("div",{className:"card"},h("div",{className:"lb"},"Where to cut (10% = saving per month)"),d.categories.map(c=>h("div",{key:c.category,className:"li"},h("b",{style:{flex:1}},c.category),h("span",{className:"help",style:{margin:0}},tl(c.avg)+"/mo"),h("b",{className:"up"},"−"+tl(c.cut10))))),
-      h("div",{className:"card"},h("div",{className:"lb"},"Detected one-offs"),d.oneOffs.length?d.oneOffs.map((o,i)=>h("div",{key:i,className:"li"},h("div",{style:{flex:1}},h("b",null,o.pos||o.category),h("div",{className:"help",style:{marginTop:2}},o.date+" · "+o.category)),h("b",null,tl(o.amount)))):h("div",{className:"help"},"None detected."))):null,
+  const x=useData("spend","spend"),d=x.d,[m0,setM]=useState(null),[er,setEr]=useState(""),[view,setView]=useState("c"),[op,setOp]=useState(null),[sh,setSh]=useState({}),[q,setQ]=useState("");
+  const mut=async(patch,path,body)=>{setEr("");x.setD({...d,...patch});try{x.setD(await api(path,body))}catch(z){setEr(z.message);x.load()}};
+  if(!d)return h(React.Fragment,null,nav,h(Er,{e:x.e}),x.l?h(Sk):null);
+  const NOW=d.now,MONTHS=d.months,TX=d.tx,m=MONTHS.indexOf(m0)>-1?m0:NOW.m;
+  const ex={};d.excluded.forEach(c=>{ex[c]=1});const one={};d.oneoffs.forEach(i=>{one[i]=1});
+  const sum=a=>a.reduce((s,t)=>s+t.a,0),inN=t=>!ex[t.c]&&!one[t.i],BUD=k=>d.budgets[k]||0;
+  const stats=MONTHS.slice(-6).map(k=>{const r=TX.filter(t=>t.m===k);return{k,rep:sum(r),nrm:sum(r.filter(inN)),bud:BUD(k)}});
+  const rows=TX.filter(t=>t.m===m),rep=sum(rows),nrm=sum(rows.filter(inN)),B=BUD(m);
+  const mi=MONTHS.indexOf(m),prevK=mi>0?MONTHS[mi-1]:null,cur=m===NOW.m;
+  const prevRows=prevK?TX.filter(t=>t.m===prevK&&(!cur||t.d<=NOW.d)):[];
+  const exAmt=sum(rows.filter(t=>ex[t.c])),ones=rows.filter(t=>one[t.i]),oneAll=sum(ones),oneIn=sum(ones.filter(t=>!ex[t.c]));
+  const setOne=(id,on)=>mut({oneoffs:on?d.oneoffs.concat([id]):d.oneoffs.filter(z=>z!==id)},"spend_oneoff",{id,on});
+  const toggleEx=c=>{const on=!ex[c];mut({excluded:on?d.excluded.concat([c]):d.excluded.filter(z=>z!==c)},"spend_exclude",{category:c,on})};
+  const goM=k=>{setM(k);setOp(null)};
+  const grp=(keyf)=>{const o={};rows.forEach(t=>{const k=keyf(t);(o[k]=o[k]||[]).push(t)});return Object.keys(o).map(k=>{const r=o[k].slice().sort((a,b)=>b.a-a.a);return{k,label:k,r,rep:sum(r),nrm:sum(r.filter(inN)),prev:sum(prevRows.filter(t=>keyf(t)===k&&inN(t)))}}).sort((a,b)=>b.rep-a.rep)};
+  const cats=grp(t=>t.c),merch=grp(t=>t.p||"(no name)");
+  const fv=(()=>{if(mi<2)return null;const ks=[MONTHS[mi-2],MONTHS[mi-1],m];
+    const T=ks.map(k=>{const o={};TX.filter(t=>t.m===k).forEach(t=>{const key=t.p+"|"+t.c;o[key]=(o[key]||0)+t.a});return o});
+    const fixed=[];Object.keys(T[2]).forEach(key=>{const v=T.map(o=>o[key]);if(v.some(z=>!z))return;if(Math.max(...v)/Math.min(...v)<=1.25)fixed.push({key,p:key.split("|")[0],c:key.split("|")[1],cur:v[2],avg:(v[0]+v[1]+v[2])/3})});
+    const fk={};fixed.forEach(f=>{fk[f.key]=1});const fixedN=sum(rows.filter(t=>fk[t.p+"|"+t.c]&&inN(t)));
+    return{fixed:fixed.sort((a,b)=>b.cur-a.cur),fixedN,varN:nrm-fixedN}})();
+  const qn=q.trim().toLocaleLowerCase("tr"),res=qn?rows.filter(t=>[t.p,t.s,t.c,String(t.a)].join(" ").toLocaleLowerCase("tr").includes(qn)).sort((a,b)=>b.a-a.a):null;
+  const delta=z=>{if(!prevK||ex[z.k])return null;
+    if(z.prev<=0.5)return z.nrm>0?{t:"new vs "+mn(prevK),good:false}:null;
+    const pc=Math.round((z.nrm/z.prev-1)*100);return{t:(pc>=0?"▲ ":"▼ ")+Math.abs(pc)+"% vs "+mn(prevK),good:pc<=0}};
+  const txRow=(t,showCat)=>{const o=one[t.i];
+    return h("div",{key:t.i+t.m+t.c,className:"tx"},
+      h("div",{style:{flex:1,minWidth:0}},h("div",{style:{fontWeight:700}},t.p||t.c),h("div",{className:"help",style:{marginTop:2}},String(t.d).padStart(2,"0")+" "+mn(t.m)+(showCat?" · "+t.c:"")+(t.s?" · "+t.s:""))),
+      h("div",{style:{fontWeight:800,textDecoration:o?"line-through":"none"}},tl(t.a)),
+      ex[t.c]?null:o?h("button",{className:"sb ok",onClick:()=>setOne(t.i,false)},"One-off ✓"):h("button",{className:"sb",onClick:()=>setOne(t.i,true)},"One-off?"))};
+  const more=(key,total,n)=>total>n?h("div",{style:{padding:"4px 14px 14px"}},h("button",{className:"sb",style:{width:"100%",padding:11},onClick:()=>setSh(p=>({...p,[key]:n+10}))},"Show more ("+(total-n)+" left)")):h("div",{style:{height:10}});
+  const panel=(z,isCat)=>{const key=m+view+z.k,n=sh[key]||10;
+    return h("div",{key:"p-"+z.k,className:"card pn"},
+      h("div",{style:{display:"flex",alignItems:"center",gap:10,padding:"12px 14px"}},
+        h("div",{style:{flex:1,minWidth:0}},h("b",null,z.label),h("div",{className:"help"},z.r.length+" transactions in "+ml(m)+" · reported "+tl(z.rep)+(isCat&&ex[z.k]?"":" · normalized "+tl(z.nrm)))),
+        isCat?h("button",{className:"sb"+(ex[z.k]?" on":""),onClick:()=>toggleEx(z.k)},ex[z.k]?"Excluded":"Exclude category"):null),
+      z.r.slice(0,n).map(t=>txRow(t,!isCat)),more(key,z.r.length,n),
+      isCat&&ex[z.k]?h("div",{className:"help",style:{padding:"0 14px 12px"}},"Category excluded, so one-off marking is off."):null)};
+  const grid=(items,isCat)=>{const mxr=Math.max(1,...items.map(y=>y.rep)),oi=items.findIndex(y=>y.k===op);
+    return h("div",{className:"cg"},items.flatMap((z,i)=>{
+      const open=op===z.k,nOne=z.r.filter(t=>one[t.i]).length,dl=isCat?delta(z):null,dim=isCat?ex[z.k]:z.nrm===0;
+      const sub=isCat&&ex[z.k]?"Excl. "+tl(z.rep):nOne?nOne+" one-off":z.rep!==z.nrm?"of "+tl(z.rep):z.r.length+" tx";
+      const tile=h("div",{key:z.k,className:"tile"+(open?" sel":"")+(dim?" exd":""),onClick:()=>setOp(open?null:z.k)},
+        h("div",{className:"nm"},z.label),
+        isCat?h("button",{className:"x"+(ex[z.k]?" on":""),title:ex[z.k]?"Include again":"Exclude category",onClick:e=>{e.stopPropagation();toggleEx(z.k)}},"⊘"):null,
+        h("div",{className:"am"},tl(z.nrm)),h("div",{className:"sub"},sub),
+        dl?h("div",{className:"sub",style:{fontWeight:700,color:dl.good?"var(--gn)":"var(--rd)"}},dl.t):null,
+        h("div",{className:"bar",style:{width:Math.max(4,z.rep/mxr*100)+"%",background:dim?"var(--mut)":"var(--ac)",height:4}}));
+      const out=[tile];
+      if(oi>=0&&(i%3===2||i===items.length-1)&&Math.floor(oi/3)===Math.floor(i/3))out.push(panel(items[oi],isCat));
+      return out}))};
+  const diff=B-nrm,under=diff>=0,pct=B?Math.min(nrm/B,1)*100:0,pace=cur&&B?B*NOW.d/NOW.dim:null,room=cur&&B?(B-nrm)/(NOW.dim-NOW.d+1):null;
+  const mKey="M"+m,mN=sh[mKey]||12;
+  return h(React.Fragment,null,nav,h(Er,{e:x.e||er}),
+    h("div",{className:"g3"},
+      h("div",{className:"card"},h("div",{className:"lb"},"Reported"),h("div",{className:"v"},tl(rep)),h("div",{className:"help"},rows.length+" transactions")),
+      h("div",{className:"card",style:{background:"linear-gradient(135deg,var(--ac),var(--ac2))",color:"#fff"}},h("div",{className:"lb",style:{color:"rgba(255,255,255,.75)"}},"Normalized"),h("div",{className:"v"},tl(nrm)),h("div",{className:"help",style:{color:"rgba(255,255,255,.75)"}},rep&&nrm!==rep?"−"+Math.round((1-nrm/rep)*100)+"% vs reported":"same as reported")),
+      h("div",{className:"card"},h("div",{className:"lb"},"One-offs"),h("div",{className:"v"},tl(oneAll)),h("div",{className:"help"},ones.length+" marked"))),
+    h("div",{className:"card"},
+      h("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline"}},h("div",{className:"lb"},"Budget · "+ml(m)),h("div",{className:"help",style:{margin:0}},"Set in Cashflow & capex")),
+      B?h(React.Fragment,null,
+        h("div",{className:"v",style:{fontSize:24,color:under?"var(--gn)":"var(--rd)"}},tl(Math.abs(diff))+(under?" under budget":" over budget")),
+        h("div",{style:{position:"relative",height:10,background:"var(--in)",borderRadius:5,marginTop:12}},
+          h("div",{style:{width:pct+"%",height:"100%",borderRadius:5,background:under?"var(--ac)":"var(--rd)"}}),
+          pace!==null?h("div",{style:{position:"absolute",left:pace/B*100+"%",top:-3,width:2,height:16,background:"var(--txt)",borderRadius:1}}):null),
+        h("div",{className:"br",style:{marginTop:12}},h("span",null,"Budget"),h("b",null,tl(B))),
+        h("div",{className:"br"},h("span",null,"Normalized spend"),h("b",null,tl(nrm)+" · "+Math.round(nrm/B*100)+"%")),
+        cur?h(React.Fragment,null,
+          h("div",{className:"br"},h("span",null,"Expected by day "+NOW.d+" (marker)"),h("b",null,tl(pace))),
+          h("div",{className:"br"},h("span",null,nrm>pace?"Above pace":"Below pace"),h("b",{className:nrm>pace?"dn":"up"},tl(Math.abs(nrm-pace)))),
+          h("div",{className:"br"},h("span",null,"Room per remaining day ("+(NOW.dim-NOW.d+1)+" days)"),h("b",null,room>0?tl(room):"–"))):null,
+        h("div",{className:"help"},"Each month is compared with the budget that applied in that month.")):
+      h("div",{className:"help",style:{marginTop:8}},"No budget for "+ml(m)+". Add a row in Normalizasyon (columns O:Q): first day of the month and the monthly amount.")),
+    h("div",{className:"card"},h("div",{className:"lb"},"Reported (light) vs normalized (solid)"+(stats.some(s=>s.bud)?" vs budget (dashed)":"")+" · tap a month"),h(SpendChart,{stats,sel:m,onSel:goM})),
+    h("div",{className:"card"},h("div",{className:"lb"},"How "+ml(m)+" gets from reported to normalized"),
+      h("div",{className:"br"},h("span",null,"Reported spend"),h("b",null,tl(rep))),
+      h("div",{className:"br"},h("span",null,"Excluded categories"),h("b",{className:exAmt?"up":""},"−"+tl(exAmt))),
+      h("div",{className:"br"},h("span",null,"One-offs (in included categories)"),h("b",{className:oneIn?"up":""},"−"+tl(oneIn))),
+      h("div",{className:"br",style:{fontSize:15}},h("b",null,"Normalized"),h("b",null,tl(nrm))),
+      ones.length&&sum(ones.filter(t=>ex[t.c]))>0?h("div",{className:"help"},"Marked one-offs inside excluded categories are not deducted twice."):null),
+    h("div",{className:"pills",style:{marginTop:16}},[["c","Categories"],["m","Merchants"],["f","Fixed vs variable"]].map(([k,l])=>h("button",{key:k,className:"pill"+(view===k?" on":""),onClick:()=>{setView(k);setOp(null)}},l))),
+    h("div",{style:{marginTop:10}},h("input",{value:q,onChange:e=>setQ(e.target.value),placeholder:"Search "+ml(m)+": merchant, description, category or amount",style:{background:"var(--card)",boxShadow:"var(--sh)"}})),
+    !rows.length?h("div",{className:"card"},h("div",{className:"help"},"No expenses recognised in "+ml(m)+" yet.")):
+    res?h("div",{className:"card",style:{padding:0,overflow:"hidden"}},
+        h("div",{className:"help",style:{padding:"12px 14px 6px",margin:0}},res.length+" result"+(res.length===1?"":"s")+" · "+tl(sum(res))),
+        res.slice(0,sh["S"+m+qn]||20).map(t=>txRow(t,true)),more("S"+m+qn,res.length,sh["S"+m+qn]||20)):
+    view==="c"?h(React.Fragment,null,
+        h("div",{className:"lb",style:{margin:"16px 4px 0"}},"Expense categories · tap a tile for the biggest transactions"+(prevK?" · change vs "+mn(prevK)+(cur?" (same days)":""):"")),grid(cats,true)):
+    view==="m"?h(React.Fragment,null,
+        h("div",{className:"lb",style:{margin:"16px 4px 0"}},"Merchants in "+ml(m)+" · across all categories"),grid(merch.slice(0,mN),false),
+        merch.length>mN?h("div",{style:{marginTop:10}},h("button",{className:"sb",style:{width:"100%",padding:11},onClick:()=>setSh(p=>({...p,[mKey]:mN+12}))},"Show more merchants ("+(merch.length-mN)+" left)")):null):
+    !fv?h("div",{className:"card"},h("div",{className:"help"},"Fixed vs variable needs 3 months of history (this month and the 2 before it).")):h(React.Fragment,null,
+      h("div",{className:"card"},h("div",{className:"lb"},"Normalized spend in "+ml(m)),
+        h("div",{style:{display:"flex",height:12,borderRadius:6,overflow:"hidden",marginTop:10,background:"var(--in)"}},
+          h("div",{style:{width:(nrm?fv.fixedN/nrm*100:0)+"%",background:"var(--ac)"}}),h("div",{style:{flex:1,background:"var(--am)",opacity:.5}})),
+        h("div",{className:"br",style:{marginTop:12}},h("span",null,"● Fixed (recurring)"),h("b",null,tl(fv.fixedN)+" · "+(nrm?Math.round(fv.fixedN/nrm*100):0)+"%")),
+        h("div",{className:"br"},h("span",null,"● Variable"),h("b",null,tl(fv.varN)+" · "+(nrm?Math.round(fv.varN/nrm*100):0)+"%")),
+        h("div",{className:"help"},"Fixed = same merchant and category in each of the last 3 months, with monthly totals within 25% of each other.")),
+      h("div",{className:"card",style:{padding:0,overflow:"hidden"}},h("div",{className:"lb",style:{padding:"12px 14px 6px"}},"Recurring items ("+fv.fixed.length+")"),
+        fv.fixed.map(f=>h("div",{key:f.key,className:"tx"},
+          h("div",{style:{flex:1,minWidth:0}},h("div",{style:{fontWeight:700}},f.p),h("div",{className:"help",style:{marginTop:2}},f.c+(ex[f.c]?" · excluded":"")+" · 3-month avg "+tl(f.avg))),
+          h("div",{style:{fontWeight:800,opacity:ex[f.c]?.5:1}},tl(f.cur)))),
+        fv.fixed.length?null:h("div",{className:"help",style:{padding:"4px 14px 14px"}},"None detected."),h("div",{style:{height:6}}))),
     h(Rf,{l:x.l,load:x.load}))}
 function Plan({nav}){
   const x=useData("plan","plan"),d=x.d;
