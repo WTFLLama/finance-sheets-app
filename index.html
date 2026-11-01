@@ -67,10 +67,14 @@ input:focus,select:focus{border-color:var(--ac)}input[type=checkbox]{width:auto;
 .tile .x{position:absolute;top:6px;right:6px;width:18px;height:18px;border-radius:50%;border:0;background:var(--in);color:var(--mut);font-size:12px;line-height:18px;padding:0}
 .tile .x.on{background:var(--rd);color:#fff}
 .pn{grid-column:1/-1;padding:0;overflow:hidden;margin:0}
+.sb.nz{background:rgba(91,91,240,.14);color:var(--ac)}.sb.nz.on{background:var(--ac);color:#fff}.sb.sm{padding:5px 8px;font-size:10.5px}.sb.am{background:rgba(245,158,11,.18);color:var(--am)}
+.mg{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}
+.mc{border:0;border-radius:10px;padding:11px 0;font-size:12px;font-weight:700;background:var(--in);color:var(--txt)}
+.mc.on{background:var(--ac);color:#fff}.mc.src{outline:2px solid var(--am)}
 </style></head><body><div id="root"></div>
 <script>
 const h=React.createElement,{useState,useEffect,useMemo}=React;
-const API="https://script.google.com/macros/s/AKfycbzVbckFFZ5iUitJSHhSx_4vj1xKVw-ZhlrPoLyKZqJalmH5Ld31ZsXNYduifZgmFvQLuA/exec";
+const API="https://script.google.com/macros/s/AKfycbzzuuHt3z8lIRpfECN8-ILh6x9LCyM339dKKvoyMDoO409_seRr7XHa0V2OsPEDsjtn4Q/exec";
 async function api(path,body,params){
   const r=body?await fetch(API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({path,...body})}):await fetch(API+"?"+new URLSearchParams({path,...params}));
   const j=await r.json();if(!j.ok)throw new Error(j.error||"API error");return j.data}
@@ -88,6 +92,7 @@ const INV_ACC="Sarf Malzemeler";
 const tl=n=>Number(n||0).toLocaleString("tr-TR",{maximumFractionDigits:0})+" ₺";
 const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const ms=k=>{const p=k.split("-");return MON[p[1]-1]+p[0].slice(2)};
+const addMonth=(k,n)=>{let y=+k.slice(0,4),m=+k.slice(5)-1+n;y+=Math.floor(m/12);m=((m%12)+12)%12;return y+"-"+String(m+1).padStart(2,"0")};
 const mn=k=>MON[k.split("-")[1]-1];
 const ml=k=>{const p=k.split("-");return MON[p[1]-1]+" "+p[0].slice(2)};
 const pad=n=>String(n).padStart(2,"0");
@@ -297,35 +302,64 @@ function SpendChart({stats,sel,onSel}){
     last.bud?h("text",{x:W,y:y(last.bud)-3,fontSize:8,fill:"var(--rd)",textAnchor:"end",fontWeight:800,style:{paintOrder:"stroke",stroke:"var(--card)",strokeWidth:3}},"Budget "+tl(last.bud)):null)}
 function Spend({nav}){
   const x=useData("spend","spend"),d=x.d,[m0,setM]=useState(null),[er,setEr]=useState(""),[view,setView]=useState("c"),[op,setOp]=useState(null),[sh,setSh]=useState({}),[q,setQ]=useState("");
+  const[sid,setSid]=useState(null),[ds,setDs]=useState([]);
   const mut=async(patch,path,body)=>{setEr("");x.setD({...d,...patch});try{x.setD(await api(path,body))}catch(z){setEr(z.message);x.load()}};
   if(!d)return h(React.Fragment,null,nav,h(Er,{e:x.e}),x.l?h(Sk):null);
   const NOW=d.now,MONTHS=d.months,TX=d.tx,m=MONTHS.indexOf(m0)>-1?m0:NOW.m;
-  const ex={};d.excluded.forEach(c=>{ex[c]=1});const one={};d.oneoffs.forEach(i=>{one[i]=1});
-  const sum=a=>a.reduce((s,t)=>s+t.a,0),inN=t=>!ex[t.c]&&!one[t.i],BUD=k=>d.budgets[k]||0;
-  const stats=MONTHS.slice(-6).map(k=>{const r=TX.filter(t=>t.m===k);return{k,rep:sum(r),nrm:sum(r.filter(inN)),bud:BUD(k)}});
-  const rows=TX.filter(t=>t.m===m),rep=sum(rows),nrm=sum(rows.filter(inN)),B=BUD(m);
+  const ik=t=>t.i+"|"+t.c;
+  const ex={};d.excluded.forEach(c=>{ex[c]=1});
+  const mk={};d.marks.forEach(z=>{mk[z.i+"|"+z.c]=z});
+  // a purchase = Transaction ID + category (all its instalments together)
+  const IT={};TX.forEach(t=>{const k=ik(t);if(!IT[k])IT[k]={k,t,tot:t.tot,sm:t.sm,om:t.om||[t.sm],n:t.n,lines:[]};IT[k].lines.push(t)});
+  const sum=a=>a.reduce((s,t)=>s+t.a,0),BUD=k=>d.budgets[k]||0;
+  // normalized pieces: untouched lines stay in their month; a normalized purchase is spread equally over its marked months; one-offs and excluded categories disappear
+  const parts=[];
+  Object.keys(IT).forEach(k=>{const it=IT[k];if(ex[it.t.c])return;const z=mk[k];
+    if(!z){it.lines.forEach(t=>parts.push({t,it,pm:t.m,a:t.a,spread:false}));return}
+    if(z.t==="one")return;
+    z.ms.forEach(pm=>parts.push({t:it.t,it,pm,a:it.tot/z.ms.length,spread:true}))});
+  const nOf=(k,f)=>sum(parts.filter(p=>p.pm===k&&(!f||f(p))));
+  const stats=MONTHS.slice(-6).map(k=>({k,rep:sum(TX.filter(t=>t.m===k)),nrm:nOf(k),bud:BUD(k)}));
+  const rows=TX.filter(t=>t.m===m),rep=sum(rows),nrm=nOf(m),B=BUD(m);
   const mi=MONTHS.indexOf(m),prevK=mi>0?MONTHS[mi-1]:null,cur=m===NOW.m;
-  const prevRows=prevK?TX.filter(t=>t.m===prevK&&(!cur||t.d<=NOW.d)):[];
-  const exAmt=sum(rows.filter(t=>ex[t.c])),ones=rows.filter(t=>one[t.i]),oneAll=sum(ones),oneIn=sum(ones.filter(t=>!ex[t.c]));
-  const setOne=(id,on)=>mut({oneoffs:on?d.oneoffs.concat([id]):d.oneoffs.filter(z=>z!==id)},"spend_oneoff",{id,on});
+  const exAmt=sum(rows.filter(t=>ex[t.c]));
+  const oneL=rows.filter(t=>!ex[t.c]&&mk[ik(t)]&&mk[ik(t)].t==="one"),normL=rows.filter(t=>!ex[t.c]&&mk[ik(t)]&&mk[ik(t)].t==="norm");
+  const oneIn=sum(oneL),movedOut=sum(normL),spreadIn=nOf(m,p=>p.spread);
+  const nOne=new Set(oneL.map(ik)).size,nNorm=new Set(normL.map(ik)).size;
+  const future=(()=>{const o={};parts.filter(p=>p.pm>NOW.m).forEach(p=>{o[p.pm]=(o[p.pm]||0)+p.a});return Object.keys(o).sort().map(k=>({k,a:o[k]}))})();
+  const setMark=(it,mode,ms)=>{const k=it.k,rest=d.marks.filter(z=>z.i+"|"+z.c!==k);
+    const nm=mode==="one"?rest.concat([{i:it.t.i,c:it.t.c,t:"one"}]):mode==="norm"?rest.concat([{i:it.t.i,c:it.t.c,t:"norm",ms}]):rest;
+    mut({marks:nm},"spend_mark",{id:it.t.i,category:it.t.c,mode,months:ms})};
   const toggleEx=c=>{const on=!ex[c];mut({excluded:on?d.excluded.concat([c]):d.excluded.filter(z=>z!==c)},"spend_exclude",{category:c,on})};
   const goM=k=>{setM(k);setOp(null)};
-  const grp=(keyf)=>{const o={};rows.forEach(t=>{const k=keyf(t);(o[k]=o[k]||[]).push(t)});return Object.keys(o).map(k=>{const r=o[k].slice().sort((a,b)=>b.a-a.a);return{k,label:k,r,rep:sum(r),nrm:sum(r.filter(inN)),prev:sum(prevRows.filter(t=>keyf(t)===k&&inN(t)))}}).sort((a,b)=>b.rep-a.rep)};
+  const openSheet=it=>{const z=mk[it.k];setSid(it.k);setDs(z&&z.t==="norm"?z.ms.slice():it.om.slice())};
+  const same=(a,b)=>a.length===b.length&&a.slice().sort().join()===b.slice().sort().join();
+  const saveSheet=()=>{const it=IT[sid];if(ds.length===0)setMark(it,"one");else if(same(ds,it.om))setMark(it,"clear");else setMark(it,"norm",ds.slice().sort());setSid(null)};
+
+  const grp=keyf=>{const keys=[];rows.forEach(t=>{const k=keyf(t);if(keys.indexOf(k)<0)keys.push(k)});parts.filter(p=>p.pm===m).forEach(p=>{const k=keyf(p.t);if(keys.indexOf(k)<0)keys.push(k)});
+    return keys.map(k=>{const r=rows.filter(t=>keyf(t)===k).sort((a,b)=>b.a-a.a);const mine=parts.filter(p=>p.pm===m&&keyf(p.t)===k),sin=mine.filter(p=>p.spread);
+      const prev=prevK?sum(parts.filter(p=>p.pm===prevK&&keyf(p.t)===k&&(!cur||p.spread||p.t.d<=NOW.d))):0;
+      return{k,label:k,r,rep:sum(r),nrm:sum(mine),sin,prev}}).sort((a,b)=>Math.max(b.rep,b.nrm)-Math.max(a.rep,a.nrm))};
   const cats=grp(t=>t.c),merch=grp(t=>t.p||"(no name)");
   const fv=(()=>{if(mi<2)return null;const ks=[MONTHS[mi-2],MONTHS[mi-1],m];
-    const T=ks.map(k=>{const o={};TX.filter(t=>t.m===k).forEach(t=>{const key=t.p+"|"+t.c;o[key]=(o[key]||0)+t.a});return o});
+    const T=ks.map(k=>{const o={};TX.filter(t=>t.m===k&&!mk[ik(t)]).forEach(t=>{const key=t.p+"|"+t.c;o[key]=(o[key]||0)+t.a});return o});
     const fixed=[];Object.keys(T[2]).forEach(key=>{const v=T.map(o=>o[key]);if(v.some(z=>!z))return;if(Math.max(...v)/Math.min(...v)<=1.25)fixed.push({key,p:key.split("|")[0],c:key.split("|")[1],cur:v[2],avg:(v[0]+v[1]+v[2])/3})});
-    const fk={};fixed.forEach(f=>{fk[f.key]=1});const fixedN=sum(rows.filter(t=>fk[t.p+"|"+t.c]&&inN(t)));
+    const fk={};fixed.forEach(f=>{fk[f.key]=1});const fixedN=sum(parts.filter(p=>p.pm===m&&!p.spread&&fk[p.t.p+"|"+p.t.c]));
     return{fixed:fixed.sort((a,b)=>b.cur-a.cur),fixedN,varN:nrm-fixedN}})();
   const qn=q.trim().toLocaleLowerCase("tr"),res=qn?rows.filter(t=>[t.p,t.s,t.c,String(t.a)].join(" ").toLocaleLowerCase("tr").includes(qn)).sort((a,b)=>b.a-a.a):null;
   const delta=z=>{if(!prevK||ex[z.k])return null;
     if(z.prev<=0.5)return z.nrm>0?{t:"new vs "+mn(prevK),good:false}:null;
     const pc=Math.round((z.nrm/z.prev-1)*100);return{t:(pc>=0?"▲ ":"▼ ")+Math.abs(pc)+"% vs "+mn(prevK),good:pc<=0}};
-  const txRow=(t,showCat)=>{const o=one[t.i];
-    return h("div",{key:t.i+t.m+t.c,className:"tx"},
-      h("div",{style:{flex:1,minWidth:0}},h("div",{style:{fontWeight:700}},t.p||t.c),h("div",{className:"help",style:{marginTop:2}},String(t.d).padStart(2,"0")+" "+mn(t.m)+(showCat?" · "+t.c:"")+(t.s?" · "+t.s:""))),
-      h("div",{style:{fontWeight:800,textDecoration:o?"line-through":"none"}},tl(t.a)),
-      ex[t.c]?null:o?h("button",{className:"sb ok",onClick:()=>setOne(t.i,false)},"One-off ✓"):h("button",{className:"sb",onClick:()=>setOne(t.i,true)},"One-off?"))};
+  const txRow=(t,showCat)=>{const k=ik(t),z=mk[k],isOne=z&&z.t==="one",isN=z&&z.t==="norm",it=IT[k];
+    return h("div",{key:k+t.m,className:"tx"},
+      h("div",{style:{flex:1,minWidth:0}},h("div",{style:{fontWeight:700}},t.p||t.c),
+        h("div",{className:"help",style:{marginTop:2}},String(t.d).padStart(2,"0")+" "+mn(t.m)+(showCat?" · "+t.c:"")+(t.s?" · "+t.s:"")+(t.n>1?" · instalment "+t.k+"/"+t.n+" of "+tl(t.tot):"")),
+        isN?h("div",{className:"help",style:{color:"var(--ac)",fontWeight:700}},"Total ÷ "+z.ms.length+" months · "+tl(t.tot/z.ms.length)+" each"):null),
+      h("div",{style:{textAlign:"right"}},
+        h("div",{style:{fontWeight:800,textDecoration:isOne?"line-through":"none"}},tl(t.a)),
+        ex[t.c]?null:h("div",{style:{display:"flex",gap:5,marginTop:6,justifyContent:"flex-end"}},
+          h("button",{className:"sb sm nz"+(isN?" on":""),onClick:()=>openSheet(it)},isN?"Spread ✓":"Normalize"),
+          h("button",{className:"sb sm"+(isOne?" am":""),onClick:()=>setMark(it,isOne?"clear":"one")},isOne?"One-off ✓":"One-off"))))};
   const more=(key,total,n)=>total>n?h("div",{style:{padding:"4px 14px 14px"}},h("button",{className:"sb",style:{width:"100%",padding:11},onClick:()=>setSh(p=>({...p,[key]:n+10}))},"Show more ("+(total-n)+" left)")):h("div",{style:{height:10}});
   const panel=(z,isCat)=>{const key=m+view+z.k,n=sh[key]||10;
     return h("div",{key:"p-"+z.k,className:"card pn"},
@@ -333,27 +367,54 @@ function Spend({nav}){
         h("div",{style:{flex:1,minWidth:0}},h("b",null,z.label),h("div",{className:"help"},z.r.length+" transactions in "+ml(m)+" · reported "+tl(z.rep)+(isCat&&ex[z.k]?"":" · normalized "+tl(z.nrm)))),
         isCat?h("button",{className:"sb"+(ex[z.k]?" on":""),onClick:()=>toggleEx(z.k)},ex[z.k]?"Excluded":"Exclude category"):null),
       z.r.slice(0,n).map(t=>txRow(t,!isCat)),more(key,z.r.length,n),
-      isCat&&ex[z.k]?h("div",{className:"help",style:{padding:"0 14px 12px"}},"Category excluded, so one-off marking is off."):null)};
-  const grid=(items,isCat)=>{const mxr=Math.max(1,...items.map(y=>y.rep)),oi=items.findIndex(y=>y.k===op);
+      z.sin.length?h("div",{style:{borderTop:"1px solid var(--bd)"}},
+        h("div",{className:"lb",style:{padding:"10px 14px 2px"}},"Spread into "+ml(m)),
+        z.sin.map(p=>h("div",{key:p.it.k,className:"tx",style:{borderTop:0}},
+          h("div",{style:{flex:1,minWidth:0}},h("div",{style:{fontWeight:700}},p.t.p||p.t.c),h("div",{className:"help",style:{marginTop:2}},"from "+ml(p.it.sm)+" · "+tl(p.it.tot)+" ÷ "+mk[p.it.k].ms.length)),
+          h("div",{style:{fontWeight:800}},tl(p.a)),h("button",{className:"sb sm nz",onClick:()=>openSheet(p.it)},"Edit"))),h("div",{style:{height:8}})):null,
+      isCat&&ex[z.k]?h("div",{className:"help",style:{padding:"0 14px 12px"}},"Category excluded, so one-off / normalize is off."):null)};
+  const grid=(items,isCat)=>{const mxr=Math.max(1,...items.map(y=>Math.max(y.rep,y.nrm))),oi=items.findIndex(y=>y.k===op);
     return h("div",{className:"cg"},items.flatMap((z,i)=>{
-      const open=op===z.k,nOne=z.r.filter(t=>one[t.i]).length,dl=isCat?delta(z):null,dim=isCat?ex[z.k]:z.nrm===0;
-      const sub=isCat&&ex[z.k]?"Excl. "+tl(z.rep):nOne?nOne+" one-off":z.rep!==z.nrm?"of "+tl(z.rep):z.r.length+" tx";
+      const open=op===z.k,nO=z.r.filter(t=>mk[ik(t)]&&mk[ik(t)].t==="one").length,nN=z.r.filter(t=>mk[ik(t)]&&mk[ik(t)].t==="norm").length,dl=isCat?delta(z):null,dim=isCat?ex[z.k]:z.nrm===0;
+      const sub=isCat&&ex[z.k]?"Excl. "+tl(z.rep):nO?nO+" one-off":nN?nN+" normalized":z.sin.length?"+"+z.sin.length+" spread in":z.rep!==z.nrm?"of "+tl(z.rep):z.r.length+" tx";
       const tile=h("div",{key:z.k,className:"tile"+(open?" sel":"")+(dim?" exd":""),onClick:()=>setOp(open?null:z.k)},
         h("div",{className:"nm"},z.label),
         isCat?h("button",{className:"x"+(ex[z.k]?" on":""),title:ex[z.k]?"Include again":"Exclude category",onClick:e=>{e.stopPropagation();toggleEx(z.k)}},"⊘"):null,
         h("div",{className:"am"},tl(z.nrm)),h("div",{className:"sub"},sub),
         dl?h("div",{className:"sub",style:{fontWeight:700,color:dl.good?"var(--gn)":"var(--rd)"}},dl.t):null,
-        h("div",{className:"bar",style:{width:Math.max(4,z.rep/mxr*100)+"%",background:dim?"var(--mut)":"var(--ac)",height:4}}));
+        h("div",{className:"bar",style:{width:Math.max(4,Math.max(z.rep,z.nrm)/mxr*100)+"%",background:dim?"var(--mut)":"var(--ac)",height:4}}));
       const out=[tile];
       if(oi>=0&&(i%3===2||i===items.length-1)&&Math.floor(oi/3)===Math.floor(i/3))out.push(panel(items[oi],isCat));
       return out}))};
   const diff=B-nrm,under=diff>=0,pct=B?Math.min(nrm/B,1)*100:0,pace=cur&&B?B*NOW.d/NOW.dim:null,room=cur&&B?(B-nrm)/(NOW.dim-NOW.d+1):null;
   const mKey="M"+m,mN=sh[mKey]||12;
+
+  const st=sid?IT[sid]:null;
+  let win=[];if(st){const lo=addMonth(st.sm,-12),hi=[addMonth(st.sm,12),...st.om].sort().pop();for(let k=lo;k<=hi;k=addMonth(k,1))win.push(k)}
+  const rng=(a,b)=>{const o=[];for(let i=a;i<=b;i++)o.push(addMonth(st.sm,i));return o};
+  const sheet=st?h("div",{className:"shw",onClick:()=>setSid(null)},h("div",{className:"sheet",style:{maxHeight:"92vh",overflow:"auto"},onClick:e=>e.stopPropagation()},
+    h("div",{style:{display:"flex",alignItems:"baseline",gap:8}},h("b",{style:{fontSize:18,flex:1}},"Normalize"),h("span",{className:"help",style:{margin:0}},ml(st.sm))),
+    h("div",{className:"br",style:{marginTop:6}},h("span",null,(st.t.p||st.t.c)+" · "+st.t.c),h("b",null,tl(st.tot))),
+    st.n>1?h("div",{className:"help"},"One purchase in "+st.n+" instalments ("+st.om.map(ms).join(", ")+"). The total is spread, upcoming instalments included."):null,
+    h("div",{className:"help"},"Tap the months this spend should cover. The total is split equally across them. Outlined month = when it was first recognised."),
+    h("div",{className:"pills",style:{marginTop:8}},[["Own months",()=>st.om.slice()],["Next 6",()=>rng(0,5)],["Next 12",()=>rng(0,11)],["Prev 12",()=>rng(-11,0)],["All 25",()=>rng(-12,12)],["Clear",()=>[]]].map(([l,f])=>
+      h("button",{key:l,className:"pill",onClick:()=>setDs(f())},l))),
+    h("div",{className:"mg"},win.map(k=>h("button",{key:k,className:"mc"+(ds.indexOf(k)>-1?" on":"")+(k===st.sm?" src":""),onClick:()=>setDs(p=>p.indexOf(k)>-1?p.filter(z=>z!==k):p.concat([k]))},ms(k)))),
+    h("div",{className:"card",style:{marginTop:12,boxShadow:"none",background:"var(--in)"}},
+      ds.length===0?h("div",{className:"help",style:{margin:0}},"Nothing selected → treated as a one-off (removed from normalized spend)."):
+      same(ds,st.om)?h("div",{className:"help",style:{margin:0}},"Same months as it is recognised now → no change."):
+      h(React.Fragment,null,h("div",{className:"v",style:{marginTop:0}},tl(st.tot/ds.length)+" per month"),h("div",{className:"help"},"× "+ds.length+" months")),
+      h("div",{className:"help"},"Months outside the data range are saved too; they appear in totals once those months exist.")),
+    h("div",{className:"row",style:{marginTop:14}},
+      h("button",{className:"btn gh",onClick:()=>setSid(null)},"Cancel"),
+      mk[sid]&&mk[sid].t==="norm"?h("button",{className:"btn gh",onClick:()=>{setMark(st,"clear");setSid(null)}},"Remove"):null,
+      h("button",{className:"btn",onClick:saveSheet},"Save")))):null;
+
   return h(React.Fragment,null,nav,h(Er,{e:x.e||er}),
     h("div",{className:"g3"},
       h("div",{className:"card"},h("div",{className:"lb"},"Reported"),h("div",{className:"v"},tl(rep)),h("div",{className:"help"},rows.length+" transactions")),
-      h("div",{className:"card",style:{background:"linear-gradient(135deg,var(--ac),var(--ac2))",color:"#fff"}},h("div",{className:"lb",style:{color:"rgba(255,255,255,.75)"}},"Normalized"),h("div",{className:"v"},tl(nrm)),h("div",{className:"help",style:{color:"rgba(255,255,255,.75)"}},rep&&nrm!==rep?"−"+Math.round((1-nrm/rep)*100)+"% vs reported":"same as reported")),
-      h("div",{className:"card"},h("div",{className:"lb"},"One-offs"),h("div",{className:"v"},tl(oneAll)),h("div",{className:"help"},ones.length+" marked"))),
+      h("div",{className:"card",style:{background:"linear-gradient(135deg,var(--ac),var(--ac2))",color:"#fff"}},h("div",{className:"lb",style:{color:"rgba(255,255,255,.75)"}},"Normalized"),h("div",{className:"v"},tl(nrm)),h("div",{className:"help",style:{color:"rgba(255,255,255,.75)"}},rep&&nrm!==rep?(nrm<rep?"−":"+")+Math.round(Math.abs(1-nrm/rep)*100)+"% vs reported":"same as reported")),
+      h("div",{className:"card"},h("div",{className:"lb"},"One-offs"),h("div",{className:"v"},tl(oneIn)),h("div",{className:"help"},nOne+" one-off · "+nNorm+" spread"))),
     h("div",{className:"card"},
       h("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline"}},h("div",{className:"lb"},"Budget · "+ml(m)),h("div",{className:"help",style:{margin:0}},"Set in Cashflow & capex")),
       B?h(React.Fragment,null,
@@ -368,17 +429,21 @@ function Spend({nav}){
           h("div",{className:"br"},h("span",null,nrm>pace?"Above pace":"Below pace"),h("b",{className:nrm>pace?"dn":"up"},tl(Math.abs(nrm-pace)))),
           h("div",{className:"br"},h("span",null,"Room per remaining day ("+(NOW.dim-NOW.d+1)+" days)"),h("b",null,room>0?tl(room):"–"))):null,
         h("div",{className:"help"},"Each month is compared with the budget that applied in that month.")):
-      h("div",{className:"help",style:{marginTop:8}},"No budget for "+ml(m)+". Add a row in Normalizasyon (columns O:Q): first day of the month and the monthly amount.")),
+      h("div",{className:"help",style:{marginTop:8}},"No budget for "+ml(m)+". Add a row in Normalizasyon (columns P:R): first day of the month and the monthly amount.")),
     h("div",{className:"card"},h("div",{className:"lb"},"Reported (light) vs normalized (solid)"+(stats.some(s=>s.bud)?" vs budget (dashed)":"")+" · tap a month"),h(SpendChart,{stats,sel:m,onSel:goM})),
     h("div",{className:"card"},h("div",{className:"lb"},"How "+ml(m)+" gets from reported to normalized"),
       h("div",{className:"br"},h("span",null,"Reported spend"),h("b",null,tl(rep))),
       h("div",{className:"br"},h("span",null,"Excluded categories"),h("b",{className:exAmt?"up":""},"−"+tl(exAmt))),
-      h("div",{className:"br"},h("span",null,"One-offs (in included categories)"),h("b",{className:oneIn?"up":""},"−"+tl(oneIn))),
-      h("div",{className:"br",style:{fontSize:15}},h("b",null,"Normalized"),h("b",null,tl(nrm))),
-      ones.length&&sum(ones.filter(t=>ex[t.c]))>0?h("div",{className:"help"},"Marked one-offs inside excluded categories are not deducted twice."):null),
+      h("div",{className:"br"},h("span",null,"One-offs"),h("b",{className:oneIn?"up":""},"−"+tl(oneIn))),
+      h("div",{className:"br"},h("span",null,"Normalized items moved out"),h("b",{className:movedOut?"up":""},"−"+tl(movedOut))),
+      h("div",{className:"br"},h("span",null,"Spread in from normalized items"),h("b",{className:spreadIn?"dn":""},"+"+tl(spreadIn))),
+      h("div",{className:"br",style:{fontSize:15}},h("b",null,"Normalized"),h("b",null,tl(nrm)))),
+    future.length?h("div",{className:"card"},h("div",{className:"lb"},"Already spread into coming months"),
+      future.slice(0,6).map(f=>h("div",{key:f.k,className:"br"},h("span",null,ml(f.k)),h("b",null,"+"+tl(f.a)))),
+      future.length>6?h("div",{className:"help"},"+ "+(future.length-6)+" more months"):null):null,
     h("div",{className:"pills",style:{marginTop:16}},[["c","Categories"],["m","Merchants"],["f","Fixed vs variable"]].map(([k,l])=>h("button",{key:k,className:"pill"+(view===k?" on":""),onClick:()=>{setView(k);setOp(null)}},l))),
     h("div",{style:{marginTop:10}},h("input",{value:q,onChange:e=>setQ(e.target.value),placeholder:"Search "+ml(m)+": merchant, description, category or amount",style:{background:"var(--card)",boxShadow:"var(--sh)"}})),
-    !rows.length?h("div",{className:"card"},h("div",{className:"help"},"No expenses recognised in "+ml(m)+" yet.")):
+    !rows.length&&!parts.some(p=>p.pm===m)?h("div",{className:"card"},h("div",{className:"help"},"No expenses recognised in "+ml(m)+" yet.")):
     res?h("div",{className:"card",style:{padding:0,overflow:"hidden"}},
         h("div",{className:"help",style:{padding:"12px 14px 6px",margin:0}},res.length+" result"+(res.length===1?"":"s")+" · "+tl(sum(res))),
         res.slice(0,sh["S"+m+qn]||20).map(t=>txRow(t,true)),more("S"+m+qn,res.length,sh["S"+m+qn]||20)):
@@ -392,14 +457,14 @@ function Spend({nav}){
         h("div",{style:{display:"flex",height:12,borderRadius:6,overflow:"hidden",marginTop:10,background:"var(--in)"}},
           h("div",{style:{width:(nrm?fv.fixedN/nrm*100:0)+"%",background:"var(--ac)"}}),h("div",{style:{flex:1,background:"var(--am)",opacity:.5}})),
         h("div",{className:"br",style:{marginTop:12}},h("span",null,"● Fixed (recurring)"),h("b",null,tl(fv.fixedN)+" · "+(nrm?Math.round(fv.fixedN/nrm*100):0)+"%")),
-        h("div",{className:"br"},h("span",null,"● Variable"),h("b",null,tl(fv.varN)+" · "+(nrm?Math.round(fv.varN/nrm*100):0)+"%")),
+        h("div",{className:"br"},h("span",null,"● Variable (incl. spread-in)"),h("b",null,tl(fv.varN)+" · "+(nrm?Math.round(fv.varN/nrm*100):0)+"%")),
         h("div",{className:"help"},"Fixed = same merchant and category in each of the last 3 months, with monthly totals within 25% of each other.")),
       h("div",{className:"card",style:{padding:0,overflow:"hidden"}},h("div",{className:"lb",style:{padding:"12px 14px 6px"}},"Recurring items ("+fv.fixed.length+")"),
         fv.fixed.map(f=>h("div",{key:f.key,className:"tx"},
           h("div",{style:{flex:1,minWidth:0}},h("div",{style:{fontWeight:700}},f.p),h("div",{className:"help",style:{marginTop:2}},f.c+(ex[f.c]?" · excluded":"")+" · 3-month avg "+tl(f.avg))),
           h("div",{style:{fontWeight:800,opacity:ex[f.c]?.5:1}},tl(f.cur)))),
         fv.fixed.length?null:h("div",{className:"help",style:{padding:"4px 14px 14px"}},"None detected."),h("div",{style:{height:6}}))),
-    h(Rf,{l:x.l,load:x.load}))}
+    h(Rf,{l:x.l,load:x.load}),sheet)}
 function Plan({nav}){
   const x=useData("plan","plan"),d=x.d;
   const[inc,setInc]=useState(""),[sp,setSp]=useState(""),[nm,setNm]=useState(""),[pr,setPr]=useState(""),[dt,setDt]=useState(today()),[n,setN]=useState(1),[rt,setRt]=useState("");
