@@ -74,7 +74,7 @@ input:focus,select:focus{border-color:var(--ac)}input[type=checkbox]{width:auto;
 </style></head><body><div id="root"></div>
 <script>
 const h=React.createElement,{useState,useEffect,useMemo}=React;
-const API="https://script.google.com/macros/s/AKfycbzzuuHt3z8lIRpfECN8-ILh6x9LCyM339dKKvoyMDoO409_seRr7XHa0V2OsPEDsjtn4Q/exec";
+const API="https://script.google.com/macros/s/AKfycbxpp2g1cuvI8W6TuLQFjXCOYsvV91vkS2hGFEqTc_6zH3rdOTyVS4uTgE62RJbYwxZdmg/exec";
 async function api(path,body,params){
   const r=body?await fetch(API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({path,...body})}):await fetch(API+"?"+new URLSearchParams({path,...params}));
   const j=await r.json();if(!j.ok)throw new Error(j.error||"API error");return j.data}
@@ -120,12 +120,16 @@ function groupTx(rows){const g=new Map();rows.forEach(r=>{const id=String(r.tran
       const o=grp.find(r=>String(r.description).includes("→"))||grp[0],i=grp.find(r=>r!==o);
       return{...o,transactionType:"transfer",transferId:o.transactionId,transferToAccount:i.paymentMethod,description:cleanTD(o.description),installmentCount:1,dateRange:o.transactionDate,
         totalAmount:new Intl.NumberFormat("tr-TR",{maximumFractionDigits:2}).format(amountValue(o.amount))+" ₺",categories:[],_s:dv(o.transactionDate)}}
-    grp.sort((a,b)=>dv(a.transactionDate)-dv(b.transactionDate));
-    const b={...grp[0]},dates=grp.map(r=>r.transactionDate).filter(Boolean),cats=new Map();
-    grp.forEach(r=>[[r.category1,r.amount1],[r.category2,r.amount2],[r.category3,r.amount3]].forEach(([n,a])=>{if(n)cats.set(n,(cats.get(n)||0)+amountValue(a))}));
-    b.installmentCount=new Set(dates).size;b.dateRange=dates[0]||"";
-    b.totalAmount=new Intl.NumberFormat("tr-TR",{maximumFractionDigits:2}).format(grp.reduce((s,r)=>s+amountValue(r.amount),0))+" ₺";
-    b.categories=Array.from(cats,([category,amount])=>({category,amount}));b._s=Math.min(...grp.map(r=>dv(r.transactionDate)));return b}).sort((a,b)=>b._s-a._s)}
+    // a return row = expense category with a negative amount, same ID as the purchase
+    const isRet=r=>inferType(r)==="expense"&&/-/.test(String(r.amount1||""));
+    const ret=grp.filter(isRet),base=grp.filter(r=>!isRet(r)),bg=base.length?base:grp;
+    bg.sort((a,b)=>dv(a.transactionDate)-dv(b.transactionDate));
+    const b={...bg[0]},dates=bg.map(r=>r.transactionDate).filter(Boolean),cats=new Map();
+    grp.forEach(r=>{const sg=isRet(r)?-1:1;[[r.category1,r.amount1],[r.category2,r.amount2],[r.category3,r.amount3]].forEach(([n,a])=>{if(n)cats.set(n,(cats.get(n)||0)+sg*amountValue(a))})});
+    const gross=bg.reduce((s,r)=>s+amountValue(r.amount),0),back=ret.reduce((s,r)=>s+amountValue(r.amount),0);
+    b.installmentCount=new Set(dates).size;b.dateRange=dates[0]||"";b.returned=back;b.netAmount=gross-back;
+    b.totalAmount=new Intl.NumberFormat("tr-TR",{maximumFractionDigits:2}).format(gross-back)+" ₺";
+    b.categories=Array.from(cats,([category,amount])=>({category,amount})).filter(c=>c.amount>0.005);b._s=Math.min(...grp.map(r=>dv(r.transactionDate)));return b}).sort((a,b)=>b._s-a._s)}
 
 /* ---------- UI helpers ---------- */
 const COL=["#5b5bf0","#10b981","#f59e0b","#ef4444","#8b5cf6","#06b6d4","#f97316","#ec4899","#84cc16","#64748b","#d946ef","#14b8a6","#a855f7","#eab308","#0ea5e9","#22c55e","#f43f5e","#6366f1"];
@@ -242,12 +246,12 @@ function Add({edit,done,L,say}){
         F("Category III",S(f.c3,v=>s("c3",v),cats,1)),F("Amount allocated to Category III",I(f.a3,v=>s("a3",v),{inputMode:"decimal"}))):null):null,
     h("div",{className:"row",style:{marginTop:18}},h("button",{className:"btn",onClick:submit,disabled:busy},busy?"Saving...":ed?"Update":m==="transfer"?"Transfer":"Save")),
     ed?h("div",{className:"row",style:{marginTop:10}},h("button",{className:"btn gh",onClick:done,disabled:busy},"Cancel")):null)}
-function OVERVIEW_STALE(){try{["ov","tx","inv","plan","dil","rp"].forEach(k=>localStorage.removeItem("c:"+k))}catch(e){}}
+function OVERVIEW_STALE(){try{["ov","tx","inv","plan","dil","rp","spend","rec"].forEach(k=>localStorage.removeItem("c:"+k))}catch(e){}}
 
 /* ---------- TRANSACTIONS ---------- */
 function Tx({onEdit,L,say}){
   const{d,l,e,load}=useData("tx","subledger_last");
-  const[pf,setPf]=useState(""),[cf,setCf]=useState(""),[del,setDel]=useState(null),[err,setErr]=useState("");
+  const[pf,setPf]=useState(""),[cf,setCf]=useState(""),[del,setDel]=useState(null),[err,setErr]=useState(""),[rt,setRt]=useState(null);
   const rows=useMemo(()=>d?groupTx(enrichRows(d.rows||[])):[],[d,L.d]);
   async function confirm(){try{await api("delete",{transactionId:del.transactionId});setDel(null);say("Deleted ✓");OVERVIEW_STALE();load()}catch(z){setDel(null);setErr(z.message)}}
   const shown=rows.filter(r=>!pf||r.paymentMethod===pf||r.transferToAccount===pf).filter(r=>!cf||(r.categories||[]).some(c=>c.category===cf));
@@ -259,17 +263,47 @@ function Tx({onEdit,L,say}){
     shown.map(r=>{const tr=r.transactionType==="transfer",up=r.transactionType==="income"||(r.transactionType!=="expense"&&Number(String(r.amount).replace(/,/g,"").replace(/[^\d.-]/g,""))>=0);
       return h("div",{key:r.transactionId,className:"card"},
         h("div",{className:"lb"},(r.installmentCount>1?r.installmentCount+" installments · first "+r.dateRange:r.transactionDate)+(r.recognitionDate&&r.recognitionDate!==r.transactionDate?" → "+r.recognitionDate:"")),
-        h("div",{className:"v "+(tr?"":up?"up":"dn")},r.installmentCount>1||tr?r.totalAmount:r.amount," • ",h("span",{style:{color:"var(--txt)",fontWeight:700,fontSize:15}},tr?r.paymentMethod+" → "+r.transferToAccount:r.paymentMethod)),
+        h("div",{className:"v "+(tr?"":up?"up":"dn")},r.installmentCount>1||tr||r.returned>0?r.totalAmount:r.amount," • ",h("span",{style:{color:"var(--txt)",fontWeight:700,fontSize:15}},tr?r.paymentMethod+" → "+r.transferToAccount:r.paymentMethod)),
         r.posName?h("div",{style:{fontWeight:700,marginTop:4}},r.posName):null,
         r.description?h("div",{className:"help"},r.description):null,
         r.cari?h("div",{className:"help"},"Cari: "+r.cari):null,
+        r.returned>0?h("div",{className:"help",style:{color:"var(--ac)",fontWeight:700}},"Returned "+tl(r.returned)):null,
         h("div",null,(r.categories||[]).map(c=>h("span",{key:c.category,className:"chip"},c.category+" "+(r.installmentCount>1?tl(c.amount):c.amount)))),
         h("div",{className:"help mono"},r.transactionId),
         h("div",{className:"row",style:{marginTop:10,justifyContent:"flex-end"}},
-          r.category1==="Komisyon"||r.installmentCount>1||(tr&&!r.transferId)||r.paymentMethod===INV_ACC||r.transferToAccount===INV_ACC?null:h("button",{className:"sb",onClick:()=>onEdit(r)},"Edit"),
+          r.transactionType==="expense"&&!tr&&r.installmentCount<=1&&r.netAmount>0.005&&r.paymentMethod!==INV_ACC&&retCats(r).length?h("button",{className:"sb",onClick:()=>setRt(r)},"Return"):null,
+          r.category1==="Komisyon"||r.installmentCount>1||r.returned>0||(tr&&!r.transferId)||r.paymentMethod===INV_ACC||r.transferToAccount===INV_ACC?null:h("button",{className:"sb",onClick:()=>onEdit(r)},"Edit"),
           h("button",{className:"sb dl",onClick:()=>setDel(r)},"Delete")))}),
     del?h(Sheet,{t:del.transferId?"Delete this transfer?":"Delete this transaction?",x:del.transferId?"Both sides of the transfer will be deleted.":"This transaction will be permanently removed from Muavin.",onOk:confirm,onNo:()=>setDel(null)}):null,
+    rt?h(RetDlg,{r:rt,L,onNo:()=>setRt(null),done:()=>{setRt(null);say("Return recorded ✓");OVERVIEW_STALE();load()}}):null,
     h(Rf,{l,load}))}
+
+
+/* ---------- RETURN ---------- */
+const NOT_RET=["İş Alacak","Sosyal Alacak","Diğer Alacak","Sosyal Borç","Transfer"];
+const retCats=r=>(r.categories||[]).filter(c=>NOT_RET.indexOf(c.category)===-1&&c.amount>0.005);
+const nf2=n=>new Intl.NumberFormat("tr-TR",{minimumFractionDigits:2,maximumFractionDigits:2}).format(n);
+function RetDlg({r,L,onNo,done}){
+  const cats=retCats(r),total=cats.reduce((s,c)=>s+c.amount,0);
+  const[amt,setAmt]=useState(String(Math.round(total*100)/100)),[dt,setDt]=useState(today()),[pm,setPm]=useState(r.paymentMethod),[sp,setSp]=useState(null),[busy,setBusy]=useState(false),[err,setErr]=useState("");
+  const a=Math.round((Number(amt)||0)*100)/100;
+  // proportional split over what is still left in each category (last one takes the rounding remainder)
+  const auto=(()=>{let left=a;return cats.map((c,i)=>{const v=i===cats.length-1?left:Math.min(Math.round(a*c.amount/total*100)/100,left);left=Math.round((left-v)*100)/100;return{category:c.category,amount:v,max:c.amount}})})();
+  const rows=sp?cats.map(c=>({category:c.category,amount:Math.round((Number(sp[c.category])||0)*100)/100,max:c.amount})):auto;
+  const sum=Math.round(rows.reduce((s,x)=>s+x.amount,0)*100)/100,bad=rows.some(x=>x.amount>x.max+0.005);
+  async function go(){setErr("");if(!(sum>0)){setErr("Enter an amount.");return}if(bad||sum>total+0.005){setErr("Amount is more than what is left to return.");return}
+    setBusy(true);try{await api("return_tx",{transactionId:r.transactionId,date:dt,paymentMethod:pm,...(sp?{splits:rows.map(x=>({category:x.category,amount:x.amount}))}:{amount:a})});done()}catch(z){setErr(z.message);setBusy(false)}}
+  return h(Dlg,{t:"Return",onNo},
+    h("div",{className:"help"},(r.posName||"")+" · "+r.transactionDate+" · left to return "+nf2(total)+" ₺"),h(Er,{e:err}),
+    F("Amount (₺)",sp?h("div",{className:"v",style:{marginTop:0}},nf2(sum)):I(amt,v=>{setAmt(v)},{inputMode:"decimal",placeholder:"Amount"})),
+    h("div",{className:"row"},F("Date",h("input",{type:"date",value:dt,onChange:e=>setDt(e.target.value)})),F("Refund to",S(pm,setPm,L.d?.paymentMethods||[r.paymentMethod]))),
+    h("div",{className:"lb",style:{marginTop:14}},sp?"Split (edit each category)":"Split over categories, in proportion"),
+    rows.map(x=>h("div",{key:x.category,className:"li"},h("b",{style:{flex:1}},x.category),
+      sp?h("div",{style:{width:110}},I(sp[x.category]==null?"":sp[x.category],v=>setSp(p=>({...p,[x.category]:v})),{inputMode:"decimal"})):h("b",{className:x.amount>x.max+0.005?"dn":""},"−"+nf2(x.amount)+" ₺"),
+      h("span",{className:"help",style:{margin:0,width:70,textAlign:"right"}},"of "+nf2(x.max)))),
+    h("div",{className:"row",style:{marginTop:10}},h("button",{className:"sb",onClick:()=>setSp(sp?null:Object.fromEntries(auto.map(x=>[x.category,String(x.amount)])))},sp?"Auto split":"Edit split")),
+    h("div",{className:"help"},"A return row with the same ID and the same recognition month as the purchase is added to Muavin, so the original month nets down."),
+    h("div",{className:"row",style:{marginTop:14}},h("button",{className:"btn gh",onClick:onNo},"Cancel"),h("button",{className:"btn",disabled:busy,onClick:go},busy?"Saving...":"Record return")))}
 
 /* ---------- INVESTMENTS ---------- */
 function Inv({priv}){
@@ -302,7 +336,7 @@ function SpendChart({stats,sel,onSel}){
     last.bud?h("text",{x:W,y:y(last.bud)-3,fontSize:8,fill:"var(--rd)",textAnchor:"end",fontWeight:800,style:{paintOrder:"stroke",stroke:"var(--card)",strokeWidth:3}},"Budget "+tl(last.bud)):null)}
 function Spend({nav}){
   const x=useData("spend","spend"),d=x.d,[m0,setM]=useState(null),[er,setEr]=useState(""),[view,setView]=useState("c"),[op,setOp]=useState(null),[sh,setSh]=useState({}),[q,setQ]=useState("");
-  const[sid,setSid]=useState(null),[ds,setDs]=useState([]);
+  const[sid,setSid]=useState(null),[ds,setDs]=useState([]),[bc,setBc]=useState(null);
   const mut=async(patch,path,body)=>{setEr("");x.setD({...d,...patch});try{x.setD(await api(path,body))}catch(z){setEr(z.message);x.load()}};
   if(!d)return h(React.Fragment,null,nav,h(Er,{e:x.e}),x.l?h(Sk):null);
   const NOW=d.now,MONTHS=d.months,TX=d.tx,m=MONTHS.indexOf(m0)>-1?m0:NOW.m;
@@ -365,7 +399,9 @@ function Spend({nav}){
     return h("div",{key:"p-"+z.k,className:"card pn"},
       h("div",{style:{display:"flex",alignItems:"center",gap:10,padding:"12px 14px"}},
         h("div",{style:{flex:1,minWidth:0}},h("b",null,z.label),h("div",{className:"help"},z.r.length+" transactions in "+ml(m)+" · reported "+tl(z.rep)+(isCat&&ex[z.k]?"":" · normalized "+tl(z.nrm)))),
-        isCat?h("button",{className:"sb"+(ex[z.k]?" on":""),onClick:()=>toggleEx(z.k)},ex[z.k]?"Excluded":"Exclude category"):null),
+        isCat?h("div",{style:{display:"flex",gap:6,flex:"none"}},
+          ex[z.k]?null:h("button",{className:"sb nz",onClick:()=>{setBc(z.k);setDs([m])}},"Normalize all"),
+          h("button",{className:"sb"+(ex[z.k]?" on":""),onClick:()=>toggleEx(z.k)},ex[z.k]?"Excluded":"Exclude")):null),
       z.r.slice(0,n).map(t=>txRow(t,!isCat)),more(key,z.r.length,n),
       z.sin.length?h("div",{style:{borderTop:"1px solid var(--bd)"}},
         h("div",{className:"lb",style:{padding:"10px 14px 2px"}},"Spread into "+ml(m)),
@@ -410,6 +446,27 @@ function Spend({nav}){
       mk[sid]&&mk[sid].t==="norm"?h("button",{className:"btn gh",onClick:()=>{setMark(st,"clear");setSid(null)}},"Remove"):null,
       h("button",{className:"btn",onClick:saveSheet},"Save")))):null;
 
+
+  // Normalize all: every unmarked purchase of the open category in this month gets the chosen months
+  const bItems=bc?(()=>{const seen={},o=[];rows.filter(t=>t.c===bc).forEach(t=>{const it=IT[ik(t)];if(!seen[it.k]){seen[it.k]=1;o.push(it)}});return o})():[],
+    bTodo=bItems.filter(it=>!mk[it.k]),bSum=bTodo.reduce((s,it)=>s+it.tot,0);
+  const bwin=[];if(bc){for(let k=addMonth(m,-12);k<=addMonth(m,12);k=addMonth(k,1))bwin.push(k)}
+  const brng=(a,b)=>{const o=[];for(let i=a;i<=b;i++)o.push(addMonth(m,i));return o};
+  const saveBatch=()=>{const ms2=ds.slice().sort(),items=bTodo.filter(it=>!same(ms2,it.om));
+    if(items.length)mut({marks:d.marks.concat(items.map(it=>({i:it.t.i,c:it.t.c,t:"norm",ms:ms2})))},"spend_mark_batch",{items:items.map(it=>({id:it.t.i,category:it.t.c})),months:ms2});setBc(null)};
+  const bsheet=bc?h("div",{className:"shw",onClick:()=>setBc(null)},h("div",{className:"sheet",style:{maxHeight:"92vh",overflow:"auto"},onClick:e=>e.stopPropagation()},
+    h("div",{style:{display:"flex",alignItems:"baseline",gap:8}},h("b",{style:{fontSize:18,flex:1}},"Normalize all"),h("span",{className:"help",style:{margin:0}},bc+" · "+ml(m))),
+    h("div",{className:"br",style:{marginTop:6}},h("span",null,bTodo.length+" purchase"+(bTodo.length===1?"":"s")),h("b",null,tl(bSum))),
+    bItems.length>bTodo.length?h("div",{className:"help"},(bItems.length-bTodo.length)+" already marked (one-off or normalized) stay as they are."):null,
+    h("div",{className:"help"},"Each purchase total is split equally across the months you tap, as if you pressed Normalize on every one."),
+    h("div",{className:"pills",style:{marginTop:8}},[["This month",()=>[m]],["Next 6",()=>brng(0,5)],["Next 12",()=>brng(0,11)],["Prev 12",()=>brng(-11,0)],["All 25",()=>brng(-12,12)],["Clear",()=>[]]].map(([l,f])=>h("button",{key:l,className:"pill",onClick:()=>setDs(f())},l))),
+    h("div",{className:"mg"},bwin.map(k=>h("button",{key:k,className:"mc"+(ds.indexOf(k)>-1?" on":"")+(k===m?" src":""),onClick:()=>setDs(p=>p.indexOf(k)>-1?p.filter(z=>z!==k):p.concat([k]))},ms(k)))),
+    h("div",{className:"card",style:{marginTop:12,boxShadow:"none",background:"var(--in)"}},
+      !ds.length?h("div",{className:"help",style:{margin:0}},"Pick at least one month."):
+      !bTodo.length?h("div",{className:"help",style:{margin:0}},"Nothing to normalize in this category."):
+      h(React.Fragment,null,h("div",{className:"v",style:{marginTop:0}},tl(bSum/ds.length)+" per month"),h("div",{className:"help"},"in total, × "+ds.length+" months"))),
+    h("div",{className:"row",style:{marginTop:14}},h("button",{className:"btn gh",onClick:()=>setBc(null)},"Cancel"),
+      h("button",{className:"btn",disabled:!ds.length||!bTodo.length,onClick:saveBatch},"Apply to "+bTodo.length)))):null;
   return h(React.Fragment,null,nav,h(Er,{e:x.e||er}),
     h("div",{className:"g3"},
       h("div",{className:"card"},h("div",{className:"lb"},"Reported"),h("div",{className:"v"},tl(rep)),h("div",{className:"help"},rows.length+" transactions")),
@@ -464,7 +521,7 @@ function Spend({nav}){
           h("div",{style:{flex:1,minWidth:0}},h("div",{style:{fontWeight:700}},f.p),h("div",{className:"help",style:{marginTop:2}},f.c+(ex[f.c]?" · excluded":"")+" · 3-month avg "+tl(f.avg))),
           h("div",{style:{fontWeight:800,opacity:ex[f.c]?.5:1}},tl(f.cur)))),
         fv.fixed.length?null:h("div",{className:"help",style:{padding:"4px 14px 14px"}},"None detected."),h("div",{style:{height:6}}))),
-    h(Rf,{l:x.l,load:x.load}),sheet)}
+    h(Rf,{l:x.l,load:x.load}),sheet,bsheet)}
 function Plan({nav}){
   const x=useData("plan","plan"),d=x.d;
   const[inc,setInc]=useState(""),[sp,setSp]=useState(""),[nm,setNm]=useState(""),[pr,setPr]=useState(""),[dt,setDt]=useState(today()),[n,setN]=useState(1),[rt,setRt]=useState("");
@@ -564,6 +621,29 @@ function Settings({back,L,say}){
       items.map(it=>h("div",{key:it,className:"li"},h("b",{style:{flex:1}},it),cfg.ty?h("span",{className:"help",style:{margin:0}},(L.d?.types?.[kind]?.[it]||"")==="credit"?"Credit":"Debit"):null,h("button",{className:"sb dl",onClick:()=>setCf(it)},"Delete")))),
     cf?h(Sheet,{t:'Delete "'+cf+'"?',x:"It is removed from the Siniflandirma sheet. Existing Muavin rows keep their text.",onOk:rm,onNo:()=>setCf(null)}):null)}
 
+
+/* ---------- RECONCILIATION ---------- */
+function Recon({back,L,say}){
+  const x=useData("rec","reconcile"),accs=x.d?x.d.accounts:[];
+  const[ac,setAc]=useState(""),[tg,setTg]=useState(""),[cf,setCf]=useState(false),[err,setErr]=useState(""),[busy,setBusy]=useState(false);
+  const cur=accs.find(a=>a.name===ac)||accs[0],name=cur?cur.name:"";
+  const tv=tg===""?null:Number(tg),ok=tv!==null&&Number.isFinite(tv),diff=ok&&cur?Math.round((tv-cur.balance)*100)/100:0;
+  const isExp=cur?(cur.type==="credit"?diff>0:diff<0):false;
+  async function go(){setBusy(true);setErr("");try{const r=await api("reconcile_set",{account:name,target:tv});x.setD({accounts:r.accounts});setCf(false);setTg("");OVERVIEW_STALE();try{localStorage.removeItem("c:tx")}catch(z){};say("Reconciled ✓")}catch(z){setErr(z.message);setCf(false)}finally{setBusy(false)}}
+  return h(Pg,{t:"Reconciliation",back},h(Er,{e:x.e||err}),!x.d&&x.l?h(Sk):null,
+    x.d?h(React.Fragment,null,
+      h("div",{className:"card"},F("Account",S(name,setAc,accs.map(a=>a.name))),
+        cur?h("div",{className:"br",style:{marginTop:12}},h("span",null,cur.type==="credit"?"Card debt in Muavin (up to today)":"Balance in Muavin (up to today)"),h("b",null,nf2(cur.balance)+" ₺")):null,
+        F(cur&&cur.type==="credit"?"Card debt it should be (₺)":"Balance it should be (₺)",I(tg,setTg,{inputMode:"decimal",placeholder:"Amount"}))),
+      ok&&cur?h("div",{className:"card"},
+        diff===0?h("div",{className:"help",style:{margin:0}},"Already matches, nothing to add."):h(React.Fragment,null,
+          h("div",{className:"lb"},"Entry to add"),
+          h("div",{className:"v "+(diff>0?"up":"dn")},(diff>0?"+":"−")+nf2(Math.abs(diff))+" ₺ on "+name),
+          h("div",{className:"help"},"Recorded today as "+(isExp?"an expense":"an income")+" in “Diğer” with POS “Reconciliation”."+(isExp?" It counts in Spend; mark it One-off there if you do not want it in normalized spend.":"")),
+          h("div",{className:"row",style:{marginTop:12}},h("button",{className:"btn",onClick:()=>setCf(true)},"Reconcile")))):null,
+      h(Rf,{l:x.l,load:x.load})):null,
+    cf?h(Sheet,{t:"Reconcile "+name+"?",x:(diff>0?"+":"−")+nf2(Math.abs(diff))+" ₺ will be added to Muavin so the balance becomes "+nf2(tv)+" ₺.",label:busy?"Saving...":"Reconcile",onOk:go,onNo:()=>setCf(false)}):null)}
+
 /* ---------- CONSUMABLES ---------- */
 const qf=n=>Number(Math.round(n*1000)/1000).toLocaleString("tr-TR",{maximumFractionDigits:3});
 const Dlg=({t,onNo,children})=>h("div",{className:"shw",onClick:onNo},h("div",{className:"sheet",style:{maxHeight:"88vh",overflowY:"auto"},onClick:e=>e.stopPropagation()},h("div",{style:{fontWeight:800,fontSize:18}},t),children));
@@ -619,7 +699,7 @@ function Stock({back,L,say}){
 
 /* ---------- APP ---------- */
 function More({go,priv,setPriv}){
-  return h(Pg,{t:"More"},[["stk","Consumables","Stock, restock and use"],["dil","Diligence","Spend, cashflow, receivables, payables"],["rep","Reports","Income statement, balance sheet, ONCA"],["set","Settings","Payment methods and categories"]].map(([k,t,x])=>h("div",{key:k,className:"card",style:{cursor:"pointer",display:"flex",alignItems:"center"},onClick:()=>go(k)},h("div",{style:{flex:1}},h("b",null,t),h("div",{className:"help",style:{marginTop:2}},x)),h("span",{className:"lb"},"›"))),
+  return h(Pg,{t:"More"},[["stk","Consumables","Stock, restock and use"],["dil","Diligence","Spend, cashflow, receivables, payables"],["rep","Reports","Income statement, balance sheet, ONCA"],["rec","Reconciliation","Match a cash or card balance to the real amount"],["set","Settings","Payment methods and categories"]].map(([k,t,x])=>h("div",{key:k,className:"card",style:{cursor:"pointer",display:"flex",alignItems:"center"},onClick:()=>go(k)},h("div",{style:{flex:1}},h("b",null,t),h("div",{className:"help",style:{marginTop:2}},x)),h("span",{className:"lb"},"›"))),
     h("div",{className:"card",style:{display:"flex",alignItems:"center"},onClick:()=>setPriv(!priv)},h("div",{style:{flex:1}},h("b",null,"Hide balances"),h("div",{className:"help",style:{marginTop:2}},"Blur amounts on Overview and Investments")),h("input",{type:"checkbox",checked:priv,readOnly:true})))}
 function App(){
   const[sc,setSc]=useState("home"),[edit,setEdit]=useState(null),[toast,setToast]=useState(null),[priv,setPriv]=useState(()=>localStorage.getItem("priv")==="1");
@@ -629,8 +709,8 @@ function App(){
   const go=k=>{if(k!=="add")setEdit(null);setSc(k);window.scrollTo(0,0)};
   const privBtn=h("button",{className:"bk",onClick:()=>setPriv(!priv),title:"Hide balances"},priv?"◌":"◉");
   const back=()=>go("more");
-  const scr=sc==="home"?h(Home,{go,priv}):sc==="tx"?h(Tx,{onEdit:r=>{setEdit(r);setSc("add")},L,say}):sc==="add"?h(Add,{edit,L,say,done:()=>{setEdit(null);setSc("tx")}}):sc==="inv"?h(Inv,{priv}):sc==="dil"?h(Dil,{back,L,say}):sc==="rep"?h(Reports,{back}):sc==="set"?h(Settings,{back,L,say}):sc==="stk"?h(Stock,{back,L,say}):h(More,{go,priv,setPriv});
-  const on=k=>(k==="more"?["more","dil","rep","set","stk"].includes(sc):sc===k);
+  const scr=sc==="home"?h(Home,{go,priv}):sc==="tx"?h(Tx,{onEdit:r=>{setEdit(r);setSc("add")},L,say}):sc==="add"?h(Add,{edit,L,say,done:()=>{setEdit(null);setSc("tx")}}):sc==="inv"?h(Inv,{priv}):sc==="dil"?h(Dil,{back,L,say}):sc==="rep"?h(Reports,{back}):sc==="set"?h(Settings,{back,L,say}):sc==="rec"?h(Recon,{back,L,say}):sc==="stk"?h(Stock,{back,L,say}):h(More,{go,priv,setPriv});
+  const on=k=>(k==="more"?["more","dil","rep","set","stk","rec"].includes(sc):sc===k);
   const nb=(k,l,i)=>h("button",{className:"nb"+(on(k)?" on":""),onClick:()=>go(k)},h(Ic,{n:i}),l);
   return h("div",{className:"app"},toast?h("div",{className:"toast"+(toast.bad?" bad":"")},toast.m):null,scr,
     h("div",{className:"nav"},nb("home","Overview","home"),nb("tx","Transactions","list"),h("button",{className:"fab",onClick:()=>go("add"),"aria-label":"Add"},h(Ic,{n:"plus"})),nb("inv","Investments","chart"),nb("more","More","grid")))}
