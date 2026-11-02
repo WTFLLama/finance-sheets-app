@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="tr"><head><meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Diligence</title>
 <link rel="manifest" href="manifest.json">
@@ -39,10 +39,7 @@ html,body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans)
 .btn{border:1px solid var(--ink);border-radius:3px;padding:13px 14px;font:600 15px var(--sans);background:var(--lime);color:var(--ink);cursor:pointer}
 .btn:disabled{opacity:.5}.btn.gh{background:transparent;color:var(--txt);border-color:var(--txt)}.btn.dg{background:var(--coral);color:var(--ink)}
 .sb{flex:none;border:1px solid var(--txt);border-radius:3px;padding:7px 11px;font:600 13px var(--sans);background:transparent;color:var(--txt);cursor:pointer}.sb.dl{color:var(--rd);border-color:var(--rd)}
-input,select{width:100%;background:var(--in);border:1px solid var(--bd);color:var(--txt);padding:12px 13px;border-radius:3px;font:400 16px var(--sans);outline:0}
-input:focus,select:focus{border-color:var(--txt);box-shadow:0 0 0 1px var(--txt)}input[type=checkbox]{width:auto;margin-right:6px}
 .fld{margin-top:12px}.fld>label{display:block;font:500 10.5px/1.3 var(--mono);letter-spacing:.7px;text-transform:uppercase;color:var(--mut);margin-bottom:5px}
-.amt input{font-size:30px;font-weight:600;text-align:center;padding:14px;letter-spacing:-1px}
 .pills{display:flex;gap:6px;overflow-x:auto;padding:4px 0;scrollbar-width:none}
 .pill{flex:none;border:1px solid var(--txt);border-radius:3px;padding:8px 12px;font:600 13px var(--sans);background:transparent;color:var(--txt);cursor:pointer}
 .pill.on{background:var(--lime);color:var(--ink);border-color:var(--ink)}.pill:disabled{opacity:.45}
@@ -97,7 +94,6 @@ input:focus,select:focus{border-color:var(--txt);box-shadow:0 0 0 1px var(--txt)
 .pm-v{font:400 21px/1.15 var(--sans);letter-spacing:-.8px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .pm-v .cur{font-size:12px;color:var(--soft);letter-spacing:0}
 .pm.debt .pm-v,.pm.debt .pm-v .cur{color:var(--coral)}
-.pm-note{font:400 9px/1.2 var(--mono);letter-spacing:.4px;text-transform:uppercase;color:var(--soft)}
 .snap{display:grid;grid-template-columns:1fr 1fr;padding-top:8px}
 .sn{padding:11px 14px;min-height:100px;display:flex;flex-direction:column;justify-content:space-between;gap:6px;border:1px solid var(--ink);min-width:0;color:var(--ink)}
 .sn.exp{background:var(--cyan);border-right:0}.sn.bud{background:var(--coral)}.sn.bud.ok{background:var(--lime)}
@@ -135,13 +131,87 @@ input:focus,select:focus{border-color:var(--txt);box-shadow:0 0 0 1px var(--txt)
 .cc-lim{font:500 18px var(--sans);letter-spacing:-.3px;font-variant-numeric:tabular-nums}
 .cc-end{text-align:right;display:flex;flex-direction:column;gap:2px}
 .ov-foot{margin-top:10px;border-top:1px solid var(--txt);padding-top:10px;display:flex;flex-direction:column;gap:3px;font:400 10px var(--mono);color:var(--mut)}
+
+input,select,.box{width:100%;height:46px;background:var(--in);border:1px solid var(--bd);color:var(--txt);padding:0 13px;border-radius:3px;font:400 16px var(--sans);outline:0;-webkit-appearance:none;appearance:none;margin:0}
+input[type=checkbox]{width:auto;height:auto}
+input[type=date]{display:flex;align-items:center;min-width:0}
+input[type=date]::-webkit-date-and-time-value{text-align:left;margin:0}
+input:focus,select:focus,.box:focus,.dd.open>.box{border-color:var(--txt);box-shadow:0 0 0 1px var(--txt)}
+.box{display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;cursor:pointer}
+.dd{position:relative}
+.dd-v{display:flex;align-items:center;gap:10px;min-width:0}.dd-v .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chev{display:flex;transition:transform .15s;color:var(--mut)}.dd.open .chev{transform:rotate(180deg)}
+.cc{width:24px;height:16px;flex:none;border:1px solid var(--ink);display:flex;align-items:center;padding-left:4px}.cc i{width:5px;height:5px;background:var(--ink)}
+.menu{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:20;background:var(--card);border:1px solid var(--txt);border-radius:3px;max-height:176px;overflow-y:auto;box-shadow:0 8px 20px rgba(25,27,24,.18)}
+.opt{display:flex;align-items:center;gap:10px;width:100%;height:36px;padding:0 10px;background:none;border:0;border-top:1px solid var(--bd);color:var(--txt);font:400 14px var(--sans);text-align:left;cursor:pointer}
+.opt:first-child{border-top:0}.opt .k{margin-left:auto;font:400 10px var(--mono);letter-spacing:.5px;text-transform:uppercase;color:var(--mut)}
+.opt.sel{background:var(--lime);color:var(--ink);font-weight:600}.opt.sel .k{color:var(--ink)}.opt:hover:not(.sel){background:var(--bd)}
+.opt:focus-visible,.more-btn:focus-visible,.sw:focus-visible,.ins:focus-visible,.ibtn2:focus-visible,.mbtn:focus-visible,.mo:focus-visible,.acc-b:focus-visible{outline:2px solid var(--txt);outline-offset:2px}
+.amount{display:flex;flex-direction:column;align-items:center;gap:6px;padding:28px 0 22px;cursor:text}
+.amount .lb{color:var(--mut)}.amount:focus-within .lb{color:var(--txt)}
+.amt-line{display:flex;align-items:baseline;justify-content:center;gap:6px;max-width:100%}
+.amt-cur{font:500 30px/1 var(--sans);color:var(--mut);letter-spacing:-.04em}
+#amt{all:unset;box-sizing:content-box;font:500 52px/1.1 var(--sans);letter-spacing:-.05em;font-variant-numeric:tabular-nums;text-align:center;min-width:2ch;max-width:calc(100vw - 110px);caret-color:var(--txt);color:var(--txt)}
+#amt::placeholder{color:var(--bd)}
+.amt-rule{width:64px;height:2px;background:var(--bd);transition:background .15s,width .15s}
+.amount:focus-within .amt-rule{background:var(--txt);width:96px}
+.more{margin-top:18px;border-top:1px solid var(--txt)}
+.more-btn{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 0;cursor:pointer;font:600 15px var(--sans)}
+.more-btn .r{display:flex;align-items:center;gap:10px}.more.open>.more-btn .chev{transform:rotate(180deg)}
+.tag{font:500 10px var(--mono);letter-spacing:.6px;text-transform:uppercase;background:var(--lime);color:var(--ink);border:1px solid var(--ink);border-radius:3px;padding:2px 6px}
+.more-body{border-top:1px solid var(--bd);padding-bottom:4px}
+.tg{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0 2px;border-top:1px solid var(--bd);margin-top:16px}
+.tg b{font:600 15px var(--sans)}.tg .help{display:block;margin-top:3px}
+.sw{flex:none;position:relative;width:46px;height:26px;border:1px solid var(--txt);border-radius:3px;background:var(--card);padding:0;cursor:pointer;transition:background .15s;display:block}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;background:var(--txt);border-radius:1px;transition:transform .15s}
+.sw[aria-checked="true"]{background:var(--lime);border-color:var(--ink)}.sw[aria-checked="true"]::after{transform:translateX(20px);background:var(--ink)}
+.mpick{position:relative;display:flex;align-items:center;gap:6px;margin-top:7px;flex-wrap:wrap}
+.mpick .d{font:500 10px/1 var(--mono);letter-spacing:.8px;text-transform:uppercase;color:var(--mut);white-space:nowrap}
+.mbtn{width:22px;height:22px;border:1px solid var(--txt);border-radius:3px;background:var(--card);color:var(--txt);display:grid;place-items:center;padding:0;cursor:pointer}
+.mbtn svg{transition:transform .15s}.mpick.open .mbtn svg{transform:rotate(180deg)}
+.closed{font:500 9px var(--mono);letter-spacing:.6px;text-transform:uppercase;border:1px solid var(--txt);border-radius:3px;padding:2px 5px}
+.mmenu{position:absolute;left:0;top:calc(100% + 6px);z-index:30;min-width:210px;background:var(--card);border:1px solid var(--txt);border-radius:3px;box-shadow:0 8px 20px rgba(25,27,24,.18);max-height:222px;overflow-y:auto}
+.mo{display:flex;align-items:center;gap:10px;width:100%;height:36px;padding:0 10px;background:none;border:0;border-top:1px solid var(--bd);color:var(--txt);font:400 14px var(--sans);text-align:left;cursor:pointer}
+.mo:first-child{border-top:0}.mo .k{margin-left:auto;font:400 10px var(--mono);letter-spacing:.5px;text-transform:uppercase;color:var(--mut)}
+.mo.sel{background:var(--lime);color:var(--ink);font-weight:600}.mo.sel .k{color:var(--ink)}.mo:hover:not(.sel){background:var(--bd)}
+.tools{display:flex;align-items:flex-end;gap:12px}
+.dil{display:flex;flex-direction:column;align-items:center;gap:5px}.dil .mono-label{font-size:9px;letter-spacing:.7px;color:var(--txt)}
+.hd{align-items:flex-start}
+.sn-top{display:flex;justify-content:space-between;align-items:center;gap:4px 6px;flex-wrap:wrap}.sn-top .mono-label{white-space:nowrap}
+.dtag{font:500 8.5px var(--mono);letter-spacing:.6px;text-transform:uppercase;background:var(--ink);color:var(--lime);border-radius:2px;padding:2px 4px}
+.ins{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;margin-top:14px;padding:12px 14px;border:1px solid var(--txt);background:var(--card);cursor:pointer}
+.ins-ic{flex:none;width:30px;height:30px;background:var(--lime);color:var(--ink);border:1px solid var(--ink);display:grid;place-items:center}
+.ins-b{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.ins-t{font:500 15px/1.3 var(--sans);letter-spacing:-.2px}.ins-t em{font-style:normal;font-family:var(--mono);font-size:13px}
+.ins-t .iu{color:var(--rd)}.ins-t .id{color:var(--gn)}.ins:active{background:var(--bd)}
+.pm.net.neg .pm-v,.pm.net.neg .pm-v .cur{color:var(--coral)}
+.acc{border-top:1px solid var(--bd)}
+.acc-b{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer;font:600 14px var(--sans)}
+.acc.open>.acc-b .chev{transform:rotate(180deg)}
 </style></head><body><div id="root"></div>
 <script>
 const h=React.createElement,{useState,useEffect,useMemo}=React;
-const API="https://script.google.com/macros/s/AKfycbxLIRize0Rjm5ABniOAzm9OThekuRrW8SIMRANAF8TAWkPo6dklPfVhfPexmxgwfOppIw/exec";
+const API="https://script.google.com/macros/s/AKfycbxk79npSF6zewSZS2g43mER6kNtFIB0z9kKBr3q088VjVIAbZ8sTbp0pScjk6RPxEDMdQ/exec";
 async function api(path,body,params){
   const r=body?await fetch(API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({path,...body})}):await fetch(API+"?"+new URLSearchParams({path,...params}));
   const j=await r.json();if(!j.ok)throw new Error(j.error||"API error");return j.data}
+/* ---------- preferences + language ---------- */
+let PREF=(()=>{let p={};try{p=JSON.parse(localStorage.getItem("pref"))||{}}catch(e){}return{lang:p.lang==="tr"?"tr":"en",dec:[0,1,2,3,4].indexOf(p.dec)>-1?p.dec:2,cur:typeof p.cur==="string"?p.cur.slice(0,4):"₺"}})();
+let PRIV=false;
+document.documentElement.lang=PREF.lang;
+const TRD={"Back": "Geri", "Refreshing...": "Yenileniyor...", "Refresh": "Yenile", "Delete": "Sil", "Cancel": "İptal", "Settings": "Ayarlar", "Loading...": "Yükleniyor...", "(none)": "(yok)", "None": "Yok", "Edit": "Düzenle", "Save": "Kaydet", "Update": "Güncelle", "Add": "Ekle", "Remove": "Kaldır", "Clear": "Temizle", "Name": "Ad", "Type": "Tür", "Amount": "Tutar", "Date": "Tarih", "Description": "Açıklama", "Category": "Kategori", "Item": "Kalem", "Account": "Hesap", "Unit": "Birim", "Quantity": "Miktar", "Overview": "Genel Bakış", "Cash": "Nakit", "Available now": "Şu an kullanılabilir", "At month end": "Ay sonu itibarıyla", "Card debt": "Kart borcu", "Net cash position": "Net nakit pozisyonu", "Spent this month": "Bu ay harcanan", "Spent in month": "Ay içinde harcanan", "Budget left today": "Bugün kalan bütçe", "Room per day": "Günlük pay", "Left at month end": "Ay sonu kalan", "Over budget": "Bütçe aşıldı", "Within budget": "Bütçe dahilinde", "Closed": "Kapandı", "Current": "Güncel", "Choose month": "Ay seç", "Show Diligence balances": "Diligence bakiyelerini göster", "Spending by category": "Kategoriye göre harcama", "Top category": "En büyük kategori", "No expense data available.": "Harcama verisi yok.", "Expenses by category": "Kategoriye göre harcamalar", "Tap a slice or row for details": "Ayrıntı için bir dilime veya satıra dokunun", "Credit cards": "Kredi kartları", "Cut-off ": "Hesap kesim ", "No cut-off date": "Kesim tarihi yok", "limit": "limit", "Currency": "Para birimi", "As of: ": "Tarih: ", "Insights": "Öngörüler", "Insights page is coming soon": "Öngörüler sayfası yakında geliyor", "days left": "gün kaldı", "No big category moves compared to ": "Şununla kıyasla belirgin kategori değişimi yok: ", "No earlier month to compare with": "Karşılaştırılacak önceki ay yok", "Hide balances": "Bakiyeleri gizle", "Amount must be a positive number.": "Tutar pozitif bir sayı olmalı.", "Transaction date is required.": "İşlem tarihi gerekli.", "Recognition date is required.": "Tanıma tarihi gerekli.", "From account is required.": "Çıkış hesabı gerekli.", "To account is required.": "Giriş hesabı gerekli.", "From and To accounts must be different.": "Çıkış ve giriş hesapları farklı olmalı.", "Instrument is required.": "Enstrüman gerekli.", "Investment category is required.": "Yatırım kategorisi gerekli.", "Commission must be 0 or more.": "Komisyon 0 veya daha fazla olmalı.", "Payment method is required.": "Ödeme yöntemi gerekli.", "Business name is required.": "İşletme adı gerekli.", "Cari is required for receivable / payable categories.": "Alacak / borç kategorileri için cari gerekli.", "Description is required.": "Açıklama gerekli.", "Category I is required.": "Kategori I gerekli.", "Split amounts must sum to total amount.": "Bölünen tutarların toplamı toplam tutara eşit olmalı.", "Category II is required if Amount II > 0.": "Tutar II > 0 ise Kategori II gerekli.", "Category III is required if Amount III > 0.": "Tutar III > 0 ise Kategori III gerekli.", "Updated ✓": "Güncellendi ✓", "Saved ": "Kaydedildi: ", " installments ✓": " taksit ✓", "Saved ✓": "Kaydedildi ✓", "Edit transaction": "İşlemi düzenle", "Add entry": "Kayıt ekle", "Editing ": "Düzenleniyor: ", "Expense": "Gider", "Income": "Gelir", "Invest": "Yatırım", "From account": "Çıkış hesabı", "To account": "Giriş hesabı", "A transfer creates two linked Muavin transactions: one outgoing and one incoming.": "Transfer, birbirine bağlı iki Muavin işlemi oluşturur: biri çıkış, biri giriş.", "e.g. Credit card payment": "örn. Kredi kartı ödemesi", "Instrument": "Enstrüman", "e.g. THYAO / SPY / BTC": "örn. THYAO / SPY / BTC", "e.g. Stocks": "örn. Hisse", "Category II": "Kategori II", "Category III": "Kategori III", "Category I": "Kategori I", "Total cost: ": "Toplam maliyet: ", "Payment method": "Ödeme yöntemi", "Transaction date": "İşlem tarihi", "Recognize later": "Sonra tanı", "Book the expense in a different month.": "Gideri farklı bir aya işle.", "Recognition date": "Tanıma tarihi", "Installments": "Taksitler", "No installments": "Taksit yok", " installments": " taksit", "Business name": "İşletme adı", "e.g. Migros / Pegasus": "örn. Migros / Pegasus", "Who owes you / is owed": "Sana kim borçlu / kime borçlusun", "e.g. Ticket / groceries / salary": "örn. Bilet / market / maaş", "Additional categories": "Ek kategoriler", "Allocate the total across up to 3 categories.": "Toplamı en fazla 3 kategoriye dağıt.", "Amount allocated to Category I": "Kategori I'e ayrılan tutar", "Amount allocated to Category II": "Kategori II'ye ayrılan tutar", "Amount allocated to Category III": "Kategori III'e ayrılan tutar", "Saving...": "Kaydediliyor...", "Deleted ✓": "Silindi ✓", "More details": "Daha fazla ayrıntı", "set": "ayarlı", "Amount (₺)": "Tutar (₺)", "Cost (₺ per unit)": "Maliyet (birim başı ₺)", "Commission (₺, optional)": "Komisyon (₺, isteğe bağlı)", "Amount (units)": "Miktar (adet)", "e.g. 10": "örn. 10", "e.g. 15": "örn. 15", "None ": "Yok", "Transactions": "İşlemler", "All payment methods": "Tüm ödeme yöntemleri", "All expense types": "Tüm gider türleri", "No rows returned.": "Kayıt bulunamadı.", " installments · first ": " taksit · ilk ", "Cari: ": "Cari: ", "Returned ": "İade edilen ", "Return": "İade", "Delete this transfer?": "Bu transfer silinsin mi?", "Delete this transaction?": "Bu işlem silinsin mi?", "Both sides of the transfer will be deleted.": "Transferin her iki tarafı da silinecek.", "This transaction will be permanently removed from Muavin.": "Bu işlem Muavin'den kalıcı olarak silinecek.", "Return recorded ✓": "İade kaydedildi ✓", "Enter an amount.": "Bir tutar girin.", "Amount is more than what is left to return.": "Tutar, iade edilebilecek kalan tutardan fazla.", " · left to return ": " · iade edilebilir ", "Refund to": "İade edilecek hesap", "Split over categories, in proportion": "Kategorilere orantılı dağıt", "Auto split": "Otomatik dağıt", "Edit split": "Dağılımı düzenle", "A return row with the same ID and the same recognition month as the purchase is added to Muavin, so the original month nets down.": "Muavin'e alışverişle aynı ID ve aynı tanıma ayına sahip bir iade satırı eklenir; böylece asıl ay net olarak düşer.", "Record return": "İadeyi kaydet", "Amount (₺) ": "Tutar (₺) ", "Stocks": "Hisse", "FX & Commodities": "Döviz ve Emtia", "Crypto": "Kripto", "Investments": "Yatırımlar", "Total balance": "Toplam bakiye", "Budget ": "Bütçe ", "new vs ": "yeni, karşılaştırma: ", " · instalment ": " · taksit ", " of ": " / toplam ", "Total ÷ ": "Toplam ÷ ", " months · ": " ay · ", " each": " her biri", "Spread ✓": "Dağıtıldı ✓", "Normalize": "Normalize et", "One-off ✓": "Tek seferlik ✓", "One-off": "Tek seferlik", " transactions in ": " işlem, ", " · reported ": " · raporlanan ", " · normalized ": " · normalize ", "Normalize all": "Tümünü normalize et", "Excluded": "Hariç", "Exclude": "Hariç tut", "Spread into ": "Dağıtılan: ", "from ": "başlangıç: ", "Category excluded, so one-off / normalize is off.": "Kategori hariç tutuldu, bu yüzden tek seferlik / normalize kapalı.", "Excl. ": "Hariç: ", " one-off": " tek seferlik", " normalized": " normalize", " spread in": " dağıtıldı", "Include again": "Tekrar dahil et", "Exclude category": "Kategoriyi hariç tut", "One purchase in ": "Tek alışveriş: ", "Own months": "Kendi ayları", "Next 6": "Sonraki 6", "Next 12": "Sonraki 12", "Prev 12": "Önceki 12", "All 25": "Tümü (25)", "Same months as it is recognised now → no change.": "Şu an tanındığı aylarla aynı → değişiklik yok.", " per month": " aylık", " months": " ay", "Each purchase total is split equally across the months you tap, as if you pressed Normalize on every one.": "Her alışverişin toplamı, dokunduğunuz aylara eşit bölünür; sanki hepsinde Normalize'a basmışsınız gibi.", "This month": "Bu ay", "Pick at least one month.": "En az bir ay seçin.", "Nothing to normalize in this category.": "Bu kategoride normalize edilecek bir şey yok.", "in total, × ": "toplam, × ", "Apply to ": "Uygula: ", "Reported": "Raporlanan", " transactions": " işlem", "Normalized": "Normalize", "% vs reported": "% (raporlanana göre)", "same as reported": "raporlananla aynı", "One-offs": "Tek seferlikler", " one-off · ": " tek seferlik · ", " spread": " dağıtılan", "Budget · ": "Bütçe · ", "Set in Cashflow & capex": "Nakit akışı ve yatırım harcamasında ayarlanır", " under budget": " bütçenin altında", " over budget": " bütçenin üstünde", "Budget": "Bütçe", "Normalized spend": "Normalize harcama", "Expected by day ": "Gün için beklenen ", "Above pace": "Hızın üstünde", "Below pace": "Hızın altında", "Each month is compared with the budget that applied in that month.": "Her ay, o ay geçerli olan bütçeyle karşılaştırılır.", "No budget for ": "Bütçe yok: ", " · tap a month": " · bir aya dokunun", "How ": "", " gets from reported to normalized": " ayı raporlanandan normalize edilene nasıl gelir", "Reported spend": "Raporlanan harcama", "Excluded categories": "Hariç tutulan kategoriler", "Normalized items moved out": "Dışarı taşınan normalize kalemler", "Spread in from normalized items": "Normalize kalemlerden içeri dağıtılan", "Already spread into coming months": "Gelecek aylara zaten dağıtılan", " more months": " ay daha", "Categories": "Kategoriler", "Fixed vs variable": "Sabit ve değişken", "Search ": "Ara: ", ": merchant, description, category or amount": ": işletme, açıklama, kategori veya tutar", "No expenses recognised in ": "Tanınan gider yok: ", " yet.": " için henüz.", " result": " sonuç", "Expense categories · tap a tile for the biggest transactions": "Gider kategorileri · en büyük işlemler için bir karoya dokunun", " · change vs ": " · değişim: ", "Merchants in ": "İşletmeler: ", " · across all categories": " · tüm kategoriler genelinde", "Normalized spend in ": "Normalize harcama: ", " · excluded": " · hariç", " · 3-month avg ": " · 3 aylık ort. ", "None detected.": "Tespit edilmedi.", "Aging (days since transaction)": "Yaşlandırma (işlemden bu yana gün)", "Net position today": "Bugünkü net pozisyon", "Cash − card debt": "Nakit − kart borcu", "Free cash flow / month": "Aylık serbest nakit akışı", "Capex committed": "Taahhüt edilen yatırım harcaması", "Net position ≥ 0": "Net pozisyon ≥ 0", "Beyond 5 years": "5 yıl sonrası", "Save assumptions": "Varsayımları kaydet", "Also included: receivables at their due dates, payables due, and every capex instalment below.": "Ayrıca dahil: vadesindeki alacaklar, vadesi gelen borçlar ve aşağıdaki her yatırım harcaması taksiti.", "Planned capex": "Planlanan yatırım harcaması", "Nothing planned yet.": "Henüz planlanmış bir şey yok.", " from ": " başlangıç ", " · interest ": " · faiz ", "First payment date": "İlk ödeme tarihi", "Instalments": "Taksitler", "Single payment": "Tek ödeme", " instalments": " taksit", "Add to plan": "Plana ekle", "Out": "Çıkış", "Capex": "Yatırım harcaması", "Closing": "Kapanış", "Item ": "Kalem ", "Price (₺)": "Fiyat (₺)", "Item (e.g. Phone)": "Kalem (örn. Telefon)", "Income assumption (₺ / month)": "Gelir varsayımı (₺ / ay)", "Spend assumption (₺ / month)": "Harcama varsayımı (₺ / ay)", "Collect": "Tahsil et", "Pay": "Öde", "Account is required.": "Hesap gerekli.", "Collected ✓": "Tahsil edildi ✓", "Paid ✓": "Ödendi ✓", " open item": " açık kalem", "Overdue ": "Gecikmiş: ", "Unapplied credit: ": "Uygulanmamış alacak: ", "Due in ": "Vadeye kalan: ", "Outstanding": "Açık bakiye", "Overdue": "Gecikmiş", "Receivable days": "Alacak günü", "Payable days": "Borç günü", " days": " gün", "Avg. collection time": "Ort. tahsilat süresi", "Avg. payment time": "Ort. ödeme süresi", "Single line": "Tek satır", "By cari": "Cariye göre", "Nothing outstanding.": "Açık bakiye yok.", "Due rules: ": "Vade kuralları: ", "Outstanding: ": "Açık bakiye: ", " · matched against the oldest open items first": " · önce en eski açık kalemlerle eşleştirilir", "Full": "Tamamı", "Received into": "Tahsil edilen hesap", "Paid from": "Ödeme yapılan hesap", "Collection": "Tahsilat", "Payment": "Ödeme", "of ": "/ ", "Spend & budget": "Harcama ve bütçe", "Cashflow & capex": "Nakit akışı ve yatırım harcaması", "Receivables": "Alacaklar", "Payables": "Borçlar", "Diligence": "Diligence", "Income statement": "Gelir tablosu", "Balance sheet": "Bilanço", "ONCA": "ONCA", "Other non-current assets": "Diğer duran varlıklar", "Reports": "Raporlar", "IS": "GT", "BS": "BL", "Other months": "Diğer aylar", "Current month": "Bu ay", "No data for this month.": "Bu ay için veri yok.", "Payment methods": "Ödeme yöntemleri", "Expense categories": "Gider kategorileri", "Income categories": "Gelir kategorileri", "Invest categories": "Yatırım kategorileri", "Name is required.": "Ad gerekli.", "Added ✓": "Eklendi ✓", "Add to ": "Ekle: ", "Working...": "Çalışıyor...", "No items.": "Kalem yok.", "It is removed from the Siniflandirma sheet. Existing Muavin rows keep their text.": "Siniflandirma sayfasından kaldırılır. Mevcut Muavin satırları metinlerini korur.", "Debit": "Banka", "Credit": "Kredi", "Customize": "Özelleştir", "Language": "Dil", "Decimal digits": "Ondalık basamak", "Currency symbol": "Para birimi simgesi", "Digits shown after the comma.": "Virgülden sonra gösterilen basamak sayısı.", "Shown next to every amount.": "Her tutarın yanında gösterilir.", "Preview": "Önizleme", "English": "English", "Türkçe": "Türkçe", "Reconciled ✓": "Mutabakat yapıldı ✓", "Reconciliation": "Mutabakat", "Already matches, nothing to add.": "Zaten eşleşiyor, eklenecek bir şey yok.", "Entry to add": "Eklenecek kayıt", "Recorded today as ": "Bugün şu olarak kaydedilir: ", "an expense": "gider", "an income": "gelir", " in “Diğer” with POS “Reconciliation”.": " “Diğer” kategorisinde, işletme “Reconciliation” olarak.", "Reconcile": "Mutabık ol", "Reconcile ": "Mutabakat: ", " ₺ will be added to Muavin so the balance becomes ": " ₺ Muavin'e eklenecek; bakiye şu olacak: ", "Card debt in Muavin (up to today)": "Muavin'deki kart borcu (bugüne kadar)", "Balance in Muavin (up to today)": "Muavin'deki bakiye (bugüne kadar)", "Card debt it should be (₺)": "Olması gereken kart borcu (₺)", "Balance it should be (₺)": "Olması gereken bakiye (₺)", " ₺ on ": " ₺ · hesap: ", "Quantity must be a positive number.": "Miktar pozitif bir sayı olmalı.", "Item name is required.": "Kalem adı gerekli.", "Total cost must be a positive number.": "Toplam maliyet pozitif bir sayı olmalı.", "Used ✓": "Kullanıldı ✓", "Stocked ✓": "Stoğa eklendi ✓", "Used up": "Tükendi", "Use": "Kullan", "Restock": "Stok ekle", "Consumables": "Sarf malzemeler", "Stock value": "Stok değeri", "Active items": "Aktif kalemler", "+ New item / purchase": "+ Yeni kalem / alım", "No stock yet. Add your first purchase.": "Henüz stok yok. İlk alımınızı ekleyin.", "Use ": "Kullan: ", "Restock ": "Stok ekle: ", "New purchase": "Yeni alım", "Remaining: ": "Kalan: ", "Use all": "Tümünü kullan", "Expense recognized: ": "Tanınan gider: ", "e.g. Coffee beans": "örn. Kahve çekirdeği", "e.g. kg / gr / pcs": "örn. kg / gr / adet", "Unit cost: ": "Birim maliyet: ", "Total cost (₺)": "Toplam maliyet (₺)", "e.g. 1000": "örn. 1000", "Stock, restock and use": "Stok, stok ekleme ve kullanım", "Portfolio and allocation": "Portföy ve dağılım", "Income statement, balance sheet, ONCA": "Gelir tablosu, bilanço, ONCA", "Payment methods and categories": "Ödeme yöntemleri ve kategoriler", "Hide amounts on Overview, Diligence and Investments (shown as ***,*)": "Genel Bakış, Diligence ve Yatırımlar'daki tutarları gizle (***,* olarak görünür)", "More": "Daha Fazla", "Edit transaction ": "İşlemi düzenle ", "Unspent": "Harcanmayan", "No budget set": "Bütçe belirlenmedi"};
+const $t=s=>{const r=PREF.lang==="tr"&&TRD[s]!==undefined?TRD[s]:s;return r.indexOf("₺")>-1?r.split("₺").join(PREF.cur):r};
+const LOC=()=>PREF.lang==="tr"?"tr-TR":"en-US";
+const LOCD=()=>PREF.lang==="tr"?"tr-TR":"en-GB";
+const MASK="***,*";
+const nfmt=(n,d)=>{const k=d==null?PREF.dec:d;return Number(n||0).toLocaleString("tr-TR",{minimumFractionDigits:k,maximumFractionDigits:k})};
+const mv=s=>PRIV?MASK:s;
+const tl=n=>mv(nfmt(n))+" "+PREF.cur;
+const trNum=m=>{const n=Number(String(m).replace(/\./g,"").replace(",","."));return Number.isFinite(n)?n:0};
+const fmtStr=s=>String(s==null?"":s).replace(/-?\d{1,3}(?:\.\d{3})+(?:,\d+)?|-?\d+(?:,\d+)?/g,m=>PRIV?MASK:nfmt(trNum(m))).split("₺").join(PREF.cur);
+const sv=v=>{const n=amountValue(v);return /-/.test(String(v))?-n:n};
+const mlong=k=>{const p=k.split("-");return new Date(+p[0],p[1]-1,1).toLocaleDateString(LOCD(),{month:"long",year:"numeric"})};
+const mname=i=>new Date(2000,i,1).toLocaleDateString(LOC(),{month:"short"}).replace(".","");
 // stale-while-revalidate: shows cached data instantly, refreshes in background
 function useData(key,path,params){
   const [d,setD]=useState(()=>{try{return JSON.parse(localStorage.getItem("c:"+key))}catch(e){return null}});
@@ -153,12 +223,10 @@ function useData(key,path,params){
   return{d,setD:put,l,e,load,act}}
 let LD=null;
 const INV_ACC="Sarf Malzemeler";
-const tl=n=>Number(n||0).toLocaleString("tr-TR",{maximumFractionDigits:0})+" ₺";
-const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-const ms=k=>{const p=k.split("-");return MON[p[1]-1]+p[0].slice(2)};
+const ms=k=>{const p=k.split("-");return mname(p[1]-1)+p[0].slice(2)};
 const addMonth=(k,n)=>{let y=+k.slice(0,4),m=+k.slice(5)-1+n;y+=Math.floor(m/12);m=((m%12)+12)%12;return y+"-"+String(m+1).padStart(2,"0")};
-const mn=k=>MON[k.split("-")[1]-1];
-const ml=k=>{const p=k.split("-");return MON[p[1]-1]+" "+p[0].slice(2)};
+const mn=k=>mname(k.split("-")[1]-1);
+const ml=k=>{const p=k.split("-");return mname(p[1]-1)+" "+p[0].slice(2)};
 const pad=n=>String(n).padStart(2,"0");
 const today=()=>{const d=new Date();return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())};
 const addMonths=(s,k)=>{const[y,m,d]=s.split("-").map(Number);const t=new Date(y,m-1+k,Math.min(d,new Date(y,m+k,0).getDate()));return t.getFullYear()+"-"+pad(t.getMonth()+1)+"-"+pad(t.getDate())};
@@ -183,7 +251,7 @@ function groupTx(rows){const g=new Map();rows.forEach(r=>{const id=String(r.tran
     if(grp.length===2&&grp.some(r=>r.category1==="Transfer")){ // both legs share one ID -> one transfer card
       const o=grp.find(r=>String(r.description).includes("→"))||grp[0],i=grp.find(r=>r!==o);
       return{...o,transactionType:"transfer",transferId:o.transactionId,transferToAccount:i.paymentMethod,description:cleanTD(o.description),installmentCount:1,dateRange:o.transactionDate,
-        totalAmount:new Intl.NumberFormat("tr-TR",{maximumFractionDigits:2}).format(amountValue(o.amount))+" ₺",categories:[],_s:dv(o.transactionDate)}}
+        totalAmount:new Intl.NumberFormat("tr-TR",{maximumFractionDigits:2}).format(amountValue(o.amount))+$t(" ₺"),categories:[],_s:dv(o.transactionDate)}}
     // a return row = expense category with a negative amount, same ID as the purchase
     const isRet=r=>inferType(r)==="expense"&&/-/.test(String(r.amount1||""));
     const ret=grp.filter(isRet),base=grp.filter(r=>!isRet(r)),bg=base.length?base:grp;
@@ -192,29 +260,42 @@ function groupTx(rows){const g=new Map();rows.forEach(r=>{const id=String(r.tran
     grp.forEach(r=>{const sg=isRet(r)?-1:1;[[r.category1,r.amount1],[r.category2,r.amount2],[r.category3,r.amount3]].forEach(([n,a])=>{if(n)cats.set(n,(cats.get(n)||0)+sg*amountValue(a))})});
     const gross=bg.reduce((s,r)=>s+amountValue(r.amount),0),back=ret.reduce((s,r)=>s+amountValue(r.amount),0);
     b.installmentCount=new Set(dates).size;b.dateRange=dates[0]||"";b.returned=back;b.netAmount=gross-back;
-    b.totalAmount=new Intl.NumberFormat("tr-TR",{maximumFractionDigits:2}).format(gross-back)+" ₺";
+    b.totalAmount=new Intl.NumberFormat("tr-TR",{maximumFractionDigits:2}).format(gross-back)+$t(" ₺");
     b.categories=Array.from(cats,([category,amount])=>({category,amount})).filter(c=>c.amount>0.005);b._s=Math.min(...grp.map(r=>dv(r.transactionDate)));return b}).sort((a,b)=>b._s-a._s)}
 
 /* ---------- UI helpers ---------- */
 const COL=["#dfff00","#ff8c77","#bdedf2","#191b18","#8a8d80","#e9ff6b","#ffc2b6","#7fc8d1","#cbcec1","#b6d400","#d9604a","#4a4d46","#a3a690","#f0ffa0","#ffd9d0","#a4d8df","#6f7266","#e6e8da"];
-const ICP={home:"M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z",list:"M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01",plus:"M12 5v14M5 12h14",chart:"M3 17l6-6 4 4 8-8M15 7h6v6",grid:"M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z",refresh:"M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5",equal:"M5 9h14M5 15h14",wallet:"M3 7a2 2 0 0 1 2-2h13v4M3 7v11a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H5a2 2 0 0 1-2-2zM16 14h2",card:"M3 6h18v12H3zM3 10h18M7 15h3",alert:"M12 3l10 18H2zM12 10v5M12 18h.01",check:"M4 12l5 5L20 6",utensils:"M7 3v8M4 3v5a3 3 0 0 0 6 0V3M7 11v10M17 21V3c-2 1-3.5 4-3.5 8H17",tag:"M3 12V3h9l9 9-9 9zM7.5 7.5h.01",chev:"M6 9l6 6 6-6",eye:"M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z",eyeoff:"M3 3l18 18M10.6 6.1A9.6 9.6 0 0 1 12 5c6 0 10 7 10 7a17 17 0 0 1-3.2 3.9M6.6 6.6C3.7 8.4 2 12 2 12s4 7 10 7a9.7 9.7 0 0 0 4.4-1"};
+const ICP={home:"M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z",list:"M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01",plus:"M12 5v14M5 12h14",chart:"M3 17l6-6 4 4 8-8M15 7h6v6",grid:"M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z",refresh:"M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5",equal:"M5 9h14M5 15h14",wallet:"M3 7a2 2 0 0 1 2-2h13v4M3 7v11a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-9a1 1 0 0 0-1-1H5a2 2 0 0 1-2-2zM16 14h2",card:"M3 6h18v12H3zM3 10h18M7 15h3",alert:"M12 3l10 18H2zM12 10v5M12 18h.01",check:"M4 12l5 5L20 6",utensils:"M7 3v8M4 3v5a3 3 0 0 0 6 0V3M7 11v10M17 21V3c-2 1-3.5 4-3.5 8H17",tag:"M3 12V3h9l9 9-9 9zM7.5 7.5h.01",chev:"M6 9l6 6 6-6",eye:"M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z",spark:"M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z",arrow:"M5 12h14M13 6l6 6-6 6",eyeoff:"M3 3l18 18M10.6 6.1A9.6 9.6 0 0 1 12 5c6 0 10 7 10 7a17 17 0 0 1-3.2 3.9M6.6 6.6C3.7 8.4 2 12 2 12s4 7 10 7a9.7 9.7 0 0 0 4.4-1"};
 const Ic=({n,s})=>h("svg",{width:s||24,height:s||24,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2,strokeLinecap:"square",strokeLinejoin:"miter","aria-hidden":true},h("path",{d:ICP[n]}));
 const Mark=({s})=>h("svg",{width:s||26,height:s||26,viewBox:"0 0 26 26","aria-hidden":true},h("rect",{width:26,height:26,fill:"#dfff00"}),h("path",{d:"M6 13.5l4.5 4.5L20 8",fill:"none",stroke:"#191b18",strokeWidth:3,strokeLinecap:"square"}));
 const F=(l,c)=>h("div",{className:"fld"},h("label",null,l),c);
 const I=(v,fn,o)=>h("input",{value:v,onChange:e=>fn(o&&o.inputMode==="decimal"?e.target.value.replace(/,/g,"."):e.target.value),...o});
-const S=(v,fn,opts,none)=>h("select",{value:v,onChange:e=>fn(e.target.value)},none?h("option",{value:""},"(none)"):null,opts.map(o=>h("option",{key:o,value:o},o)));
-const Pg=({t,back,sub,act,children})=>h(React.Fragment,null,h("div",{className:"hd"},back?h("button",{className:"bk",onClick:back,"aria-label":"Back"},"‹"):null,h("div",{className:"tt"},h("h1",null,t),sub?h("span",{className:"sub"},sub):null),act||null),h("div",{className:"ct"},children));
+const S=(v,fn,opts,none)=>h("select",{value:v,onChange:e=>fn(e.target.value)},none?h("option",{value:""},$t("(none)")):null,opts.map(o=>h("option",{key:o,value:o},o)));
+const Pg=({t,back,sub,act,children})=>h(React.Fragment,null,h("div",{className:"hd"},back?h("button",{className:"bk",onClick:back,"aria-label":$t("Back")},"‹"):null,h("div",{className:"tt"},h("h1",null,t),sub?(typeof sub==="string"?h("span",{className:"sub"},sub):sub):null),act||null),h("div",{className:"ct"},children));
 const Er=({e})=>e?h("div",{className:"err"},e):null;
-const Rf=({l,load})=>h("div",{className:"row",style:{marginTop:14}},h("button",{className:"btn gh",disabled:l,onClick:load},l?"Refreshing...":"Refresh"));
+const Rf=({l,load})=>h("div",{className:"row",style:{marginTop:14}},h("button",{className:"btn gh",disabled:l,onClick:load},l?$t("Refreshing..."):$t("Refresh")));
 const Sk=()=>h(React.Fragment,null,h("div",{className:"sk"}),h("div",{className:"sk"}),h("div",{className:"sk"}));
 const M=(l,v)=>h("div",{className:"card"},h("div",{className:"lb"},l),h("div",{className:"v"},v));
-const Sheet=({t,x,ok,label,onOk,onNo})=>h("div",{className:"shw",onClick:onNo},h("div",{className:"sheet",onClick:e=>e.stopPropagation()},h("div",{style:{fontWeight:800,fontSize:18}},t),h("div",{className:"help"},x),h("div",{className:"row",style:{marginTop:16}},h("button",{className:"btn dg",onClick:onOk},label||"Delete"),h("button",{className:"btn gh",onClick:onNo},"Cancel"))));
+const Sheet=({t,x,ok,label,onOk,onNo})=>h("div",{className:"shw",onClick:onNo},h("div",{className:"sheet",onClick:e=>e.stopPropagation()},h("div",{style:{fontWeight:800,fontSize:18}},t),h("div",{className:"help"},x),h("div",{className:"row",style:{marginTop:16}},h("button",{className:"btn dg",onClick:onOk},label||$t("Delete")),h("button",{className:"btn gh",onClick:onNo},$t("Cancel")))));
 function Donut({sl,children}){const R=70,C=2*Math.PI*R,sum=sl.reduce((a,x)=>a+Math.max(x.value,0),0);let cum=0;
   return h("div",{className:"donut"},h("svg",{viewBox:"0 0 200 200"},sum>0?sl.map(x=>{const len=Math.max(x.value,0)/sum*C;const el=h("circle",{key:x.label,cx:100,cy:100,r:R,fill:"none",stroke:x.color,strokeWidth:26,strokeDasharray:Math.max(len-1.5,0)+" "+C,strokeDashoffset:-cum,transform:"rotate(-90 100 100)"});cum+=len;return el}):h("circle",{cx:100,cy:100,r:R,fill:"none",stroke:"var(--bd)",strokeWidth:26})),h("div",{className:"dc"},children))}
 const Legend=({sl})=>{const sum=sl.reduce((a,x)=>a+Math.max(x.value,0),0)||1;return h("div",{style:{marginTop:10}},sl.map(x=>h("div",{key:x.label,className:"li"},h("span",{className:"dot",style:{background:x.color}}),h("div",{style:{flex:1,fontWeight:700}},x.label),h("div",{className:"help",style:{margin:0}},Math.round(x.value/sum*100)+"%"),h("b",null,x.display))))};
 
+
+const SWC=["#dfff00","#ff8c77","#bdedf2"];
+function useOut(ref,open,close){useEffect(()=>{if(!open)return;const f=e=>{if(ref.current&&!ref.current.contains(e.target))close()},k=e=>{if(e.key==="Escape")close()};document.addEventListener("mousedown",f);document.addEventListener("touchstart",f);document.addEventListener("keydown",k);return()=>{document.removeEventListener("mousedown",f);document.removeEventListener("touchstart",f);document.removeEventListener("keydown",k)}},[open])}
+function Dd({value,onChange,opts,cards,none,id}){
+  const[open,setOpen]=useState(false),ref=React.useRef(null);useOut(ref,open,()=>setOpen(false));
+  useEffect(()=>{if(open&&ref.current){const m=ref.current.querySelector(".menu");if(m){const s=m.querySelector(".sel");if(s)m.scrollTop=Math.max(0,s.offsetTop-40);m.scrollIntoView({block:"nearest",behavior:"smooth"})}}},[open]);
+  const o=opts.map(x=>typeof x==="object"?x:{v:x,t:x});if(none)o.unshift({v:"",t:none});
+  const i=o.findIndex(x=>String(x.v)===String(value)),cur=i>-1?o[i]:null;
+  return h("div",{className:"dd"+(open?" open":""),ref},
+    h("button",{type:"button",className:"box",id,"aria-haspopup":"listbox","aria-expanded":open,onClick:()=>setOpen(!open)},
+      h("span",{className:"dd-v"},cards&&cur?h("span",{className:"cc",style:{background:SWC[i%3]}},h("i")):null,h("span",{className:"t"},cur?cur.t:"")),h("span",{className:"chev"},h(Ic,{n:"chev",s:16}))),
+    open?h("div",{className:"menu",role:"listbox"},o.map((x,n)=>h("button",{key:String(x.v)+"|"+n,type:"button",className:"opt"+(n===i?" sel":""),role:"option","aria-selected":n===i,onClick:()=>{onChange(x.v);setOpen(false)}},cards?h("span",{className:"cc",style:{background:SWC[n%3]}},h("i")):null,h("span",null,x.t),x.k?h("span",{className:"k"},x.k):null))):null)}
+const Sw=({on,set,label})=>h("button",{type:"button",className:"sw",role:"switch","aria-checked":!!on,"aria-label":label,onClick:()=>set(!on)});
+
 /* ---------- HOME ---------- */
-const plain=v=>String(v==null?"":v).replace(/\s*₺\s*/g,"").trim();
 const catIc=c=>/yemek|market|gıda|restoran|mutfak|food|grocer/i.test(c)?"utensils":"tag";
 function pieTx(hex){const n=parseInt(hex.slice(1),16),lum=.299*(n>>16)+.587*((n>>8)&255)+.114*(n&255);return lum>140?"#191b18":"#f5f5ec"}
 function Pie({sl}){const[sel,setSel]=useState(null);const tot=sl.reduce((a,x)=>a+x.value,0)||1,cx=120,cy=120,R=108;let ang=-Math.PI/2;
@@ -224,49 +305,68 @@ function Pie({sl}){const[sel,setSel]=useState(null);const tot=sl.reduce((a,x)=>a
     const p=fr>.999?h("circle",{cx,cy,r:R,...sh}):h("path",{d:"M"+cx+" "+cy+" L"+(cx+R*Math.cos(ang))+" "+(cy+R*Math.sin(ang))+" A"+R+" "+R+" 0 "+(fr>.5?1:0)+" 1 "+(cx+R*Math.cos(nx))+" "+(cy+R*Math.sin(nx))+" Z",...sh});ang=nx;
     return h(React.Fragment,{key:x.label},p,fr>=.12?h("text",{x:lx,y:ly-1,fontSize:11,...ts},x.label.slice(0,10)):null,fr>=.12?h("text",{x:lx,y:ly+12,fontSize:10,...ts},x.display):null)});
   const pk=sl.find(x=>x.label===sel);
-  return h("div",{className:"pie-wrap"},h("svg",{viewBox:"0 0 240 240",role:"img","aria-label":"Expenses by category",className:"pie-svg"},w),
-    h("div",{className:"pie-cap"},pk?pk.label+" · "+pk.display+" · "+Math.round(pk.value/tot*100)+"%":"Tap a slice or row for details"),
+  return h("div",{className:"pie-wrap"},h("svg",{viewBox:"0 0 240 240",role:"img","aria-label":$t("Expenses by category"),className:"pie-svg"},w),
+    h("div",{className:"pie-cap"},pk?pk.label+" · "+pk.display+" · "+Math.round(pk.value/tot*100)+"%":$t("Tap a slice or row for details")),
     sl.map(x=>h("button",{key:x.label,type:"button",className:"pie-leg"+(sel===x.label?" on":""),onClick:()=>setSel(sel===x.label?null:x.label)},h("span",{className:"dot",style:{background:x.color}}),h("span",{className:"pie-name"},x.label),h("span",{className:"pie-amt"},x.display),h("span",{className:"pie-pct"},Math.round(x.value/tot*100)+"%"))))}
-function Home({go,priv}){
-  const{d,l,e,load}=useData("ov","overview");
-  const[open,setOpen]=useState(false);
-  // top 7 categories + everything else (including "Diğer") as one "Diğer" slice
-  const sl=(()=>{if(!d||!d.expenseBreakdown)return[];const eb=d.expenseBreakdown,oth=eb.filter(x=>x.category==="Diğer").reduce((a,x)=>a+x.amount,0),it=eb.filter(x=>x.category!=="Diğer").sort((a,b)=>b.amount-a.amount),top=it.slice(0,7).map(x=>({label:x.category,value:x.amount})),rest=it.slice(7).reduce((a,x)=>a+x.amount,0)+oth;
+function Home({go,say}){
+  const[mo,setMo]=useState(null),[dil,setDil]=useState(()=>{try{return localStorage.getItem("dil")==="1"}catch(e){return false}}),[open,setOpen]=useState(false),[mm,setMm]=useState(false),[nonce,setNonce]=useState(0);
+  const{d,l,e,load}=useData("ov-"+(mo||"cur"),"overview",mo?{month:mo}:{});
+  const mref=React.useRef(null);useOut(mref,mm,()=>setMm(false));
+  const setD=v=>{setDil(v);setNonce(n=>n+1);try{localStorage.setItem("dil",v?"1":"0")}catch(z){}};
+  const dg=d&&d.diligence,cur=!d||d.current!==false,P=n=>[mv(nfmt(n)),h("span",{key:"c",className:"cur"},PREF.cur)];
+  // category slices: top 7 + everything else (including "Diğer") as one "Diğer" slice
+  const eb=d?(dil&&dg?dg.categories:(d.expenseBreakdown||[])):[];
+  const sl=(()=>{const oth=eb.filter(x=>x.category==="Diğer").reduce((a,x)=>a+x.amount,0),it=eb.filter(x=>x.category!=="Diğer").sort((a,b)=>b.amount-a.amount),top=it.slice(0,7).map(x=>({label:x.category,value:x.amount})),rest=it.slice(7).reduce((a,x)=>a+x.amount,0)+oth;
     if(rest>0.005)top.push({label:"Diğer",value:rest});return top.map((x,i)=>({...x,display:tl(x.value),color:COL[i%COL.length]}))})();
   const top=sl.find(x=>x.label!=="Diğer")||sl[0];
-  const now=new Date(),dateStr=now.toLocaleDateString("en-GB",{day:"2-digit",month:"long",year:"numeric"}),monthStr=now.toLocaleDateString("en-GB",{month:"long",year:"numeric"}).toUpperCase();
-  const over=d&&/-/.test(String(d.budgetLeftToday));
-  const P=priv?" pr":"";
-  const Mo=(cls,v)=>h("div",{className:cls+P},v,h("span",{className:"cur"},"₺"));
-  const sw=["#dfff00","#ff8c77","#bdedf2"];
-  return h(Pg,{t:"Overview",sub:dateStr,act:h("button",{type:"button",className:"ibtn2","aria-label":"Refresh",disabled:l,onClick:load},h(Ic,{n:"refresh",s:18}))},h(Er,{e}),
+  const ins=useMemo(()=>{const a=d&&d.insights&&d.insights[dil?"diligence":"reported"];const c=(a||[]).filter(x=>Math.abs(x.pct)>=8);return c.length?c[Math.floor(Math.random()*c.length)]:null},[d,dil,nonce]);
+  const key=d&&d.month?d.month:today().slice(0,7),months=(d&&d.months||[]).slice().reverse();
+  const cash=d?(d.cashN!=null?d.cashN:sv(d.cash)):0,debt=d?(d.cardDebtN!=null?d.cardDebtN:Math.abs(sv(d.cardDebt))):0,net=d?(d.net!=null?d.net:cash-debt):0;
+  const rep=d?(d.expenseN!=null?d.expenseN:sv(d.currentMonthExpense)):0,spent=dil&&dg?dg.spent:rep;
+  const repLeft=d?(d.budgetLeftN!=null?d.budgetLeftN:(d.budgetLeftToday===""||d.budgetLeftToday==null?null:sv(d.budgetLeftToday))):null;
+  let bLab,bVal,bOk,bStat;
+  if(d){
+    if(cur&&dil&&dg){bLab=$t("Room per day");if(dg.room!=null){bVal=dg.room;bOk=bVal>=0;bStat=$t(bOk?"Within budget":"Over budget")+" · "+dg.daysLeft+" "+$t("days left")}else{bVal=null;bOk=false;bStat=$t("No budget set")}}
+    else if(cur){bLab=$t("Budget left today");bVal=repLeft;bOk=bVal!=null&&bVal>=0;bStat=bVal==null?$t("No budget set"):$t(bOk?"Within budget":"Over budget")}
+    else{bLab=$t("Left at month end");const b=dil&&dg?(dg.budget>0?dg.budget-dg.spent:null):repLeft;bVal=b;bOk=b!=null&&b>=0;bStat=b==null?$t("No budget set"):$t(bOk?"Within budget":"Over budget")}}
+  const dateStr=cur?new Date().toLocaleDateString(LOCD(),{day:"2-digit",month:"long",year:"numeric"}):mlong(key);
+  const insT=ins?(PREF.lang==="tr"?[h("em",{key:"e"},ins.category)," harcamaları ",ml(d.insights.prev)+" dönemine göre ",h("span",{key:"s",className:ins.pct>0?"iu":"id"},"%"+Math.abs(Math.round(ins.pct))+(ins.pct>0?" arttı":" azaldı"))]
+    :[h("em",{key:"e"},ins.category)," expenses ",h("span",{key:"s",className:ins.pct>0?"iu":"id"},(ins.pct>0?"up ":"down ")+Math.abs(Math.round(ins.pct))+"%")," compared to "+ml(d.insights.prev)])
+    :(d&&d.insights&&d.insights.prev&&months.length>1&&key!==months[months.length-1]?$t("No big category moves compared to ")+ml(d.insights.prev):$t("No earlier month to compare with"));
+  const pick=m=>{setMo(m===(months[0]||"")?null:m);setMm(false);setOpen(false);setNonce(n=>n+1)};
+  const picker=h("div",{className:"mpick"+(mm?" open":""),ref:mref},h("span",{className:"d"},dateStr),cur?null:h("span",{className:"closed"},$t("Closed")),
+    months.length>1?h("button",{type:"button",className:"mbtn","aria-label":$t("Choose month"),"aria-haspopup":"listbox","aria-expanded":mm,onClick:()=>setMm(!mm)},h(Ic,{n:"chev",s:12})):null,
+    mm?h("div",{className:"mmenu",role:"listbox"},months.map((m,i)=>h("button",{key:m,type:"button",className:"mo"+(m===key?" sel":""),role:"option","aria-selected":m===key,onClick:()=>pick(m)},h("span",null,mlong(m)),i===0?h("span",{className:"k"},$t("Current")):null))):null);
+  const tools=h("div",{className:"tools"},h("div",{className:"dil"},h("span",{className:"mono-label",lang:"en"},"Diligence"),h(Sw,{on:dil,set:setD,label:$t("Show Diligence balances")})),
+    h("button",{type:"button",className:"ibtn2",id:"rf","aria-label":$t("Refresh"),disabled:l,onClick:()=>{setNonce(n=>n+1);load()}},h(Ic,{n:"refresh",s:18})));
+  return h(Pg,{t:$t("Overview"),sub:picker,act:tools},h(Er,{e}),
     !d&&l?h(Sk):null,
     d?h(React.Fragment,null,
       h("section",null,
-        h("div",{className:"pos-net"},h("div",{className:"pos-top"},h("span",{className:"mono-label"},"Cash"),h(Ic,{n:"wallet",s:18})),
-          Mo("pos-amt",plain(d.cash)),h("div",{className:"pos-foot"},h("span",null,"Available now"),h("span",{className:"mono"},"TRY"))),
+        h("div",{className:"pos-net"},h("div",{className:"pos-top"},h("span",{className:"mono-label"},$t("Cash")),h(Ic,{n:"wallet",s:18})),
+          h("div",{className:"pos-amt"},P(cash)),h("div",{className:"pos-foot"},h("span",null,$t(cur?"Available now":"At month end")),h("span",{className:"mono"},PREF.cur))),
         h("div",{className:"pos-split"},
-          h("div",{className:"pm debt"},h("div",{className:"pm-h"},h("span",{style:{color:"#ff8c77",display:"flex"}},h(Ic,{n:"card",s:14})),h("span",{className:"mono-label"},"Card debt")),Mo("pm-v",plain(d.cardDebt))),
-          h("div",{className:"pm net"},h("div",{className:"pm-h"},h("span",{style:{color:"#dfff00",display:"flex"}},h(Ic,{n:"equal",s:14})),h("span",{className:"mono-label"},"Net position")),Mo("pm-v",d.net==null?"–":plain(tl(d.net))),h("span",{className:"pm-note"},"Cash minus card debt")))),
+          h("div",{className:"pm debt"},h("div",{className:"pm-h"},h("span",{style:{color:"#ff8c77",display:"flex"}},h(Ic,{n:"card",s:14})),h("span",{className:"mono-label"},$t("Card debt"))),h("div",{className:"pm-v"},P(debt))),
+          h("div",{className:"pm net"+(net<0?" neg":"")},h("div",{className:"pm-h"},h("span",{style:{color:net<0?"#ff8c77":"#dfff00",display:"flex"}},h(Ic,{n:"equal",s:14})),h("span",{className:"mono-label"},$t("Net cash position"))),h("div",{className:"pm-v"},P(net))))),
       h("section",{className:"snap"},
-        h("div",{className:"sn exp"},h("span",{className:"mono-label"},"Spent this month"),Mo("sn-v",plain(d.currentMonthExpense)),h("span",{className:"mono"},monthStr)),
-        h("div",{className:"sn bud"+(over?"":" ok")},h("span",{className:"mono-label"},"Budget left today"),Mo("sn-v",plain(d.budgetLeftToday)),h("div",{className:"bud-status"},h(Ic,{n:over?"alert":"check",s:13}),over?"Over budget":"Within budget")),
+        h("div",{className:"sn exp"},h("div",{className:"sn-top"},h("span",{className:"mono-label"},$t(cur?"Spent this month":"Spent in month")),dil?h("span",{className:"dtag",lang:"en"},"Diligence"):null),h("div",{className:"sn-v"},P(spent)),h("span",{className:"mono"},mlong(key))),
+        h("div",{className:"sn bud"+(bOk?" ok":"")},h("div",{className:"sn-top"},h("span",{className:"mono-label"},bLab),cur&&dil?h("span",{className:"dtag",lang:"en"},"Diligence"):null),h("div",{className:"sn-v"},bVal==null?"–":P(bVal)),h("div",{className:"bud-status"},h(Ic,{n:bOk?"check":"alert",s:13}),h("span",null,bStat))),
         h("div",{className:"sn cat"+(open?" open":"")},
           h("button",{type:"button",className:"cat-btn","aria-expanded":open,onClick:()=>setOpen(!open)},
-            h("span",{className:"cat-top"},h("span",{className:"mono-label"},open?"Spending by category":"Top category"),h("span",{className:"cat-chev"},h(Ic,{n:"chev",s:16}))),
-            top?h("span",{className:"cat-row"},h("span",{className:"cat-name"},h(Ic,{n:catIc(top.label),s:20}),h("span",null,top.label)),h("span",{className:"cat-amt"+P},top.display)):h("span",{className:"help"},"No expense data available.")),
-          open&&sl.length?h(Pie,{sl}):null)),
-      d.cards&&d.cards.length?h("section",null,h("div",{className:"cc-head"},h("h2",null,"Credit cards",h("span",null,"/ "+String(d.cards.length).padStart(2,"0")))),
-        d.cards.map((c,i)=>h("div",{key:c.name,className:"cc-row"},h("span",{className:"chipcard",style:{background:sw[i%3]}},h("i")),h("div",{className:"cc-main"},h("b",null,c.name),h("span",{className:"cc-sub"},(c.cutOffDate||c.cutOff)?"Cut-off "+(c.cutOffDate||c.cutOff):"No cut-off date")),h("div",{className:"cc-end"},h("span",{className:"cc-lim"},plain(c.limit)),h("span",{className:"cc-sub"},"TRY limit"))))):null,
-      h("div",{className:"ov-foot"},h("span",null,"As of: "+d.asOf),h("span",null,"TRY / Turkish lira"))):null,
-    h("div",{className:"row",style:{marginTop:14}},h("button",{className:"btn gh",onClick:()=>go("set")},"Settings")))}
+            h("span",{className:"cat-top"},h("span",{className:"mono-label"},$t(open?"Spending by category":"Top category"),dil?[" · ",h("span",{key:"d",lang:"en"},"Diligence")]:null),h("span",{className:"cat-chev"},h(Ic,{n:"chev",s:16}))),
+            top?h("span",{className:"cat-row"},h("span",{className:"cat-name"},h(Ic,{n:catIc(top.label),s:20}),h("span",null,top.label)),h("span",{className:"cat-amt"},top.display)):h("span",{className:"help"},$t("No expense data available."))),
+          open&&sl.length?h(Pie,{sl,key:(dil?"d":"r")+key}):null)),
+      h("button",{type:"button",className:"ins",onClick:()=>say($t("Insights page is coming soon"))},h("span",{className:"ins-ic"},h(Ic,{n:"spark",s:16})),h("span",{className:"ins-b"},h("span",{className:"mono-label"},$t("Insights")),h("span",{className:"ins-t"},insT)),h(Ic,{n:"arrow",s:18})),
+      d.cards&&d.cards.length?h("section",null,h("div",{className:"cc-head"},h("h2",null,$t("Credit cards"),h("span",null,"/ "+String(d.cards.length).padStart(2,"0")))),
+        d.cards.map((c,i)=>h("div",{key:c.name,className:"cc-row"},h("span",{className:"chipcard",style:{background:SWC[i%3]}},h("i")),h("div",{className:"cc-main"},h("b",null,c.name),h("span",{className:"cc-sub"},(c.cutOffDate||c.cutOff)?$t("Cut-off ")+(c.cutOffDate||c.cutOff):$t("No cut-off date"))),h("div",{className:"cc-end"},h("span",{className:"cc-lim"},mv(nfmt(c.limitN!=null?c.limitN:amountValue(c.limit)))),h("span",{className:"cc-sub"},PREF.cur+" "+$t("limit")))))):null,
+      h("div",{className:"ov-foot"},h("span",null,$t("As of: ")+new Date(d.asOf).toLocaleString(LOC())),h("span",null,$t("Currency")+": "+PREF.cur))):null)}
 
 /* ---------- ADD / EDIT ---------- */
 function Add({edit,done,L,say}){
   const ls=L.d||{};
   const init=()=>({mode:"expense",amount:"",td:today(),rl:false,rd:"",inst:1,pos:"",desc:"",pm:ls.paymentMethods?.[0]||"",c1:ls.expenseCategories?.[0]||"",a1:"",c2:"",a2:"",c3:"",a3:"",cari:"",split:false,units:"",ic:ls.investmentCategories?.[0]||"",com:"",from:ls.paymentMethods?.[0]||"",to:ls.paymentMethods?.[1]||""});
   const[f,setF]=useState(init);const s=(k,v)=>setF(p=>({...p,[k]:v}));
-  const[busy,setBusy]=useState(false),[err,setErr]=useState("");const ed=!!edit,m=f.mode;
+  const[busy,setBusy]=useState(false),[err,setErr]=useState(""),[more,setMore]=useState(false);const ed=!!edit,m=f.mode;useEffect(()=>{if(edit)setMore(!!(edit.description&&!edit.transferId&&(edit.transactionType||inferType(edit))==="expense"||edit.category2||edit.category3||(edit.recognitionDate&&edit.recognitionDate!==edit.transactionDate)))},[edit]);
   useEffect(()=>{if(L.d)setF(p=>({...p,pm:p.pm||ls.paymentMethods?.[0]||"",from:p.from||ls.paymentMethods?.[0]||"",to:p.to||ls.paymentMethods?.[1]||"",c1:p.c1||ls.expenseCategories?.[0]||"",ic:p.ic||ls.investmentCategories?.[0]||""}))},[L.d]);
   useEffect(()=>{if(!edit)return;const r=edit;setErr("");
     const b={td:toInputDate(r.transactionDate),rd:toInputDate(r.recognitionDate),rl:!!r.recognitionDate&&r.recognitionDate!==r.transactionDate};
@@ -282,17 +382,17 @@ function Add({edit,done,L,say}){
   useEffect(()=>{if(needCari)api("caris").then(r=>{setCaris(r);try{localStorage.setItem("c:caris",JSON.stringify(r))}catch(e){}}).catch(()=>{})},[needCari]);
   function mode(n){if(ed)return;setF(p=>({...p,mode:n,c2:"",c3:"",a1:"",a2:"",a3:"",split:false,inst:1,com:"",c1:n==="expense"?ls.expenseCategories?.[0]||"":n==="income"?ls.incomeCategories?.[0]||"":ls.investmentCategories?.[0]||"",ic:ls.investmentCategories?.[0]||"",from:ls.paymentMethods?.[0]||"",to:ls.paymentMethods?.[1]||""}))}
   function validate(){const amt=Number(f.amount);
-    if(!Number.isFinite(amt)||amt<=0)return"Amount must be a positive number.";
-    if(!f.td)return"Transaction date is required.";if(f.rl&&!f.rd)return"Recognition date is required.";
-    if(m==="transfer"){if(!f.from)return"From account is required.";if(!f.to)return"To account is required.";if(f.from===f.to)return"From and To accounts must be different.";return null}
-    if(m==="invest"){if(!f.pos.trim())return"Instrument is required.";if(!f.ic)return"Investment category is required.";if(!(Number(f.units)>0))return"Amount (units) must be a positive number.";if(f.com!==""&&!(Number(f.com)>=0))return"Commission must be 0 or more.";return null}
-    if(!f.pm)return"Payment method is required.";if(!f.pos.trim())return"POS / Business name is required.";
-    if(needCari&&!f.cari.trim())return"Cari is required for receivable / payable categories.";
-    if(m==="expense"&&!f.desc.trim())return"Description is required.";if(!f.c1)return"Category I is required.";
+    if(!Number.isFinite(amt)||amt<=0)return$t("Amount must be a positive number.");
+    if(!f.td)return$t("Transaction date is required.");if(f.rl&&!f.rd)return$t("Recognition date is required.");
+    if(m==="transfer"){if(!f.from)return$t("From account is required.");if(!f.to)return$t("To account is required.");if(f.from===f.to)return$t("From and To accounts must be different.");return null}
+    if(m==="invest"){if(!f.pos.trim())return$t("Instrument is required.");if(!f.ic)return$t("Investment category is required.");if(!(Number(f.units)>0))return"Amount (units) must be a positive number.";if(f.com!==""&&!(Number(f.com)>=0))return$t("Commission must be 0 or more.");return null}
+    if(!f.pm)return$t("Payment method is required.");if(!f.pos.trim())return$t("Business name is required.");
+    if(needCari&&!f.cari.trim())return$t("Cari is required for receivable / payable categories.");
+    if(m==="expense"&&!f.desc.trim())return$t("Description is required.");if(!f.c1)return$t("Category I is required.");
     if(!f.split||m==="income")return null;
     const a1=Number(f.a1||0),a2=Number(f.a2||0),a3=Number(f.a3||0);
-    if(Math.abs(a1+a2+a3-amt)>0.01)return"Split amounts must sum to total amount.";if(a1<0||a2<0||a3<0)return"Split amounts must be >= 0.";
-    if(!f.c2&&a2>0)return"Category II is required if Amount II > 0.";if(!f.c3&&a3>0)return"Category III is required if Amount III > 0.";return null}
+    if(Math.abs(a1+a2+a3-amt)>0.01)return$t("Split amounts must sum to total amount.");if(a1<0||a2<0||a3<0)return"Split amounts must be >= 0.";
+    if(!f.c2&&a2>0)return$t("Category II is required if Amount II > 0.");if(!f.c3&&a3>0)return$t("Category III is required if Amount III > 0.");return null}
   async function submit(){setErr("");const v=validate();if(v){setErr(v);return}setBusy(true);
     const rec=f.rl?f.rd:f.td,id=edit?.transactionId||"";
     try{let p,items=null;
@@ -304,75 +404,86 @@ function Add({edit,done,L,say}){
         if(m==="expense"&&!ed&&n>1){const t=Number(f.amount),s1=splitCents(sp?Number(f.a1||0):t,n),s2=splitCents(sp?Number(f.a2||0):0,n),s3=splitCents(sp?Number(f.a3||0):0,n);
           items=s1.map((_,i)=>({...p,transactionDate:addMonths(rec,i),recognitionDate:rec,amount:Math.round((s1[i]+s2[i]+s3[i])*100)/100,amount1:s1[i],amount2:p.amount2===""?"":s2[i],amount3:p.amount3===""?"":s3[i]}))}}
       if(items)await api("append_batch",{items});else if(ed)await api("edit",p);else await api("append",p);
-      say(ed?"Updated ✓":items?"Saved "+items.length+" installments ✓":"Saved ✓");
-      OVERVIEW_STALE();setF(init());if(done)done()}
+      say(ed?$t("Updated ✓"):items?$t("Saved ")+items.length+$t(" installments ✓"):$t("Saved ✓"));
+      OVERVIEW_STALE();setF(init());setMore(false);if(done)done()}
     catch(z){setErr(String(z.message||z))}finally{setBusy(false)}}
   const ex=m==="expense"||m==="income";
-  return h(Pg,{t:ed?"Edit transaction":"Add entry"},h(Er,{e:err}),
-    ed?h("div",{className:"ban"},"Editing ",h("span",{className:"mono"},edit.transactionId)):null,
-    h("div",{className:"pills"},[["expense","Expense"],["income","Income"],["transfer","Transfer"],["invest","Invest"]].map(([k,l])=>h("button",{key:k,className:"pill"+(m===k?" on":""),disabled:ed,onClick:()=>mode(k)},l))),
-    h("div",{className:"fld amt"},h("label",{className:"lb"},m==="invest"?"Cost (TL per unit)":"Amount (TRY)"),I(f.amount,v=>s("amount",v),{inputMode:"decimal",placeholder:"0"})),
-    m==="transfer"?h(React.Fragment,null,F("From account",S(f.from,v=>s("from",v),ls.paymentMethods||[])),F("To account",S(f.to,v=>s("to",v),ls.paymentMethods||[])),h("div",{className:"help"},"A transfer creates two linked Muavin transactions: one outgoing and one incoming."),F("Description",I(f.desc,v=>s("desc",v),{placeholder:"e.g. Credit card payment"}))):null,
-    m==="invest"?h(React.Fragment,null,F("Instrument",I(f.pos,v=>s("pos",v),{placeholder:"e.g. THYAO / SPY / BTC"})),F("Amount (units)",I(f.units,v=>s("units",v),{inputMode:"decimal",placeholder:"e.g. 10"})),
-      F("Category",(ls.investmentCategories||[]).length?S(f.ic,v=>{s("ic",v);s("c1",v)},ls.investmentCategories):I(f.ic,v=>{s("ic",v);s("c1",v)},{placeholder:"e.g. Stocks"})),
-      F("Category II",I(f.c2,v=>s("c2",v))),F("Category III",I(f.c3,v=>s("c3",v))),
-      !ed?F("Commission (TL, optional)",I(f.com,v=>s("com",v),{inputMode:"decimal",placeholder:"e.g. 15"})):null,
-      Number(f.amount)>0&&Number(f.units)>0?h("div",{className:"help"},"Total cost: "+Math.round(Number(f.amount)*Number(f.units)*100)/100):null):null,
-    ex?F("Payment method",S(f.pm,v=>s("pm",v),ls.paymentMethods||[])):null,
-    F("Transaction date",I(f.td,v=>s("td",v),{type:"date"})),
+  const nSet=(f.inst>1?1:0)+(f.desc.trim()?1:0)+(f.split?1:0)+(f.rl?1:0);
+  const pmOpts=(ls.paymentMethods||[]).map(n=>({v:n,t:n,k:ls.types?.payment?.[n]?$t(ls.types.payment[n]==="credit"?"Credit":"Debit"):""}));
+  const catOpts=cats.map(c=>({v:c,t:c}));
+  const instOpts=Array.from({length:12},(_,i)=>i+1).map(n=>({v:n,t:n===1?$t("No installments"):n+$t(" installments")}));
+  const tg=(label,help,on,set)=>h("div",{className:"tg"},h("div",null,h("b",null,label),h("span",{className:"help"},help)),h(Sw,{on,set,label}));
+  return h(Pg,{t:ed?$t("Edit transaction"):$t("Add entry")},h(Er,{e:err}),
+    ed?h("div",{className:"ban"},$t("Editing "),h("span",{className:"mono"},edit.transactionId)):null,
+    h("div",{className:"pills"},[["expense",$t("Expense")],["income",$t("Income")],["transfer",$t("Transfer")],["invest",$t("Invest")]].map(([k,l])=>h("button",{key:k,className:"pill"+(m===k?" on":""),disabled:ed,onClick:()=>mode(k)},l))),
+    h("label",{className:"amount",htmlFor:"amt"},h("span",{className:"lb"},m==="invest"?$t("Cost (₺ per unit)"):$t("Amount (₺)")),
+      h("span",{className:"amt-line"},h("span",{className:"amt-cur"},PREF.cur),
+        h("input",{id:"amt",inputMode:"decimal",autoComplete:"off",placeholder:"0",value:String(f.amount).replace(".",","),style:{width:Math.max(2,String(f.amount).length+.6)+"ch"},onChange:e=>{let v=e.target.value.replace(/[^0-9.,]/g,"").replace(/\./g,",");const i=v.indexOf(",");if(i>-1)v=v.slice(0,i+1)+v.slice(i+1).replace(/,/g,"").slice(0,m==="invest"?6:2);s("amount",v.replace(",","."))}})),
+      h("span",{className:"amt-rule"})),
+    m==="transfer"?h(React.Fragment,null,F($t("From account"),h(Dd,{value:f.from,onChange:v=>s("from",v),opts:ls.paymentMethods||[],cards:true})),F($t("To account"),h(Dd,{value:f.to,onChange:v=>s("to",v),opts:ls.paymentMethods||[],cards:true})),h("div",{className:"help"},$t("A transfer creates two linked Muavin transactions: one outgoing and one incoming.")),F($t("Description"),I(f.desc,v=>s("desc",v),{placeholder:$t("e.g. Credit card payment")}))):null,
+    m==="invest"?h(React.Fragment,null,F($t("Instrument"),I(f.pos,v=>s("pos",v),{placeholder:$t("e.g. THYAO / SPY / BTC")})),F($t("Amount (units)"),I(f.units,v=>s("units",v),{inputMode:"decimal",placeholder:$t("e.g. 10")})),
+      F($t("Category"),(ls.investmentCategories||[]).length?h(Dd,{value:f.ic,onChange:v=>{s("ic",v);s("c1",v)},opts:ls.investmentCategories}):I(f.ic,v=>{s("ic",v);s("c1",v)},{placeholder:$t("e.g. Stocks")})),
+      F($t("Category II"),I(f.c2,v=>s("c2",v))),F($t("Category III"),I(f.c3,v=>s("c3",v))),
+      !ed?F($t("Commission (₺, optional)"),I(f.com,v=>s("com",v),{inputMode:"decimal",placeholder:$t("e.g. 15")})):null,
+      Number(f.amount)>0&&Number(f.units)>0?h("div",{className:"help"},$t("Total cost: ")+Math.round(Number(f.amount)*Number(f.units)*100)/100):null):null,
+    ex?F($t("Payment method"),h(Dd,{value:f.pm,onChange:v=>s("pm",v),opts:pmOpts,cards:true})):null,
+    F($t("Transaction date"),I(f.td,v=>s("td",v),{type:"date"})),
     ex?h(React.Fragment,null,
-      h("div",{className:"fld"},h("label",{style:{fontSize:14,color:"var(--txt)"}},h("input",{type:"checkbox",checked:f.rl,onChange:e=>s("rl",e.target.checked)}),"Recognize later")),
-      f.rl?F("Recognition date",I(f.rd,v=>s("rd",v),{type:"date"})):null,
-      m==="expense"&&!ed?F("Installments",h("select",{value:f.inst,onChange:e=>s("inst",Number(e.target.value))},Array.from({length:12},(_,i)=>i+1).map(n=>h("option",{key:n,value:n},n===1?"No installments":n+" installments")))):null,
-      m==="expense"&&!ed&&f.inst>1?h("div",{className:"help"},"Total is split evenly. Recognition date is the same for every installment; transaction dates move forward one month at a time."):null,
-      F("POS / Business name",I(f.pos,v=>s("pos",v),{placeholder:"e.g. Migros / Pegasus"})),
-      needCari?F("Cari (counterparty)",h(React.Fragment,null,I(f.cari,v=>s("cari",v),{list:"cari-list",placeholder:"Who owes you / is owed"}),h("datalist",{id:"cari-list"},caris.map(c=>h("option",{key:c,value:c}))))):null,
-      m==="expense"?F("Description",I(f.desc,v=>s("desc",v),{placeholder:"e.g. Ticket / groceries / salary"})):null,
-      F(m==="income"?"Category":"Category I",S(f.c1,v=>s("c1",v),cats)),
-      m==="expense"?h("div",{className:"fld"},h("label",{style:{fontSize:14,color:"var(--txt)"}},h("input",{type:"checkbox",checked:f.split,onChange:e=>s("split",e.target.checked)}),"Additional categories"),h("div",{className:"help"},"Allocate the total across up to 3 categories.")):null,
-      m==="expense"&&f.split?h(React.Fragment,null,
-        F("Amount allocated to Category I",I(f.a1,v=>s("a1",v),{inputMode:"decimal"})),
-        F("Category II",S(f.c2,v=>s("c2",v),cats,1)),F("Amount allocated to Category II",I(f.a2,v=>s("a2",v),{inputMode:"decimal"})),
-        F("Category III",S(f.c3,v=>s("c3",v),cats,1)),F("Amount allocated to Category III",I(f.a3,v=>s("a3",v),{inputMode:"decimal"}))):null):null,
-    h("div",{className:"row",style:{marginTop:18}},h("button",{className:"btn",onClick:submit,disabled:busy},busy?"Saving...":ed?"Update":m==="transfer"?"Transfer":"Save")),
-    ed?h("div",{className:"row",style:{marginTop:10}},h("button",{className:"btn gh",onClick:done,disabled:busy},"Cancel")):null)}
-function OVERVIEW_STALE(){try{["ov","tx","inv","plan","dil","rp","spend","rec"].forEach(k=>localStorage.removeItem("c:"+k))}catch(e){}}
+      F($t("Business name"),I(f.pos,v=>s("pos",v),{placeholder:$t("e.g. Migros / Pegasus")})),
+      needCari?F("Cari",h(React.Fragment,null,I(f.cari,v=>s("cari",v),{list:"cari-list",placeholder:$t("Who owes you / is owed")}),h("datalist",{id:"cari-list"},caris.map(c=>h("option",{key:c,value:c}))))):null,
+      F(m==="income"?$t("Category"):$t("Category I"),h(Dd,{value:f.c1,onChange:v=>s("c1",v),opts:catOpts})),
+      h("section",{className:"more"+(more?" open":"")},
+        h("button",{type:"button",className:"more-btn","aria-expanded":more,onClick:()=>setMore(!more)},h("span",null,$t("More details")),h("span",{className:"r"},nSet?h("span",{className:"tag"},nSet+" "+$t("set")):null,h("span",{className:"chev"},h(Ic,{n:"chev",s:16})))),
+        more?h("div",{className:"more-body"},
+          m==="expense"&&!ed?F($t("Installments"),h(Dd,{value:f.inst,onChange:v=>s("inst",Number(v)),opts:instOpts})):null,
+          m==="expense"&&!ed&&f.inst>1?h("div",{className:"help"},"Total is split evenly. Recognition date is the same for every installment; transaction dates move forward one month at a time."):null,
+          m==="expense"?F($t("Description"),I(f.desc,v=>s("desc",v),{placeholder:$t("e.g. Ticket / groceries / salary")})):null,
+          m==="expense"?tg($t("Additional categories"),$t("Allocate the total across up to 3 categories."),f.split,v=>s("split",v)):null,
+          m==="expense"&&f.split?h(React.Fragment,null,
+            F($t("Amount allocated to Category I"),I(f.a1,v=>s("a1",v),{inputMode:"decimal"})),
+            F($t("Category II"),h(Dd,{value:f.c2,onChange:v=>s("c2",v),opts:catOpts,none:$t("None")})),F($t("Amount allocated to Category II"),I(f.a2,v=>s("a2",v),{inputMode:"decimal"})),
+            F($t("Category III"),h(Dd,{value:f.c3,onChange:v=>s("c3",v),opts:catOpts,none:$t("None")})),F($t("Amount allocated to Category III"),I(f.a3,v=>s("a3",v),{inputMode:"decimal"}))):null,
+          tg($t("Recognize later"),$t("Book the expense in a different month."),f.rl,v=>s("rl",v)),
+          f.rl?F($t("Recognition date"),I(f.rd,v=>s("rd",v),{type:"date"})):null):null)):null,
+    h("div",{className:"row",style:{marginTop:20}},h("button",{className:"btn",onClick:submit,disabled:busy},busy?$t("Saving..."):ed?$t("Update"):m==="transfer"?$t("Transfer"):$t("Save"))),
+    ed?h("div",{className:"row",style:{marginTop:10}},h("button",{className:"btn gh",onClick:done,disabled:busy},$t("Cancel"))):null)}
+function OVERVIEW_STALE(){try{["tx","inv","plan","dil","rp","spend","rec"].forEach(k=>localStorage.removeItem("c:"+k));Object.keys(localStorage).filter(k=>k.indexOf("c:ov")===0).forEach(k=>localStorage.removeItem(k))}catch(e){}}
 
 /* ---------- TRANSACTIONS ---------- */
 function Tx({onEdit,L,say}){
   const{d,l,e,load}=useData("tx","subledger_last");
   const[pf,setPf]=useState(""),[cf,setCf]=useState(""),[del,setDel]=useState(null),[err,setErr]=useState(""),[rt,setRt]=useState(null);
   const rows=useMemo(()=>d?groupTx(enrichRows(d.rows||[])):[],[d,L.d]);
-  async function confirm(){try{await api("delete",{transactionId:del.transactionId});setDel(null);say("Deleted ✓");OVERVIEW_STALE();load()}catch(z){setDel(null);setErr(z.message)}}
+  async function confirm(){try{await api("delete",{transactionId:del.transactionId});setDel(null);say($t("Deleted ✓"));OVERVIEW_STALE();load()}catch(z){setDel(null);setErr(z.message)}}
   const shown=rows.filter(r=>!pf||r.paymentMethod===pf||r.transferToAccount===pf).filter(r=>!cf||(r.categories||[]).some(c=>c.category===cf));
-  return h(Pg,{t:"Transactions"},h(Er,{e:e||err}),
+  return h(Pg,{t:$t("Transactions")},h(Er,{e:e||err}),
     h("div",{className:"row"},
-      h("select",{value:pf,onChange:x=>setPf(x.target.value)},h("option",{value:""},"All payment methods"),Array.from(new Set(rows.map(r=>r.paymentMethod).filter(Boolean))).sort().map(x=>h("option",{key:x,value:x},x))),
-      h("select",{value:cf,onChange:x=>setCf(x.target.value)},h("option",{value:""},"All expense types"),Array.from(new Set(rows.flatMap(r=>r.categories||[]).map(c=>c.category).filter(Boolean))).sort().map(x=>h("option",{key:x,value:x},x)))),
-    !rows.length?(l?h(Sk):h("div",{className:"help"},"No rows returned.")):null,
+      h("select",{value:pf,onChange:x=>setPf(x.target.value)},h("option",{value:""},$t("All payment methods")),Array.from(new Set(rows.map(r=>r.paymentMethod).filter(Boolean))).sort().map(x=>h("option",{key:x,value:x},x))),
+      h("select",{value:cf,onChange:x=>setCf(x.target.value)},h("option",{value:""},$t("All expense types")),Array.from(new Set(rows.flatMap(r=>r.categories||[]).map(c=>c.category).filter(Boolean))).sort().map(x=>h("option",{key:x,value:x},x)))),
+    !rows.length?(l?h(Sk):h("div",{className:"help"},$t("No rows returned."))):null,
     shown.map(r=>{const tr=r.transactionType==="transfer",up=r.transactionType==="income"||(r.transactionType!=="expense"&&Number(String(r.amount).replace(/,/g,"").replace(/[^\d.-]/g,""))>=0);
       return h("div",{key:r.transactionId,className:"card"},
-        h("div",{className:"lb"},(r.installmentCount>1?r.installmentCount+" installments · first "+r.dateRange:r.transactionDate)+(r.recognitionDate&&r.recognitionDate!==r.transactionDate?" → "+r.recognitionDate:"")),
-        h("div",{className:"v "+(tr?"":up?"up":"dn")},r.installmentCount>1||tr||r.returned>0?r.totalAmount:r.amount," • ",h("span",{style:{color:"var(--txt)",fontWeight:700,fontSize:15}},tr?r.paymentMethod+" → "+r.transferToAccount:r.paymentMethod)),
+        h("div",{className:"lb"},(r.installmentCount>1?r.installmentCount+$t(" installments · first ")+r.dateRange:r.transactionDate)+(r.recognitionDate&&r.recognitionDate!==r.transactionDate?" → "+r.recognitionDate:"")),
+        h("div",{className:"v "+(tr?"":up?"up":"dn")},fmtStr(r.installmentCount>1||tr||r.returned>0?r.totalAmount:r.amount)," • ",h("span",{style:{color:"var(--txt)",fontWeight:700,fontSize:15}},tr?r.paymentMethod+" → "+r.transferToAccount:r.paymentMethod)),
         r.posName?h("div",{style:{fontWeight:700,marginTop:4}},r.posName):null,
         r.description?h("div",{className:"help"},r.description):null,
-        r.cari?h("div",{className:"help"},"Cari: "+r.cari):null,
-        r.returned>0?h("div",{className:"help",style:{color:"var(--txt)",fontWeight:700}},"Returned "+tl(r.returned)):null,
-        h("div",null,(r.categories||[]).map(c=>h("span",{key:c.category,className:"chip"},c.category+" "+(r.installmentCount>1?tl(c.amount):c.amount)))),
+        r.cari?h("div",{className:"help"},$t("Cari: ")+r.cari):null,
+        r.returned>0?h("div",{className:"help",style:{color:"var(--txt)",fontWeight:700}},$t("Returned ")+tl(r.returned)):null,
+        h("div",null,(r.categories||[]).map(c=>h("span",{key:c.category,className:"chip"},c.category+" "+(r.installmentCount>1?tl(c.amount):fmtStr(c.amount))))),
         h("div",{className:"help mono"},r.transactionId),
         h("div",{className:"row",style:{marginTop:10,justifyContent:"flex-end"}},
-          r.transactionType==="expense"&&!tr&&r.installmentCount<=1&&r.netAmount>0.005&&r.paymentMethod!==INV_ACC&&retCats(r).length?h("button",{className:"sb",onClick:()=>setRt(r)},"Return"):null,
-          r.category1==="Komisyon"||r.installmentCount>1||r.returned>0||(tr&&!r.transferId)||r.paymentMethod===INV_ACC||r.transferToAccount===INV_ACC?null:h("button",{className:"sb",onClick:()=>onEdit(r)},"Edit"),
-          h("button",{className:"sb dl",onClick:()=>setDel(r)},"Delete")))}),
-    del?h(Sheet,{t:del.transferId?"Delete this transfer?":"Delete this transaction?",x:del.transferId?"Both sides of the transfer will be deleted.":"This transaction will be permanently removed from Muavin.",onOk:confirm,onNo:()=>setDel(null)}):null,
-    rt?h(RetDlg,{r:rt,L,onNo:()=>setRt(null),done:()=>{setRt(null);say("Return recorded ✓");OVERVIEW_STALE();load()}}):null,
+          r.transactionType==="expense"&&!tr&&r.installmentCount<=1&&r.netAmount>0.005&&r.paymentMethod!==INV_ACC&&retCats(r).length?h("button",{className:"sb",onClick:()=>setRt(r)},$t("Return")):null,
+          r.category1==="Komisyon"||r.installmentCount>1||r.returned>0||(tr&&!r.transferId)||r.paymentMethod===INV_ACC||r.transferToAccount===INV_ACC?null:h("button",{className:"sb",onClick:()=>onEdit(r)},$t("Edit")),
+          h("button",{className:"sb dl",onClick:()=>setDel(r)},$t("Delete"))))}),
+    del?h(Sheet,{t:del.transferId?$t("Delete this transfer?"):$t("Delete this transaction?"),x:del.transferId?$t("Both sides of the transfer will be deleted."):$t("This transaction will be permanently removed from Muavin."),onOk:confirm,onNo:()=>setDel(null)}):null,
+    rt?h(RetDlg,{r:rt,L,onNo:()=>setRt(null),done:()=>{setRt(null);say($t("Return recorded ✓"));OVERVIEW_STALE();load()}}):null,
     h(Rf,{l,load}))}
 
 
 /* ---------- RETURN ---------- */
 const NOT_RET=["İş Alacak","Sosyal Alacak","Diğer Alacak","Sosyal Borç","Transfer"];
 const retCats=r=>(r.categories||[]).filter(c=>NOT_RET.indexOf(c.category)===-1&&c.amount>0.005);
-const nf2=n=>new Intl.NumberFormat("tr-TR",{minimumFractionDigits:2,maximumFractionDigits:2}).format(n);
+const nf2=n=>nfmt(n);
 function RetDlg({r,L,onNo,done}){
   const cats=retCats(r),total=cats.reduce((s,c)=>s+c.amount,0);
   const[amt,setAmt]=useState(String(Math.round(total*100)/100)),[dt,setDt]=useState(today()),[pm,setPm]=useState(r.paymentMethod),[sp,setSp]=useState(null),[busy,setBusy]=useState(false),[err,setErr]=useState("");
@@ -381,29 +492,29 @@ function RetDlg({r,L,onNo,done}){
   const auto=(()=>{let left=a;return cats.map((c,i)=>{const v=i===cats.length-1?left:Math.min(Math.round(a*c.amount/total*100)/100,left);left=Math.round((left-v)*100)/100;return{category:c.category,amount:v,max:c.amount}})})();
   const rows=sp?cats.map(c=>({category:c.category,amount:Math.round((Number(sp[c.category])||0)*100)/100,max:c.amount})):auto;
   const sum=Math.round(rows.reduce((s,x)=>s+x.amount,0)*100)/100,bad=rows.some(x=>x.amount>x.max+0.005);
-  async function go(){setErr("");if(!(sum>0)){setErr("Enter an amount.");return}if(bad||sum>total+0.005){setErr("Amount is more than what is left to return.");return}
+  async function go(){setErr("");if(!(sum>0)){setErr($t("Enter an amount."));return}if(bad||sum>total+0.005){setErr($t("Amount is more than what is left to return."));return}
     setBusy(true);try{await api("return_tx",{transactionId:r.transactionId,date:dt,paymentMethod:pm,...(sp?{splits:rows.map(x=>({category:x.category,amount:x.amount}))}:{amount:a})});done()}catch(z){setErr(z.message);setBusy(false)}}
-  return h(Dlg,{t:"Return",onNo},
-    h("div",{className:"help"},(r.posName||"")+" · "+r.transactionDate+" · left to return "+nf2(total)+" ₺"),h(Er,{e:err}),
-    F("Amount (₺)",sp?h("div",{className:"v",style:{marginTop:0}},nf2(sum)):I(amt,v=>{setAmt(v)},{inputMode:"decimal",placeholder:"Amount"})),
-    h("div",{className:"row"},F("Date",h("input",{type:"date",value:dt,onChange:e=>setDt(e.target.value)})),F("Refund to",S(pm,setPm,L.d?.paymentMethods||[r.paymentMethod]))),
-    h("div",{className:"lb",style:{marginTop:14}},sp?"Split (edit each category)":"Split over categories, in proportion"),
+  return h(Dlg,{t:$t("Return"),onNo},
+    h("div",{className:"help"},(r.posName||"")+" · "+r.transactionDate+$t(" · left to return ")+nf2(total)+$t(" ₺")),h(Er,{e:err}),
+    F($t("Amount (₺)"),sp?h("div",{className:"v",style:{marginTop:0}},nf2(sum)):I(amt,v=>{setAmt(v)},{inputMode:"decimal",placeholder:$t("Amount")})),
+    h("div",{className:"row"},F($t("Date"),h("input",{type:"date",value:dt,onChange:e=>setDt(e.target.value)})),F($t("Refund to"),S(pm,setPm,L.d?.paymentMethods||[r.paymentMethod]))),
+    h("div",{className:"lb",style:{marginTop:14}},sp?"Split (edit each category)":$t("Split over categories, in proportion")),
     rows.map(x=>h("div",{key:x.category,className:"li"},h("b",{style:{flex:1}},x.category),
-      sp?h("div",{style:{width:110}},I(sp[x.category]==null?"":sp[x.category],v=>setSp(p=>({...p,[x.category]:v})),{inputMode:"decimal"})):h("b",{className:x.amount>x.max+0.005?"dn":""},"−"+nf2(x.amount)+" ₺"),
-      h("span",{className:"help",style:{margin:0,width:70,textAlign:"right"}},"of "+nf2(x.max)))),
-    h("div",{className:"row",style:{marginTop:10}},h("button",{className:"sb",onClick:()=>setSp(sp?null:Object.fromEntries(auto.map(x=>[x.category,String(x.amount)])))},sp?"Auto split":"Edit split")),
-    h("div",{className:"help"},"A return row with the same ID and the same recognition month as the purchase is added to Muavin, so the original month nets down."),
-    h("div",{className:"row",style:{marginTop:14}},h("button",{className:"btn gh",onClick:onNo},"Cancel"),h("button",{className:"btn",disabled:busy,onClick:go},busy?"Saving...":"Record return")))}
+      sp?h("div",{style:{width:110}},I(sp[x.category]==null?"":sp[x.category],v=>setSp(p=>({...p,[x.category]:v})),{inputMode:"decimal"})):h("b",{className:x.amount>x.max+0.005?"dn":""},"−"+nf2(x.amount)+$t(" ₺")),
+      h("span",{className:"help",style:{margin:0,width:70,textAlign:"right"}},$t("of ")+nf2(x.max)))),
+    h("div",{className:"row",style:{marginTop:10}},h("button",{className:"sb",onClick:()=>setSp(sp?null:Object.fromEntries(auto.map(x=>[x.category,String(x.amount)])))},sp?$t("Auto split"):$t("Edit split"))),
+    h("div",{className:"help"},$t("A return row with the same ID and the same recognition month as the purchase is added to Muavin, so the original month nets down.")),
+    h("div",{className:"row",style:{marginTop:14}},h("button",{className:"btn gh",onClick:onNo},$t("Cancel")),h("button",{className:"btn",disabled:busy,onClick:go},busy?$t("Saving..."):$t("Record return"))))}
 
 /* ---------- INVESTMENTS ---------- */
 function Inv({priv,back}){
   const{d,l,e,load}=useData("inv","investments");
-  const sl=d?[{label:"Stocks",value:d.stocksRaw,display:d.stocksPct,color:"var(--txt)"},{label:"FX & Commodities",value:d.fxRaw,display:d.fxPct,color:"#ff8c77"},{label:"Crypto",value:d.cryptoRaw,display:d.cryptoPct,color:"#bdedf2"}]:[];
+  const sl=d?[{label:$t("Stocks"),value:d.stocksRaw,display:d.stocksPct,color:"var(--txt)"},{label:$t("FX & Commodities"),value:d.fxRaw,display:d.fxPct,color:"#ff8c77"},{label:$t("Crypto"),value:d.cryptoRaw,display:d.cryptoPct,color:"#bdedf2"}]:[];
   const pc=d&&d.profitLossRaw<0?"dn":"up";
-  return h(Pg,{t:"Investments",back},h(Er,{e}),!d&&l?h(Sk):null,
+  return h(Pg,{t:$t("Investments"),back},h(Er,{e}),!d&&l?h(Sk):null,
     d?h(React.Fragment,null,h("div",{className:"card"},
-      h(Donut,{sl},h("div",{className:"lb"},"Total balance"),h("div",{className:"v "+(priv?"pr":"")},d.totalBalance),h("div",{className:pc,style:{fontSize:12,fontWeight:700,marginTop:4}},d.profitLoss),h("div",{className:pc,style:{fontSize:12,fontWeight:700}},d.profitLossPct)),
-      h(Legend,{sl})),h("div",{className:"help"},"As of: "+d.asOf)):null,
+      h(Donut,{sl},h("div",{className:"lb"},$t("Total balance")),h("div",{className:"v"},fmtStr(d.totalBalance)),h("div",{className:pc,style:{fontSize:12,fontWeight:700,marginTop:4}},fmtStr(d.profitLoss)),h("div",{className:pc,style:{fontSize:12,fontWeight:700}},d.profitLossPct)),
+      h(Legend,{sl})),h("div",{className:"help"},$t("As of: ")+d.asOf)):null,
     h(Rf,{l,load}))}
 
 /* ---------- DILIGENCE ---------- */
@@ -423,7 +534,7 @@ function SpendChart({stats,sel,onSel}){
         h("rect",{x,y:H-b,width:w,height:b,rx:4,fill:"var(--txt)"}),
         h("text",{x:x+w/2,y:H+14,fontSize:9,fontWeight:on?800:500,fill:"currentColor",textAnchor:"middle"},ms(s.k)))}),
     path.trim()?h("path",{d:path,fill:"none",stroke:"var(--rd)",strokeWidth:1.5,strokeDasharray:"4 3"}):null,
-    last.bud?h("text",{x:W,y:y(last.bud)-3,fontSize:8,fill:"var(--rd)",textAnchor:"end",fontWeight:800,style:{paintOrder:"stroke",stroke:"var(--card)",strokeWidth:3}},"Budget "+tl(last.bud)):null)}
+    last.bud?h("text",{x:W,y:y(last.bud)-3,fontSize:8,fill:"var(--rd)",textAnchor:"end",fontWeight:800,style:{paintOrder:"stroke",stroke:"var(--card)",strokeWidth:3}},$t("Budget ")+tl(last.bud)):null)}
 function Spend({nav}){
   const x=useData("spend","spend"),d=x.d,[m0,setM]=useState(null),[er,setEr]=useState(""),[view,setView]=useState("c"),[op,setOp]=useState(null),[sh,setSh]=useState({}),[q,setQ]=useState("");
   const[sid,setSid]=useState(null),[ds,setDs]=useState([]),[bc,setBc]=useState(null);
@@ -472,40 +583,40 @@ function Spend({nav}){
     return{fixed:fixed.sort((a,b)=>b.cur-a.cur),fixedN,varN:nrm-fixedN}})();
   const qn=q.trim().toLocaleLowerCase("tr"),res=qn?rows.filter(t=>[t.p,t.s,t.c,String(t.a)].join(" ").toLocaleLowerCase("tr").includes(qn)).sort((a,b)=>b.a-a.a):null;
   const delta=z=>{if(!prevK||ex[z.k])return null;
-    if(z.prev<=0.5)return z.nrm>0?{t:"new vs "+mn(prevK),good:false}:null;
+    if(z.prev<=0.5)return z.nrm>0?{t:$t("new vs ")+mn(prevK),good:false}:null;
     const pc=Math.round((z.nrm/z.prev-1)*100);return{t:(pc>=0?"▲ ":"▼ ")+Math.abs(pc)+"% vs "+mn(prevK),good:pc<=0}};
   const txRow=(t,showCat)=>{const k=ik(t),z=mk[k],isOne=z&&z.t==="one",isN=z&&z.t==="norm",it=IT[k];
     return h("div",{key:k+t.m,className:"tx"},
       h("div",{style:{flex:1,minWidth:0}},h("div",{style:{fontWeight:700}},t.p||t.c),
-        h("div",{className:"help",style:{marginTop:2}},String(t.d).padStart(2,"0")+" "+mn(t.m)+(showCat?" · "+t.c:"")+(t.s?" · "+t.s:"")+(t.n>1?" · instalment "+t.k+"/"+t.n+" of "+tl(t.tot):"")),
-        isN?h("div",{className:"help",style:{color:"var(--txt)",fontWeight:700}},"Total ÷ "+z.ms.length+" months · "+tl(t.tot/z.ms.length)+" each"):null),
+        h("div",{className:"help",style:{marginTop:2}},String(t.d).padStart(2,"0")+" "+mn(t.m)+(showCat?" · "+t.c:"")+(t.s?" · "+t.s:"")+(t.n>1?$t(" · instalment ")+t.k+"/"+t.n+$t(" of ")+tl(t.tot):"")),
+        isN?h("div",{className:"help",style:{color:"var(--txt)",fontWeight:700}},$t("Total ÷ ")+z.ms.length+$t(" months · ")+tl(t.tot/z.ms.length)+$t(" each")):null),
       h("div",{style:{textAlign:"right"}},
         h("div",{style:{fontWeight:800,textDecoration:isOne?"line-through":"none"}},tl(t.a)),
         ex[t.c]?null:h("div",{style:{display:"flex",gap:5,marginTop:6,justifyContent:"flex-end"}},
-          h("button",{className:"sb sm nz"+(isN?" on":""),onClick:()=>openSheet(it)},isN?"Spread ✓":"Normalize"),
-          h("button",{className:"sb sm"+(isOne?" am":""),onClick:()=>setMark(it,isOne?"clear":"one")},isOne?"One-off ✓":"One-off"))))};
+          h("button",{className:"sb sm nz"+(isN?" on":""),onClick:()=>openSheet(it)},isN?$t("Spread ✓"):$t("Normalize")),
+          h("button",{className:"sb sm"+(isOne?" am":""),onClick:()=>setMark(it,isOne?"clear":"one")},isOne?$t("One-off ✓"):$t("One-off")))))};
   const more=(key,total,n)=>total>n?h("div",{style:{padding:"4px 14px 14px"}},h("button",{className:"sb",style:{width:"100%",padding:11},onClick:()=>setSh(p=>({...p,[key]:n+10}))},"Show more ("+(total-n)+" left)")):h("div",{style:{height:10}});
   const panel=(z,isCat)=>{const key=m+view+z.k,n=sh[key]||10;
     return h("div",{key:"p-"+z.k,className:"card pn"},
       h("div",{style:{display:"flex",alignItems:"center",gap:10,padding:"12px 14px"}},
-        h("div",{style:{flex:1,minWidth:0}},h("b",null,z.label),h("div",{className:"help"},z.r.length+" transactions in "+ml(m)+" · reported "+tl(z.rep)+(isCat&&ex[z.k]?"":" · normalized "+tl(z.nrm)))),
+        h("div",{style:{flex:1,minWidth:0}},h("b",null,z.label),h("div",{className:"help"},z.r.length+$t(" transactions in ")+ml(m)+$t(" · reported ")+tl(z.rep)+(isCat&&ex[z.k]?"":$t(" · normalized ")+tl(z.nrm)))),
         isCat?h("div",{style:{display:"flex",gap:6,flex:"none"}},
-          ex[z.k]?null:h("button",{className:"sb nz",onClick:()=>{setBc(z.k);setDs([m])}},"Normalize all"),
-          h("button",{className:"sb"+(ex[z.k]?" on":""),onClick:()=>toggleEx(z.k)},ex[z.k]?"Excluded":"Exclude")):null),
+          ex[z.k]?null:h("button",{className:"sb nz",onClick:()=>{setBc(z.k);setDs([m])}},$t("Normalize all")),
+          h("button",{className:"sb"+(ex[z.k]?" on":""),onClick:()=>toggleEx(z.k)},ex[z.k]?$t("Excluded"):$t("Exclude"))):null),
       z.r.slice(0,n).map(t=>txRow(t,!isCat)),more(key,z.r.length,n),
       z.sin.length?h("div",{style:{borderTop:"1px solid var(--bd)"}},
-        h("div",{className:"lb",style:{padding:"10px 14px 2px"}},"Spread into "+ml(m)),
+        h("div",{className:"lb",style:{padding:"10px 14px 2px"}},$t("Spread into ")+ml(m)),
         z.sin.map(p=>h("div",{key:p.it.k,className:"tx",style:{borderTop:0}},
-          h("div",{style:{flex:1,minWidth:0}},h("div",{style:{fontWeight:700}},p.t.p||p.t.c),h("div",{className:"help",style:{marginTop:2}},"from "+ml(p.it.sm)+" · "+tl(p.it.tot)+" ÷ "+mk[p.it.k].ms.length)),
-          h("div",{style:{fontWeight:800}},tl(p.a)),h("button",{className:"sb sm nz",onClick:()=>openSheet(p.it)},"Edit"))),h("div",{style:{height:8}})):null,
-      isCat&&ex[z.k]?h("div",{className:"help",style:{padding:"0 14px 12px"}},"Category excluded, so one-off / normalize is off."):null)};
+          h("div",{style:{flex:1,minWidth:0}},h("div",{style:{fontWeight:700}},p.t.p||p.t.c),h("div",{className:"help",style:{marginTop:2}},$t("from ")+ml(p.it.sm)+" · "+tl(p.it.tot)+" ÷ "+mk[p.it.k].ms.length)),
+          h("div",{style:{fontWeight:800}},tl(p.a)),h("button",{className:"sb sm nz",onClick:()=>openSheet(p.it)},$t("Edit")))),h("div",{style:{height:8}})):null,
+      isCat&&ex[z.k]?h("div",{className:"help",style:{padding:"0 14px 12px"}},$t("Category excluded, so one-off / normalize is off.")):null)};
   const grid=(items,isCat)=>{const mxr=Math.max(1,...items.map(y=>Math.max(y.rep,y.nrm))),oi=items.findIndex(y=>y.k===op);
     return h("div",{className:"cg"},items.flatMap((z,i)=>{
       const open=op===z.k,nO=z.r.filter(t=>mk[ik(t)]&&mk[ik(t)].t==="one").length,nN=z.r.filter(t=>mk[ik(t)]&&mk[ik(t)].t==="norm").length,dl=isCat?delta(z):null,dim=isCat?ex[z.k]:z.nrm===0;
-      const sub=isCat&&ex[z.k]?"Excl. "+tl(z.rep):nO?nO+" one-off":nN?nN+" normalized":z.sin.length?"+"+z.sin.length+" spread in":z.rep!==z.nrm?"of "+tl(z.rep):z.r.length+" tx";
+      const sub=isCat&&ex[z.k]?$t("Excl. ")+tl(z.rep):nO?nO+$t(" one-off"):nN?nN+$t(" normalized"):z.sin.length?"+"+z.sin.length+$t(" spread in"):z.rep!==z.nrm?$t("of ")+tl(z.rep):z.r.length+" tx";
       const tile=h("div",{key:z.k,className:"tile"+(open?" sel":"")+(dim?" exd":""),onClick:()=>setOp(open?null:z.k)},
         h("div",{className:"nm"},z.label),
-        isCat?h("button",{className:"x"+(ex[z.k]?" on":""),title:ex[z.k]?"Include again":"Exclude category",onClick:e=>{e.stopPropagation();toggleEx(z.k)}},"⊘"):null,
+        isCat?h("button",{className:"x"+(ex[z.k]?" on":""),title:ex[z.k]?$t("Include again"):$t("Exclude category"),onClick:e=>{e.stopPropagation();toggleEx(z.k)}},"⊘"):null,
         h("div",{className:"am"},tl(z.nrm)),h("div",{className:"sub"},sub),
         dl?h("div",{className:"sub",style:{fontWeight:700,color:dl.good?"var(--gn)":"var(--rd)"}},dl.t):null,
         h("div",{className:"bar",style:{width:Math.max(4,Math.max(z.rep,z.nrm)/mxr*100)+"%",background:dim?"var(--mut)":"var(--txt)",height:4}}));
@@ -519,22 +630,22 @@ function Spend({nav}){
   let win=[];if(st){const lo=addMonth(st.sm,-12),hi=[addMonth(st.sm,12),...st.om].sort().pop();for(let k=lo;k<=hi;k=addMonth(k,1))win.push(k)}
   const rng=(a,b)=>{const o=[];for(let i=a;i<=b;i++)o.push(addMonth(st.sm,i));return o};
   const sheet=st?h("div",{className:"shw",onClick:()=>setSid(null)},h("div",{className:"sheet",style:{maxHeight:"92vh",overflow:"auto"},onClick:e=>e.stopPropagation()},
-    h("div",{style:{display:"flex",alignItems:"baseline",gap:8}},h("b",{style:{fontSize:18,flex:1}},"Normalize"),h("span",{className:"help",style:{margin:0}},ml(st.sm))),
+    h("div",{style:{display:"flex",alignItems:"baseline",gap:8}},h("b",{style:{fontSize:18,flex:1}},$t("Normalize")),h("span",{className:"help",style:{margin:0}},ml(st.sm))),
     h("div",{className:"br",style:{marginTop:6}},h("span",null,(st.t.p||st.t.c)+" · "+st.t.c),h("b",null,tl(st.tot))),
-    st.n>1?h("div",{className:"help"},"One purchase in "+st.n+" instalments ("+st.om.map(ms).join(", ")+"). The total is spread, upcoming instalments included."):null,
+    st.n>1?h("div",{className:"help"},$t("One purchase in ")+st.n+" instalments ("+st.om.map(ms).join(", ")+"). The total is spread, upcoming instalments included."):null,
     h("div",{className:"help"},"Tap the months this spend should cover. The total is split equally across them. Outlined month = when it was first recognised."),
-    h("div",{className:"pills",style:{marginTop:8}},[["Own months",()=>st.om.slice()],["Next 6",()=>rng(0,5)],["Next 12",()=>rng(0,11)],["Prev 12",()=>rng(-11,0)],["All 25",()=>rng(-12,12)],["Clear",()=>[]]].map(([l,f])=>
+    h("div",{className:"pills",style:{marginTop:8}},[[$t("Own months"),()=>st.om.slice()],[$t("Next 6"),()=>rng(0,5)],[$t("Next 12"),()=>rng(0,11)],[$t("Prev 12"),()=>rng(-11,0)],[$t("All 25"),()=>rng(-12,12)],[$t("Clear"),()=>[]]].map(([l,f])=>
       h("button",{key:l,className:"pill",onClick:()=>setDs(f())},l))),
     h("div",{className:"mg"},win.map(k=>h("button",{key:k,className:"mc"+(ds.indexOf(k)>-1?" on":"")+(k===st.sm?" src":""),onClick:()=>setDs(p=>p.indexOf(k)>-1?p.filter(z=>z!==k):p.concat([k]))},ms(k)))),
     h("div",{className:"card",style:{marginTop:12,boxShadow:"none",background:"var(--in)"}},
       ds.length===0?h("div",{className:"help",style:{margin:0}},"Nothing selected → treated as a one-off (removed from normalized spend)."):
-      same(ds,st.om)?h("div",{className:"help",style:{margin:0}},"Same months as it is recognised now → no change."):
-      h(React.Fragment,null,h("div",{className:"v",style:{marginTop:0}},tl(st.tot/ds.length)+" per month"),h("div",{className:"help"},"× "+ds.length+" months")),
+      same(ds,st.om)?h("div",{className:"help",style:{margin:0}},$t("Same months as it is recognised now → no change.")):
+      h(React.Fragment,null,h("div",{className:"v",style:{marginTop:0}},tl(st.tot/ds.length)+$t(" per month")),h("div",{className:"help"},"× "+ds.length+$t(" months"))),
       h("div",{className:"help"},"Months outside the data range are saved too; they appear in totals once those months exist.")),
     h("div",{className:"row",style:{marginTop:14}},
-      h("button",{className:"btn gh",onClick:()=>setSid(null)},"Cancel"),
-      mk[sid]&&mk[sid].t==="norm"?h("button",{className:"btn gh",onClick:()=>{setMark(st,"clear");setSid(null)}},"Remove"):null,
-      h("button",{className:"btn",onClick:saveSheet},"Save")))):null;
+      h("button",{className:"btn gh",onClick:()=>setSid(null)},$t("Cancel")),
+      mk[sid]&&mk[sid].t==="norm"?h("button",{className:"btn gh",onClick:()=>{setMark(st,"clear");setSid(null)}},$t("Remove")):null,
+      h("button",{className:"btn",onClick:saveSheet},$t("Save"))))):null;
 
 
   // Normalize all: every unmarked purchase of the open category in this month gets the chosen months
@@ -545,62 +656,62 @@ function Spend({nav}){
   const saveBatch=()=>{const ms2=ds.slice().sort(),items=bTodo.filter(it=>!same(ms2,it.om));
     if(items.length)mut({marks:d.marks.concat(items.map(it=>({i:it.t.i,c:it.t.c,t:"norm",ms:ms2})))},"spend_mark_batch",{items:items.map(it=>({id:it.t.i,category:it.t.c})),months:ms2});setBc(null)};
   const bsheet=bc?h("div",{className:"shw",onClick:()=>setBc(null)},h("div",{className:"sheet",style:{maxHeight:"92vh",overflow:"auto"},onClick:e=>e.stopPropagation()},
-    h("div",{style:{display:"flex",alignItems:"baseline",gap:8}},h("b",{style:{fontSize:18,flex:1}},"Normalize all"),h("span",{className:"help",style:{margin:0}},bc+" · "+ml(m))),
-    h("div",{className:"br",style:{marginTop:6}},h("span",null,bTodo.length+" purchase"+(bTodo.length===1?"":"s")),h("b",null,tl(bSum))),
+    h("div",{style:{display:"flex",alignItems:"baseline",gap:8}},h("b",{style:{fontSize:18,flex:1}},$t("Normalize all")),h("span",{className:"help",style:{margin:0}},bc+" · "+ml(m))),
+    h("div",{className:"br",style:{marginTop:6}},h("span",null,bTodo.length+(PREF.lang==="tr"?" alım":" purchase"+(bTodo.length===1?"":"s"))),h("b",null,tl(bSum))),
     bItems.length>bTodo.length?h("div",{className:"help"},(bItems.length-bTodo.length)+" already marked (one-off or normalized) stay as they are."):null,
-    h("div",{className:"help"},"Each purchase total is split equally across the months you tap, as if you pressed Normalize on every one."),
-    h("div",{className:"pills",style:{marginTop:8}},[["This month",()=>[m]],["Next 6",()=>brng(0,5)],["Next 12",()=>brng(0,11)],["Prev 12",()=>brng(-11,0)],["All 25",()=>brng(-12,12)],["Clear",()=>[]]].map(([l,f])=>h("button",{key:l,className:"pill",onClick:()=>setDs(f())},l))),
+    h("div",{className:"help"},$t("Each purchase total is split equally across the months you tap, as if you pressed Normalize on every one.")),
+    h("div",{className:"pills",style:{marginTop:8}},[[$t("This month"),()=>[m]],[$t("Next 6"),()=>brng(0,5)],[$t("Next 12"),()=>brng(0,11)],[$t("Prev 12"),()=>brng(-11,0)],[$t("All 25"),()=>brng(-12,12)],[$t("Clear"),()=>[]]].map(([l,f])=>h("button",{key:l,className:"pill",onClick:()=>setDs(f())},l))),
     h("div",{className:"mg"},bwin.map(k=>h("button",{key:k,className:"mc"+(ds.indexOf(k)>-1?" on":"")+(k===m?" src":""),onClick:()=>setDs(p=>p.indexOf(k)>-1?p.filter(z=>z!==k):p.concat([k]))},ms(k)))),
     h("div",{className:"card",style:{marginTop:12,boxShadow:"none",background:"var(--in)"}},
-      !ds.length?h("div",{className:"help",style:{margin:0}},"Pick at least one month."):
-      !bTodo.length?h("div",{className:"help",style:{margin:0}},"Nothing to normalize in this category."):
-      h(React.Fragment,null,h("div",{className:"v",style:{marginTop:0}},tl(bSum/ds.length)+" per month"),h("div",{className:"help"},"in total, × "+ds.length+" months"))),
-    h("div",{className:"row",style:{marginTop:14}},h("button",{className:"btn gh",onClick:()=>setBc(null)},"Cancel"),
-      h("button",{className:"btn",disabled:!ds.length||!bTodo.length,onClick:saveBatch},"Apply to "+bTodo.length)))):null;
+      !ds.length?h("div",{className:"help",style:{margin:0}},$t("Pick at least one month.")):
+      !bTodo.length?h("div",{className:"help",style:{margin:0}},$t("Nothing to normalize in this category.")):
+      h(React.Fragment,null,h("div",{className:"v",style:{marginTop:0}},tl(bSum/ds.length)+$t(" per month")),h("div",{className:"help"},$t("in total, × ")+ds.length+$t(" months")))),
+    h("div",{className:"row",style:{marginTop:14}},h("button",{className:"btn gh",onClick:()=>setBc(null)},$t("Cancel")),
+      h("button",{className:"btn",disabled:!ds.length||!bTodo.length,onClick:saveBatch},$t("Apply to ")+bTodo.length)))):null;
   return h(React.Fragment,null,nav,h(Er,{e:x.e||er}),
     h("div",{className:"g3"},
-      h("div",{className:"card"},h("div",{className:"lb"},"Reported"),h("div",{className:"v"},tl(rep)),h("div",{className:"help"},rows.length+" transactions")),
-      h("div",{className:"card",style:{background:"var(--lime)",color:"#191b18"}},h("div",{className:"lb",style:{color:"rgba(25,27,24,.7)"}},"Normalized"),h("div",{className:"v"},tl(nrm)),h("div",{className:"help",style:{color:"rgba(25,27,24,.7)"}},rep&&nrm!==rep?(nrm<rep?"−":"+")+Math.round(Math.abs(1-nrm/rep)*100)+"% vs reported":"same as reported")),
-      h("div",{className:"card"},h("div",{className:"lb"},"One-offs"),h("div",{className:"v"},tl(oneIn)),h("div",{className:"help"},nOne+" one-off · "+nNorm+" spread"))),
+      h("div",{className:"card"},h("div",{className:"lb"},$t("Reported")),h("div",{className:"v"},tl(rep)),h("div",{className:"help"},rows.length+$t(" transactions"))),
+      h("div",{className:"card",style:{background:"var(--lime)",color:"#191b18"}},h("div",{className:"lb",style:{color:"rgba(25,27,24,.7)"}},$t("Normalized")),h("div",{className:"v"},tl(nrm)),h("div",{className:"help",style:{color:"rgba(25,27,24,.7)"}},rep&&nrm!==rep?(nrm<rep?"−":"+")+Math.round(Math.abs(1-nrm/rep)*100)+$t("% vs reported"):$t("same as reported"))),
+      h("div",{className:"card"},h("div",{className:"lb"},$t("One-offs")),h("div",{className:"v"},tl(oneIn)),h("div",{className:"help"},nOne+$t(" one-off · ")+nNorm+$t(" spread")))),
     h("div",{className:"card"},
-      h("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline"}},h("div",{className:"lb"},"Budget · "+ml(m)),h("div",{className:"help",style:{margin:0}},"Set in Cashflow & capex")),
+      h("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline"}},h("div",{className:"lb"},$t("Budget · ")+ml(m)),h("div",{className:"help",style:{margin:0}},$t("Set in Cashflow & capex"))),
       B?h(React.Fragment,null,
-        h("div",{className:"v",style:{fontSize:24,color:under?"var(--gn)":"var(--rd)"}},tl(Math.abs(diff))+(under?" under budget":" over budget")),
+        h("div",{className:"v",style:{fontSize:24,color:under?"var(--gn)":"var(--rd)"}},tl(Math.abs(diff))+(under?$t(" under budget"):$t(" over budget"))),
         h("div",{style:{position:"relative",height:10,background:"var(--in)",borderRadius:5,marginTop:12}},
           h("div",{style:{width:pct+"%",height:"100%",borderRadius:5,background:under?"var(--txt)":"var(--rd)"}}),
           pace!==null?h("div",{style:{position:"absolute",left:pace/B*100+"%",top:-3,width:2,height:16,background:"var(--txt)",borderRadius:1}}):null),
-        h("div",{className:"br",style:{marginTop:12}},h("span",null,"Budget"),h("b",null,tl(B))),
-        h("div",{className:"br"},h("span",null,"Normalized spend"),h("b",null,tl(nrm)+" · "+Math.round(nrm/B*100)+"%")),
+        h("div",{className:"br",style:{marginTop:12}},h("span",null,$t("Budget")),h("b",null,tl(B))),
+        h("div",{className:"br"},h("span",null,$t("Normalized spend")),h("b",null,tl(nrm)+" · "+Math.round(nrm/B*100)+"%")),
         cur?h(React.Fragment,null,
-          h("div",{className:"br"},h("span",null,"Expected by day "+NOW.d+" (marker)"),h("b",null,tl(pace))),
-          h("div",{className:"br"},h("span",null,nrm>pace?"Above pace":"Below pace"),h("b",{className:nrm>pace?"dn":"up"},tl(Math.abs(nrm-pace)))),
+          h("div",{className:"br"},h("span",null,$t("Expected by day ")+NOW.d+" (marker)"),h("b",null,tl(pace))),
+          h("div",{className:"br"},h("span",null,nrm>pace?$t("Above pace"):$t("Below pace")),h("b",{className:nrm>pace?"dn":"up"},tl(Math.abs(nrm-pace)))),
           h("div",{className:"br"},h("span",null,"Room per remaining day ("+(NOW.dim-NOW.d+1)+" days)"),h("b",null,room>0?tl(room):"–"))):null,
-        h("div",{className:"help"},"Each month is compared with the budget that applied in that month.")):
-      h("div",{className:"help",style:{marginTop:8}},"No budget for "+ml(m)+". Add a row in Normalizasyon (columns P:R): first day of the month and the monthly amount.")),
-    h("div",{className:"card"},h("div",{className:"lb"},"Reported (light) vs normalized (solid)"+(stats.some(s=>s.bud)?" vs budget (dashed)":"")+" · tap a month"),h(SpendChart,{stats,sel:m,onSel:goM})),
-    h("div",{className:"card"},h("div",{className:"lb"},"How "+ml(m)+" gets from reported to normalized"),
-      h("div",{className:"br"},h("span",null,"Reported spend"),h("b",null,tl(rep))),
-      h("div",{className:"br"},h("span",null,"Excluded categories"),h("b",{className:exAmt?"up":""},"−"+tl(exAmt))),
-      h("div",{className:"br"},h("span",null,"One-offs"),h("b",{className:oneIn?"up":""},"−"+tl(oneIn))),
-      h("div",{className:"br"},h("span",null,"Normalized items moved out"),h("b",{className:movedOut?"up":""},"−"+tl(movedOut))),
-      h("div",{className:"br"},h("span",null,"Spread in from normalized items"),h("b",{className:spreadIn?"dn":""},"+"+tl(spreadIn))),
-      h("div",{className:"br",style:{fontSize:15}},h("b",null,"Normalized"),h("b",null,tl(nrm)))),
-    future.length?h("div",{className:"card"},h("div",{className:"lb"},"Already spread into coming months"),
+        h("div",{className:"help"},$t("Each month is compared with the budget that applied in that month."))):
+      h("div",{className:"help",style:{marginTop:8}},$t("No budget for ")+ml(m)+". Add a row in Normalizasyon (columns P:R): first day of the month and the monthly amount.")),
+    h("div",{className:"card"},h("div",{className:"lb"},"Reported (light) vs normalized (solid)"+(stats.some(s=>s.bud)?" vs budget (dashed)":"")+$t(" · tap a month")),h(SpendChart,{stats,sel:m,onSel:goM})),
+    h("div",{className:"card"},h("div",{className:"lb"},$t("How ")+ml(m)+$t(" gets from reported to normalized")),
+      h("div",{className:"br"},h("span",null,$t("Reported spend")),h("b",null,tl(rep))),
+      h("div",{className:"br"},h("span",null,$t("Excluded categories")),h("b",{className:exAmt?"up":""},"−"+tl(exAmt))),
+      h("div",{className:"br"},h("span",null,$t("One-offs")),h("b",{className:oneIn?"up":""},"−"+tl(oneIn))),
+      h("div",{className:"br"},h("span",null,$t("Normalized items moved out")),h("b",{className:movedOut?"up":""},"−"+tl(movedOut))),
+      h("div",{className:"br"},h("span",null,$t("Spread in from normalized items")),h("b",{className:spreadIn?"dn":""},"+"+tl(spreadIn))),
+      h("div",{className:"br",style:{fontSize:15}},h("b",null,$t("Normalized")),h("b",null,tl(nrm)))),
+    future.length?h("div",{className:"card"},h("div",{className:"lb"},$t("Already spread into coming months")),
       future.slice(0,6).map(f=>h("div",{key:f.k,className:"br"},h("span",null,ml(f.k)),h("b",null,"+"+tl(f.a)))),
-      future.length>6?h("div",{className:"help"},"+ "+(future.length-6)+" more months"):null):null,
-    h("div",{className:"pills",style:{marginTop:16}},[["c","Categories"],["m","Merchants"],["f","Fixed vs variable"]].map(([k,l])=>h("button",{key:k,className:"pill"+(view===k?" on":""),onClick:()=>{setView(k);setOp(null)}},l))),
-    h("div",{style:{marginTop:10}},h("input",{value:q,onChange:e=>setQ(e.target.value),placeholder:"Search "+ml(m)+": merchant, description, category or amount",style:{background:"var(--card)",boxShadow:"var(--sh)"}})),
-    !rows.length&&!parts.some(p=>p.pm===m)?h("div",{className:"card"},h("div",{className:"help"},"No expenses recognised in "+ml(m)+" yet.")):
+      future.length>6?h("div",{className:"help"},"+ "+(future.length-6)+$t(" more months")):null):null,
+    h("div",{className:"pills",style:{marginTop:16}},[["c",$t("Categories")],["m","Merchants"],["f",$t("Fixed vs variable")]].map(([k,l])=>h("button",{key:k,className:"pill"+(view===k?" on":""),onClick:()=>{setView(k);setOp(null)}},l))),
+    h("div",{style:{marginTop:10}},h("input",{value:q,onChange:e=>setQ(e.target.value),placeholder:$t("Search ")+ml(m)+$t(": merchant, description, category or amount"),style:{background:"var(--card)",boxShadow:"var(--sh)"}})),
+    !rows.length&&!parts.some(p=>p.pm===m)?h("div",{className:"card"},h("div",{className:"help"},$t("No expenses recognised in ")+ml(m)+$t(" yet."))):
     res?h("div",{className:"card",style:{padding:0,overflow:"hidden"}},
-        h("div",{className:"help",style:{padding:"12px 14px 6px",margin:0}},res.length+" result"+(res.length===1?"":"s")+" · "+tl(sum(res))),
+        h("div",{className:"help",style:{padding:"12px 14px 6px",margin:0}},res.length+(PREF.lang==="tr"?" sonuç":$t(" result")+(res.length===1?"":"s"))+" · "+tl(sum(res))),
         res.slice(0,sh["S"+m+qn]||20).map(t=>txRow(t,true)),more("S"+m+qn,res.length,sh["S"+m+qn]||20)):
     view==="c"?h(React.Fragment,null,
-        h("div",{className:"lb",style:{margin:"16px 4px 0"}},"Expense categories · tap a tile for the biggest transactions"+(prevK?" · change vs "+mn(prevK)+(cur?" (same days)":""):"")),grid(cats,true)):
+        h("div",{className:"lb",style:{margin:"16px 4px 0"}},$t("Expense categories · tap a tile for the biggest transactions")+(prevK?$t(" · change vs ")+mn(prevK)+(cur?" (same days)":""):"")),grid(cats,true)):
     view==="m"?h(React.Fragment,null,
-        h("div",{className:"lb",style:{margin:"16px 4px 0"}},"Merchants in "+ml(m)+" · across all categories"),grid(merch.slice(0,mN),false),
+        h("div",{className:"lb",style:{margin:"16px 4px 0"}},$t("Merchants in ")+ml(m)+$t(" · across all categories")),grid(merch.slice(0,mN),false),
         merch.length>mN?h("div",{style:{marginTop:10}},h("button",{className:"sb",style:{width:"100%",padding:11},onClick:()=>setSh(p=>({...p,[mKey]:mN+12}))},"Show more merchants ("+(merch.length-mN)+" left)")):null):
     !fv?h("div",{className:"card"},h("div",{className:"help"},"Fixed vs variable needs 3 months of history (this month and the 2 before it).")):h(React.Fragment,null,
-      h("div",{className:"card"},h("div",{className:"lb"},"Normalized spend in "+ml(m)),
+      h("div",{className:"card"},h("div",{className:"lb"},$t("Normalized spend in ")+ml(m)),
         h("div",{style:{display:"flex",height:12,borderRadius:6,overflow:"hidden",marginTop:10,background:"var(--in)"}},
           h("div",{style:{width:(nrm?fv.fixedN/nrm*100:0)+"%",background:"var(--txt)"}}),h("div",{style:{flex:1,background:"var(--am)",opacity:.5}})),
         h("div",{className:"br",style:{marginTop:12}},h("span",null,"● Fixed (recurring)"),h("b",null,tl(fv.fixedN)+" · "+(nrm?Math.round(fv.fixedN/nrm*100):0)+"%")),
@@ -608,9 +719,9 @@ function Spend({nav}){
         h("div",{className:"help"},"Fixed = same merchant and category in each of the last 3 months, with monthly totals within 25% of each other.")),
       h("div",{className:"card",style:{padding:0,overflow:"hidden"}},h("div",{className:"lb",style:{padding:"12px 14px 6px"}},"Recurring items ("+fv.fixed.length+")"),
         fv.fixed.map(f=>h("div",{key:f.key,className:"tx"},
-          h("div",{style:{flex:1,minWidth:0}},h("div",{style:{fontWeight:700}},f.p),h("div",{className:"help",style:{marginTop:2}},f.c+(ex[f.c]?" · excluded":"")+" · 3-month avg "+tl(f.avg))),
+          h("div",{style:{flex:1,minWidth:0}},h("div",{style:{fontWeight:700}},f.p),h("div",{className:"help",style:{marginTop:2}},f.c+(ex[f.c]?$t(" · excluded"):"")+$t(" · 3-month avg ")+tl(f.avg))),
           h("div",{style:{fontWeight:800,opacity:ex[f.c]?.5:1}},tl(f.cur)))),
-        fv.fixed.length?null:h("div",{className:"help",style:{padding:"4px 14px 14px"}},"None detected."),h("div",{style:{height:6}}))),
+        fv.fixed.length?null:h("div",{className:"help",style:{padding:"4px 14px 14px"}},$t("None detected.")),h("div",{style:{height:6}}))),
     h(Rf,{l:x.l,load:x.load}),sheet,bsheet)}
 function Plan({nav}){
   const x=useData("plan","plan"),d=x.d;
@@ -619,97 +730,112 @@ function Plan({nav}){
   const a=d&&d.assumptions,s=d&&d.summary;
   return h(React.Fragment,null,nav,h(Er,{e:x.e}),!d&&x.l?h(Sk):null,
     d?h(React.Fragment,null,
-      h("div",{className:"g2"},M("Net position today",tl(a.opening)),M("Cash − card debt",tl(a.cash)+" − "+tl(a.card)),M("Free cash flow / month",tl(s.freeCashFlow)),M("Capex committed",tl(s.capexLeft)),M("Lowest point (12 mo)",tl(s.lowest)+" · "+ml(s.lowestMonth)),M("Net position ≥ 0",s.breakEven?ml(s.breakEven):"Beyond 5 years")),
+      h("div",{className:"g2"},M($t("Net position today"),tl(a.opening)),M($t("Cash − card debt"),tl(a.cash)+" − "+tl(a.card)),M($t("Free cash flow / month"),tl(s.freeCashFlow)),M($t("Capex committed"),tl(s.capexLeft)),M("Lowest point (12 mo)",tl(s.lowest)+" · "+ml(s.lowestMonth)),M($t("Net position ≥ 0"),s.breakEven?ml(s.breakEven):$t("Beyond 5 years"))),
       h("div",{className:"card"},h("div",{className:"lb"},"Projected net position (cash − card debt), month-end"),h(ClosingBars,{rows:d.months})),
       h("div",{className:"card"},h("div",{className:"lb"},"Assumptions (leave empty to use automatic values)"),
         F("Monthly income",I(inc,setInc,{inputMode:"decimal",placeholder:"Monthly income · auto "+tl(a.incomeAuto)})),F("Monthly spend",I(sp,setSp,{inputMode:"decimal",placeholder:"Monthly spend · auto "+tl(a.spendAuto)})),
-        h("div",{className:"row",style:{marginTop:10}},h("button",{className:"btn",disabled:x.l,onClick:()=>x.act(()=>api("plan_set",{income:Number(inc||0),spend:Number(sp||0)}))},x.l?"Saving...":"Save assumptions")),
-        h("div",{className:"help"},"Also included: receivables at their due dates, payables due, and every capex instalment below.")),
-      h("div",{className:"card"},h("div",{className:"lb"},"Planned capex"),!d.items.length?h("div",{className:"help"},"Nothing planned yet."):null,
-        d.items.map(it=>h("div",{key:it.id,className:"li"},h("div",{style:{flex:1}},h("b",null,it.name),h("div",{className:"help",style:{marginTop:2}},it.n+" × "+tl(it.pmt)+" from "+ml(it.date.slice(0,7))+(it.interest>1?" · interest "+tl(it.interest):""))),h("b",null,tl(it.total)),h("button",{className:"sb dl",disabled:x.l,onClick:()=>x.act(()=>api("capex_delete",{id:it.id}))},"Delete"))),
-        F("Item",I(nm,setNm,{placeholder:"Item (e.g. Phone)"})),F("Price (₺)",I(pr,setPr,{inputMode:"decimal",placeholder:"Price (₺)"})),F("First payment date",I(dt,setDt,{type:"date"})),
-        F("Instalments",h("select",{value:n,onChange:e=>setN(Number(e.target.value))},[1,2,3,4,6,9,12,18,24,36].map(v=>h("option",{key:v,value:v},v===1?"Single payment":v+" instalments")))),
+        h("div",{className:"row",style:{marginTop:10}},h("button",{className:"btn",disabled:x.l,onClick:()=>x.act(()=>api("plan_set",{income:Number(inc||0),spend:Number(sp||0)}))},x.l?$t("Saving..."):$t("Save assumptions"))),
+        h("div",{className:"help"},$t("Also included: receivables at their due dates, payables due, and every capex instalment below."))),
+      h("div",{className:"card"},h("div",{className:"lb"},$t("Planned capex")),!d.items.length?h("div",{className:"help"},$t("Nothing planned yet.")):null,
+        d.items.map(it=>h("div",{key:it.id,className:"li"},h("div",{style:{flex:1}},h("b",null,it.name),h("div",{className:"help",style:{marginTop:2}},it.n+" × "+tl(it.pmt)+$t(" from ")+ml(it.date.slice(0,7))+(it.interest>1?$t(" · interest ")+tl(it.interest):""))),h("b",null,tl(it.total)),h("button",{className:"sb dl",disabled:x.l,onClick:()=>x.act(()=>api("capex_delete",{id:it.id}))},$t("Delete")))),
+        F($t("Item"),I(nm,setNm,{placeholder:$t("Item (e.g. Phone)")})),F($t("Price (₺)"),I(pr,setPr,{inputMode:"decimal",placeholder:$t("Price (₺)")})),F($t("First payment date"),I(dt,setDt,{type:"date"})),
+        F($t("Instalments"),h("select",{value:n,onChange:e=>setN(Number(e.target.value))},[1,2,3,4,6,9,12,18,24,36].map(v=>h("option",{key:v,value:v},v===1?$t("Single payment"):v+$t(" instalments"))))),
         n>1?F("Monthly interest %",I(rt,setRt,{inputMode:"decimal",placeholder:"Monthly interest % (optional)"})):null,
-        h("div",{className:"row",style:{marginTop:10}},h("button",{className:"btn",disabled:x.l,onClick:()=>x.act(async()=>{const r=await api("capex_save",{name:nm,price:Number(pr),date:dt,n,rate:Number(rt||0)});setNm("");setPr("");setN(1);setRt("");return r})},"Add to plan"))),
+        h("div",{className:"row",style:{marginTop:10}},h("button",{className:"btn",disabled:x.l,onClick:()=>x.act(async()=>{const r=await api("capex_save",{name:nm,price:Number(pr),date:dt,n,rate:Number(rt||0)});setNm("");setPr("");setN(1);setRt("");return r})},$t("Add to plan")))),
       h("div",{className:"card",style:{padding:"14px 0"}},h("div",{className:"lb",style:{padding:"0 16px 8px"}},"Monthly projection"),
-        h("div",{style:{overflowX:"auto"}},h("table",{className:"tbl"},h("thead",null,h("tr",null,["Month","In","Out","Capex","Closing"].map(c=>h("th",{key:c,className:"lb"},c)))),
+        h("div",{style:{overflowX:"auto"}},h("table",{className:"tbl"},h("thead",null,h("tr",null,["Month","In",$t("Out"),$t("Capex"),$t("Closing")].map(c=>h("th",{key:c,className:"lb"},c)))),
           h("tbody",null,d.months.map(r=>h("tr",{key:r.m},h("td",null,ml(r.m)),h("td",null,tl(r.income+r.collections)),h("td",null,tl(r.spend+r.payables)),h("td",null,r.capex?tl(r.capex):"-"),h("td",{className:r.closing<0?"dn":"up"},tl(r.closing)))))))) ):null,
     h(Rf,{l:x.l,load:x.load}))}
 function Recv({kind,nav,L,say}){
   const x=useData("rp","receivables"),ar=kind==="ar",d=x.d&&x.d[kind],mx=d?Math.max(1,...d.buckets.map(b=>b.amount)):1;
   const[op,setOp]=useState({}),[dlg,setDlg]=useState(null),[f,setF]=useState({}),[err,setErr]=useState(""),[busy,setBusy]=useState(false);
   const s=(k,v)=>setF(p=>({...p,[k]:v}));
-  const accts=(L.d?.paymentMethods||[]).filter(p=>p!==INV_ACC),verb=ar?"Collect":"Pay";
+  const accts=(L.d?.paymentMethods||[]).filter(p=>p!==INV_ACC),verb=ar?$t("Collect"):$t("Pay");
   function open(g){setErr("");setF({amt:String(Math.round(g.outstanding*100)/100),date:today(),acc:accts[0]||"",desc:""});setDlg(g)}
   async function save(){setErr("");const a=Number(f.amt);
-    if(!(a>0)){setErr("Amount must be a positive number.");return}
+    if(!(a>0)){setErr($t("Amount must be a positive number."));return}
     if(a>dlg.outstanding+0.01){setErr("Amount exceeds outstanding ("+tl(dlg.outstanding)+").");return}
-    if(!f.acc){setErr("Account is required.");return}
+    if(!f.acc){setErr($t("Account is required."));return}
     setBusy(true);
     try{const r=await api("settle",{kind,category:dlg.category,cari:dlg.cari,amount:a,date:f.date,account:f.acc,description:f.desc});
-      OVERVIEW_STALE();x.setD(r);say(ar?"Collected ✓":"Paid ✓");setDlg(null)}
+      OVERVIEW_STALE();x.setD(r);say(ar?$t("Collected ✓"):$t("Paid ✓"));setDlg(null)}
     catch(z){setErr(z.message)}finally{setBusy(false)}}
   const gcard=g=>{const k=g.category+"|"+g.cari;
     return h("div",{key:k,className:"card"},
       h("div",{style:{display:"flex",justifyContent:"space-between",gap:10,cursor:"pointer"},onClick:()=>setOp(p=>({...p,[k]:!p[k]}))},
-        h("div",null,h("b",{style:{fontSize:17}},g.label),h("div",{className:"help",style:{marginTop:2}},(g.cari?g.category+" · ":"")+g.count+" open item"+(g.count===1?"":"s")+(op[k]?" ▴":" ▾"))),
-        h("div",{style:{textAlign:"right"}},h("div",{className:"v"},tl(g.outstanding)),g.overdue>0?h("span",{className:"badge",style:{background:"rgba(225,29,72,.14)",color:"var(--rd)"}},"Overdue "+tl(g.overdue)):null)),
-      g.credit>0?h("div",{className:"help"},"Unapplied credit: "+tl(g.credit)):null,
+        h("div",null,h("b",{style:{fontSize:17}},g.label),h("div",{className:"help",style:{marginTop:2}},(g.cari?g.category+" · ":"")+g.count+(PREF.lang==="tr"?" açık kalem":$t(" open item")+(g.count===1?"":"s"))+(op[k]?" ▴":" ▾"))),
+        h("div",{style:{textAlign:"right"}},h("div",{className:"v"},tl(g.outstanding)),g.overdue>0?h("span",{className:"badge",style:{background:"rgba(225,29,72,.14)",color:"var(--rd)"}},$t("Overdue ")+tl(g.overdue)):null)),
+      g.credit>0?h("div",{className:"help"},$t("Unapplied credit: ")+tl(g.credit)):null,
       op[k]?g.items.map((i,n)=>h("div",{key:n,className:"li"},
         h("div",{style:{flex:1}},h("b",null,i.pos||i.category),h("div",{className:"help",style:{marginTop:2}},i.date+" → "+i.due+(i.desc?" · "+i.desc:""))),
-        h("div",{style:{textAlign:"right"}},h("b",null,tl(i.open)),i.open<i.amount-0.005?h("div",{className:"help",style:{margin:0}},"of "+tl(i.amount)):null,
-          h("div",null,h("span",{className:"badge",style:i.overdueDays>0?{background:"rgba(225,29,72,.14)",color:"var(--rd)"}:{background:"rgba(22,163,74,.14)",color:"var(--gn)"}},i.overdueDays>0?"Overdue "+i.overdueDays+"d":"Due in "+(-i.overdueDays)+"d"))))):null,
+        h("div",{style:{textAlign:"right"}},h("b",null,tl(i.open)),i.open<i.amount-0.005?h("div",{className:"help",style:{margin:0}},$t("of ")+tl(i.amount)):null,
+          h("div",null,h("span",{className:"badge",style:i.overdueDays>0?{background:"rgba(225,29,72,.14)",color:"var(--rd)"}:{background:"rgba(22,163,74,.14)",color:"var(--gn)"}},i.overdueDays>0?$t("Overdue ")+i.overdueDays+"d":$t("Due in ")+(-i.overdueDays)+"d"))))):null,
       g.outstanding>0.005?h("div",{className:"row",style:{marginTop:10,justifyContent:"flex-end"}},h("button",{className:"sb",onClick:()=>open(g)},verb)):null)};
   const sl=d?d.groups.filter(g=>!g.cari):[],cl=d?d.groups.filter(g=>g.cari):[];
   return h(React.Fragment,null,nav,h(Er,{e:x.e}),!d&&x.l?h(Sk):null,
     d?h(React.Fragment,null,
-      h("div",{className:"g2"},M("Outstanding",tl(d.outstanding)),M("Overdue",tl(d.overdue)),M(ar?"Receivable days":"Payable days",Math.round(d.days)+" days"),M(ar?"Avg. collection time":"Avg. payment time",d.avgCollect===null?"-":Math.round(d.avgCollect)+" days")),
-      h("div",{className:"card"},h("div",{className:"lb"},"Aging (days since transaction)"),d.buckets.map(b=>h("div",{key:b.label,style:{marginTop:12}},h("div",{className:"row",style:{justifyContent:"space-between",fontSize:13}},h("span",null,b.label),h("b",{style:{flex:"none"}},tl(b.amount))),h("div",{className:"bar",style:{width:b.amount/mx*100+"%",background:b.label==="90+ days"?"var(--rd)":"var(--txt)"}})))),
-      sl.length?h("div",{className:"lb",style:{marginTop:18}},"Single line"):null,sl.map(gcard),
-      cl.length?h("div",{className:"lb",style:{marginTop:18}},"By cari"):null,cl.map(gcard),
-      !d.groups.length?h("div",{className:"help",style:{marginTop:12}},"Nothing outstanding."):null,
-      h("div",{className:"help"},"Due rules: "+x.d.rules)):null,
+      h("div",{className:"g2"},M($t("Outstanding"),tl(d.outstanding)),M($t("Overdue"),tl(d.overdue)),M(ar?$t("Receivable days"):$t("Payable days"),Math.round(d.days)+$t(" days")),M(ar?$t("Avg. collection time"):$t("Avg. payment time"),d.avgCollect===null?"-":Math.round(d.avgCollect)+$t(" days"))),
+      h("div",{className:"card"},h("div",{className:"lb"},$t("Aging (days since transaction)")),d.buckets.map(b=>h("div",{key:b.label,style:{marginTop:12}},h("div",{className:"row",style:{justifyContent:"space-between",fontSize:13}},h("span",null,b.label),h("b",{style:{flex:"none"}},tl(b.amount))),h("div",{className:"bar",style:{width:b.amount/mx*100+"%",background:b.label==="90+ days"?"var(--rd)":"var(--txt)"}})))),
+      sl.length?h("div",{className:"lb",style:{marginTop:18}},$t("Single line")):null,sl.map(gcard),
+      cl.length?h("div",{className:"lb",style:{marginTop:18}},$t("By cari")):null,cl.map(gcard),
+      !d.groups.length?h("div",{className:"help",style:{marginTop:12}},$t("Nothing outstanding.")):null,
+      h("div",{className:"help"},$t("Due rules: ")+x.d.rules)):null,
     h(Rf,{l:x.l,load:x.load}),
     dlg?h(Dlg,{t:verb+" · "+dlg.label,onNo:()=>setDlg(null)},
       h(Er,{e:err}),
-      h("div",{className:"help"},"Outstanding: "+tl(dlg.outstanding)+" · matched against the oldest open items first"),
-      F("Amount (₺)",h("div",{className:"row"},I(f.amt,v=>s("amt",v),{inputMode:"decimal"}),h("button",{className:"sb",style:{flex:"none"},onClick:()=>s("amt",String(Math.round(dlg.outstanding*100)/100))},"Full"))),
-      F(ar?"Received into":"Paid from",S(f.acc,v=>s("acc",v),accts)),
-      F("Date",I(f.date,v=>s("date",v),{type:"date"})),
-      F("Note (optional)",I(f.desc,v=>s("desc",v),{placeholder:ar?"Collection":"Payment"})),
-      h("div",{className:"row",style:{marginTop:16}},h("button",{className:"btn",disabled:busy,onClick:save},busy?"Saving...":verb),h("button",{className:"btn gh",onClick:()=>setDlg(null)},"Cancel"))):null)}
+      h("div",{className:"help"},$t("Outstanding: ")+tl(dlg.outstanding)+$t(" · matched against the oldest open items first")),
+      F($t("Amount (₺)"),h("div",{className:"row"},I(f.amt,v=>s("amt",v),{inputMode:"decimal"}),h("button",{className:"sb",style:{flex:"none"},onClick:()=>s("amt",String(Math.round(dlg.outstanding*100)/100))},$t("Full")))),
+      F(ar?$t("Received into"):$t("Paid from"),S(f.acc,v=>s("acc",v),accts)),
+      F($t("Date"),I(f.date,v=>s("date",v),{type:"date"})),
+      F("Note (optional)",I(f.desc,v=>s("desc",v),{placeholder:ar?$t("Collection"):$t("Payment")})),
+      h("div",{className:"row",style:{marginTop:16}},h("button",{className:"btn",disabled:busy,onClick:save},busy?$t("Saving..."):verb),h("button",{className:"btn gh",onClick:()=>setDlg(null)},$t("Cancel")))):null)}
 function Dil({back,L,say}){
   const[v,setV]=useState("spend");
-  const nav=h("div",{className:"pills"},[["spend","Spend & budget"],["plan","Cashflow & capex"],["ar","Receivables"],["ap","Payables"]].map(([k,l])=>h("button",{key:k,className:"pill"+(v===k?" on":""),onClick:()=>setV(k)},l)));
-  return h(Pg,{t:"Diligence"},v==="spend"?h(Spend,{nav}):v==="plan"?h(Plan,{nav}):h(Recv,{key:v,kind:v,nav,L,say}))}
+  const nav=h("div",{className:"pills"},[["spend",$t("Spend & budget")],["plan",$t("Cashflow & capex")],["ar",$t("Receivables")],["ap",$t("Payables")]].map(([k,l])=>h("button",{key:k,className:"pill"+(v===k?" on":""),onClick:()=>setV(k)},l)));
+  return h(Pg,{t:$t("Diligence")},v==="spend"?h(Spend,{nav}):v==="plan"?h(Plan,{nav}):h(Recv,{key:v,kind:v,nav,L,say}))}
 
 /* ---------- REPORTS ---------- */
 const STM=[{key:"is",label:"IS",title:"Income statement"},{key:"bs",label:"BS",title:"Balance sheet"},{key:"onca",label:"ONCA",title:"Other non-current assets"}];
-function StTable({rows,hz}){
+function StTable({rows,hz,mk}){
+  const[op,setOp]=useState({});
   const fl=c=>String(c).trim()!=="",hi=Math.max(0,rows.findIndex(r=>r.filter(fl).length>=2)),head=rows[hi]||[],body=rows.slice(hi+1);
   const cols=head.map((_,i)=>i).filter(i=>String(head[i]).trim()!=="Mapping"&&(!hz||i===0||body.some(r=>/[1-9]/.test(String(r[i])))));
   const tot=l=>fl(l)&&l===String(l).toUpperCase()&&l!==String(l).toLowerCase();
-  return h("div",{style:{overflowX:"auto"}},h("table",{className:"tbl"},h("thead",null,h("tr",null,cols.map(i=>h("th",{key:i,className:"lb"},head[i])))),h("tbody",null,body.map((r,n)=>h("tr",{key:n,className:tot(r[0])?"tot":""},cols.map(i=>h("td",{key:i},r[i])))))))}
+  const isM=i=>!!(mk&&mk[i]),fixed=cols.filter(i=>!isM(i)),mcols=cols.filter(isM);
+  const cell=(c,i)=>{const s=String(c).trim();if(i===0||!/^-?[\d.,]+$/.test(s))return c;return PRIV?MASK:nfmt(trNum(s))};
+  const tbl=show=>h("div",{style:{overflowX:"auto"}},h("table",{className:"tbl"},h("thead",null,h("tr",null,show.map(i=>h("th",{key:i,className:"lb"},isM(i)?mlong(mk[i]):head[i])))),h("tbody",null,body.map((r,n)=>h("tr",{key:n,className:tot(r[0])?"tot":""},show.map(i=>h("td",{key:i},cell(r[i],i))))))));
+  if(!mcols.length)return tbl(cols);
+  const ck=today().slice(0,7),past=mcols.filter(i=>mk[i]<=ck).sort((a,b)=>mk[b]<mk[a]?-1:1),fut=mcols.filter(i=>mk[i]>ck).sort((a,b)=>mk[a]<mk[b]?-1:1);
+  const main=past.length?past[0]:fut[0],others=past.slice(past.length?1:0).concat(past.length?fut:fut.slice(1));
+  return h(React.Fragment,null,tbl(fixed.concat([main])),
+    others.length?h("div",{style:{marginTop:10}},h("div",{className:"lb",style:{padding:"0 16px 6px"}},$t("Other months")),others.map(i=>h("div",{key:i,className:"acc"+(op[i]?" open":"")},
+      h("button",{type:"button",className:"acc-b","aria-expanded":!!op[i],onClick:()=>setOp(p=>({...p,[i]:!p[i]}))},h("span",null,mlong(mk[i])),h("span",{className:"chev"},h(Ic,{n:"chev",s:16}))),
+      op[i]?tbl(fixed.concat([i])):null))):null)}
 function Reports({back}){
   const[k,setK]=useState("is"),x=useData("st-"+k,"statement",{name:k}),cfg=STM.find(s=>s.key===k);
-  return h(Pg,{t:"Reports",back},h("div",{className:"pills"},STM.map(s=>h("button",{key:s.key,className:"pill"+(k===s.key?" on":""),onClick:()=>setK(s.key)},s.label))),h(Er,{e:x.e}),
-    h("div",{className:"card",style:{padding:"14px 0"}},h("div",{className:"lb",style:{padding:"0 16px 8px"}},cfg.title),!x.d&&x.l?h("div",{className:"help",style:{padding:"0 16px"}},"Loading..."):null,x.d?h(StTable,{rows:x.d.rows,hz:k!=="onca"}):null),
+  return h(Pg,{t:$t("Reports"),back},h("div",{className:"pills"},STM.map(s=>h("button",{key:s.key,className:"pill"+(k===s.key?" on":""),onClick:()=>setK(s.key)},$t(s.label)))),h(Er,{e:x.e}),
+    h("div",{className:"card",style:{padding:"14px 0"}},h("div",{className:"lb",style:{padding:"0 16px 8px"}},$t(cfg.title)),!x.d&&x.l?h("div",{className:"help",style:{padding:"0 16px"}},$t("Loading...")):null,x.d?h(StTable,{key:k,rows:x.d.rows,hz:k!=="onca",mk:x.d.mk}):null),
     h(Rf,{l:x.l,load:x.load}))}
 
 /* ---------- SETTINGS ---------- */
 const KINDS=[{key:"payment",label:"Payment methods",names:"paymentMethods",ty:true},{key:"expense",label:"Expense categories",names:"expenseCategories",ty:true},{key:"income",label:"Income categories",names:"incomeCategories",ty:true},{key:"investment",label:"Invest categories",names:"investmentCategories",ty:false}];
-function Settings({back,L,say}){
+function Settings({back,L,say,setPref}){
   const[kind,setKind]=useState("payment"),[name,setName]=useState(""),[type,setType]=useState("Debit"),[err,setErr]=useState(""),[busy,setBusy]=useState(false),[cf,setCf]=useState(null);
   const cfg=KINDS.find(k=>k.key===kind),items=L.d?.[cfg.names]||[];
-  async function add(){setErr("");if(!name.trim()){setErr("Name is required.");return}setBusy(true);try{L.setD(await api("list_add",{kind,name:name.trim(),type}));setName("");say("Added ✓")}catch(z){setErr(z.message)}finally{setBusy(false)}}
-  async function rm(){setBusy(true);try{L.setD(await api("list_delete",{kind,name:cf}));setCf(null);say("Deleted ✓")}catch(z){setErr(z.message);setCf(null)}finally{setBusy(false)}}
-  return h(Pg,{t:"Settings",back},h(Er,{e:err}),
-    h("div",{className:"pills"},KINDS.map(k=>h("button",{key:k.key,className:"pill"+(kind===k.key?" on":""),onClick:()=>{setKind(k.key);setCf(null);setErr("")}},k.label))),
-    h("div",{className:"card"},h("div",{className:"lb"},"Add to "+cfg.label.toLowerCase()),F("Name",I(name,setName,{placeholder:"Name"})),cfg.ty?F("Type",S(type,setType,["Debit","Credit"])):null,
-      h("div",{className:"row",style:{marginTop:12}},h("button",{className:"btn",onClick:add,disabled:busy},busy?"Working...":"Add"))),
-    h("div",{className:"card"},h("div",{className:"lb"},cfg.label+" ("+items.length+")"),!items.length?h("div",{className:"help"},L.d?"No items.":"Loading..."):null,
-      items.map(it=>h("div",{key:it,className:"li"},h("b",{style:{flex:1}},it),cfg.ty?h("span",{className:"help",style:{margin:0}},(L.d?.types?.[kind]?.[it]||"")==="credit"?"Credit":"Debit"):null,h("button",{className:"sb dl",onClick:()=>setCf(it)},"Delete")))),
-    cf?h(Sheet,{t:'Delete "'+cf+'"?',x:"It is removed from the Siniflandirma sheet. Existing Muavin rows keep their text.",onOk:rm,onNo:()=>setCf(null)}):null)}
+  async function add(){setErr("");if(!name.trim()){setErr($t("Name is required."));return}setBusy(true);try{L.setD(await api("list_add",{kind,name:name.trim(),type}));setName("");say($t("Added ✓"))}catch(z){setErr(z.message)}finally{setBusy(false)}}
+  async function rm(){setBusy(true);try{L.setD(await api("list_delete",{kind,name:cf}));setCf(null);say($t("Deleted ✓"))}catch(z){setErr(z.message);setCf(null)}finally{setBusy(false)}}
+  return h(Pg,{t:$t("Settings"),back},h(Er,{e:err}),
+    h("div",{className:"card"},h("div",{className:"lb"},$t("Customize")),
+      F($t("Language"),h("div",{className:"pills"},[["en","English"],["tr","Türkçe"]].map(([k,l])=>h("button",{key:k,className:"pill"+(PREF.lang===k?" on":""),onClick:()=>setPref({lang:k})},l)))),
+      F($t("Decimal digits"),h("div",{className:"pills"},[0,1,2,3,4].map(n=>h("button",{key:n,className:"pill"+(PREF.dec===n?" on":""),onClick:()=>setPref({dec:n})},String(n))))),h("div",{className:"help"},$t("Digits shown after the comma.")),
+      F($t("Currency symbol"),h(React.Fragment,null,h("div",{className:"pills",style:{marginBottom:8}},["₺","$","€","£"].map(c=>h("button",{key:c,className:"pill"+(PREF.cur===c?" on":""),onClick:()=>setPref({cur:c})},c))),I(PREF.cur,v=>setPref({cur:v.trim().slice(0,4)}),{maxLength:4,placeholder:"₺"}))),h("div",{className:"help"},$t("Shown next to every amount.")),
+      h("div",{className:"br",style:{marginTop:12}},h("span",null,$t("Preview")),h("b",null,nfmt(1234.5678)+" "+PREF.cur))),
+    h("div",{className:"pills"},KINDS.map(k=>h("button",{key:k.key,className:"pill"+(kind===k.key?" on":""),onClick:()=>{setKind(k.key);setCf(null);setErr("")}},$t(k.label)))),
+    h("div",{className:"card"},h("div",{className:"lb"},$t("Add to ")+$t(cfg.label).toLowerCase()),F($t("Name"),I(name,setName,{placeholder:$t("Name")})),cfg.ty?F($t("Type"),h(Dd,{value:type,onChange:setType,opts:[{v:"Debit",t:$t("Debit")},{v:"Credit",t:$t("Credit")}]})):null,
+      h("div",{className:"row",style:{marginTop:12}},h("button",{className:"btn",onClick:add,disabled:busy},busy?$t("Working..."):$t("Add")))),
+    h("div",{className:"card"},h("div",{className:"lb"},$t(cfg.label)+" ("+items.length+")"),!items.length?h("div",{className:"help"},L.d?$t("No items."):$t("Loading...")):null,
+      items.map(it=>h("div",{key:it,className:"li"},h("b",{style:{flex:1}},it),cfg.ty?h("span",{className:"help",style:{margin:0}},(L.d?.types?.[kind]?.[it]||"")==="credit"?$t("Credit"):$t("Debit")):null,h("button",{className:"sb dl",onClick:()=>setCf(it)},$t("Delete"))))),
+    cf?h(Sheet,{t:$t("Delete")+' "'+cf+'"?',x:$t("It is removed from the Siniflandirma sheet. Existing Muavin rows keep their text."),onOk:rm,onNo:()=>setCf(null)}):null)}
 
 
 /* ---------- RECONCILIATION ---------- */
@@ -719,20 +845,20 @@ function Recon({back,L,say}){
   const cur=accs.find(a=>a.name===ac)||accs[0],name=cur?cur.name:"";
   const tv=tg===""?null:Number(tg),ok=tv!==null&&Number.isFinite(tv),diff=ok&&cur?Math.round((tv-cur.balance)*100)/100:0;
   const isExp=cur?(cur.type==="credit"?diff>0:diff<0):false;
-  async function go(){setBusy(true);setErr("");try{const r=await api("reconcile_set",{account:name,target:tv});x.setD({accounts:r.accounts});setCf(false);setTg("");OVERVIEW_STALE();try{localStorage.removeItem("c:tx")}catch(z){};say("Reconciled ✓")}catch(z){setErr(z.message);setCf(false)}finally{setBusy(false)}}
-  return h(Pg,{t:"Reconciliation",back},h(Er,{e:x.e||err}),!x.d&&x.l?h(Sk):null,
+  async function go(){setBusy(true);setErr("");try{const r=await api("reconcile_set",{account:name,target:tv});x.setD({accounts:r.accounts});setCf(false);setTg("");OVERVIEW_STALE();try{localStorage.removeItem("c:tx")}catch(z){};say($t("Reconciled ✓"))}catch(z){setErr(z.message);setCf(false)}finally{setBusy(false)}}
+  return h(Pg,{t:$t("Reconciliation"),back},h(Er,{e:x.e||err}),!x.d&&x.l?h(Sk):null,
     x.d?h(React.Fragment,null,
-      h("div",{className:"card"},F("Account",S(name,setAc,accs.map(a=>a.name))),
-        cur?h("div",{className:"br",style:{marginTop:12}},h("span",null,cur.type==="credit"?"Card debt in Muavin (up to today)":"Balance in Muavin (up to today)"),h("b",null,nf2(cur.balance)+" ₺")):null,
-        F(cur&&cur.type==="credit"?"Card debt it should be (₺)":"Balance it should be (₺)",I(tg,setTg,{inputMode:"decimal",placeholder:"Amount"}))),
+      h("div",{className:"card"},F($t("Account"),S(name,setAc,accs.map(a=>a.name))),
+        cur?h("div",{className:"br",style:{marginTop:12}},h("span",null,cur.type==="credit"?$t("Card debt in Muavin (up to today)"):$t("Balance in Muavin (up to today)")),h("b",null,nf2(cur.balance)+$t(" ₺"))):null,
+        F(cur&&cur.type==="credit"?$t("Card debt it should be (₺)"):$t("Balance it should be (₺)"),I(tg,setTg,{inputMode:"decimal",placeholder:$t("Amount")}))),
       ok&&cur?h("div",{className:"card"},
-        diff===0?h("div",{className:"help",style:{margin:0}},"Already matches, nothing to add."):h(React.Fragment,null,
-          h("div",{className:"lb"},"Entry to add"),
-          h("div",{className:"v "+(diff>0?"up":"dn")},(diff>0?"+":"−")+nf2(Math.abs(diff))+" ₺ on "+name),
-          h("div",{className:"help"},"Recorded today as "+(isExp?"an expense":"an income")+" in “Diğer” with POS “Reconciliation”."+(isExp?" It counts in Spend; mark it One-off there if you do not want it in normalized spend.":"")),
-          h("div",{className:"row",style:{marginTop:12}},h("button",{className:"btn",onClick:()=>setCf(true)},"Reconcile")))):null,
+        diff===0?h("div",{className:"help",style:{margin:0}},$t("Already matches, nothing to add.")):h(React.Fragment,null,
+          h("div",{className:"lb"},$t("Entry to add")),
+          h("div",{className:"v "+(diff>0?"up":"dn")},(diff>0?"+":"−")+nf2(Math.abs(diff))+$t(" ₺ on ")+name),
+          h("div",{className:"help"},$t("Recorded today as ")+(isExp?$t("an expense"):$t("an income"))+$t(" in “Diğer” with POS “Reconciliation”.")+(isExp?" It counts in Spend; mark it One-off there if you do not want it in normalized spend.":"")),
+          h("div",{className:"row",style:{marginTop:12}},h("button",{className:"btn",onClick:()=>setCf(true)},$t("Reconcile"))))):null,
       h(Rf,{l:x.l,load:x.load})):null,
-    cf?h(Sheet,{t:"Reconcile "+name+"?",x:(diff>0?"+":"−")+nf2(Math.abs(diff))+" ₺ will be added to Muavin so the balance becomes "+nf2(tv)+" ₺.",label:busy?"Saving...":"Reconcile",onOk:go,onNo:()=>setCf(false)}):null)}
+    cf?h(Sheet,{t:$t("Reconcile ")+name+"?",x:(diff>0?"+":"−")+nf2(Math.abs(diff))+$t(" ₺ will be added to Muavin so the balance becomes ")+nf2(tv)+$t(" ₺."),label:busy?$t("Saving..."):$t("Reconcile"),onOk:go,onNo:()=>setCf(false)}):null)}
 
 /* ---------- CONSUMABLES ---------- */
 const qf=n=>Number(Math.round(n*1000)/1000).toLocaleString("tr-TR",{maximumFractionDigits:3});
@@ -747,62 +873,63 @@ function Stock({back,L,say}){
     setDlg({kind,it})}
   async function save(){setErr("");setBusy(true);
     try{let r;
-      if(!(Number(f.qty)>0))throw new Error("Quantity must be a positive number.");
+      if(!(Number(f.qty)>0))throw new Error($t("Quantity must be a positive number."));
       if(dlg.kind==="use")r=await api("inv_use",{name:f.name,qty:Number(f.qty),date:f.date,category:f.cat});
-      else{if(!String(f.name).trim())throw new Error("Item name is required.");if(!(Number(f.total)>0))throw new Error("Total cost must be a positive number.");
+      else{if(!String(f.name).trim())throw new Error($t("Item name is required."));if(!(Number(f.total)>0))throw new Error($t("Total cost must be a positive number."));
         r=await api("inv_buy",{name:String(f.name).trim(),unit:f.unit,qty:Number(f.qty),total:Number(f.total),date:f.date,fromAccount:f.from})}
-      x.setD(r);OVERVIEW_STALE();say(dlg.kind==="use"?"Used ✓":"Stocked ✓");setDlg(null)}
+      x.setD(r);OVERVIEW_STALE();say(dlg.kind==="use"?$t("Used ✓"):$t("Stocked ✓"));setDlg(null)}
     catch(z){setErr(z.message)}finally{setBusy(false)}}
   const card=it=>{const pct=it.boughtQty?Math.max(0,Math.min(100,it.qty/it.boughtQty*100)):0;
     return h("div",{key:it.name,className:"card",style:it.status==="used"?{opacity:.7}:null},
       h("div",{style:{display:"flex",justifyContent:"space-between",gap:10}},
-        h("div",null,h("b",{style:{fontSize:17}},it.name),h("div",{className:"help",style:{marginTop:2}},it.status==="used"?"Used up":tl(it.unitCost)+" / "+(it.unit||"unit"))),
+        h("div",null,h("b",{style:{fontSize:17}},it.name),h("div",{className:"help",style:{marginTop:2}},it.status==="used"?$t("Used up"):tl(it.unitCost)+" / "+(it.unit||"unit"))),
         h("div",{style:{textAlign:"right"}},h("div",{className:"v"},qf(it.qty)+" "+it.unit),h("div",{className:"help",style:{marginTop:2}},tl(it.value)))),
       h("div",{style:{background:"var(--in)",borderRadius:4,marginTop:10}},h("div",{className:"bar",style:{width:pct+"%",marginTop:0,background:pct<20?"var(--rd)":"var(--txt)"}})),
       it.moves.length?h("div",{className:"help"},it.moves.slice(0,3).map(m=>m.date+" "+(m.qty>0?"+":"")+qf(m.qty)+it.unit+(m.category?" · "+m.category:"")).join("  |  ")):null,
-      h("div",{className:"row",style:{marginTop:10,justifyContent:"flex-end"}},it.status==="active"?h("button",{className:"sb",onClick:()=>open("use",it)},"Use"):null,h("button",{className:"sb",onClick:()=>open("buy",it)},"Restock")))};
+      h("div",{className:"row",style:{marginTop:10,justifyContent:"flex-end"}},it.status==="active"?h("button",{className:"sb",onClick:()=>open("use",it)},$t("Use")):null,h("button",{className:"sb",onClick:()=>open("buy",it)},$t("Restock"))))};
   const it=dlg&&dlg.it,q=Number(f.qty),cost=dlg&&dlg.kind==="use"&&it&&q>0?(q>=it.qty-1e-9?it.value:q*it.unitCost):0;
-  return h(Pg,{t:"Consumables",back},h(Er,{e:x.e}),!d&&x.l?h(Sk):null,
+  return h(Pg,{t:$t("Consumables"),back},h(Er,{e:x.e}),!d&&x.l?h(Sk):null,
     d?h(React.Fragment,null,
-      h("div",{className:"g2"},M("Stock value",tl(d.totals.value)),M("Active items",d.totals.active)),
-      h("div",{className:"row",style:{marginTop:12}},h("button",{className:"btn",onClick:()=>open("buy",null)},"+ New item / purchase")),
+      h("div",{className:"g2"},M($t("Stock value"),tl(d.totals.value)),M($t("Active items"),d.totals.active)),
+      h("div",{className:"row",style:{marginTop:12}},h("button",{className:"btn",onClick:()=>open("buy",null)},$t("+ New item / purchase"))),
       d.items.filter(i=>i.status==="active").map(card),
-      d.items.some(i=>i.status==="used")?h("div",{className:"lb",style:{marginTop:18}},"Used up"):null,
+      d.items.some(i=>i.status==="used")?h("div",{className:"lb",style:{marginTop:18}},$t("Used up")):null,
       d.items.filter(i=>i.status==="used").map(card),
-      !d.items.length?h("div",{className:"help"},"No stock yet. Add your first purchase."):null):null,
+      !d.items.length?h("div",{className:"help"},$t("No stock yet. Add your first purchase.")):null):null,
     h(Rf,{l:x.l,load:x.load}),
-    dlg?h(Dlg,{t:dlg.kind==="use"?"Use "+it.name:it?"Restock "+it.name:"New purchase",onNo:()=>setDlg(null)},
+    dlg?h(Dlg,{t:dlg.kind==="use"?$t("Use ")+it.name:it?$t("Restock ")+it.name:$t("New purchase"),onNo:()=>setDlg(null)},
       h(Er,{e:err}),
       dlg.kind==="use"?h(React.Fragment,null,
-        h("div",{className:"help"},"Remaining: "+qf(it.qty)+" "+it.unit+" · "+tl(it.value)),
-        F("Quantity used ("+(it.unit||"units")+")",h("div",{className:"row"},I(f.qty,v=>s("qty",v),{inputMode:"decimal",placeholder:"0"}),h("button",{className:"sb",style:{flex:"none"},onClick:()=>s("qty",String(it.qty))},"Use all"))),
-        h("div",{className:"help"},"Expense recognized: "+(cost?tl(cost):"–")),
-        F("Category",S(f.cat,v=>s("cat",v),cats)),F("Date",I(f.date,v=>s("date",v),{type:"date"})))
+        h("div",{className:"help"},$t("Remaining: ")+qf(it.qty)+" "+it.unit+" · "+tl(it.value)),
+        F("Quantity used ("+(it.unit||"units")+")",h("div",{className:"row"},I(f.qty,v=>s("qty",v),{inputMode:"decimal",placeholder:"0"}),h("button",{className:"sb",style:{flex:"none"},onClick:()=>s("qty",String(it.qty))},$t("Use all")))),
+        h("div",{className:"help"},$t("Expense recognized: ")+(cost?tl(cost):"–")),
+        F($t("Category"),S(f.cat,v=>s("cat",v),cats)),F($t("Date"),I(f.date,v=>s("date",v),{type:"date"})))
       :h(React.Fragment,null,
-        F("Item",I(f.name,v=>{const m=(d?.items||[]).find(i=>i.name===v);setF(p=>({...p,name:v,unit:p.unit||(m?m.unit:"")}))},{list:"stk-names",readOnly:!!it,placeholder:"e.g. Coffee beans"})),
+        F($t("Item"),I(f.name,v=>{const m=(d?.items||[]).find(i=>i.name===v);setF(p=>({...p,name:v,unit:p.unit||(m?m.unit:"")}))},{list:"stk-names",readOnly:!!it,placeholder:$t("e.g. Coffee beans")})),
         h("datalist",{id:"stk-names"},(d?.items||[]).map(i=>h("option",{key:i.name,value:i.name}))),
-        F("Quantity",I(f.qty,v=>s("qty",v),{inputMode:"decimal",placeholder:"e.g. 2"})),F("Unit",I(f.unit,v=>s("unit",v),{placeholder:"e.g. kg / gr / pcs"})),
-        F("Total cost (₺)",I(f.total,v=>s("total",v),{inputMode:"decimal",placeholder:"e.g. 1000"})),
-        Number(f.qty)>0&&Number(f.total)>0?h("div",{className:"help"},"Unit cost: "+tl(Number(f.total)/Number(f.qty))):null,
-        F("Paid from",S(f.from,v=>s("from",v),funds)),F("Date",I(f.date,v=>s("date",v),{type:"date"}))),
-      h("div",{className:"row",style:{marginTop:16}},h("button",{className:"btn",disabled:busy,onClick:save},busy?"Saving...":"Save"),h("button",{className:"btn gh",onClick:()=>setDlg(null)},"Cancel"))):null)}
+        F($t("Quantity"),I(f.qty,v=>s("qty",v),{inputMode:"decimal",placeholder:"e.g. 2"})),F($t("Unit"),I(f.unit,v=>s("unit",v),{placeholder:$t("e.g. kg / gr / pcs")})),
+        F($t("Total cost (₺)"),I(f.total,v=>s("total",v),{inputMode:"decimal",placeholder:$t("e.g. 1000")})),
+        Number(f.qty)>0&&Number(f.total)>0?h("div",{className:"help"},$t("Unit cost: ")+tl(Number(f.total)/Number(f.qty))):null,
+        F($t("Paid from"),S(f.from,v=>s("from",v),funds)),F($t("Date"),I(f.date,v=>s("date",v),{type:"date"}))),
+      h("div",{className:"row",style:{marginTop:16}},h("button",{className:"btn",disabled:busy,onClick:save},busy?$t("Saving..."):$t("Save")),h("button",{className:"btn gh",onClick:()=>setDlg(null)},$t("Cancel")))):null)}
 
 /* ---------- APP ---------- */
 function More({go,priv,setPriv}){
-  return h(Pg,{t:"More"},[["stk","Consumables","Stock, restock and use"],["inv","Investments","Portfolio and allocation"],["rep","Reports","Income statement, balance sheet, ONCA"],["rec","Reconciliation","Match a cash or card balance to the real amount"],["set","Settings","Payment methods and categories"]].map(([k,t,x])=>h("div",{key:k,className:"card",style:{cursor:"pointer",display:"flex",alignItems:"center"},onClick:()=>go(k)},h("div",{style:{flex:1}},h("b",null,t),h("div",{className:"help",style:{marginTop:2}},x)),h("span",{className:"lb"},"›"))),
-    h("div",{className:"card",style:{display:"flex",alignItems:"center"},onClick:()=>setPriv(!priv)},h("div",{style:{flex:1}},h("b",null,"Hide balances"),h("div",{className:"help",style:{marginTop:2}},"Blur amounts on Overview and Investments")),h("input",{type:"checkbox",checked:priv,readOnly:true})))}
+  return h(Pg,{t:$t("More")},[["stk",$t("Consumables"),$t("Stock, restock and use")],["inv",$t("Investments"),$t("Portfolio and allocation")],["rep",$t("Reports"),$t("Income statement, balance sheet, ONCA")],["rec",$t("Reconciliation"),"Match a cash or card balance to the real amount"],["set",$t("Settings"),$t("Payment methods and categories")]].map(([k,t,x])=>h("div",{key:k,className:"card",style:{cursor:"pointer",display:"flex",alignItems:"center"},onClick:()=>go(k)},h("div",{style:{flex:1}},h("b",null,t),h("div",{className:"help",style:{marginTop:2}},x)),h("span",{className:"lb"},"›"))),
+    h("div",{className:"card",style:{display:"flex",alignItems:"center",gap:12}},h("div",{style:{flex:1}},h("b",null,$t("Hide balances")),h("div",{className:"help",style:{marginTop:2}},$t("Hide amounts on Overview, Diligence and Investments (shown as ***,*)"))),h(Sw,{on:priv,set:setPriv,label:$t("Hide balances")})))}
 function App(){
-  const[sc,setSc]=useState("home"),[edit,setEdit]=useState(null),[toast,setToast]=useState(null),[priv,setPriv]=useState(()=>localStorage.getItem("priv")==="1");
-  const L=useData("lists","lists");LD=L.d;
+  const[,bump]=useState(0),[sc,setSc]=useState("home"),[edit,setEdit]=useState(null),[toast,setToast]=useState(null),[priv,setPriv]=useState(()=>localStorage.getItem("priv")==="1");
+  const L=useData("lists","lists");LD=L.d;PRIV=priv;
+  const setPref=p=>{PREF={...PREF,...p};try{localStorage.setItem("pref",JSON.stringify(PREF))}catch(e){}document.documentElement.lang=PREF.lang;bump(n=>n+1)};
   useEffect(()=>{try{localStorage.setItem("priv",priv?"1":"0")}catch(e){}},[priv]);
   const say=(m,bad)=>{setToast({m,bad});setTimeout(()=>setToast(null),2600)};
   const go=k=>{if(k!=="add")setEdit(null);setSc(k);window.scrollTo(0,0)};
-  const privBtn=h("button",{className:"ibtn"+(priv?" on":""),onClick:()=>setPriv(!priv),title:"Hide balances","aria-label":"Hide balances","aria-pressed":priv},h(Ic,{n:priv?"eyeoff":"eye",s:18}));
+  const privBtn=h("button",{className:"ibtn"+(priv?" on":""),onClick:()=>setPriv(!priv),title:$t("Hide balances"),"aria-label":$t("Hide balances"),"aria-pressed":priv},h(Ic,{n:priv?"eyeoff":"eye",s:18}));
   const back=()=>go("more");
-  const scr=sc==="home"?h(Home,{go,priv}):sc==="tx"?h(Tx,{onEdit:r=>{setEdit(r);setSc("add")},L,say}):sc==="add"?h(Add,{edit,L,say,done:()=>{setEdit(null);setSc("tx")}}):sc==="inv"?h(Inv,{priv,back}):sc==="dil"?h(Dil,{L,say}):sc==="rep"?h(Reports,{back}):sc==="set"?h(Settings,{back,L,say}):sc==="rec"?h(Recon,{back,L,say}):sc==="stk"?h(Stock,{back,L,say}):h(More,{go,priv,setPriv});
+  const scr=sc==="home"?h(Home,{go,say}):sc==="tx"?h(Tx,{onEdit:r=>{setEdit(r);setSc("add")},L,say}):sc==="add"?h(Add,{edit,L,say,done:()=>{setEdit(null);setSc("tx")}}):sc==="inv"?h(Inv,{priv,back}):sc==="dil"?h(Dil,{L,say}):sc==="rep"?h(Reports,{back}):sc==="set"?h(Settings,{back,L,say,setPref}):sc==="rec"?h(Recon,{back,L,say}):sc==="stk"?h(Stock,{back,L,say}):h(More,{go,priv,setPriv});
   const on=k=>(k==="more"?["more","inv","rep","set","stk","rec"].includes(sc):sc===k);
   const nb=(k,l,i)=>h("button",{className:"nb"+(on(k)?" on":""),onClick:()=>go(k)},h(Ic,{n:i}),l);
-  return h("div",{className:"app"},h("header",{className:"appbar"},h("div",{className:"brand"},h(Mark,{s:26}),"Diligence"),privBtn),toast?h("div",{className:"toast"+(toast.bad?" bad":"")},toast.m):null,scr,
-    h("div",{className:"nav"},nb("home","Overview","home"),nb("tx","Transactions","list"),h("button",{className:"fab",onClick:()=>go("add"),"aria-label":"Add"},h(Ic,{n:"plus"})),nb("dil","Diligence","chart"),nb("more","More","grid")))}
+  return h("div",{className:"app"},h("header",{className:"appbar"},h("div",{className:"brand"},h(Mark,{s:26}),$t("Diligence")),privBtn),toast?h("div",{className:"toast"+(toast.bad?" bad":"")},toast.m):null,scr,
+    h("div",{className:"nav"},nb("home",$t("Overview"),"home"),nb("tx",$t("Transactions"),"list"),h("button",{className:"fab",onClick:()=>go("add"),"aria-label":$t("Add")},h(Ic,{n:"plus"})),nb("dil",$t("Diligence"),"chart"),nb("more",$t("More"),"grid")))}
 ReactDOM.createRoot(document.getElementById("root")).render(h(App));
 </script></body></html>
