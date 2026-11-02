@@ -522,24 +522,24 @@ function Add({edit,done,L,say}){
   useEffect(()=>{if(needCari)api("caris").then(r=>{setCaris(r);try{localStorage.setItem("c:caris",JSON.stringify(r))}catch(e){}}).catch(()=>{})},[needCari]);
   function mode(n){if(ed)return;setF(p=>({...p,mode:n,c2:"",c3:"",a1:"",a2:"",a3:"",split:false,inst:1,com:"",c1:n==="expense"?ls.expenseCategories?.[0]||"":n==="income"?ls.incomeCategories?.[0]||"":ls.investmentCategories?.[0]||"",ic:ls.investmentCategories?.[0]||"",from:ls.paymentMethods?.[0]||"",to:ls.paymentMethods?.[1]||""}))}
   function validate(){const amt=Number(f.amount);
-    if(!Number.isFinite(amt)||amt<=0)return$t("Amount must be a positive number.");
-    if(!f.td)return$t("Transaction date is required.");if(f.rl&&!f.rd)return$t("Recognition date is required.");
-    if(m==="transfer"){if(!f.from)return$t("From account is required.");if(!f.to)return$t("To account is required.");if(f.from===f.to)return$t("From and To accounts must be different.");return null}
-    if(m==="invest"){if(!f.pos.trim())return$t("Instrument is required.");if(!f.ic)return$t("Investment category is required.");if(!(Number(f.units)>0))return"Amount (units) must be a positive number.";if(f.com!==""&&!(Number(f.com)>=0))return$t("Commission must be 0 or more.");return null}
-    if(!f.pm)return$t("Payment method is required.");if(!f.pos.trim())return$t("Business name is required.");
-    if(needCari&&!f.cari.trim())return$t("Cari is required for receivable / payable categories.");
-    if(m==="expense"&&!f.desc.trim())return$t("Description is required.");if(!f.c1)return$t("Category I is required.");
+    if(!Number.isFinite(amt)||amt<=0)return $t("Amount must be a positive number.");
+    if(!f.td)return $t("Transaction date is required.");if(f.rl&&!f.rd)return $t("Recognition date is required.");
+    if(m==="transfer"){if(!f.from)return $t("From account is required.");if(!f.to)return $t("To account is required.");if(f.from===f.to)return $t("From and To accounts must be different.");return null}
+    if(m==="invest"){if(!f.pos.trim())return $t("Instrument is required.");if(!f.ic)return $t("Investment category is required.");if(!(Number(f.units)>0))return"Amount (units) must be a positive number.";if(f.com!==""&&!(Number(f.com)>=0))return $t("Commission must be 0 or more.");return null}
+    if(!f.pm)return $t("Payment method is required.");if(!f.pos.trim())return $t("Business name is required.");
+    if(needCari&&!f.cari.trim())return $t("Cari is required for receivable / payable categories.");
+    if(!f.c1)return $t("Category I is required.");
     if(!f.split||m==="income")return null;
     const a1=Number(f.a1||0),a2=Number(f.a2||0),a3=Number(f.a3||0);
-    if(Math.abs(a1+a2+a3-amt)>0.01)return$t("Split amounts must sum to total amount.");if(a1<0||a2<0||a3<0)return"Split amounts must be >= 0.";
-    if(!f.c2&&a2>0)return$t("Category II is required if Amount II > 0.");if(!f.c3&&a3>0)return$t("Category III is required if Amount III > 0.");return null}
+    if(Math.abs(a1+a2+a3-amt)>0.01)return $t("Split amounts must sum to total amount.");if(a1<0||a2<0||a3<0)return"Split amounts must be >= 0.";
+    if(!f.c2&&a2>0)return $t("Category II is required if Amount II > 0.");if(!f.c3&&a3>0)return $t("Category III is required if Amount III > 0.");return null}
   async function submit(){setErr("");const v=validate();if(v){setErr(v);return}setBusy(true);
     const rec=f.rl?f.rd:f.td,id=edit?.transactionId||"";
     try{let p,items=null;
       if(m==="transfer")p={transactionType:"transfer",transactionId:id,transactionDate:f.td,recognitionDate:rec,fromAccount:f.from,toAccount:f.to,amount:Number(f.amount),description:f.desc||"Transfer"};
       else if(m==="invest")p={transactionType:"invest",transactionId:id,transactionDate:f.td,posName:f.pos,cost:Number(f.amount),units:Number(f.units),category1:f.ic||f.c1,category2:f.c2,category3:f.c3,commission:Number(f.com||0)};
       else{const sp=f.split&&m==="expense";
-        p={transactionType:m,transactionId:id,transactionDate:f.td,recognitionDate:rec,paymentMethod:f.pm,posName:f.pos,cari:needCari?f.cari.trim():"",amount:Number(f.amount),description:m==="income"?(ed&&f.desc.trim()?f.desc:f.pos):f.desc,category1:f.c1,amount1:sp?Number(f.a1||0):Number(f.amount),category2:sp?f.c2:"",amount2:sp?(f.a2===""?"":Number(f.a2)):"",category3:sp?f.c3:"",amount3:sp?(f.a3===""?"":Number(f.a3)):""};
+        p={transactionType:m,transactionId:id,transactionDate:f.td,recognitionDate:rec,paymentMethod:f.pm,posName:f.pos,cari:needCari?f.cari.trim():"",amount:Number(f.amount),description:m==="income"?(ed&&f.desc.trim()?f.desc:f.pos):(f.desc.trim()||(f.pos.trim()+" - "+f.c1)),category1:f.c1,amount1:sp?Number(f.a1||0):Number(f.amount),category2:sp?f.c2:"",amount2:sp?(f.a2===""?"":Number(f.a2)):"",category3:sp?f.c3:"",amount3:sp?(f.a3===""?"":Number(f.a3)):""};
         const n=Number(f.inst);
         if(m==="expense"&&!ed&&n>1){const t=Number(f.amount),s1=splitCents(sp?Number(f.a1||0):t,n),s2=splitCents(sp?Number(f.a2||0):0,n),s3=splitCents(sp?Number(f.a3||0):0,n);
           items=s1.map((_,i)=>({...p,transactionDate:addMonths(rec,i),recognitionDate:rec,amount:Math.round((s1[i]+s2[i]+s3[i])*100)/100,amount1:s1[i],amount2:p.amount2===""?"":s2[i],amount3:p.amount3===""?"":s3[i]}))}}
@@ -1223,7 +1223,8 @@ const MX=(function(){
       L.its.forEach(it=>{const c=cells[cells.length-1],gap=c?it.x-c.x1:1e9;
         if(c&&gap<it.size*1.1){c.s+=(gap>it.size*.18&&!/\s$/.test(c.s)&&!/^\s/.test(it.s)?" ":"")+it.s;c.x1=Math.max(c.x1,it.x+it.w)}
         else cells.push({s:it.s,x0:it.x,x1:it.x+it.w})});
-      cells.forEach(c=>{c.s=c.s.replace(/\s+/g," ").trim()});L.cells=cells.filter(c=>c.s);L.text=L.cells.map(c=>c.s).join("  ")});
+      cells.forEach(c=>{c.s=c.s.replace(/\s+/g," ").trim().replace(/^:\s*/,"")});L.cells=cells.filter(c=>c.s&&!/^bosluk$/i.test(c.s));L.text=L.cells.map(c=>c.s).join("  ")});
+    for(let i=lines.length-1;i>=0;i--)if(!lines[i].cells.length)lines.splice(i,1);
     // repair Turkish letters
     const map=inferTurkish(lines,ph),keys=Object.keys(map);
     if(keys.length){const fix=s=>s.replace(/[\uE000-\uF8FF]/g,c=>map[c]||c);lines.forEach(L=>{L.cells.forEach(c=>{c.s=fix(c.s)});L.text=fix(L.text)})}
@@ -1234,24 +1235,28 @@ const MX=(function(){
   const headKind=s=>{const f=fold(s).replace(/\s+/g," ").trim();if(!f||f.length>40)return"";if(HEAD.bal.test(f))return"bal";if(HEAD.pts.test(f)&&!HEAD.amt.test(f))return"pts";if(HEAD.inst.test(f)&&!/TUTAR/.test(f))return"inst";
     if(HEAD.date.test(f)&&!/VALOR|KESIM|SON ODEME/.test(f))return"date";if(HEAD.debit.test(f))return"debit";if(HEAD.credit.test(f))return"credit";if(HEAD.amt.test(f))return"amt";if(HEAD.desc.test(f))return"desc";return""};
 
+  const UNDATED=/^(DONEM FAIZI|AKDI FAIZ|GECIKME FAIZI|NAKIT AVANS FAIZI|TAKSIT FAIZI|FAIZ\b|KKDF|BSMV|KART UCRETI|YILLIK|UYELIK|HESAP ISLETIM|KOMISYON|UCRET)/;
+  const GI=/\s*(\d{1,3}(?:\.\d{3})*,\d{2})\s*[xX]\s*(\d{1,2})\s*=\s*(\d{1,3}(?:\.\d{3})*,\d{2})\s*(\d{1,2})\s*\.?\s*TAKS[İIiı]T/i;
   function pdfLines(doc){
     const L=doc.lines,out=[];let head=null,sec="",meta={},cont=null;
     L.forEach(l=>{const f=fold(l.text);
-      if(/HESAP KESIM TARIHI|KESIM TARIHI/.test(f)&&!meta.cut){const m=l.text.match(/(\d{1,2}[./-]\d{1,2}[./-]\d{2,4})/);if(m)meta.cut=parseDate(m[1])}
-      if(!meta.last4){const m=l.text.match(/\b\d{4}\s?\d{2}[*X]{2}\s?[*X]{4}\s?(\d{4})\b/i);if(m)meta.last4=m[1]}
-      if(meta.prev==null&&/ONCEKI DONEM (BAKIYE|BORC)|ONCEKI EKSTRE|DEVREDEN BAKIYE/.test(f)){const mm=l.cells.map(c=>c.s).filter(s=>MONEY.test(s));if(mm.length)meta.prev=parseAmt(mm[mm.length-1])}
+      if(/HESAP KESIM TARIHI|KESIM TARIHI/.test(f)&&!meta.cut){const m=l.text.match(/(\d{1,2}[./-]\d{1,2}[./-]\d{2,4}|\d{1,2}\s+[A-Za-zÇĞİÖŞÜçğıöşü]{3,9}\s+\d{4})/);if(m)meta.cut=parseDate(m[1])}
+      if(!meta.last4){const m=l.text.match(/\b\d{4}\s?(?:\d{2}[*X]{2}|[*X]{4})\s?[*X]{4}\s?(\d{4})\b/i);if(m)meta.last4=m[1]}
+      if(meta.prev==null&&/ONCEKI (DONEM |HESAP |EKSTRE |AY )*(HESAP OZETI |EKSTRE )?(BAKIYE|BORC)|ONCEKI DONEMDEN DEVIR|DEVREDEN BAKIYE|DEVIR EDILEN/.test(f)){const mm=l.cells.map(c=>c.s).filter(s=>MONEY.test(s));if(mm.length)meta.prev=parseAmt(mm[mm.length-1])}
       if(meta.debt==null&&/^DONEM BORCU|DONEM BORCU\s|TOPLAM BORC|HESAP KESIM TARIHINDEKI BORC|GUNCEL DONEM BORCU/.test(f)){const mm=l.cells.map(c=>c.s.replace(/\s*(TL|TRY)$/i,"")).filter(s=>MONEY.test(s));if(mm.length)meta.debt=parseAmt(mm[0])}
       // column header
       const kinds=l.cells.map(c=>headKind(c.s));
       if(kinds.indexOf("date")>-1&&(kinds.indexOf("amt")>-1||kinds.indexOf("debit")>-1)){head={};l.cells.forEach((c,i)=>{const k=kinds[i];if(k&&!head[k])head[k]=(c.x0+c.x1)/2});cont=null;return}
       if(/^(SANAL KART|EK KART|ASIL KART)/.test(f)&&!parseDate(l.cells[0].s)){sec=/^SANAL/.test(f)?"Virtual card":/^EK/.test(f)?"Additional card":"";cont=null;return}
-      const c0=l.cells[0]?l.cells[0].s:"";let dm=c0.match(/^(\d{1,2}[./-]\d{1,2}[./-]\d{2,4}|\d{4}-\d{2}-\d{2})(?:\s+(\d{1,2}:\d{2}(?::\d{2})?))?\s*(.*)$/);
+      const c0=l.cells[0]?l.cells[0].s:"";let dm=c0.match(/^(\d{1,2}[./-]\d{1,2}[./-]\d{2,4}|\d{4}-\d{2}-\d{2}|\d{1,2}\s+[A-Za-zÇĞİÖŞÜçğıöşü]{3,9}\.?\s+\d{4})(?:\s+(\d{1,2}:\d{2}(?::\d{2})?))?\s*(.*)$/),und=false;
+      // interest / fee lines printed without a date belong to the cut-off date
+      if(!dm&&meta.cut&&head&&head.amt!=null&&UNDATED.test(f)&&l.cells.length>=2&&MONEY.test(l.cells[l.cells.length-1].s.replace(/\s+(TL|TRY)$/i,""))){dm=["",meta.cut,"",""];und=true}
       if(!dm){
         // a wrapped description continues on the next line
-        if(cont&&l.p===cont.p&&cont.y-l.y<l.size*1.9&&!l.cells.some(c=>MONEY.test(c.s))&&l.cells.length<=2&&Math.abs(l.cells[0].x0-cont.dx)<l.size*2&&l.text.length<60){cont.row.desc+=" "+l.text;cont.y=l.y}else cont=null;
+        if(cont&&l.p===cont.p&&cont.y-l.y<l.size*1.9&&!l.cells.some(c=>MONEY.test(c.s))&&l.cells.length<=2&&Math.abs(l.cells[0].x0-cont.dx)<Math.max(3,l.size*.6)&&l.text.length<60){cont.row.desc+=" "+l.text;cont.y=l.y}else cont=null;
         return}
-      const d=parseDate(dm[1]);if(!d){cont=null;return}
-      const cells=l.cells.slice(1);let rest=(dm[3]||"").trim();
+      let d=parseDate(dm[1]);if(!d){cont=null;return}
+      const cells=l.cells.slice(und?0:1);let rest=(dm[3]||"").trim();
       if(rest){const m2=rest.match(/^(\d{1,2}[./-]\d{1,2}[./-]\d{2,4})\s*(.*)$/);if(m2)rest=m2[2]}   // valör date
       else if(cells[0]&&parseDate(cells[0].s)&&/^\d/.test(cells[0].s)&&cells[0].s.length<=10)cells.shift();
       const money=[],other=[];
@@ -1265,16 +1270,31 @@ const MX=(function(){
       else if(head&&head.amt!=null){const ms=head.bal!=null?money.filter(m=>m!==near(head.bal,money)||money.length===1):money;amt=(near(head.amt,ms.length?ms:money)).v}
       else{const ms=money.length>1&&head&&head.bal!=null?money.slice(0,-1):money;amt=ms[0].v}
       if(amt==null||amt===0){cont=null;return}
-      const amtCell=money.find(m=>m.v===amt||Math.abs(m.v)===amt)||money[0];
+      const amtCell=money.filter(m=>m.v===amt||Math.abs(m.v)===amt).sort((a,b)=>head&&head.amt!=null?Math.abs((a.c.x0+a.c.x1)/2-head.amt)-Math.abs((b.c.x0+b.c.x1)/2-head.amt):0)[0]||money[0];
+      const plus=/^\+|\+\s*(TL|TRY|₺)?\s*$/i.test(amtCell.c.s);
       const descCells=other.filter(c=>c.x1<=amtCell.c.x0+2||!amtCell.c.x1);
-      let desc=(rest+" "+descCells.map(c=>c.s).join(" ")).replace(/\s+/g," ").trim(),inst=null;
+      let desc=(rest+" "+descCells.map(c=>c.s).join(" ")).replace(/\s+/g," ").trim(),inst=null,d0="";
       other.forEach(c=>{if(!inst&&c.x0>=amtCell.c.x0-2){const z=instOf(c.s);if(z)inst=z}});
       if(!inst&&head&&head.inst!=null)other.forEach(c=>{if(!inst&&Math.abs((c.x0+c.x1)/2-head.inst)<40){const z=instOf(c.s);if(z)inst=z}});
+      const gi=desc.match(GI);
+      if(gi&&!inst){const z=instOf(gi[4]+"/"+gi[2]);if(z){inst=z;desc=desc.replace(gi[0],"").trim()}}
+      // "1. Taksit" in the description (+ "6x502.00" remaining in the Kalan Taksit column) or "6.Tk" (Peşine Taksit)
+      let ino=0;
+      if(!inst){const k=desc.match(/\s*\b(\d{1,2})\s*\.\s*(?:TAKS[İIiı]T|TK)\b\.?/i);if(k){ino=+k[1];desc=desc.replace(k[0]," ").replace(/\s*\bPEŞ\.?\s*TAKS[İIiı]T\b|\s*\bANAPARA\b/gi,"").replace(/\s+/g," ").trim();
+        const rm=other.filter(c=>c.x0>=amtCell.c.x0-2).map(c=>c.s.match(/^(\d{1,2})\s*[xX]\s*\d[\d.,]*$/)).filter(Boolean)[0];
+        if(rm){const z=instOf(ino+"/"+(ino+ +rm[1]));if(z){inst=z;ino=0}}else if(ino===1){ino=0}}}
       const tm=desc.match(/\s*\(?(?:TAKSIT|TKS|TAKS)\.?\s*(\d{1,2})\s*\/\s*(\d{1,2})\)?|\s+(\d{1,2})\s*\/\s*(\d{1,2})\s*(?:TAKSIT|TKS)\b/i);
       if(tm){const z=instOf((tm[1]||tm[3])+"/"+(tm[2]||tm[4]));if(z&&!inst){inst=z;desc=desc.replace(tm[0],"").trim()}}
-      const row={d,desc,amt,dir,inst,card:sec};
+      // a later instalment printed with its own (posting) date: the purchase was no-1 months earlier;
+      // printed with the purchase date (long before the cut-off): keep it
+      const recent=meta.cut?dayDiff(meta.cut,d)<=45:true;
+      if(inst&&inst.no>1&&recent){d0=d;d=addMonthsYmd(d,-(inst.no-1))}
+      if(!inst&&ino>1){if(!recent)d=addMonthsYmd(d,ino-1);desc+=" · Taksit "+ino}
+      const row={d,d0,desc,amt,dir,inst,card:sec,plus};
       if(/^(ONCEKI DONEM|DEVREDEN|TOPLAM|GENEL TOPLAM|DONEM BORCU|ASGARI)/.test(fold(desc))){cont=null;return}
       out.push(row);cont={row,p:l.p,y:l.y,dx:(descCells[0]||{x0:0}).x0}});
+    if(out.some(r=>r.plus))out.forEach(r=>{r.dir=r.plus?-1:1});
+    out.forEach(r=>{delete r.plus});
     return{rows:out,meta}}
 
   /* ---------- CSV / XLS / XLSX ---------- */
@@ -1337,19 +1357,35 @@ const MX=(function(){
     const buf=await file.arrayBuffer(),name=String(file.name||"");
     const isPdf=/\.pdf$/i.test(name)||(new Uint8Array(buf.slice(0,5)).join(",")==="37,80,68,70,45");
     let res;
-    if(isPdf){const doc=await readPdf(buf);res=pdfLines(doc);res.kind="pdf";res.fixed=doc.fixed;const first=doc.lines.findIndex(l=>/^\d{1,2}[./-]\d{1,2}[./-]\d{2,4}/.test(l.cells[0]?l.cells[0].s:""));res.head=doc.lines.slice(0,first>0?Math.min(first,25):12).map(l=>l.text).join("\n")}
+    if(isPdf){const doc=await readPdf(buf);res=pdfLines(doc);res.kind="pdf";res.fixed=doc.fixed;const first=doc.lines.findIndex(l=>{const t=l.cells[0]?l.cells[0].s:"";return /^\d{1,2}[./-]\d{1,2}[./-]\d{2,4}/.test(t)||(/^\d{1,2}\s+[A-Za-zÇĞİÖŞÜçğıöşü]{3,9}\s+\d{4}/.test(t)&&!!parseDate(t))});res.head=doc.lines.slice(0,first>0?Math.min(first,25):12).map(l=>l.text).join("\n");res.all=doc.lines.map(l=>l.text).join("\n").slice(0,30000)}
     else if(/\.(xlsx|xlsm|xls|csv|txt)$/i.test(name)){res=await readSheet(buf,name)}
     else throw new Error("Choose a PDF, CSV, XLS or XLSX file.");
     if(!res.rows.length)throw new Error("No transactions found in this file. If it is a PDF, try the Excel / CSV download from internet banking.");
     res.name=name;return res}
 
-  // payment method named in the file (e.g. "QNB"), best match by number of mentions
+  // payment method named in the file (e.g. "QNB"), best match by number of mentions;
+  // otherwise the bank that issued the statement, matched to an account named after the bank or its card brand
+  const BANKS=[[/GARANTI ?BANKASI|GARANTIBBVA|GARANTI BBVA|BONUSFLAS/,["BONUS","GARANTI","MILESSMILES","SHOPANDFLY","FLEXICARD","MONEYCARD"]],
+    [/YAPI ?(VE )?KREDI|YAPIKREDI|WORLDCARD/,["PLAY","WORLD","YAPIKREDI","YKB","ADIOS","CRYSTAL","OPET"]],
+    [/VAKIFBANK|VAKIFKART|VAKIFLAR BANKASI/,["RAILMILES","VAKIF","VAKIFBANK"]],
+    [/DENIZBANK/,["DENIZ","DENIZBANK","DENIZKART","FASTPAY","BLACK"]],
+    [/QNB|FINANSBANK|CARDFINANS|ENPARA/,["QNB","FINANS","CARDFINANS","ENPARA"]],
+    [/AKBANK/,["AXESS","WINGS","AKBANK","FREE"]],
+    [/IS BANKASI|ISBANK|MAXIMUM KART|MAXIMUMKART/,["MAXIMUM","ISBANK","MAXI","ISBANKASI"]],
+    [/HALKBANK|PARAF/,["PARAF","HALK","HALKBANK"]],
+    [/ZIRAAT|BANKKART/,["BANKKART","ZIRAAT"]],
+    [/ING BANK|INGBANK/,["ING"]],[/\bTEB\b|CEPTETEB/,["TEB","CEPTETEB"]],[/KUVEYT/,["KUVEYT","SAGLAMKART"]],[/ALBARAKA/,["ALBARAKA"]],[/ODEABANK/,["ODEA"]]];
   function detectPm(res,pms){const lines=String(res.head||"").split("\n").map(compact),fn=compact(res.name);let best="",bs=0;
-    (pms||[]).forEach(p=>{const c=compact(p);if(c.length<3)return;let n=fn.indexOf(c)>-1?20:0;lines.forEach((l,i)=>{n+=(l.split(c).length-1)*(i<3?10:1)});if(n>bs){bs=n;best=p}});return bs>=5?best:""}
+    (pms||[]).forEach(p=>{const c=compact(p);if(c.length<3)return;let n=fn.indexOf(c)>-1?20:0;lines.forEach((l,i)=>{n+=(l.split(c).length-1)*(i<3?10:1)});if(n>bs){bs=n;best=p}});
+    if(bs>=5)return best;
+    const all=fold(String(res.all||res.head||"")).replace(/\s+/g," "),hits=BANKS.filter(b=>b[0].test(all));
+    if(hits.length!==1)return"";
+    const cand=(pms||[]).filter(p=>{const c=compact(p);return c.length>=2&&hits[0][1].some(t=>c===t||c.indexOf(t)===0||(t.length>=4&&c.indexOf(t)>-1))});
+    return cand.length===1?cand[0]:""}
 
   /* ---------- turn parsed lines into review rows ---------- */
   const PAY=/ODEME|TESEKKUR|PAYMENT|ODEMENIZ|OTOMATIK ODEME|HESAPTAN|KART BORCU|KK ODEME/;
-  const FEE_FAIZ=/FAIZ|BSMV|KKDF|GECIKME|VERGI|FON\b/,FEE_KOM=/UCRET|UCRETI|KOMISYON|MASRAF|AIDAT|UYELIK|YILLIK KART/;
+  const FEE_FAIZ=/FAIZ|BSMV|KKDF|GECIKME/,FEE_KOM=/UCRET|UCRETI|KOMISYON|MASRAF|AIDAT|UYELIK|YILLIK KART/;
   const REFUND=/\bIADE|\bIADESI|REFUND|IPTAL|\bIADE\b/,SALARY=/MAAS|SALARY|BORDRO|UCRET ODEMESI/;
   const XFER=/VIRMAN|KENDI HESAB|HESAPLAR ARASI|KREDI KARTI ODEME|KART ODEME|KK ODEME|KARTA ODEME/;
   const STOP={POS:1,ISTANBUL:1,TR:1,TRTR:1,TUR:1,AS:1,LTD:1,STI:1,SAN:1,TIC:1,VE:1,MAGAZA:1,MAGAZASI:1,AVM:1,ANKARA:1,IZMIR:1,ONLINE:1,WWW:1,COM:1,TL:1,THE:1,ODEME:1,YEMEKPAY:1,IYZICO:1,PAYTR:1,PARAM:1,SANAL:1,ECOM:1};
@@ -1372,7 +1408,7 @@ const MX=(function(){
         if(h.ck.length>=6&&cd.indexOf(h.ck)>-1)s=100+h.ck.length;
         else if(h.ck.length>=3&&dt.some(t=>t===h.ck||(h.ck.length>=4&&t.indexOf(h.ck)===0)))s=90+h.ck.length;
         else if(h.ck.length>=5&&h.ck.length<6&&cd.indexOf(h.ck)>-1)s=60+h.ck.length;
-        else{const t0=h.tk.filter(t=>t.length>=5&&!STOP[t])[0];if(t0&&dt.some(t=>t===t0||t.indexOf(t0)===0||(t.length>=5&&t0.indexOf(t)===0)))s=50+t0.length}
+        else{const t0=h.tk.filter(t=>t.length>=5&&!STOP[t])[0];if(t0&&dt.some(t=>t===t0||t.indexOf(t0)===0||(t.length>=5&&!STOP[t]&&t0.indexOf(t)===0)))s=50+t0.length}
         if(!s)return;s+=Math.min(h.cnt||1,10)*.3;if(s>bs||(s===bs&&best&&(h.t||"")>(best.t||""))){bs=s;best=h}});
       return best?{cat:best.c,src:"history",why:best.n}:null};
     const acctIn=desc=>{const cd=compact(desc);return others.filter(p=>compact(p).length>=3&&cd.indexOf(compact(p))>-1)[0]||""};
@@ -1381,7 +1417,7 @@ const MX=(function(){
     const has=(list,c)=>list.indexOf(c)>-1;
     const fallback=kind=>kind==="inc"?(has(o.inc,"Diğer")?"Diğer":o.inc[o.inc.length-1]||""):(has(o.exp,"Diğer")?"Diğer":o.exp[o.exp.length-1]||"");
     const clean=s=>String(s).replace(/\s+(TRTR|TR|TUR)$/,"").replace(/\s+[-–]$/,"").replace(/\s{2,}/g," ").trim()||"(no description)";
-    const rows=lines.map((L,i)=>{const f=fold(L.desc),r={id:"L"+(i+1),d:L.d,n:clean(L.desc),raw:L.desc,a:r2(Math.abs(L.out)),dirOut:L.out>0,inst:L.inst,card:L.card,cat:"",acct:"",kind:"",src:"none",why:"",dup:null,link:null,sug:null,cari:"",desc:"",rl:false,rd:"",removed:false,inc:false,key:keyTok(L.desc)};
+    const rows=lines.map((L,i)=>{const f=fold(L.desc),r={id:"L"+(i+1),d:L.d,d0:L.d0||"",n:clean(L.desc),raw:L.desc,a:r2(Math.abs(L.out)),dirOut:L.out>0,inst:L.inst,card:L.card,cat:"",acct:"",kind:"",src:"none",why:"",dup:null,link:null,sug:null,cari:"",desc:"",rl:false,rd:"",removed:false,inc:false,key:keyTok(L.desc)};
       if(L.out>0){
         const ac=acctIn(L.desc);
         if(!o.credit&&ac&&(XFER.test(f)||PAY.test(f)||ac)){r.kind="tr";r.acct=ac;r.src="rule";r.why="transfer"}
@@ -1419,7 +1455,7 @@ const MX=(function(){
     return rows.filter(r=>!r.removed&&(!r.dup||r.inc)).map(r=>{
       const base={key:r.id,label:r.n,date:r.d,pm,amount:r.a,pos:r.n,desc:r.desc||""};
       if(r.kind==="tr")return{...base,type:"transfer",from:r.dirOut?pm:r.acct,to:r.dirOut?r.acct:pm,desc:r.desc||r.n};
-      const it={...base,type:r.kind==="ret"?"return":r.kind==="inc"?"income":"expense",cat:r.cat,cari:r.cari||"",rec:r.rl&&r.rd?r.rd:""};
+      const it={...base,type:r.kind==="ret"?"return":r.kind==="inc"?"income":"expense",cat:r.cat,cari:r.cari||"",rec:r.rl&&r.rd?r.rd:(r.inst&&r.inst.no>1&&r.d0?r.d0:"")};
       if(r.link)it.link=r.link.to.src==="imp"?{imp:r.link.to.id}:{mv:r.link.to.id};
       else if(r.inst&&it.type==="expense")it.inst={no:r.inst.no,of:r.inst.of};
       return it})}
@@ -1443,7 +1479,7 @@ function Mass({back,L,say,go}){
   const isPay=p=>String(p||"").toLocaleLowerCase("tr").indexOf(pa.toLocaleLowerCase("tr"))>-1;
   function pick(f){if(!f)return;setErr("");setPerr("");setFile(f);setDet("");
     const p=MX.read(f);parseRef.current=p;
-    p.then(r=>{if(parseRef.current!==p)return;const d=MX.detectPm(r,pms);if(d){setDet(d+(r.meta&&r.meta.last4?" · •••• "+r.meta.last4:""));setPm(x=>x||d)}}).catch(e=>{if(parseRef.current===p)setPerr(e.message||String(e))})}
+    p.then(r=>{if(parseRef.current!==p)return;let d="";try{const m4=JSON.parse(localStorage.getItem("mx-l4")||"{}"),k4=r.meta&&r.meta.last4;if(k4&&pms.indexOf(m4[k4])>-1)d=m4[k4]}catch(e){}if(!d)d=MX.detectPm(r,pms);if(d){setDet(d+(r.meta&&r.meta.last4?" · •••• "+r.meta.last4:""));setPm(x=>x||d)}}).catch(e=>{if(parseRef.current===p)setPerr(e.message||String(e))})}
   async function start(){setErr("");setStep("load");setProg(.12);
     try{const r=await parseRef.current;setProg(.5);
       const ds=r.rows.map(x=>x.d).sort();
@@ -1489,6 +1525,7 @@ function Mass({back,L,say,go}){
     if(badTr.length){say($t("Choose the other account for each transfer."),true);return}
     setBusy(true);
     try{const items=MX.payload(rows,pm);const r=await api("mass_save",{items,rules});
+      try{const k4=res&&res.meta&&res.meta.last4;if(k4){const m4=JSON.parse(localStorage.getItem("mx-l4")||"{}");m4[k4]=pm;localStorage.setItem("mx-l4",JSON.stringify(m4))}}catch(e){}
       OVERVIEW_STALE();try{localStorage.removeItem("c:caris")}catch(e){}
       setResult({lines:items.length,rows:r.rows,exp:act.filter(x=>x.kind==="exp").length,inc:act.filter(x=>x.kind==="inc"||x.kind==="ret").length,tr:nTr,auto:act.filter(x=>isExp(x)&&autoSrc(x)).length,manual:act.filter(x=>x.src==="manual").length,
         diger:act.filter(x=>isExp(x)&&x.cat==="Diğer").length,linked:act.filter(x=>x.link).length,removed:rows.filter(x=>x.removed).length,dups:nDup,out:outSum,inn:inSum});
