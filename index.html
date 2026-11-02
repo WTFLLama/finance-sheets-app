@@ -483,7 +483,7 @@ function Home({go,say}){
     d?h(React.Fragment,null,
       h("section",null,
         h("div",{className:"pos-net"},h("div",{className:"pos-top"},h("span",{className:"mono-label"},$t("Cash")),h(Ic,{n:"wallet",s:18})),
-          h("div",{className:"pos-amt"},P(cash)),h("div",{className:"pos-foot"},h("span",null,$t(cur?"Available now":"At month end")),h("span",{className:"mono"},PREF.cur))),
+          h("div",{className:"pos-amt"},P(cash)),h("div",{className:"pos-foot"},h("span",null,cur?null:$t("At month end")),h("span",{className:"mono"},PREF.cur))),
         h("div",{className:"pos-split"},
           h("div",{className:"pm debt"},h("div",{className:"pm-h"},h("span",{style:{color:"#ff8c77",display:"flex"}},h(Ic,{n:"card",s:14})),h("span",{className:"mono-label"},$t("Card debt"))),h("div",{className:"pm-v"},P(debt))),
           h("div",{className:"pm net"+(net<0?" neg":"")},h("div",{className:"pm-h"},h("span",{style:{color:net<0?"#ff8c77":"#dfff00",display:"flex"}},h(Ic,{n:"equal",s:14})),h("span",{className:"mono-label"},$t("Net cash position"))),h("div",{className:"pm-v"},P(net))))),
