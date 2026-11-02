@@ -3,7 +3,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Diligence</title>
 <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#191b18">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -261,10 +260,75 @@ input[type=range].rg::-webkit-slider-thumb{-webkit-appearance:none;width:22px;he
 input[type=range].rg::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--paper);border:1px solid var(--ink)}
 input[type=range].rg:focus-visible{outline:2px solid var(--txt);outline-offset:2px}
 .rgl{display:flex;justify-content:space-between;font:500 10px var(--mono);letter-spacing:.6px;text-transform:uppercase;color:var(--mut)}
+/* ===== Mass entry ===== */
+.mx-stp{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
+.mx-st{border-top:3px solid var(--g-lo);padding-top:7px;font:500 10px/1.2 var(--mono);letter-spacing:.7px;text-transform:uppercase;color:var(--mut)}
+.mx-st.on,.mx-st.dn{border-top-color:var(--txt);color:var(--txt)}
+.mx-drop{margin-top:10px;border:1.5px dashed var(--mut);border-radius:14px;padding:20px 14px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;background:var(--in)}
+.mx-drop b{font:600 15px var(--sans)}
+.mx-uic{width:42px;height:42px;display:grid;place-items:center;background:var(--lime);color:var(--ink);border:1px solid var(--ink);border-radius:12px}
+.mx-ext{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}.mx-ext span{font:500 10px var(--mono);letter-spacing:.6px;border:1px solid var(--bd);border-radius:5px;padding:2px 6px;color:var(--mut)}
+.mx-file{margin-top:10px;display:flex;align-items:center;gap:10px;padding:10px;border:1px solid var(--g-bd);border-radius:14px;background:var(--in)}
+.mx-fic{flex:none;width:40px;height:40px;display:grid;place-items:center;background:var(--cyan);color:var(--ink);border:1px solid var(--ink);border-radius:10px}
+.mx-fn{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.mx-fn b{font:600 14px var(--sans);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mx-fn .mono{color:var(--mut)}
+.mx-det{display:flex;align-items:center;gap:8px;margin-top:10px;font:600 13px var(--sans)}
+.mx-next{margin:16px 4px 0;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--mut)}
+.mx-next div{display:flex;gap:10px;align-items:flex-start}.mx-next i{flex:none;width:7px;height:7px;background:var(--txt);margin-top:6px;border-radius:2px}
+.mx-ld{padding:26px 16px;margin-top:14px}
+.mx-pg{height:10px;border-radius:5px;background:var(--g-lo);overflow:hidden}
+.mx-pg>div{height:100%;border-radius:5px;background:var(--txt);transition:width .45s ease}
+.mx-coach{margin-top:12px;background:var(--cyan);color:var(--ink);border:1px solid var(--ink);border-radius:16px;padding:13px 14px}
+.mx-coach .mono-label{color:#3b3e37}.mx-coach h2{margin:4px 0 10px;font:600 17px/1.2 var(--sans);letter-spacing:-.3px}
+.mx-leg{display:flex;flex-direction:column;gap:8px}.mx-leg>div{display:flex;gap:10px;align-items:center;font-size:13px;line-height:1.3}
+.mx-k{flex:none;width:28px;height:28px;display:grid;place-items:center;border:1px solid var(--ink);border-radius:8px;background:rgba(255,255,250,.6)}
+.mx-coach .btn{margin-top:12px;padding:9px 14px;font-size:14px;background:var(--ink);color:var(--paper)}
+.mx-tiles{display:grid;gap:8px;margin-top:12px}
+.mx-tl{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;gap:8px;min-height:72px;padding:10px 11px;border-radius:14px;border:1px solid var(--g-bd);color:var(--ink);min-width:0}
+.mx-tl .mono-label{color:var(--ink);font-size:9.5px}.mx-tl:focus-visible{outline:2px solid var(--txt);outline-offset:2px}.mx-tl.sel{box-shadow:0 0 0 2px var(--txt)}
+.mx-tl.cy{background:linear-gradient(160deg,#9fe4ee,#bdedf2)}.mx-tl.li{background:linear-gradient(160deg,#ebff4a,#d6f400)}.mx-tl.co{background:linear-gradient(160deg,#ffa391,#ff8c77)}.mx-tl.gr{background:linear-gradient(160deg,#d9dccf,#c4c7ba)}
+.mx-tv{font:500 28px/1 var(--sans);letter-spacing:-1.2px;font-variant-numeric:tabular-nums}
+.card.mx-list{padding:0}
+.mx-ln{padding:12px;border-top:1px solid var(--g-lo);position:relative}.mx-ln:first-child{border-top:0}
+.mx-ln:has(.dd.open){z-index:7}
+.mx-ln.dim .mx-l1{opacity:.55}
+.mx-l1{display:flex;align-items:flex-start;gap:10px}
+.mx-xb{flex:none;width:28px;height:28px;border:1px solid var(--g-bd);border-radius:8px;background:var(--in);color:var(--mut);display:grid;place-items:center;padding:0;cursor:pointer}
+.mx-xb:active,.mx-xb:hover{background:var(--coral);color:var(--ink);border-color:var(--ink)}
+.mx-nm{flex:1;min-width:0}.mx-nm b{display:block;font:600 14px/1.3 var(--sans);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mx-sub{display:flex;flex-wrap:wrap;align-items:center;gap:3px 6px;margin-top:3px;font:400 11px/1.3 var(--mono);color:var(--mut)}
+.mx-sub .tag{font-size:9.5px;padding:1px 5px}
+.tag.mx-t-sort{background:var(--coral)}.tag.mx-t-set{background:transparent;color:var(--txt);border-color:var(--txt)}.tag.mx-t-dup,.tag.mx-t-tr{background:var(--cyan)}
+.mx-am{flex:none;font:600 15px/1.3 var(--sans);font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}.mx-am.cr{color:var(--gn)}
+.mx-l2{display:flex;gap:6px;align-items:center;margin:10px 0 0 38px}
+.mx-ib{flex:none;width:40px;height:40px;border:1px solid var(--g-bd);border-radius:8px;background:var(--in);color:var(--txt);display:grid;place-items:center;padding:0;cursor:pointer}
+.mx-ib.on{background:var(--lime);color:var(--ink);border-color:var(--ink)}.mx-ibx{flex:none;width:40px}
+.mx-ib:focus-visible,.mx-xb:focus-visible{outline:2px solid var(--txt);outline-offset:2px}
+.mx-dd{flex:1;min-width:0}.mx-dd .box{height:40px;font-size:14px;font-weight:600}.mx-dd.todo .box{border-color:var(--coral);box-shadow:inset 0 0 0 1px var(--coral)}
+.mx-dd .menu{max-height:230px}
+.mx-strip{margin:10px 0 0 38px;padding:9px 10px;border:1px solid var(--ink);border-radius:10px;background:var(--cyan);color:var(--ink);font-size:12.5px;line-height:1.35;display:flex;gap:6px 8px;align-items:center;flex-wrap:wrap}
+.mx-strip .mx-tx{flex:1 1 160px;min-width:0}.mx-strip .sb{border-color:var(--ink);color:var(--ink)}.mx-strip .sb.ok{background:var(--ink);color:var(--lime)}
+.mx-lk{margin:10px 0 0 38px;display:flex;align-items:center;gap:8px;padding:6px 6px 6px 9px;border:1px solid var(--g-bd);border-radius:8px;background:var(--in);font:500 12px/1.3 var(--sans)}
+.mx-lk>span{flex:1;min-width:0;overflow-wrap:anywhere}.mx-lk>svg{flex:none}
+.mx-lk button{flex:none;width:24px;height:24px;border:0;background:none;color:var(--mut);cursor:pointer;display:grid;place-items:center;padding:0;border-radius:6px}
+.mx-fbar{position:fixed;left:0;right:0;bottom:calc(78px + env(safe-area-inset-bottom,0px));z-index:29;padding:0 10px}
+.mx-fin{max-width:540px;margin:0 auto;padding:10px 12px;border-radius:18px;background:var(--g-menu);backdrop-filter:blur(20px) saturate(1.6);-webkit-backdrop-filter:blur(20px) saturate(1.6);border:1px solid var(--g-bd);box-shadow:0 10px 26px rgba(0,0,0,.22)}
+.mx-fsum{display:flex;justify-content:space-between;gap:10px;margin-bottom:8px;font:500 10.5px/1.3 var(--mono);letter-spacing:.3px;text-transform:uppercase;color:var(--mut)}.mx-fsum b{color:var(--txt);font-weight:500}
+.mx-fin .btn{padding:11px 12px}
+.btn.mx-ab{background:transparent;color:var(--rd);border-color:var(--rd)}
+.mx-rv .ct,.ct:has(.mx-list){padding-bottom:calc(200px + env(safe-area-inset-bottom,0px))}
+.mx-cand{margin-top:6px;border:1px solid var(--g-bd);border-radius:12px;overflow:hidden;background:var(--in);max-height:300px;overflow-y:auto}
+.mx-cand .opt{height:auto;min-height:48px;padding:8px 12px}
+.mx-cn{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}.mx-cn b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mx-cn small{font:400 11px var(--mono);color:var(--mut)}
+.mx-cand .opt.sel small{color:var(--ink)}.mx-ca{font:600 14px var(--sans);font-variant-numeric:tabular-nums;white-space:nowrap}
+.mx-res{margin-top:10px;border-radius:20px;overflow:hidden;border:1px solid var(--g-bd);box-shadow:0 14px 30px -10px var(--g-sh)}
+.mx-res-a{background:linear-gradient(160deg,#ebff4a,#d6f400);color:var(--ink);padding:14px 16px 12px}.mx-res-a .mono-label{color:var(--ink)}
+.mx-res-n{font:500 clamp(44px,15vw,60px)/1 var(--sans);letter-spacing:-.06em;padding-block:6px 2px;font-variant-numeric:tabular-nums}.mx-res-n small{font-size:.3em;letter-spacing:0;margin-left:.3em}
+.mx-res-b{background:var(--ink);color:var(--paper);padding:11px 16px;display:flex;justify-content:space-between;font:500 11px/1.3 var(--mono);letter-spacing:.4px;text-transform:uppercase}
+@media(prefers-reduced-motion:reduce){.mx-pg>div{transition:none}}
 </style></head><body><div id="root"></div>
 <script>
 const h=React.createElement,{useState,useEffect,useMemo}=React;
-const API="https://script.google.com/macros/s/AKfycbz-6cNjs81Dt_aQqUVDnCTWME0scyBXL89rwb6Ce60a3KqkXNLlSgk_XG13J7nbg9aOSg/exec";
+const API="https://script.google.com/macros/s/AKfycbw1uKIczhCi5z3T7wc2Ozj-cg7qPdh5tWOd5k0OEfZRmPdvAjmIalcvIUa7mJ-fo-8-vw/exec";
 async function api(path,body,params){
   const r=body?await fetch(API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({path,...body})}):await fetch(API+"?"+new URLSearchParams({path,...params}));
   const j=await r.json();if(!j.ok)throw new Error(j.error||"API error");return j.data}
@@ -274,7 +338,7 @@ let PRIV=false;
 document.documentElement.lang=PREF.lang;
 const applyTheme=()=>{const r=document.documentElement;r.style.setProperty("--gh",String(PREF.glass/100));if(PREF.theme==="system")r.removeAttribute("data-theme");else r.setAttribute("data-theme",PREF.theme);try{const m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#191b18")}catch(e){}};
 applyTheme();
-const TRD={"Glass hardness": "Cam sertliği", "Soft": "Yumuşak", "Hard": "Sert", "From clear frosted glass to solid cards.": "Şeffaf buzlu camdan düz kartlara kadar.", "Back": "Geri", "Refreshing...": "Yenileniyor...", "Refresh": "Yenile", "Delete": "Sil", "Cancel": "İptal", "Settings": "Ayarlar", "Loading...": "Yükleniyor...", "(none)": "(yok)", "None": "Yok", "Edit": "Düzenle", "Save": "Kaydet", "Update": "Güncelle", "Add": "Ekle", "Remove": "Kaldır", "Clear": "Temizle", "Name": "Ad", "Type": "Tür", "Amount": "Tutar", "Date": "Tarih", "Description": "Açıklama", "Category": "Kategori", "Item": "Kalem", "Account": "Hesap", "Unit": "Birim", "Quantity": "Miktar", "Overview": "Genel Bakış", "Cash": "Nakit", "Available now": "Şu an kullanılabilir", "At month end": "Ay sonu itibarıyla", "Card debt": "Kart borcu", "Net cash position": "Net nakit pozisyonu", "Spent this month": "Bu ay harcanan", "Spent in month": "Ay içinde harcanan", "Budget left today": "Bugün kalan bütçe", "Room per day": "Günlük pay", "Left at month end": "Ay sonu kalan", "Over budget": "Bütçe aşıldı", "Within budget": "Bütçe dahilinde", "Closed": "Kapandı", "Current": "Güncel", "Choose month": "Ay seç", "Show Diligence balances": "Diligence bakiyelerini göster", "Spending by category": "Kategoriye göre harcama", "Top category": "En büyük kategori", "No expense data available.": "Harcama verisi yok.", "Expenses by category": "Kategoriye göre harcamalar", "Tap a slice or row for details": "Ayrıntı için bir dilime veya satıra dokunun", "Credit cards": "Kredi kartları", "Cut-off ": "Hesap kesim ", "No cut-off date": "Kesim tarihi yok", "limit": "limit", "Currency": "Para birimi", "As of: ": "Tarih: ", "Insights": "Öngörüler", "Insights page is coming soon": "Öngörüler sayfası yakında geliyor", "days left": "gün kaldı", "No big category moves compared to ": "Şununla kıyasla belirgin kategori değişimi yok: ", "No earlier month to compare with": "Karşılaştırılacak önceki ay yok", "Hide balances": "Bakiyeleri gizle", "Theme": "Tema", "System": "Sistem", "Light": "Açık", "Dark": "Koyu", "Follows your device setting.": "Cihaz ayarını izler.", "Coming soon": "Yakında", "Spending trends and category moves": "Harcama eğilimleri ve kategori değişimleri", "Insights will compare your months and point out the biggest category moves.": "Öngörüler aylarını karşılaştırır ve en büyük kategori değişimlerini gösterir.", "Amount must be a positive number.": "Tutar pozitif bir sayı olmalı.", "Transaction date is required.": "İşlem tarihi gerekli.", "Recognition date is required.": "Tanıma tarihi gerekli.", "From account is required.": "Çıkış hesabı gerekli.", "To account is required.": "Giriş hesabı gerekli.", "From and To accounts must be different.": "Çıkış ve giriş hesapları farklı olmalı.", "Instrument is required.": "Enstrüman gerekli.", "Investment category is required.": "Yatırım kategorisi gerekli.", "Commission must be 0 or more.": "Komisyon 0 veya daha fazla olmalı.", "Payment method is required.": "Ödeme yöntemi gerekli.", "Business name is required.": "İşletme adı gerekli.", "Cari is required for receivable / payable categories.": "Alacak / borç kategorileri için cari gerekli.", "Description is required.": "Açıklama gerekli.", "Category I is required.": "Kategori I gerekli.", "Split amounts must sum to total amount.": "Bölünen tutarların toplamı toplam tutara eşit olmalı.", "Category II is required if Amount II > 0.": "Tutar II > 0 ise Kategori II gerekli.", "Category III is required if Amount III > 0.": "Tutar III > 0 ise Kategori III gerekli.", "Updated ✓": "Güncellendi ✓", "Saved ": "Kaydedildi: ", " installments ✓": " taksit ✓", "Saved ✓": "Kaydedildi ✓", "Edit transaction": "İşlemi düzenle", "Add entry": "Kayıt ekle", "Editing ": "Düzenleniyor: ", "Expense": "Gider", "Income": "Gelir", "Invest": "Yatırım", "From account": "Çıkış hesabı", "To account": "Giriş hesabı", "A transfer creates two linked Muavin transactions: one outgoing and one incoming.": "Transfer, birbirine bağlı iki Muavin işlemi oluşturur: biri çıkış, biri giriş.", "e.g. Credit card payment": "örn. Kredi kartı ödemesi", "Instrument": "Enstrüman", "e.g. THYAO / SPY / BTC": "örn. THYAO / SPY / BTC", "e.g. Stocks": "örn. Hisse", "Category II": "Kategori II", "Category III": "Kategori III", "Category I": "Kategori I", "Total cost: ": "Toplam maliyet: ", "Payment method": "Ödeme yöntemi", "Transaction date": "İşlem tarihi", "Recognize later": "Sonra tanı", "Book the expense in a different month.": "Gideri farklı bir aya işle.", "Recognition date": "Tanıma tarihi", "Installments": "Taksitler", "No installments": "Taksit yok", " installments": " taksit", "Business name": "İşletme adı", "e.g. Migros / Pegasus": "örn. Migros / Pegasus", "Who owes you / is owed": "Sana kim borçlu / kime borçlusun", "e.g. Ticket / groceries / salary": "örn. Bilet / market / maaş", "Additional categories": "Ek kategoriler", "Allocate the total across up to 3 categories.": "Toplamı en fazla 3 kategoriye dağıt.", "Amount allocated to Category I": "Kategori I'e ayrılan tutar", "Amount allocated to Category II": "Kategori II'ye ayrılan tutar", "Amount allocated to Category III": "Kategori III'e ayrılan tutar", "Saving...": "Kaydediliyor...", "Deleted ✓": "Silindi ✓", "More details": "Daha fazla ayrıntı", "set": "ayarlı", "Amount (₺)": "Tutar (₺)", "Cost (₺ per unit)": "Maliyet (birim başı ₺)", "Commission (₺, optional)": "Komisyon (₺, isteğe bağlı)", "Amount (units)": "Miktar (adet)", "e.g. 10": "örn. 10", "e.g. 15": "örn. 15", "None ": "Yok", "Transactions": "İşlemler", "All payment methods": "Tüm ödeme yöntemleri", "All expense types": "Tüm gider türleri", "No rows returned.": "Kayıt bulunamadı.", " installments · first ": " taksit · ilk ", "Cari: ": "Cari: ", "Returned ": "İade edilen ", "Return": "İade", "Delete this transfer?": "Bu transfer silinsin mi?", "Delete this transaction?": "Bu işlem silinsin mi?", "Both sides of the transfer will be deleted.": "Transferin her iki tarafı da silinecek.", "This transaction will be permanently removed from Muavin.": "Bu işlem Muavin'den kalıcı olarak silinecek.", "Return recorded ✓": "İade kaydedildi ✓", "Enter an amount.": "Bir tutar girin.", "Amount is more than what is left to return.": "Tutar, iade edilebilecek kalan tutardan fazla.", " · left to return ": " · iade edilebilir ", "Refund to": "İade edilecek hesap", "Split over categories, in proportion": "Kategorilere orantılı dağıt", "Auto split": "Otomatik dağıt", "Edit split": "Dağılımı düzenle", "A return row with the same ID and the same recognition month as the purchase is added to Muavin, so the original month nets down.": "Muavin'e alışverişle aynı ID ve aynı tanıma ayına sahip bir iade satırı eklenir; böylece asıl ay net olarak düşer.", "Record return": "İadeyi kaydet", "Amount (₺) ": "Tutar (₺) ", "Stocks": "Hisse", "FX & Commodities": "Döviz ve Emtia", "Crypto": "Kripto", "Investments": "Yatırımlar", "Total balance": "Toplam bakiye", "Budget ": "Bütçe ", "new vs ": "yeni, karşılaştırma: ", " · instalment ": " · taksit ", " of ": " / toplam ", "Total ÷ ": "Toplam ÷ ", " months · ": " ay · ", " each": " her biri", "Spread ✓": "Dağıtıldı ✓", "Normalize": "Normalize et", "One-off ✓": "Tek seferlik ✓", "One-off": "Tek seferlik", " transactions in ": " işlem, ", " · reported ": " · raporlanan ", " · normalized ": " · normalize ", "Normalize all": "Tümünü normalize et", "Excluded": "Hariç", "Exclude": "Hariç tut", "Spread into ": "Dağıtılan: ", "from ": "başlangıç: ", "Category excluded, so one-off / normalize is off.": "Kategori hariç tutuldu, bu yüzden tek seferlik / normalize kapalı.", "Excl. ": "Hariç: ", " one-off": " tek seferlik", " normalized": " normalize", " spread in": " dağıtıldı", "Include again": "Tekrar dahil et", "Exclude category": "Kategoriyi hariç tut", "One purchase in ": "Tek alışveriş: ", "Own months": "Kendi ayları", "Next 6": "Sonraki 6", "Next 12": "Sonraki 12", "Prev 12": "Önceki 12", "All 25": "Tümü (25)", "Same months as it is recognised now → no change.": "Şu an tanındığı aylarla aynı → değişiklik yok.", " per month": " aylık", " months": " ay", "Each purchase total is split equally across the months you tap, as if you pressed Normalize on every one.": "Her alışverişin toplamı, dokunduğunuz aylara eşit bölünür; sanki hepsinde Normalize'a basmışsınız gibi.", "This month": "Bu ay", "Pick at least one month.": "En az bir ay seçin.", "Nothing to normalize in this category.": "Bu kategoride normalize edilecek bir şey yok.", "in total, × ": "toplam, × ", "Apply to ": "Uygula: ", "Reported": "Raporlanan", " transactions": " işlem", "Normalized": "Normalize", "% vs reported": "% (raporlanana göre)", "same as reported": "raporlananla aynı", "One-offs": "Tek seferlikler", " one-off · ": " tek seferlik · ", " spread": " dağıtılan", "Budget · ": "Bütçe · ", "Set in Cashflow & capex": "Nakit akışı ve yatırım harcamasında ayarlanır", " under budget": " bütçenin altında", " over budget": " bütçenin üstünde", "Budget": "Bütçe", "Normalized spend": "Normalize harcama", "Expected by day ": "Gün için beklenen ", "Above pace": "Hızın üstünde", "Below pace": "Hızın altında", "Each month is compared with the budget that applied in that month.": "Her ay, o ay geçerli olan bütçeyle karşılaştırılır.", "No budget for ": "Bütçe yok: ", " · tap a month": " · bir aya dokunun", "How ": "", " gets from reported to normalized": " ayı raporlanandan normalize edilene nasıl gelir", "Reported spend": "Raporlanan harcama", "Excluded categories": "Hariç tutulan kategoriler", "Normalized items moved out": "Dışarı taşınan normalize kalemler", "Spread in from normalized items": "Normalize kalemlerden içeri dağıtılan", "Already spread into coming months": "Gelecek aylara zaten dağıtılan", " more months": " ay daha", "Categories": "Kategoriler", "Fixed vs variable": "Sabit ve değişken", "Search ": "Ara: ", ": merchant, description, category or amount": ": işletme, açıklama, kategori veya tutar", "No expenses recognised in ": "Tanınan gider yok: ", " yet.": " için henüz.", " result": " sonuç", "Expense categories · tap a tile for the biggest transactions": "Gider kategorileri · en büyük işlemler için bir karoya dokunun", " · change vs ": " · değişim: ", "Merchants in ": "İşletmeler: ", " · across all categories": " · tüm kategoriler genelinde", "Normalized spend in ": "Normalize harcama: ", " · excluded": " · hariç", " · 3-month avg ": " · 3 aylık ort. ", "None detected.": "Tespit edilmedi.", "Aging (days since transaction)": "Yaşlandırma (işlemden bu yana gün)", "Net position today": "Bugünkü net pozisyon", "Cash − card debt": "Nakit − kart borcu", "Free cash flow / month": "Aylık serbest nakit akışı", "Capex committed": "Taahhüt edilen yatırım harcaması", "Net position ≥ 0": "Net pozisyon ≥ 0", "Beyond 5 years": "5 yıl sonrası", "Save assumptions": "Varsayımları kaydet", "Also included: receivables at their due dates, payables due, and every capex instalment below.": "Ayrıca dahil: vadesindeki alacaklar, vadesi gelen borçlar ve aşağıdaki her yatırım harcaması taksiti.", "Planned capex": "Planlanan yatırım harcaması", "Nothing planned yet.": "Henüz planlanmış bir şey yok.", " from ": " başlangıç ", " · interest ": " · faiz ", "First payment date": "İlk ödeme tarihi", "Instalments": "Taksitler", "Single payment": "Tek ödeme", " instalments": " taksit", "Add to plan": "Plana ekle", "Out": "Çıkış", "Capex": "Yatırım harcaması", "Closing": "Kapanış", "Item ": "Kalem ", "Price (₺)": "Fiyat (₺)", "Item (e.g. Phone)": "Kalem (örn. Telefon)", "Income assumption (₺ / month)": "Gelir varsayımı (₺ / ay)", "Spend assumption (₺ / month)": "Harcama varsayımı (₺ / ay)", "Collect": "Tahsil et", "Pay": "Öde", "Account is required.": "Hesap gerekli.", "Collected ✓": "Tahsil edildi ✓", "Paid ✓": "Ödendi ✓", " open item": " açık kalem", "Overdue ": "Gecikmiş: ", "Unapplied credit: ": "Uygulanmamış alacak: ", "Due in ": "Vadeye kalan: ", "Outstanding": "Açık bakiye", "Overdue": "Gecikmiş", "Receivable days": "Alacak günü", "Payable days": "Borç günü", " days": " gün", "Avg. collection time": "Ort. tahsilat süresi", "Avg. payment time": "Ort. ödeme süresi", "Single line": "Tek satır", "By cari": "Cariye göre", "Nothing outstanding.": "Açık bakiye yok.", "Due rules: ": "Vade kuralları: ", "Outstanding: ": "Açık bakiye: ", " · matched against the oldest open items first": " · önce en eski açık kalemlerle eşleştirilir", "Full": "Tamamı", "Received into": "Tahsil edilen hesap", "Paid from": "Ödeme yapılan hesap", "Collection": "Tahsilat", "Payment": "Ödeme", "of ": "/ ", "Spend & budget": "Harcama ve bütçe", "Cashflow & capex": "Nakit akışı ve yatırım harcaması", "Receivables": "Alacaklar", "Payables": "Borçlar", "Diligence": "Diligence", "Income statement": "Gelir tablosu", "Balance sheet": "Bilanço", "ONCA": "ONCA", "Other non-current assets": "Diğer duran varlıklar", "Reports": "Raporlar", "IS": "GT", "BS": "BL", "Other months": "Diğer aylar", "Current month": "Bu ay", "No data for this month.": "Bu ay için veri yok.", "Payment methods": "Ödeme yöntemleri", "Expense categories": "Gider kategorileri", "Income categories": "Gelir kategorileri", "Invest categories": "Yatırım kategorileri", "Name is required.": "Ad gerekli.", "Added ✓": "Eklendi ✓", "Add to ": "Ekle: ", "Working...": "Çalışıyor...", "No items.": "Kalem yok.", "It is removed from the Siniflandirma sheet. Existing Muavin rows keep their text.": "Siniflandirma sayfasından kaldırılır. Mevcut Muavin satırları metinlerini korur.", "Debit": "Banka", "Credit": "Kredi", "Customize": "Özelleştir", "Language": "Dil", "Decimal digits": "Ondalık basamak", "Currency symbol": "Para birimi simgesi", "Digits shown after the comma.": "Virgülden sonra gösterilen basamak sayısı.", "Shown next to every amount.": "Her tutarın yanında gösterilir.", "Preview": "Önizleme", "English": "English", "Türkçe": "Türkçe", "Reconciled ✓": "Mutabakat yapıldı ✓", "Reconciliation": "Mutabakat", "Already matches, nothing to add.": "Zaten eşleşiyor, eklenecek bir şey yok.", "Entry to add": "Eklenecek kayıt", "Recorded today as ": "Bugün şu olarak kaydedilir: ", "an expense": "gider", "an income": "gelir", " in “Diğer” with POS “Reconciliation”.": " “Diğer” kategorisinde, işletme “Reconciliation” olarak.", "Reconcile": "Mutabık ol", "Reconcile ": "Mutabakat: ", " ₺ will be added to Muavin so the balance becomes ": " ₺ Muavin'e eklenecek; bakiye şu olacak: ", "Card debt in Muavin (up to today)": "Muavin'deki kart borcu (bugüne kadar)", "Balance in Muavin (up to today)": "Muavin'deki bakiye (bugüne kadar)", "Card debt it should be (₺)": "Olması gereken kart borcu (₺)", "Balance it should be (₺)": "Olması gereken bakiye (₺)", " ₺ on ": " ₺ · hesap: ", "Quantity must be a positive number.": "Miktar pozitif bir sayı olmalı.", "Item name is required.": "Kalem adı gerekli.", "Total cost must be a positive number.": "Toplam maliyet pozitif bir sayı olmalı.", "Used ✓": "Kullanıldı ✓", "Stocked ✓": "Stoğa eklendi ✓", "Used up": "Tükendi", "Use": "Kullan", "Restock": "Stok ekle", "Consumables": "Sarf malzemeler", "Stock value": "Stok değeri", "Active items": "Aktif kalemler", "+ New item / purchase": "+ Yeni kalem / alım", "No stock yet. Add your first purchase.": "Henüz stok yok. İlk alımınızı ekleyin.", "Use ": "Kullan: ", "Restock ": "Stok ekle: ", "New purchase": "Yeni alım", "Remaining: ": "Kalan: ", "Use all": "Tümünü kullan", "Expense recognized: ": "Tanınan gider: ", "e.g. Coffee beans": "örn. Kahve çekirdeği", "e.g. kg / gr / pcs": "örn. kg / gr / adet", "Unit cost: ": "Birim maliyet: ", "Total cost (₺)": "Toplam maliyet (₺)", "e.g. 1000": "örn. 1000", "Stock, restock and use": "Stok, stok ekleme ve kullanım", "Portfolio and allocation": "Portföy ve dağılım", "Income statement, balance sheet, ONCA": "Gelir tablosu, bilanço, ONCA", "Payment methods and categories": "Ödeme yöntemleri ve kategoriler", "Hide amounts on Overview, Diligence and Investments (shown as ***,*)": "Genel Bakış, Diligence ve Yatırımlar'daki tutarları gizle (***,* olarak görünür)", "More": "Daha Fazla", "Edit transaction ": "İşlemi düzenle ", "Unspent": "Harcanmayan", "No budget set": "Bütçe belirlenmedi"};
+const TRD={"Glass hardness": "Cam sertliği", "Soft": "Yumuşak", "Hard": "Sert", "From clear frosted glass to solid cards.": "Şeffaf buzlu camdan düz kartlara kadar.", "Back": "Geri", "Refreshing...": "Yenileniyor...", "Refresh": "Yenile", "Delete": "Sil", "Cancel": "İptal", "Settings": "Ayarlar", "Loading...": "Yükleniyor...", "(none)": "(yok)", "None": "Yok", "Edit": "Düzenle", "Save": "Kaydet", "Update": "Güncelle", "Add": "Ekle", "Remove": "Kaldır", "Clear": "Temizle", "Name": "Ad", "Type": "Tür", "Amount": "Tutar", "Date": "Tarih", "Description": "Açıklama", "Category": "Kategori", "Item": "Kalem", "Account": "Hesap", "Unit": "Birim", "Quantity": "Miktar", "Overview": "Genel Bakış", "Cash": "Nakit", "Available now": "Şu an kullanılabilir", "At month end": "Ay sonu itibarıyla", "Card debt": "Kart borcu", "Net cash position": "Net nakit pozisyonu", "Spent this month": "Bu ay harcanan", "Spent in month": "Ay içinde harcanan", "Budget left today": "Bugün kalan bütçe", "Room per day": "Günlük pay", "Left at month end": "Ay sonu kalan", "Over budget": "Bütçe aşıldı", "Within budget": "Bütçe dahilinde", "Closed": "Kapandı", "Current": "Güncel", "Choose month": "Ay seç", "Show Diligence balances": "Diligence bakiyelerini göster", "Spending by category": "Kategoriye göre harcama", "Top category": "En büyük kategori", "No expense data available.": "Harcama verisi yok.", "Expenses by category": "Kategoriye göre harcamalar", "Tap a slice or row for details": "Ayrıntı için bir dilime veya satıra dokunun", "Credit cards": "Kredi kartları", "Cut-off ": "Hesap kesim ", "No cut-off date": "Kesim tarihi yok", "limit": "limit", "Currency": "Para birimi", "As of: ": "Tarih: ", "Insights": "Öngörüler", "Insights page is coming soon": "Öngörüler sayfası yakında geliyor", "days left": "gün kaldı", "No big category moves compared to ": "Şununla kıyasla belirgin kategori değişimi yok: ", "No earlier month to compare with": "Karşılaştırılacak önceki ay yok", "Hide balances": "Bakiyeleri gizle", "Theme": "Tema", "System": "Sistem", "Light": "Açık", "Dark": "Koyu", "Follows your device setting.": "Cihaz ayarını izler.", "Coming soon": "Yakında", "Spending trends and category moves": "Harcama eğilimleri ve kategori değişimleri", "Insights will compare your months and point out the biggest category moves.": "Öngörüler aylarını karşılaştırır ve en büyük kategori değişimlerini gösterir.", "Amount must be a positive number.": "Tutar pozitif bir sayı olmalı.", "Transaction date is required.": "İşlem tarihi gerekli.", "Recognition date is required.": "Tanıma tarihi gerekli.", "From account is required.": "Çıkış hesabı gerekli.", "To account is required.": "Giriş hesabı gerekli.", "From and To accounts must be different.": "Çıkış ve giriş hesapları farklı olmalı.", "Instrument is required.": "Enstrüman gerekli.", "Investment category is required.": "Yatırım kategorisi gerekli.", "Commission must be 0 or more.": "Komisyon 0 veya daha fazla olmalı.", "Payment method is required.": "Ödeme yöntemi gerekli.", "Business name is required.": "İşletme adı gerekli.", "Cari is required for receivable / payable categories.": "Alacak / borç kategorileri için cari gerekli.", "Description is required.": "Açıklama gerekli.", "Category I is required.": "Kategori I gerekli.", "Split amounts must sum to total amount.": "Bölünen tutarların toplamı toplam tutara eşit olmalı.", "Category II is required if Amount II > 0.": "Tutar II > 0 ise Kategori II gerekli.", "Category III is required if Amount III > 0.": "Tutar III > 0 ise Kategori III gerekli.", "Updated ✓": "Güncellendi ✓", "Saved ": "Kaydedildi: ", " installments ✓": " taksit ✓", "Saved ✓": "Kaydedildi ✓", "Edit transaction": "İşlemi düzenle", "Add entry": "Kayıt ekle", "Editing ": "Düzenleniyor: ", "Expense": "Gider", "Income": "Gelir", "Invest": "Yatırım", "From account": "Çıkış hesabı", "To account": "Giriş hesabı", "A transfer creates two linked Muavin transactions: one outgoing and one incoming.": "Transfer, birbirine bağlı iki Muavin işlemi oluşturur: biri çıkış, biri giriş.", "e.g. Credit card payment": "örn. Kredi kartı ödemesi", "Instrument": "Enstrüman", "e.g. THYAO / SPY / BTC": "örn. THYAO / SPY / BTC", "e.g. Stocks": "örn. Hisse", "Category II": "Kategori II", "Category III": "Kategori III", "Category I": "Kategori I", "Total cost: ": "Toplam maliyet: ", "Payment method": "Ödeme yöntemi", "Transaction date": "İşlem tarihi", "Recognize later": "Sonra tanı", "Book the expense in a different month.": "Gideri farklı bir aya işle.", "Recognition date": "Tanıma tarihi", "Installments": "Taksitler", "No installments": "Taksit yok", " installments": " taksit", "Business name": "İşletme adı", "e.g. Migros / Pegasus": "örn. Migros / Pegasus", "Who owes you / is owed": "Sana kim borçlu / kime borçlusun", "e.g. Ticket / groceries / salary": "örn. Bilet / market / maaş", "Additional categories": "Ek kategoriler", "Allocate the total across up to 3 categories.": "Toplamı en fazla 3 kategoriye dağıt.", "Amount allocated to Category I": "Kategori I'e ayrılan tutar", "Amount allocated to Category II": "Kategori II'ye ayrılan tutar", "Amount allocated to Category III": "Kategori III'e ayrılan tutar", "Saving...": "Kaydediliyor...", "Deleted ✓": "Silindi ✓", "More details": "Daha fazla ayrıntı", "set": "ayarlı", "Amount (₺)": "Tutar (₺)", "Cost (₺ per unit)": "Maliyet (birim başı ₺)", "Commission (₺, optional)": "Komisyon (₺, isteğe bağlı)", "Amount (units)": "Miktar (adet)", "e.g. 10": "örn. 10", "e.g. 15": "örn. 15", "None ": "Yok", "Transactions": "İşlemler", "All payment methods": "Tüm ödeme yöntemleri", "All expense types": "Tüm gider türleri", "No rows returned.": "Kayıt bulunamadı.", " installments · first ": " taksit · ilk ", "Cari: ": "Cari: ", "Returned ": "İade edilen ", "Return": "İade", "Delete this transfer?": "Bu transfer silinsin mi?", "Delete this transaction?": "Bu işlem silinsin mi?", "Both sides of the transfer will be deleted.": "Transferin her iki tarafı da silinecek.", "This transaction will be permanently removed from Muavin.": "Bu işlem Muavin'den kalıcı olarak silinecek.", "Return recorded ✓": "İade kaydedildi ✓", "Enter an amount.": "Bir tutar girin.", "Amount is more than what is left to return.": "Tutar, iade edilebilecek kalan tutardan fazla.", " · left to return ": " · iade edilebilir ", "Refund to": "İade edilecek hesap", "Split over categories, in proportion": "Kategorilere orantılı dağıt", "Auto split": "Otomatik dağıt", "Edit split": "Dağılımı düzenle", "A return row with the same ID and the same recognition month as the purchase is added to Muavin, so the original month nets down.": "Muavin'e alışverişle aynı ID ve aynı tanıma ayına sahip bir iade satırı eklenir; böylece asıl ay net olarak düşer.", "Record return": "İadeyi kaydet", "Amount (₺) ": "Tutar (₺) ", "Stocks": "Hisse", "FX & Commodities": "Döviz ve Emtia", "Crypto": "Kripto", "Investments": "Yatırımlar", "Total balance": "Toplam bakiye", "Budget ": "Bütçe ", "new vs ": "yeni, karşılaştırma: ", " · instalment ": " · taksit ", " of ": " / toplam ", "Total ÷ ": "Toplam ÷ ", " months · ": " ay · ", " each": " her biri", "Spread ✓": "Dağıtıldı ✓", "Normalize": "Normalize et", "One-off ✓": "Tek seferlik ✓", "One-off": "Tek seferlik", " transactions in ": " işlem, ", " · reported ": " · raporlanan ", " · normalized ": " · normalize ", "Normalize all": "Tümünü normalize et", "Excluded": "Hariç", "Exclude": "Hariç tut", "Spread into ": "Dağıtılan: ", "from ": "başlangıç: ", "Category excluded, so one-off / normalize is off.": "Kategori hariç tutuldu, bu yüzden tek seferlik / normalize kapalı.", "Excl. ": "Hariç: ", " one-off": " tek seferlik", " normalized": " normalize", " spread in": " dağıtıldı", "Include again": "Tekrar dahil et", "Exclude category": "Kategoriyi hariç tut", "One purchase in ": "Tek alışveriş: ", "Own months": "Kendi ayları", "Next 6": "Sonraki 6", "Next 12": "Sonraki 12", "Prev 12": "Önceki 12", "All 25": "Tümü (25)", "Same months as it is recognised now → no change.": "Şu an tanındığı aylarla aynı → değişiklik yok.", " per month": " aylık", " months": " ay", "Each purchase total is split equally across the months you tap, as if you pressed Normalize on every one.": "Her alışverişin toplamı, dokunduğunuz aylara eşit bölünür; sanki hepsinde Normalize'a basmışsınız gibi.", "This month": "Bu ay", "Pick at least one month.": "En az bir ay seçin.", "Nothing to normalize in this category.": "Bu kategoride normalize edilecek bir şey yok.", "in total, × ": "toplam, × ", "Apply to ": "Uygula: ", "Reported": "Raporlanan", " transactions": " işlem", "Normalized": "Normalize", "% vs reported": "% (raporlanana göre)", "same as reported": "raporlananla aynı", "One-offs": "Tek seferlikler", " one-off · ": " tek seferlik · ", " spread": " dağıtılan", "Budget · ": "Bütçe · ", "Set in Cashflow & capex": "Nakit akışı ve yatırım harcamasında ayarlanır", " under budget": " bütçenin altında", " over budget": " bütçenin üstünde", "Budget": "Bütçe", "Normalized spend": "Normalize harcama", "Expected by day ": "Gün için beklenen ", "Above pace": "Hızın üstünde", "Below pace": "Hızın altında", "Each month is compared with the budget that applied in that month.": "Her ay, o ay geçerli olan bütçeyle karşılaştırılır.", "No budget for ": "Bütçe yok: ", " · tap a month": " · bir aya dokunun", "How ": "", " gets from reported to normalized": " ayı raporlanandan normalize edilene nasıl gelir", "Reported spend": "Raporlanan harcama", "Excluded categories": "Hariç tutulan kategoriler", "Normalized items moved out": "Dışarı taşınan normalize kalemler", "Spread in from normalized items": "Normalize kalemlerden içeri dağıtılan", "Already spread into coming months": "Gelecek aylara zaten dağıtılan", " more months": " ay daha", "Categories": "Kategoriler", "Fixed vs variable": "Sabit ve değişken", "Search ": "Ara: ", ": merchant, description, category or amount": ": işletme, açıklama, kategori veya tutar", "No expenses recognised in ": "Tanınan gider yok: ", " yet.": " için henüz.", " result": " sonuç", "Expense categories · tap a tile for the biggest transactions": "Gider kategorileri · en büyük işlemler için bir karoya dokunun", " · change vs ": " · değişim: ", "Merchants in ": "İşletmeler: ", " · across all categories": " · tüm kategoriler genelinde", "Normalized spend in ": "Normalize harcama: ", " · excluded": " · hariç", " · 3-month avg ": " · 3 aylık ort. ", "None detected.": "Tespit edilmedi.", "Aging (days since transaction)": "Yaşlandırma (işlemden bu yana gün)", "Net position today": "Bugünkü net pozisyon", "Cash − card debt": "Nakit − kart borcu", "Free cash flow / month": "Aylık serbest nakit akışı", "Capex committed": "Taahhüt edilen yatırım harcaması", "Net position ≥ 0": "Net pozisyon ≥ 0", "Beyond 5 years": "5 yıl sonrası", "Save assumptions": "Varsayımları kaydet", "Also included: receivables at their due dates, payables due, and every capex instalment below.": "Ayrıca dahil: vadesindeki alacaklar, vadesi gelen borçlar ve aşağıdaki her yatırım harcaması taksiti.", "Planned capex": "Planlanan yatırım harcaması", "Nothing planned yet.": "Henüz planlanmış bir şey yok.", " from ": " başlangıç ", " · interest ": " · faiz ", "First payment date": "İlk ödeme tarihi", "Instalments": "Taksitler", "Single payment": "Tek ödeme", " instalments": " taksit", "Add to plan": "Plana ekle", "Out": "Çıkış", "Capex": "Yatırım harcaması", "Closing": "Kapanış", "Item ": "Kalem ", "Price (₺)": "Fiyat (₺)", "Item (e.g. Phone)": "Kalem (örn. Telefon)", "Income assumption (₺ / month)": "Gelir varsayımı (₺ / ay)", "Spend assumption (₺ / month)": "Harcama varsayımı (₺ / ay)", "Collect": "Tahsil et", "Pay": "Öde", "Account is required.": "Hesap gerekli.", "Collected ✓": "Tahsil edildi ✓", "Paid ✓": "Ödendi ✓", " open item": " açık kalem", "Overdue ": "Gecikmiş: ", "Unapplied credit: ": "Uygulanmamış alacak: ", "Due in ": "Vadeye kalan: ", "Outstanding": "Açık bakiye", "Overdue": "Gecikmiş", "Receivable days": "Alacak günü", "Payable days": "Borç günü", " days": " gün", "Avg. collection time": "Ort. tahsilat süresi", "Avg. payment time": "Ort. ödeme süresi", "Single line": "Tek satır", "By cari": "Cariye göre", "Nothing outstanding.": "Açık bakiye yok.", "Due rules: ": "Vade kuralları: ", "Outstanding: ": "Açık bakiye: ", " · matched against the oldest open items first": " · önce en eski açık kalemlerle eşleştirilir", "Full": "Tamamı", "Received into": "Tahsil edilen hesap", "Paid from": "Ödeme yapılan hesap", "Collection": "Tahsilat", "Payment": "Ödeme", "of ": "/ ", "Spend & budget": "Harcama ve bütçe", "Cashflow & capex": "Nakit akışı ve yatırım harcaması", "Receivables": "Alacaklar", "Payables": "Borçlar", "Diligence": "Diligence", "Income statement": "Gelir tablosu", "Balance sheet": "Bilanço", "ONCA": "ONCA", "Other non-current assets": "Diğer duran varlıklar", "Reports": "Raporlar", "IS": "GT", "BS": "BL", "Other months": "Diğer aylar", "Current month": "Bu ay", "No data for this month.": "Bu ay için veri yok.", "Payment methods": "Ödeme yöntemleri", "Expense categories": "Gider kategorileri", "Income categories": "Gelir kategorileri", "Invest categories": "Yatırım kategorileri", "Name is required.": "Ad gerekli.", "Added ✓": "Eklendi ✓", "Add to ": "Ekle: ", "Working...": "Çalışıyor...", "No items.": "Kalem yok.", "It is removed from the Siniflandirma sheet. Existing Muavin rows keep their text.": "Siniflandirma sayfasından kaldırılır. Mevcut Muavin satırları metinlerini korur.", "Debit": "Banka", "Credit": "Kredi", "Customize": "Özelleştir", "Language": "Dil", "Decimal digits": "Ondalık basamak", "Currency symbol": "Para birimi simgesi", "Digits shown after the comma.": "Virgülden sonra gösterilen basamak sayısı.", "Shown next to every amount.": "Her tutarın yanında gösterilir.", "Preview": "Önizleme", "English": "English", "Türkçe": "Türkçe", "Reconciled ✓": "Mutabakat yapıldı ✓", "Reconciliation": "Mutabakat", "Already matches, nothing to add.": "Zaten eşleşiyor, eklenecek bir şey yok.", "Entry to add": "Eklenecek kayıt", "Recorded today as ": "Bugün şu olarak kaydedilir: ", "an expense": "gider", "an income": "gelir", " in “Diğer” with POS “Reconciliation”.": " “Diğer” kategorisinde, işletme “Reconciliation” olarak.", "Reconcile": "Mutabık ol", "Reconcile ": "Mutabakat: ", " ₺ will be added to Muavin so the balance becomes ": " ₺ Muavin'e eklenecek; bakiye şu olacak: ", "Card debt in Muavin (up to today)": "Muavin'deki kart borcu (bugüne kadar)", "Balance in Muavin (up to today)": "Muavin'deki bakiye (bugüne kadar)", "Card debt it should be (₺)": "Olması gereken kart borcu (₺)", "Balance it should be (₺)": "Olması gereken bakiye (₺)", " ₺ on ": " ₺ · hesap: ", "Quantity must be a positive number.": "Miktar pozitif bir sayı olmalı.", "Item name is required.": "Kalem adı gerekli.", "Total cost must be a positive number.": "Toplam maliyet pozitif bir sayı olmalı.", "Used ✓": "Kullanıldı ✓", "Stocked ✓": "Stoğa eklendi ✓", "Used up": "Tükendi", "Use": "Kullan", "Restock": "Stok ekle", "Consumables": "Sarf malzemeler", "Stock value": "Stok değeri", "Active items": "Aktif kalemler", "+ New item / purchase": "+ Yeni kalem / alım", "No stock yet. Add your first purchase.": "Henüz stok yok. İlk alımınızı ekleyin.", "Use ": "Kullan: ", "Restock ": "Stok ekle: ", "New purchase": "Yeni alım", "Remaining: ": "Kalan: ", "Use all": "Tümünü kullan", "Expense recognized: ": "Tanınan gider: ", "e.g. Coffee beans": "örn. Kahve çekirdeği", "e.g. kg / gr / pcs": "örn. kg / gr / adet", "Unit cost: ": "Birim maliyet: ", "Total cost (₺)": "Toplam maliyet (₺)", "e.g. 1000": "örn. 1000", "Stock, restock and use": "Stok, stok ekleme ve kullanım", "Portfolio and allocation": "Portföy ve dağılım", "Income statement, balance sheet, ONCA": "Gelir tablosu, bilanço, ONCA", "Payment methods and categories": "Ödeme yöntemleri ve kategoriler", "Hide amounts on Overview, Diligence and Investments (shown as ***,*)": "Genel Bakış, Diligence ve Yatırımlar'daki tutarları gizle (***,* olarak görünür)", "More": "Daha Fazla", "Edit transaction ": "İşlemi düzenle ", "Unspent": "Harcanmayan", "No budget set": "Bütçe belirlenmedi", "Mass entry": "Toplu giriş", "Import a bank statement (PDF, CSV, XLS, XLSX)": "Banka ekstresini içe aktar (PDF, CSV, XLS, XLSX)", "Match a cash or card balance to the real amount": "Nakit veya kart bakiyesini gerçek tutarla eşleştir", "Import": "İçe aktar", "Review": "Kontrol", "Step 1 of 3 · Import": "Adım 1 / 3 · İçe aktar", "Statement file": "Ekstre dosyası", "Replace": "Değiştir", "Remove file": "Dosyayı kaldır", "Choose your bank statement": "Banka ekstreni seç", "Downloaded from your bank app or internet banking.": "Banka uygulamandan veya internet bankacılığından indirilmiş.", "Choose file": "Dosya seç", "Detected": "Algılandı", "The file is read on this phone. Only the lines you save are sent to your sheet.": "Dosya bu telefonda okunur. Sadece kaydettiğin satırlar tabloya gönderilir.", "Which account is it for?": "Hangi hesaba ait?", "Choose an account": "Hesap seç", "Every line in the file is added to this account.": "Dosyadaki her satır bu hesaba eklenir.", "Card: purchases become expenses, payments to the card become transfers, refunds are linked to the purchase.": "Kart: harcamalar gider, karta yapılan ödemeler transfer olur, iadeler alışverişe bağlanır.", "Bank account: money out becomes expenses, money in becomes income. Payments to your cards become transfers.": "Banka hesabı: çıkan para gider, giren para gelir olur. Kartlarına yapılan ödemeler transfer olur.", "Every line in the file is read.": "Dosyadaki her satır okunur.", "Known merchants get a category from your past entries.": "Bilinen işletmeler geçmiş kayıtlarından kategori alır.", "Lines already in Diligence are skipped.": "Diligence'ta zaten olan satırlar atlanır.", "You check the list, then save.": "Listeyi kontrol eder, sonra kaydedersin.", "Import statement": "Ekstreyi içe aktar", "Importing": "İçe aktarılıyor", "Saved": "Kaydedildi", "Added to Muavin": "Muavin'e eklendi", " lines": " satır", "Rows written": "Yazılan satır", "Expenses": "Giderler", "Income and refunds": "Gelir ve iadeler", "Transfers": "Transferler", "Sorted automatically": "Otomatik sınıflandırılan", "Sorted by you": "Senin sınıflandırdığın", "Still in Diğer": "Hâlâ Diğer'de", "Linked to another expense": "Başka bir gidere bağlanan", "Removed by you": "Senin kaldırdığın", "Already in Diligence (skipped)": "Diligence'ta zaten var (atlandı)", "Import another": "Başka ekstre yükle", "See transactions": "İşlemlere git", "Transfer": "Transfer", "Auto": "Otomatik", "Set by you": "Sen seçtin", "To sort": "Sınıflandır", "Refund · ": "İade · ", "In Diligence": "Diligence'ta", "bank fee": "banka ücreti", "card payment": "kart ödemesi", "transfer": "transfer", "salary": "maaş", "Instalment ": "Taksit ", "Virtual card": "Sanal kart", "Additional card": "Ek kart", "Cari needed": "Cari gerekli", "Recognized ": "Tanınma ", "Matches ": "Eşleşen kayıt: ", "Include anyway": "Yine de ekle", "Link": "Bağla", "Refund of ": "İadesi: ", "Instalment of ": "Taksiti: ", "Same purchase as ": "Aynı alışveriş: ", " (in Diligence)": " (Diligence'ta)", "Remove link": "Bağlantıyı kaldır", "Saves ": "", " monthly instalments of ": " aylık taksit olarak kaydedilir, her biri ", ", like the Add tab.": "; Kayıt ekle sekmesindeki gibi.", "Looks like a refund of ": "Şunun iadesi gibi görünüyor: ", "Dismiss": "Kapat", "Put ": "Şu kadar ", " more “": " “", "” line(s) in ": "” satırını da şuraya koy: ", " and remember it?": " ve hatırlansın mı?", "Remember “": "“", "” as ": "” şuna kaydedilsin mi: ", " for next imports?": " (sonraki içe aktarımlar için)", "Apply": "Uygula", "Remember": "Hatırla", "Not now": "Şimdi değil", "Rule saved: ": "Kural kaydedildi: ", "Removed ": "Kaldırıldı: ", "Add a cari to ": "Önce şu kadar satıra cari ekle: ", " line(s) first": "", "Choose the other account for each transfer.": "Her transfer için diğer hesabı seç.", "Review lines": "Satırları kontrol et", "How to review": "Nasıl kontrol edilir", "Check each line before you save": "Kaydetmeden önce her satırı kontrol et", "Remove a line you do not want to import.": "İçe aktarmak istemediğin satırı kaldır.", "Edit the name, amount, date, note or cari.": "Adı, tutarı, tarihi, notu veya cariyi düzenle.", "Link a refund or an instalment to another expense.": "Bir iadeyi veya taksiti başka bir gidere bağla.", "Pick a category. Auto lines come from your rules and past entries; everything else starts in Diğer.": "Kategori seç. Otomatik satırlar kurallarından ve geçmiş kayıtlarından gelir; diğerleri Diğer ile başlar.", "Got it": "Anladım", "Statement check": "Ekstre kontrolü", "cut-off ": "kesim ", "Previous balance": "Önceki bakiye", "Lines on the statement": "Ekstredeki satırlar", "Period debt": "Dönem borcu", "Every line was read: the lines add up to the statement's own total.": "Her satır okundu: satırların toplamı ekstrenin kendi toplamını tutuyor.", "The lines differ from the statement total by ": "Satırlar ekstre toplamından şu kadar farklı: ", ". Some lines may be missing; compare with the PDF before saving.": ". Bazı satırlar eksik olabilir; kaydetmeden önce PDF ile karşılaştır.", " line(s) are already in Diligence and will be skipped. Each one shows the Muavin row it matches.": " satır Diligence'ta zaten var ve atlanacak. Her biri eşleştiği Muavin satırını gösterir.", "All lines": "Tüm satırlar", "Auto-sorted": "Otomatik", "Nothing left to sort.": "Sınıflandırılacak satır kalmadı.", "No lines in this view.": "Bu görünümde satır yok.", " skipped": " atlandı", " in Diğer": " Diğer'de", "Abort": "Vazgeç", "Save ": "Kaydet: ", "Nothing new": "Yeni satır yok", "Abort this import?": "Bu içe aktarımdan vazgeçilsin mi?", " lines will be discarded. Nothing has been saved yet.": " satır silinecek. Henüz hiçbir şey kaydedilmedi.", "Abort import": "İçe aktarımdan vazgeç", "Edit line": "Satırı düzenle", "Save line": "Satırı kaydet", "Link to another expense": "Başka bir gidere bağla", "Instalment": "Taksit", "Same purchase": "Aynı alışveriş", "Refund": "İade", "This line gives back money from an earlier purchase. It gets the purchase's ID and month, so that month nets down in Spend.": "Bu satır önceki bir alışverişin parasını geri verir. Alışverişin ID'sini ve ayını alır; böylece o ay Harcama'da net olarak düşer.", "This line is one payment of an earlier purchase. It gets the purchase's ID and month, so the purchase stays one expense.": "Bu satır önceki bir alışverişin bir ödemesidir. Alışverişin ID'sini ve ayını alır; böylece alışveriş tek gider olarak kalır.", "This line belongs to the same purchase as another line, for example a split receipt.": "Bu satır başka bir satırla aynı alışverişe aittir, örneğin bölünmüş bir fiş.", "Search by name": "Ada göre ara", "In this import": "Bu içe aktarımda", "Already in Diligence": "Diligence'ta zaten var", "No matching expenses found.": "Eşleşen gider bulunamadı."};
 const $t=s=>{const r=PREF.lang==="tr"&&TRD[s]!==undefined?TRD[s]:s;return r.indexOf("₺")>-1?r.split("₺").join(PREF.cur):r};
 const LOC=()=>PREF.lang==="tr"?"tr-TR":"en-US";
 const LOCD=()=>PREF.lang==="tr"?"tr-TR":"en-GB";
@@ -991,9 +1055,558 @@ function Stock({back,L,say}){
         F($t("Paid from"),S(f.from,v=>s("from",v),funds)),F($t("Date"),I(f.date,v=>s("date",v),{type:"date"}))),
       h("div",{className:"row",style:{marginTop:16}},h("button",{className:"btn",disabled:busy,onClick:save},busy?$t("Saving..."):$t("Save")),h("button",{className:"btn gh",onClick:()=>setDlg(null)},$t("Cancel")))):null)}
 
+/* ---------- MASS ENTRY: statement parser (no AI, runs on the device) ---------- */
+const MX=(function(){
+  const PDFJS="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/",XLSXJS="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
+  const pad=n=>String(n).padStart(2,"0");
+  const up=s=>String(s==null?"":s).toLocaleUpperCase("tr");
+  const FOLD={"Ç":"C","Ğ":"G","İ":"I","Ö":"O","Ş":"S","Ü":"U","Â":"A","Î":"I","Û":"U"};
+  const fold=s=>up(s).replace(/[ÇĞİÖŞÜÂÎÛ]/g,c=>FOLD[c]);
+  const compact=s=>fold(s).replace(/[^A-Z0-9]/g,"");
+  const toks=s=>fold(s).split(/[^A-Z0-9]+/).filter(t=>t.length>=2);
+  const r2=n=>Math.round(n*100)/100;
+
+  /* ---------- small parsers ---------- */
+  const TRM=["OCAK","SUBAT","MART","NISAN","MAYIS","HAZIRAN","TEMMUZ","AGUSTOS","EYLUL","EKIM","KASIM","ARALIK"],ENM=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  function ymd(y,m,d){y=+y;m=+m;d=+d;if(y<100)y+=2000;if(!(y>1990&&y<2100&&m>=1&&m<=12&&d>=1&&d<=31))return null;const t=new Date(y,m-1,d);return t.getMonth()===m-1?y+"-"+pad(m)+"-"+pad(d):null}
+  function parseDate(v,opt){
+    if(v instanceof Date&&!isNaN(v))return v.getFullYear()+"-"+pad(v.getMonth()+1)+"-"+pad(v.getDate());
+    if(typeof v==="number"&&v>30000&&v<60000&&!(opt==="strict"&&Math.floor(v)===v)){const t=new Date(Math.round((v-25569)*86400000));return t.getUTCFullYear()+"-"+pad(t.getUTCMonth()+1)+"-"+pad(t.getUTCDate())}
+    const s=String(v==null?"":v).trim();let m;
+    if((m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/)))return ymd(m[1],m[2],m[3]);
+    if((m=s.match(/^(\d{1,2})[./-](\d{1,2})[./-](\d{4}|\d{2})(?!\d)/)))return ymd(m[3],m[2],m[1]);
+    if((m=fold(s).match(/^(\d{1,2})\s+([A-Z]{3,8})\s+(\d{4})/))){const k=TRM.findIndex(x=>x.indexOf(m[2])===0&&m[2].length>=3),e=ENM.indexOf(m[2].slice(0,3));const mo=k>-1?k+1:e>-1?e+1:0;return mo?ymd(m[3],mo,m[1]):null}
+    return null}
+  const MONEY=/^[-+(]?\s*(?:\d{1,3}(?:[.,\s]\d{3})+|\d+)[.,]\d{2}\s*\)?\s*-?\s*(?:TL|TRY|₺)?\s*[-+]?$/i;
+  function parseAmt(v){
+    if(typeof v==="number")return Number.isFinite(v)?v:null;
+    let s=String(v==null?"":v).trim();if(!s)return null;
+    const neg=/^-|^\(|-\s*(?:TL|TRY|₺)?$|\)$/i.test(s);
+    s=s.replace(/[^\d.,]/g,"");if(!/\d/.test(s))return null;
+    const c=s.lastIndexOf(","),d=s.lastIndexOf(".");
+    if(c>-1&&d>-1){const dec=c>d?",":".";s=s.split(dec===","?".":",").join("").replace(dec,".")}
+    else if(c>-1||d>-1){const sep=c>-1?",":".",parts=s.split(sep);s=parts.length===2&&parts[1].length<=2?parts[0]+"."+parts[1]:parts.join("")}
+    const n=Number(s);return Number.isFinite(n)?(neg?-n:n):null}
+  const addMonthsYmd=(s,k)=>{const[y,m,d]=s.split("-").map(Number);const t=new Date(y,m-1+k,Math.min(d,new Date(y,m+k,0).getDate()));return t.getFullYear()+"-"+pad(t.getMonth()+1)+"-"+pad(t.getDate())};
+  const dayDiff=(a,b)=>Math.round((new Date(a+"T12:00:00")-new Date(b+"T12:00:00"))/86400000);
+  const INST=/^\(?\s*(\d{1,2})\s*\/\s*(\d{1,2})\s*\)?$/;
+  const instOf=s=>{const m=String(s).trim().match(INST);if(!m)return null;const no=+m[1],of=+m[2];return no>=1&&of>=2&&of<=36&&no<=of?{no,of}:null};
+
+  /* ---------- library loading ---------- */
+  const loaded={};
+  function script(src){return loaded[src]||(loaded[src]=new Promise((ok,no)=>{const e=document.createElement("script");e.src=src;e.onload=ok;e.onerror=()=>{delete loaded[src];no(new Error("Could not load the file reader. Check your internet connection."))};document.head.appendChild(e)}))}
+  async function pdfLib(){
+    if(typeof window==="undefined")return require("./pdfjs/build/pdf.js");
+    await script(PDFJS+"pdf.min.js");const lib=window.pdfjsLib;
+    if(!lib.GlobalWorkerOptions.workerSrc){try{const r=await fetch(PDFJS+"pdf.worker.min.js");lib.GlobalWorkerOptions.workerSrc=URL.createObjectURL(new Blob([await r.text()],{type:"text/javascript"}))}catch(e){lib.GlobalWorkerOptions.workerSrc=PDFJS+"pdf.worker.min.js"}}
+    return lib}
+  async function xlsxLib(){if(typeof window==="undefined")return require("./sjs/dist/xlsx.full.min.js");await script(XLSXJS);return window.XLSX}
+
+  /* ---------- Turkish letters that some bank PDFs ship without a Unicode map ---------- */
+  // Arial / Helvetica advance widths (1/1000 em), regular and bold
+  const TRW={U:{"İ":[278,278],"Ş":[667,667],"Ç":[722,722],"Ü":[722,722],"Ö":[778,778],"Ğ":[778,778]},
+             L:{"ç":[500,556],"ş":[500,556],"ğ":[556,611],"ü":[556,611],"ö":[556,611],"ı":[222,278]}};
+  const VOW="AEIİOÖUÜ",FRONT="EİÖÜ",BACK="AIOU";
+  const DICT=("ÖDEME ÖDEMENİZ ÖDEMESİ TEŞEKKÜR TEŞEKKÜRLER EDERİZ ÖNCEKİ DÖNEM DÖNEMİ BORÇ BORCU BORCUNUZ ÖZET ÖZETİ ÖZETİNİZ İŞLEM İŞLEMİ İŞLEMLER AÇIKLAMA AÇIKLAMASI "+
+    "MÜŞTERİ NUMARASI KARTI ALIŞVERİŞ FAİZ FAİZİ ÜCRET ÜCRETİ ÜCRETLER ÜYELİK YILLIK GECİKME ÇEKİM NAKİT KULLANILABİLİR KAZANILAN ÖZEL KARŞILIĞI BANKACILIĞI ŞİŞLİ "+
+    "İSTANBUL ANKARA İZMİR BURSA ANTALYA BÜYÜK MÜKELLEFLER GEREĞİ KISITLARI ÖDENDİĞİNDEN KALDIRILMIŞTIR TARİHİ TARİHİNİZ TUTARI ASGARİ ORANI HESAP KESİM İADE İPTAL "+
+    "HAVALE GİDEN GELEN ŞUBE ŞUBESİ ŞTİ ŞİRKETİ TİC TİCARET SANAYİ LİMİTED ANONİM ANONİ İNŞAAT İNŞ GIDA YİYECEK İÇECEK İÇECEKLERİ ÇİÇEK ÇİÇEKÇİLİK MAĞAZA MAĞAZASI MAĞAZACILIK "+
+    "MARKET MARKETLERİ ÜRÜN ÜRÜNLERİ FIRIN BÜFE KÖFTE DÖNER KÜÇÜK ÇARŞI ÇARŞISI KÖY KÖYÜ EYÜP EYÜPSULTAN ÜSKÜDAR BEŞİKTAŞ KADIKÖY BAKIRKÖY ATAŞEHİR ÜMRANİYE ÇEKMEKÖY "+
+    "BEYLİKDÜZÜ SARIYER BEYOĞLU KAĞITHANE GÜNGÖREN BAĞCILAR BAHÇELİEVLER KÜÇÜKÇEKMECE BÜYÜKÇEKMECE GAZİOSMANPAŞA BAYRAMPAŞA ZEYTİNBURNU FATİH BAŞAKŞEHİR ŞAHİN ŞAHİNLER "+
+    "ÖZGÜR ÜNLÜ GÜNEŞ YEŞİL YEŞİLPINAR ALİBEYKÖY İSTİNYE MECİDİYEKÖY ÖZDİLEK ÇAĞDAŞ DOĞAN DOĞUŞ ŞOK BİM MİGROS TÜRK TÜRKİYE TÜRKCELL İGDAŞ İSKİ ECZANE ECZANESİ SAĞLIK "+
+    "HASTANE HASTANESİ AKARYAKIT YIKAMA KUAFÖR GÜZELLİK GİYİM ÇANTA KİTAP KIRTASİYE ELEKTRONİK MOBİLYA BAHÇE ÇAY KAHVECİ PASTANE PASTANESİ TATLI TATLICI LOKANTA LOKANTASI "+
+    "ÇİĞ KÖFTECİ DÜRÜM DÜRÜMCÜ PİDE KEBAP KEBAPÇI SÜT ŞARKÜTERİ ÇİFTLİK ÜNİVERSİTE ÜYELİĞİ ABONELİK BİLET SİNEMA TİYATRO OTELİ TURİZM HAVAYOLLARI TAKSİ OTOBÜS "+
+    "İSTANBULKART YÜKLEME VERGİ HARÇ SİGORTA AİDAT FATURA FATURASI ELEKTRİK DOĞALGAZ İNTERNET HİZMET HİZMETLERİ DİŞ KLİNİK KLİNİĞİ OPTİK ÇOCUK OYUNCAK HEDİYE HEDİYELİK "+
+    "ÇAMAŞIR TEMİZLEME TERZİ ÇİLİNGİR HIRDAVAT GÜMÜŞ İÇKİ GEÇİŞ KÖPRÜ İLE İÇİN GÜMRÜK LİMİTİ İNDİRİM TAKSİT TAKSİTLİ VADELİ KREDİ SANAL DÖKÜM EKSTRE EKSTRESİ "+
+    "ADRESİ MAHALLESİ CADDESİ SOKAĞI DAİRE İLÇE BİNASI ŞEKER ÇİKOLATA GÜL ÇELİK ÖZTÜRK YILDIZ YILMAZ DEMİR AYDIN ÖZDEMİR KILIÇ ÇETİN KOÇ ÖZKAN ŞİMŞEK ÖZER ERDOĞAN "+
+    "KÖSE ÇAKIR ÖZCAN GÜNAYDIN MÜDÜRLÜĞÜ BELEDİYESİ BAKANLIĞI DERNEĞİ VAKFI YAYINCILIK YAYINLARI GÖZLÜK MÜZİK DÜNYASI DÜNYA KÖŞE KÖŞESİ PAZARI GÜVEN GÜVENLİK İLETİŞİM "+
+    "ÜRÜNLER İŞLETME İŞLETMESİ İŞLETMECİLİĞİ GÜNLÜK HAFTALIK AYLIK ŞARJ YAKIT OTOPARKI ÇİFTÇİ ÖĞRENCİ ÖĞLE AKŞAM KAHVALTI ÜCRETSİZ").split(" ");
+  const DICTL=DICT.map(w=>w.length);
+
+  function inferTurkish(lines,ph){
+    const keys=Object.keys(ph);if(!keys.length)return{};
+    const votes={};keys.forEach(k=>{votes[k]={}});
+    const isPh=c=>!!ph[c];
+    const letterCase=c=>/[A-ZÇĞİÖŞÜ]/.test(c)?"U":/[a-zçğıöşü]/.test(c)?"L":"";
+    const cands=(k,cs)=>{const w=ph[k].w,out=[];["U","L"].forEach(C=>{if(cs&&cs!==C)return;Object.keys(TRW[C]).forEach(l=>{if(!w||TRW[C][l].some(x=>Math.abs(x-w)<=12))out.push(l)})});return out.length?out:Object.keys(cs==="L"?TRW.L:TRW.U)};
+    const add=(k,l,v)=>{votes[k][l]=(votes[k][l]||0)+v};
+    lines.forEach(L=>{
+      L.text.split(/[^A-Za-z0-9ÇĞİÖŞÜçğıöşü\uE000-\uE0FF]+/).forEach(tok=>{
+        if(![...tok].some(isPh))return;
+        const ch=[...tok],n=ch.length;
+        // case of each placeholder from its neighbours
+        const cs=ch.map((c,i)=>{if(!isPh(c))return letterCase(c);const nb=(ch.slice(i+1).find(x=>!isPh(x)&&letterCase(x))||"");const pb=(ch.slice(0,i).reverse().find(x=>!isPh(x)&&letterCase(x))||"");
+          const a=letterCase(pb),b=letterCase(nb);if(a&&b)return a===b?a:(i===0?"U":b);if(i===0&&b==="L")return"U";return a||b||"U"});
+        // dictionary: same length, or a dictionary stem the token starts with
+        const T=ch.map((c,i)=>isPh(c)?c:up(c)).join("");
+        DICT.forEach((w,wi)=>{const wl=DICTL[wi];if(wl!==n&&!(wl>=5&&wl<n))return;
+          const wc=[...w];let ok=true,hit=false;
+          for(let i=0;i<wl&&ok;i++){const c=ch[i];if(isPh(c)){const cc=cands(c,cs[i]).map(up);if(cc.indexOf(wc[i])<0)ok=false;else hit=true}else if(up(c)!==wc[i]&&!(wc[i]==="I"&&up(c)==="I"))ok=false}
+          if(!ok||!hit)return;const wgt=wl===n?6:3;
+          for(let i=0;i<wl;i++){const c=ch[i];if(isPh(c)){const l=cs[i]==="L"?wc[i].toLocaleLowerCase("tr"):wc[i];add(c,l,wgt)}}});
+        // sound pattern: a vowel sits between consonants, a consonant between vowels
+        const vs=ch.filter(c=>!isPh(c)).map(up).join(""),front=[...vs].filter(c=>FRONT.indexOf(c)>-1).length,back=[...vs].filter(c=>BACK.indexOf(c)>-1).length;
+        ch.forEach((c,i)=>{if(!isPh(c))return;const p=i>0&&!isPh(ch[i-1])?up(ch[i-1]):null,q=i<n-1&&!isPh(ch[i+1])?up(ch[i+1]):null;
+          const pv=p===null?null:VOW.indexOf(p)>-1,qv=q===null?null:VOW.indexOf(q)>-1;
+          cands(c,cs[i]).forEach(l=>{const L_=up(l),v=VOW.indexOf(L_)>-1||l==="ı";let s=0;
+            if(pv===false&&qv===false)s+=v?1.5:-1;else if(pv===true&&qv===true)s+=v?-1.5:1.5;
+            else if(i===0&&qv===true)s+=v?-1:1;else if(i===n-1&&pv===false)s+=v?1:-.5;else if(pv===null&&qv===false&&i===0)s+=v?.8:0;
+            if(L_==="Ğ"&&(i===0||pv===false))s-=3;
+            if(v&&L_!=="İ"&&l!=="ı"){if(front>back)s+=.5;else if(back>front)s-=.5}
+            add(c,l,s)})})})});
+    const ORDER="İŞÜÇÖĞşçüöğı",map={};
+    keys.forEach(k=>{const v=votes[k];let best=null,bs=-1e9;Object.keys(v).sort((a,b)=>ORDER.indexOf(a)-ORDER.indexOf(b)).forEach(l=>{if(v[l]>bs){bs=v[l];best=l}});
+      if(!best){const c=cands(k,"");best=c[0]}map[k]=best});
+    return map}
+
+  /* ---------- PDF ---------- */
+  async function readPdf(buf){
+    const lib=await pdfLib();
+    let doc;try{doc=await lib.getDocument({data:new Uint8Array(buf),fontExtraProperties:true,isEvalSupported:false}).promise}
+    catch(e){throw new Error(/password/i.test(e&&e.name+e.message)?"This PDF is password protected. Download it again without a password.":"This PDF could not be opened.")}
+    const items=[],ph={},phOf={};let nextPh=0xE000;
+    const HID=/[\u0000-\u001f\uE000-\uF8FF\uFFFD]/,O=lib.OPS;
+    let wAdd=[],xSub=[];
+    const phFor=(key,w)=>{if(!phOf[key]){const pc=String.fromCharCode(nextPh++);phOf[key]=pc;ph[pc]={w:Math.round(w||0)}}return phOf[key]};
+    for(let p=1;p<=doc.numPages;p++){
+      const pg=await doc.getPage(p),tc=await pg.getTextContent();
+      const strs=tc.items.map(it=>it.str||"");
+      // glyphs with no Unicode name (e.g. Turkish capitals named G0..G18) come through as control characters or spaces;
+      // the drawing instructions still carry their font and code, so line both up and mark those glyphs
+      let ops=null;
+      try{const ol=await pg.getOperatorList();let font="";ops=[];
+        for(let i=0;i<ol.fnArray.length;i++){const fn=ol.fnArray[i],a=ol.argsArray[i];
+          if(fn===O.setFont)font=a[0];
+          else if(fn===O.showText||fn===O.showSpacedText||fn===O.nextLineShowText||fn===O.nextLineSetSpacingShowText){
+            const g=fn===O.nextLineSetSpacingShowText?a[2]:a[0];
+            (g||[]).forEach(x=>{if(!x||typeof x==="number")return;const u=String(x.unicode||"");
+              if(u.length===1&&HID.test(u)&&x.originalCharCode!==32)ops.push({h:font+"|"+x.originalCharCode,w:x.width});
+              else for(const c of u)ops.push({c})})}}}catch(e){ops=null}
+      if(ops&&ops.some(o=>o.h)){
+        const flat=[];strs.forEach((st,k)=>{for(const c of st)flat.push({k,c})});
+        const out=strs.map(()=>"");let j=0,pending="",pendW=0,lastK=-1;wAdd=strs.map(()=>0);xSub=strs.map(()=>0);
+        const sp=c=>/\s/.test(c),nextHid=i=>{for(let z=i+1;z<flat.length;z++){if(!sp(flat[z].c))return HID.test(flat[z].c)}return false};
+        const put=(k,t)=>{if(pending&&!sp(t)){out[k]+=pending;xSub[k]+=pendW;wAdd[k]+=pendW;pending="";pendW=0}out[k]+=t;if(!sp(t))lastK=k};
+        // a hidden glyph that PDF.js turned into whitespace: attach it to the text it is drawn next to
+        const attach=(k,o)=>{const prev=ops[j-1],next=ops[j+1],pc=phFor(o.h,o.w);
+          if(lastK>-1&&((prev&&!prev.h&&!sp(prev.c))||(prev&&prev.h&&!(next&&!next.h&&!sp(next.c))))){out[lastK]+=pc;wAdd[lastK]+=o.w||0}else{pending+=pc;pendW+=o.w||0}};
+        for(let i=0;i<flat.length;i++){const {k,c}=flat[i];let guard=0;
+          for(;;){const op=ops[j];if(++guard>40||!op){put(k,HID.test(c)?phFor(tc.items[k].fontName+"|"+c.charCodeAt(0),0):c);break}
+            if(HID.test(c)){if(op.h){put(k,phFor(op.h,op.w));j++;break}if(sp(op.c)){j++;continue}
+              let f=-1;for(let z=j;z<Math.min(ops.length,j+6);z++)if(ops[z].h){f=z;break}if(f>-1){j=f;continue}put(k,phFor(tc.items[k].fontName+"|"+c.charCodeAt(0),0));break}
+            if(sp(c)){
+              if(op.h){if(nextHid(i)){put(k," ");break}attach(k,op);j++;
+                while(ops[j]&&ops[j].h&&!nextHid(i)){attach(k,ops[j]);j++}break}
+              if(sp(op.c)){put(k,c);j++;while(ops[j]&&!ops[j].h&&sp(ops[j].c)&&i+1<flat.length&&!sp(flat[i+1].c))j++;break}
+              put(k," ");break}
+            if(op.c===c){put(k,c);j++;break}
+            if(sp(op.c)){j++;continue}
+            if(op.h){attach(k,op);j++;continue}
+            let f=-1;for(let z=j;z<Math.min(ops.length,j+6);z++)if(!ops[z].h&&ops[z].c===c){f=z;break}
+            if(f>-1){j=f;continue}put(k,c);break}}
+        if(pending&&lastK>-1)out[lastK]+=pending;
+        out.forEach((o,k)=>{strs[k]=o})}
+      tc.items.forEach((it,k)=>{const str=strs[k];if(!str||!str.replace(/\s/g,""))return;
+        const t=it.transform,size=Math.hypot(t[2],t[3])||Math.hypot(t[0],t[1])||10;
+        let s="";for(const c of str){
+          if(c>="\uE000"&&c<="\uE0FF"&&ph[c])s+=c;
+          else if(HID.test(c)){s+=phFor(it.fontName+"|"+c.charCodeAt(0),str.length===1?it.width/size*1000:0)}
+          else s+=c}
+        items.push({p,x:t[4]-(xSub[k]||0)*size/1000,y:t[5],w:it.width+(wAdd[k]||0)*size/1000,size,s})});wAdd=[];xSub=[]}
+    if(!items.length)throw new Error("This PDF has no readable text (it looks scanned). Download the statement again from internet banking, or as Excel / CSV.");
+    // rebuild lines and cells
+    items.sort((a,b)=>a.p-b.p||b.y-a.y||a.x-b.x);
+    const lines=[];
+    items.forEach(it=>{let L=lines.length?lines[lines.length-1]:null;
+      if(!L||L.p!==it.p||Math.abs(L.y-it.y)>Math.max(2,it.size*.45)){L={p:it.p,y:it.y,size:it.size,its:[]};lines.push(L)}L.its.push(it)});
+    lines.forEach(L=>{L.its.sort((a,b)=>a.x-b.x);const cells=[];
+      L.its.forEach(it=>{const c=cells[cells.length-1],gap=c?it.x-c.x1:1e9;
+        if(c&&gap<it.size*1.1){c.s+=(gap>it.size*.18&&!/\s$/.test(c.s)&&!/^\s/.test(it.s)?" ":"")+it.s;c.x1=Math.max(c.x1,it.x+it.w)}
+        else cells.push({s:it.s,x0:it.x,x1:it.x+it.w})});
+      cells.forEach(c=>{c.s=c.s.replace(/\s+/g," ").trim()});L.cells=cells.filter(c=>c.s);L.text=L.cells.map(c=>c.s).join("  ")});
+    // repair Turkish letters
+    const map=inferTurkish(lines,ph),keys=Object.keys(map);
+    if(keys.length){const fix=s=>s.replace(/[\uE000-\uF8FF]/g,c=>map[c]||c);lines.forEach(L=>{L.cells.forEach(c=>{c.s=fix(c.s)});L.text=fix(L.text)})}
+    return{kind:"pdf",lines,fixed:keys.length}}
+
+  const HEAD={date:/^(ISLEM )?TARIH|^DATE|TARIHI$|^ISLEM TARIHI/,desc:/ACIKLAMA|ACIKLAMASI|DESCRIPTION|ISYERI|ISLEM DETAY|DETAY|MERCHANT|^ISLEM$|ALICI|GONDEREN/,amt:/^TUTAR|TUTARI$|^AMOUNT|^ISLEM TUTARI|^TL TUTAR|^MIKTAR/,
+    debit:/^BORC|^GIDEN|^CIKAN|^CIKIS|^DEBIT|^HARCAMA/,credit:/^ALACAK|^GELEN|^GIREN|^GIRIS|^CREDIT/,inst:/TAKSIT/,bal:/BAKIYE|BALANCE/,pts:/PUAN|POINT|BONUS|MIL/};
+  const headKind=s=>{const f=fold(s).replace(/\s+/g," ").trim();if(!f||f.length>40)return"";if(HEAD.bal.test(f))return"bal";if(HEAD.pts.test(f)&&!HEAD.amt.test(f))return"pts";if(HEAD.inst.test(f)&&!/TUTAR/.test(f))return"inst";
+    if(HEAD.date.test(f)&&!/VALOR|KESIM|SON ODEME/.test(f))return"date";if(HEAD.debit.test(f))return"debit";if(HEAD.credit.test(f))return"credit";if(HEAD.amt.test(f))return"amt";if(HEAD.desc.test(f))return"desc";return""};
+
+  function pdfLines(doc){
+    const L=doc.lines,out=[];let head=null,sec="",meta={},cont=null;
+    L.forEach(l=>{const f=fold(l.text);
+      if(/HESAP KESIM TARIHI|KESIM TARIHI/.test(f)&&!meta.cut){const m=l.text.match(/(\d{1,2}[./-]\d{1,2}[./-]\d{2,4})/);if(m)meta.cut=parseDate(m[1])}
+      if(!meta.last4){const m=l.text.match(/\b\d{4}\s?\d{2}[*X]{2}\s?[*X]{4}\s?(\d{4})\b/i);if(m)meta.last4=m[1]}
+      if(meta.prev==null&&/ONCEKI DONEM (BAKIYE|BORC)|ONCEKI EKSTRE|DEVREDEN BAKIYE/.test(f)){const mm=l.cells.map(c=>c.s).filter(s=>MONEY.test(s));if(mm.length)meta.prev=parseAmt(mm[mm.length-1])}
+      if(meta.debt==null&&/^DONEM BORCU|DONEM BORCU\s|TOPLAM BORC|HESAP KESIM TARIHINDEKI BORC|GUNCEL DONEM BORCU/.test(f)){const mm=l.cells.map(c=>c.s.replace(/\s*(TL|TRY)$/i,"")).filter(s=>MONEY.test(s));if(mm.length)meta.debt=parseAmt(mm[0])}
+      // column header
+      const kinds=l.cells.map(c=>headKind(c.s));
+      if(kinds.indexOf("date")>-1&&(kinds.indexOf("amt")>-1||kinds.indexOf("debit")>-1)){head={};l.cells.forEach((c,i)=>{const k=kinds[i];if(k&&!head[k])head[k]=(c.x0+c.x1)/2});cont=null;return}
+      if(/^(SANAL KART|EK KART|ASIL KART)/.test(f)&&!parseDate(l.cells[0].s)){sec=/^SANAL/.test(f)?"Virtual card":/^EK/.test(f)?"Additional card":"";cont=null;return}
+      const c0=l.cells[0]?l.cells[0].s:"";let dm=c0.match(/^(\d{1,2}[./-]\d{1,2}[./-]\d{2,4}|\d{4}-\d{2}-\d{2})(?:\s+(\d{1,2}:\d{2}(?::\d{2})?))?\s*(.*)$/);
+      if(!dm){
+        // a wrapped description continues on the next line
+        if(cont&&l.p===cont.p&&cont.y-l.y<l.size*1.9&&!l.cells.some(c=>MONEY.test(c.s))&&l.cells.length<=2&&Math.abs(l.cells[0].x0-cont.dx)<l.size*2&&l.text.length<60){cont.row.desc+=" "+l.text;cont.y=l.y}else cont=null;
+        return}
+      const d=parseDate(dm[1]);if(!d){cont=null;return}
+      const cells=l.cells.slice(1);let rest=(dm[3]||"").trim();
+      if(rest){const m2=rest.match(/^(\d{1,2}[./-]\d{1,2}[./-]\d{2,4})\s*(.*)$/);if(m2)rest=m2[2]}   // valör date
+      else if(cells[0]&&parseDate(cells[0].s)&&/^\d/.test(cells[0].s)&&cells[0].s.length<=10)cells.shift();
+      const money=[],other=[];
+      cells.forEach(c=>{const s=c.s.replace(/\s+(TL|TRY)$/i,"");if(MONEY.test(s))money.push({c,v:parseAmt(s)});else other.push(c)});
+      // a money value glued to the end of the description cell
+      if(!money.length){const tail=(rest+" "+other.map(c=>c.s).join(" ")).match(/^(.*?)\s+(-?[\d.,]+[.,]\d{2}-?)\s*(TL|TRY)?\s*(\d{1,2}\/\d{1,2})?$/i);
+        if(tail){rest=tail[1];other.length=0;money.push({c:{x0:0,x1:0},v:parseAmt(tail[2])});if(tail[4])other.push({s:tail[4],x0:1e9,x1:1e9})}else{cont=null;return}}
+      const near=(x,list)=>list.slice().sort((a,b)=>Math.abs((a.c.x0+a.c.x1)/2-x)-Math.abs((b.c.x0+b.c.x1)/2-x))[0];
+      let amt=null,dir=0;
+      if(head&&head.debit!=null&&head.credit!=null){const a=near(head.debit,money),b=near(head.credit,money);const pick=Math.abs((a.c.x0+a.c.x1)/2-head.debit)<=Math.abs((b.c.x0+b.c.x1)/2-head.credit)?a:b;amt=Math.abs(pick.v);dir=pick===a?1:-1}
+      else if(head&&head.amt!=null){const ms=head.bal!=null?money.filter(m=>m!==near(head.bal,money)||money.length===1):money;amt=(near(head.amt,ms.length?ms:money)).v}
+      else{const ms=money.length>1&&head&&head.bal!=null?money.slice(0,-1):money;amt=ms[0].v}
+      if(amt==null||amt===0){cont=null;return}
+      const amtCell=money.find(m=>m.v===amt||Math.abs(m.v)===amt)||money[0];
+      const descCells=other.filter(c=>c.x1<=amtCell.c.x0+2||!amtCell.c.x1);
+      let desc=(rest+" "+descCells.map(c=>c.s).join(" ")).replace(/\s+/g," ").trim(),inst=null;
+      other.forEach(c=>{if(!inst&&c.x0>=amtCell.c.x0-2){const z=instOf(c.s);if(z)inst=z}});
+      if(!inst&&head&&head.inst!=null)other.forEach(c=>{if(!inst&&Math.abs((c.x0+c.x1)/2-head.inst)<40){const z=instOf(c.s);if(z)inst=z}});
+      const tm=desc.match(/\s*\(?(?:TAKSIT|TKS|TAKS)\.?\s*(\d{1,2})\s*\/\s*(\d{1,2})\)?|\s+(\d{1,2})\s*\/\s*(\d{1,2})\s*(?:TAKSIT|TKS)\b/i);
+      if(tm){const z=instOf((tm[1]||tm[3])+"/"+(tm[2]||tm[4]));if(z&&!inst){inst=z;desc=desc.replace(tm[0],"").trim()}}
+      const row={d,desc,amt,dir,inst,card:sec};
+      if(/^(ONCEKI DONEM|DEVREDEN|TOPLAM|GENEL TOPLAM|DONEM BORCU|ASGARI)/.test(fold(desc))){cont=null;return}
+      out.push(row);cont={row,p:l.p,y:l.y,dx:(descCells[0]||{x0:0}).x0}});
+    return{rows:out,meta}}
+
+  /* ---------- CSV / XLS / XLSX ---------- */
+  function decodeText(buf){const b=new Uint8Array(buf);
+    if(b[0]===0xFF&&b[1]===0xFE)return new TextDecoder("utf-16le").decode(b);
+    try{return new TextDecoder("utf-8",{fatal:true}).decode(b).replace(/^﻿/,"")}catch(e){}
+    try{return new TextDecoder("windows-1254").decode(b)}catch(e){return new TextDecoder("iso-8859-9").decode(b)}}
+  function parseCsv(text){
+    const ls=text.split(/\r\n|\n|\r/).filter(l=>l.trim()).slice(0,30);
+    let sep=";",best=-1;[";",",","\t","|"].forEach(s=>{const n=ls.map(l=>splitCsv(l,s).length);const mode=n.sort((a,b)=>n.filter(x=>x===b).length-n.filter(x=>x===a).length)[0];const sc=mode>1?n.filter(x=>x===mode).length*10+mode:0;if(sc>best){best=sc;sep=s}});
+    const rows=[];let cur=[],f="",q=false;
+    for(let i=0;i<text.length;i++){const c=text[i];
+      if(q){if(c==='"'){if(text[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
+      else if(c==='"')q=true;else if(c===sep){cur.push(f);f=""}else if(c==="\n"||c==="\r"){if(c==="\r"&&text[i+1]==="\n")i++;cur.push(f);rows.push(cur);cur=[];f=""}else f+=c}
+    if(f||cur.length){cur.push(f);rows.push(cur)}
+    return rows.map(r=>r.map(x=>x.trim()))}
+  function splitCsv(l,s){const o=[];let f="",q=false;for(const c of l){if(c==='"')q=!q;else if(c===s&&!q){o.push(f);f=""}else f+=c}o.push(f);return o}
+  async function readSheet(buf,name){
+    let rows;
+    if(/\.(csv|txt)$/i.test(name))rows=parseCsv(decodeText(buf));
+    else{const X=await xlsxLib();let wb;try{wb=X.read(new Uint8Array(buf),{type:"array",cellDates:false,codepage:1254})}catch(e){throw new Error("This spreadsheet could not be opened.")}
+      let bestRows=null,bs=-1;wb.SheetNames.forEach(sn=>{const r=X.utils.sheet_to_json(wb.Sheets[sn],{header:1,raw:true,defval:""});const sc=r.filter(x=>x.some(v=>parseDate(v))).length;if(sc>bs){bs=sc;bestRows=r}});rows=bestRows||[]}
+    return tableRows(rows)}
+  function tableRows(rows){
+    rows=rows.map(r=>r.map(v=>typeof v==="string"?v.replace(/\s+/g," ").trim():v));
+    const meta={};
+    rows.slice(0,40).forEach(r=>{const t=r.join(" ");if(!meta.last4){const m=t.match(/\b\d{4}\s?\d{2}[*X]{2}\s?[*X]{4}\s?(\d{4})\b/i);if(m)meta.last4=m[1]}});
+    // header row
+    let hi=-1,col={};
+    for(let i=0;i<Math.min(rows.length,60)&&hi<0;i++){const k=rows[i].map(c=>typeof c==="string"?headKind(c):"");
+      if(k.indexOf("date")>-1&&(k.indexOf("amt")>-1||k.indexOf("debit")>-1||k.indexOf("credit")>-1)){hi=i;k.forEach((x,j)=>{if(x&&col[x]==null)col[x]=j});
+        if(col.desc==null){const texts=rows.slice(i+1,i+30);let bj=-1,bl=0;rows[i].forEach((_,j)=>{if(Object.values(col).indexOf(j)>-1)return;const avg=texts.reduce((s,r)=>s+(typeof r[j]==="string"&&!parseDate(r[j])&&parseAmt(r[j])==null?r[j].length:0),0);if(avg>bl){bl=avg;bj=j}});if(bj>-1)col.desc=bj}}}
+    if(hi<0){ // no header: infer from the values
+      const body=rows.filter(r=>r.some(v=>parseDate(v))),w=Math.max(0,...body.map(r=>r.length));
+      const st=[];for(let j=0;j<w;j++){let dt=0,nm=0,tx=0;body.forEach(r=>{const v=r[j];if(parseDate(v,typeof v==="number"?"":"strict"))dt++;else if(typeof v==="number"||(typeof v==="string"&&MONEY.test(v)))nm++;else if(typeof v==="string"&&v.length>2)tx+=v.length});st.push({j,dt,nm,tx})}
+      const dc=st.slice().sort((a,b)=>b.dt-a.dt)[0];if(!dc||dc.dt<1)throw new Error("No transactions found in this file.");
+      const nums=st.filter(s=>s.j!==dc.j&&s.nm>=body.length*.5).map(s=>s.j);
+      col.date=dc.j;col.desc=(st.filter(s=>s.j!==dc.j&&nums.indexOf(s.j)<0).sort((a,b)=>b.tx-a.tx)[0]||{}).j;
+      col.amt=nums[0];
+      if(nums.length>1){const vals=j=>body.map(r=>parseAmt(r[j])||0);const a=vals(nums[0]),b=vals(nums[1]);let hit=0;for(let i=1;i<a.length;i++){const db=b[i]-b[i-1];if(Math.abs(Math.abs(db)-Math.abs(a[i]))<.011)hit++}
+        if(hit<(a.length-1)*.6){let hit2=0;for(let i=1;i<b.length;i++){const da=a[i]-a[i-1];if(Math.abs(Math.abs(da)-Math.abs(b[i]))<.011)hit2++}if(hit2>=(b.length-1)*.6)col.amt=nums[1]}}
+      if(col.amt==null)throw new Error("No amount column found in this file.");hi=-1}
+    const out=[];
+    rows.slice(hi+1).forEach(r=>{const d=parseDate(r[col.date]);if(!d)return;
+      let amt=null,dir=0;
+      if(col.debit!=null||col.credit!=null){const a=col.debit!=null?parseAmt(r[col.debit]):null,b=col.credit!=null?parseAmt(r[col.credit]):null;
+        if(a)  {amt=Math.abs(a);dir=1}else if(b){amt=Math.abs(b);dir=-1}else if(col.amt!=null)amt=parseAmt(r[col.amt])}
+      else amt=parseAmt(r[col.amt]);
+      if(amt==null||amt===0)return;
+      let desc=String(col.desc!=null?r[col.desc]:"").replace(/\s+/g," ").trim(),inst=null;
+      if(col.inst!=null){const v=r[col.inst];inst=instOf(v);if(!inst&&typeof v==="number"&&v>=2&&v<=36)inst={no:1,of:v}}
+      const tm=desc.match(/\s*\(?(?:TAKSIT|TKS)\.?\s*(\d{1,2})\s*\/\s*(\d{1,2})\)?/i);if(tm&&!inst){inst=instOf(tm[1]+"/"+tm[2]);if(inst)desc=desc.replace(tm[0],"").trim()}
+      if(/^(ONCEKI DONEM|DEVREDEN|TOPLAM|GENEL TOPLAM|DONEM BORCU)/.test(fold(desc)))return;
+      out.push({d,desc,amt,dir,inst,card:""})});
+    const headTxt=rows.slice(0,hi>0?hi:0).map(r=>r.join(" ")).join(" ").slice(0,600);
+    return{kind:"sheet",rows:out,meta,head:headTxt}}
+
+  /* ---------- read any statement file ---------- */
+  async function read(file){
+    const buf=await file.arrayBuffer(),name=String(file.name||"");
+    const isPdf=/\.pdf$/i.test(name)||(new Uint8Array(buf.slice(0,5)).join(",")==="37,80,68,70,45");
+    let res;
+    if(isPdf){const doc=await readPdf(buf);res=pdfLines(doc);res.kind="pdf";res.fixed=doc.fixed;const first=doc.lines.findIndex(l=>/^\d{1,2}[./-]\d{1,2}[./-]\d{2,4}/.test(l.cells[0]?l.cells[0].s:""));res.head=doc.lines.slice(0,first>0?Math.min(first,25):12).map(l=>l.text).join("\n")}
+    else if(/\.(xlsx|xlsm|xls|csv|txt)$/i.test(name)){res=await readSheet(buf,name)}
+    else throw new Error("Choose a PDF, CSV, XLS or XLSX file.");
+    if(!res.rows.length)throw new Error("No transactions found in this file. If it is a PDF, try the Excel / CSV download from internet banking.");
+    res.name=name;return res}
+
+  // payment method named in the file (e.g. "QNB"), best match by number of mentions
+  function detectPm(res,pms){const lines=String(res.head||"").split("\n").map(compact),fn=compact(res.name);let best="",bs=0;
+    (pms||[]).forEach(p=>{const c=compact(p);if(c.length<3)return;let n=fn.indexOf(c)>-1?20:0;lines.forEach((l,i)=>{n+=(l.split(c).length-1)*(i<3?10:1)});if(n>bs){bs=n;best=p}});return bs>=5?best:""}
+
+  /* ---------- turn parsed lines into review rows ---------- */
+  const PAY=/ODEME|TESEKKUR|PAYMENT|ODEMENIZ|OTOMATIK ODEME|HESAPTAN|KART BORCU|KK ODEME/;
+  const FEE_FAIZ=/FAIZ|BSMV|KKDF|GECIKME|VERGI|FON\b/,FEE_KOM=/UCRET|UCRETI|KOMISYON|MASRAF|AIDAT|UYELIK|YILLIK KART/;
+  const REFUND=/\bIADE|\bIADESI|REFUND|IPTAL|\bIADE\b/,SALARY=/MAAS|SALARY|BORDRO|UCRET ODEMESI/;
+  const XFER=/VIRMAN|KENDI HESAB|HESAPLAR ARASI|KREDI KARTI ODEME|KART ODEME|KK ODEME|KARTA ODEME/;
+  const STOP={POS:1,ISTANBUL:1,TR:1,TRTR:1,TUR:1,AS:1,LTD:1,STI:1,SAN:1,TIC:1,VE:1,MAGAZA:1,MAGAZASI:1,AVM:1,ANKARA:1,IZMIR:1,ONLINE:1,WWW:1,COM:1,TL:1,THE:1,ODEME:1,YEMEKPAY:1,IYZICO:1,PAYTR:1,PARAM:1,SANAL:1,ECOM:1};
+  const keyTok=s=>toks(s).filter(t=>t.length>=3&&!STOP[t]&&!/^\d+$/.test(t))[0]||"";
+
+  function build(res,o){
+    // o = {pm, credit, ctx:{rows, merchants, rules, transfers}, exp, inc, pms}
+    const ctx=o.ctx||{},rules=(ctx.rules||[]).map(r=>({k:r.k,c:r.c,ck:compact(r.k)})).filter(r=>r.ck.length>=3);
+    const hist=(ctx.merchants||[]).map(h=>({...h,ck:compact(h.n),tk:toks(h.n)})).filter(h=>h.ck.length>=3);
+    const others=(o.pms||[]).filter(p=>p!==o.pm);
+    let lines=res.rows.map(r=>({...r}));
+    // sign: + = money out of the account (purchase / spend), - = money in
+    lines.forEach(L=>{L.out=L.dir?L.dir*Math.abs(L.amt):(o.credit?L.amt:-L.amt)});
+    if(o.credit&&!lines.some(L=>L.dir)){const pk=lines.filter(L=>PAY.test(fold(L.desc)));
+      if((pk.length&&pk.every(L=>L.out>0)&&lines.some(L=>L.out<0))||(!pk.length&&lines.filter(L=>L.out<0).length>lines.length*.7))lines.forEach(L=>{L.out=-L.out})}
+    const pickCat=(desc,kind)=>{const cd=compact(desc),dt=toks(desc);
+      for(const r of rules)if(cd.indexOf(r.ck)>-1&&(kind==="inc"?o.inc:o.exp).indexOf(r.c)>-1)return{cat:r.c,src:"rule",why:r.k};
+      let best=null,bs=0;
+      hist.forEach(h=>{if(h.k!==kind)return;let s=0;
+        if(h.ck.length>=6&&cd.indexOf(h.ck)>-1)s=100+h.ck.length;
+        else if(h.ck.length>=3&&dt.some(t=>t===h.ck||(h.ck.length>=4&&t.indexOf(h.ck)===0)))s=90+h.ck.length;
+        else if(h.ck.length>=5&&h.ck.length<6&&cd.indexOf(h.ck)>-1)s=60+h.ck.length;
+        else{const t0=h.tk.filter(t=>t.length>=5&&!STOP[t])[0];if(t0&&dt.some(t=>t===t0||t.indexOf(t0)===0||(t.length>=5&&t0.indexOf(t)===0)))s=50+t0.length}
+        if(!s)return;s+=Math.min(h.cnt||1,10)*.3;if(s>bs||(s===bs&&best&&(h.t||"")>(best.t||""))){bs=s;best=h}});
+      return best?{cat:best.c,src:"history",why:best.n}:null};
+    const acctIn=desc=>{const cd=compact(desc);return others.filter(p=>compact(p).length>=3&&cd.indexOf(compact(p))>-1)[0]||""};
+    const tf=ctx.transfers||{},topOf=m=>Object.keys(m||{}).sort((a,b)=>m[b]-m[a]).filter(a=>others.indexOf(a)>-1)[0];
+    const fromAcct=topOf(tf.into)||others[0]||"",toAcct=topOf(tf.out)||others[0]||"";
+    const has=(list,c)=>list.indexOf(c)>-1;
+    const fallback=kind=>kind==="inc"?(has(o.inc,"Diğer")?"Diğer":o.inc[o.inc.length-1]||""):(has(o.exp,"Diğer")?"Diğer":o.exp[o.exp.length-1]||"");
+    const clean=s=>String(s).replace(/\s+(TRTR|TR|TUR)$/,"").replace(/\s+[-–]$/,"").replace(/\s{2,}/g," ").trim()||"(no description)";
+    const rows=lines.map((L,i)=>{const f=fold(L.desc),r={id:"L"+(i+1),d:L.d,n:clean(L.desc),raw:L.desc,a:r2(Math.abs(L.out)),dirOut:L.out>0,inst:L.inst,card:L.card,cat:"",acct:"",kind:"",src:"none",why:"",dup:null,link:null,sug:null,cari:"",desc:"",rl:false,rd:"",removed:false,inc:false,key:keyTok(L.desc)};
+      if(L.out>0){
+        const ac=acctIn(L.desc);
+        if(!o.credit&&ac&&(XFER.test(f)||PAY.test(f)||ac)){r.kind="tr";r.acct=ac;r.src="rule";r.why="transfer"}
+        else if(FEE_FAIZ.test(f)&&has(o.exp,"Faiz")){r.kind="exp";r.cat="Faiz";r.src="rule";r.why="bank fee"}
+        else if(FEE_KOM.test(f)&&has(o.exp,"Komisyon")){r.kind="exp";r.cat="Komisyon";r.src="rule";r.why="bank fee"}
+        else{r.kind="exp";const g=pickCat(L.desc,"exp");if(g){r.cat=g.cat;r.src=g.src;r.why=g.why}else r.cat=fallback("exp")}}
+      else{
+        const ac=acctIn(L.desc);
+        if(o.credit&&(PAY.test(f)||ac)){r.kind="tr";r.acct=ac||fromAcct;r.src="rule";r.why="card payment"}
+        else if(!o.credit&&(ac||XFER.test(f))){r.kind="tr";r.acct=ac||toAcct;r.src="rule";r.why="transfer"}
+        else if(o.credit||REFUND.test(f)){r.kind="ret";const g=pickCat(L.desc,"exp");if(g){r.cat=g.cat;r.src=g.src;r.why=g.why}else r.cat=fallback("exp")}
+        else{r.kind="inc";const g=pickCat(L.desc,"inc"),sal=SALARY.test(f)&&o.inc.find(c=>/^maa/i.test(fold(c)));if(g){r.cat=g.cat;r.src=g.src;r.why=g.why}else if(sal){r.cat=sal;r.src="rule";r.why="salary"}else r.cat=fallback("inc")}}
+      if(r.kind==="tr"&&!r.acct){r.kind=L.out>0?"exp":(o.credit?"ret":"inc");r.cat=fallback(r.kind==="inc"?"inc":"exp");r.src="none"}
+      return r});
+    // already in Diligence? same account, amount within 0.05, transaction date within 3 days (instalment k = purchase date + k-1 months)
+    const mv=(ctx.rows||[]).map(x=>({...x,m:o.credit?x.f:-x.f,used:false}));
+    rows.forEach(r=>{const out=r.dirOut?r.a:-r.a,dd=r.inst&&r.inst.no>1?addMonthsYmd(r.d,r.inst.no-1):r.d;
+      let best=null,bs=1e9;
+      const rc=compact(r.raw),rk=r.key;
+      mv.forEach(x=>{if(x.used)return;const da=Math.abs(x.m-out),dy=Math.abs(dayDiff(x.d,dd));if(da<=.05&&dy<=3){const xc=compact(x.pos+" "+x.desc),nm=(rk&&xc.indexOf(rk)>-1)||(compact(x.pos).length>=3&&rc.indexOf(compact(x.pos))>-1);const s=da*100+dy-(nm?5:0);if(s<bs){bs=s;best=x}}});
+      if(!best&&r.inst)mv.forEach(x=>{if(x.used)return;const da=Math.abs(x.m-out*r.inst.of),dy=Math.abs(dayDiff(x.d,r.d));if(da<=1&&dy<=3&&!best)best=x});
+      if(best){best.used=true;r.dup={id:best.id,n:best.pos||best.c1||"",d:best.d,a:r2(Math.abs(best.m))}}});
+    // refunds: suggest the purchase they belong to
+    const purch=rows.filter(x=>x.kind==="exp").map(x=>({src:"imp",id:x.id,n:x.n,d:x.d,a:x.a,key:x.key,cat:x.cat}))
+      .concat((()=>{const g={};(ctx.rows||[]).filter(x=>(o.credit?x.f:-x.f)>0&&x.c1&&o.exp.indexOf(x.c1)>-1).forEach(x=>{const p=g[x.id];
+        if(!p)g[x.id]={src:"mv",id:x.id,n:x.pos,d:x.d,a:Math.abs(x.f),key:keyTok(x.pos),cat:x.c1,k:1};else{p.a+=Math.abs(x.f);p.k++;if(x.d<p.d)p.d=x.d}});
+        return Object.keys(g).map(k=>({...g[k],a:r2(g[k].a)}))})());
+    rows.forEach(r=>{if(r.kind!=="ret"||r.dup||!r.key)return;
+      const c=purch.filter(p=>p.key&&(p.key===r.key||p.key.indexOf(r.key)===0||r.key.indexOf(p.key)===0)&&p.a>=r.a-.01&&p.d<=r.d).sort((a,b)=>b.d<a.d?-1:1)[0];
+      if(c)r.sug={type:"refund",to:c}});
+    return{rows,purch}}
+
+  // lines the user kept -> mass_save items
+  function payload(rows,pm){
+    return rows.filter(r=>!r.removed&&(!r.dup||r.inc)).map(r=>{
+      const base={key:r.id,label:r.n,date:r.d,pm,amount:r.a,pos:r.n,desc:r.desc||""};
+      if(r.kind==="tr")return{...base,type:"transfer",from:r.dirOut?pm:r.acct,to:r.dirOut?r.acct:pm,desc:r.desc||r.n};
+      const it={...base,type:r.kind==="ret"?"return":r.kind==="inc"?"income":"expense",cat:r.cat,cari:r.cari||"",rec:r.rl&&r.rd?r.rd:""};
+      if(r.link)it.link=r.link.to.src==="imp"?{imp:r.link.to.id}:{mv:r.link.to.id};
+      else if(r.inst&&it.type==="expense")it.inst={no:r.inst.no,of:r.inst.of};
+      return it})}
+  return{read,build,payload,detectPm,parseDate,parseAmt,compact,fold,keyTok,addMonthsYmd,inferTurkish,tableRows,_pdfLines:pdfLines,_readPdf:readPdf,_readSheet:readSheet}
+})();
+
+/* ---------- MASS ENTRY (statement import, guided) ---------- */
+const MX_ICP={x:"M6 6l12 12M18 6L6 18",pen:"M4 20l4-1 11-11-3-3L5 16zM14 7l3 3",chain:"M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1",up:"M12 16V4M7 9l5-5 5 5M4 20h16",file:"M6 3h8l4 4v14H6zM14 3v4h4",stack:"M4 7h16M4 12h16M4 17h10"};
+Object.assign(ICP,MX_ICP);
+const mxDate=s=>{const p=String(s).split("-");return p.length===3?p[2]+" "+mname(+p[1]-1):s};
+const mxCoach=()=>{try{return localStorage.getItem("mx-coach")!=="1"}catch(e){return true}};
+function MxSteps({n}){return h("div",{className:"mx-stp"},[$t("Import"),$t("Review"),$t("Save")].map((l,i)=>h("div",{key:l,className:"mx-st"+(i+1<n?" dn":i+1===n?" on":"")},(i+1)+" · "+l)))}
+function Mass({back,L,say,go}){
+  const ls=L.d||{},pms=(ls.paymentMethods||[]).filter(p=>p!==INV_ACC&&String(p).toLowerCase()!=="investment");
+  const ptype=p=>ls.types&&ls.types.payment&&ls.types.payment[p]==="credit"?"credit":"debit";
+  const exp=ls.expenseCategories||[],inc=ls.incomeCategories||[],cc=ls.cariCategories||["Sosyal Alacak","Diğer Alacak"],pa=ls.payableAccount||"Sosyal Borç";
+  const[step,setStep]=useState("import"),[file,setFile]=useState(null),[pm,setPm]=useState(""),[det,setDet]=useState(""),[err,setErr]=useState(""),[perr,setPerr]=useState("");
+  const[prog,setProg]=useState(0),[res,setRes]=useState(null),[rows,setRows]=useState([]),[purch,setPurch]=useState([]),[filter,setFilter]=useState("all"),[snap,setSnap]=useState([]);
+  const[coach,setCoach]=useState(mxCoach),[sheet,setSheet]=useState(null),[similar,setSimilar]=useState(null),[rules,setRules]=useState([]),[busy,setBusy]=useState(false),[result,setResult]=useState(null),[caris,setCaris]=useState([]);
+  const parseRef=React.useRef(null),inp=React.useRef(null);
+  const isPay=p=>String(p||"").toLocaleLowerCase("tr").indexOf(pa.toLocaleLowerCase("tr"))>-1;
+  function pick(f){if(!f)return;setErr("");setPerr("");setFile(f);setDet("");
+    const p=MX.read(f);parseRef.current=p;
+    p.then(r=>{if(parseRef.current!==p)return;const d=MX.detectPm(r,pms);if(d){setDet(d+(r.meta&&r.meta.last4?" · •••• "+r.meta.last4:""));setPm(x=>x||d)}}).catch(e=>{if(parseRef.current===p)setPerr(e.message||String(e))})}
+  async function start(){setErr("");setStep("load");setProg(.12);
+    try{const r=await parseRef.current;setProg(.5);
+      const ds=r.rows.map(x=>x.d).sort();
+      const ctx=await api("mass_context",null,{pm,from:ds[0],to:ds[ds.length-1]});setProg(.85);
+      const b=MX.build(r,{pm,credit:ctx.type==="credit",ctx,exp,inc,pms:pms.filter(p=>p!==pm).concat([pm])});
+      setRes({...r,ctx});setRows(b.rows);setPurch(b.purch);setFilter("all");setSnap([]);setSimilar(null);setRules([]);setProg(1);
+      if(b.rows.some(x=>cc.indexOf(x.cat)>-1)||isPay(pm))api("caris").then(setCaris).catch(()=>{});
+      setTimeout(()=>{setStep("review");window.scrollTo(0,0)},250)}
+    catch(e){setErr(e.message||String(e));setStep("import")}}
+  const up=(id,patch)=>setRows(rs=>rs.map(r=>r.id===id?{...r,...(typeof patch==="function"?patch(r):patch)}:r));
+  const isDup=r=>!!r.dup&&!r.inc,active=r=>!r.removed&&!isDup(r),isExp=r=>r.kind!=="tr";
+  const needCari=r=>r.kind!=="tr"&&(cc.indexOf(r.cat)>-1||isPay(pm))&&!String(r.cari||"").trim();
+  const autoSrc=r=>r.src==="rule"||r.src==="history";
+  const act=rows.filter(active),nDup=rows.filter(r=>!r.removed&&isDup(r)).length;
+  const cnt={all:rows.filter(r=>!r.removed).length,auto:act.filter(r=>isExp(r)&&autoSrc(r)).length,sort:act.filter(r=>isExp(r)&&r.src==="none").length,dup:nDup};
+  const outSum=act.filter(r=>r.dirOut&&r.kind!=="tr").reduce((s,r)=>s+r.a,0),inSum=act.filter(r=>!r.dirOut&&r.kind!=="tr").reduce((s,r)=>s+r.a,0),nTr=act.filter(r=>r.kind==="tr").length;
+  const shown=rows.filter(r=>{if(r.removed)return false;if(filter==="auto")return active(r)&&isExp(r)&&autoSrc(r);if(filter==="sort")return active(r)&&snap.indexOf(r.id)>-1;if(filter==="dup")return isDup(r);return true});
+  const setFilt=f=>{setFilter(f);setSimilar(null);setSnap(rows.filter(r=>active(r)&&isExp(r)&&r.src==="none").map(r=>r.id))};
+  function remove(r){up(r.id,{removed:true});setSimilar(null);say($t("Removed ")+r.n)}
+  function setVal(r,v){
+    if(v.indexOf("t:")===0){up(r.id,{kind:"tr",acct:v.slice(2),src:"manual",link:null});setSimilar(null);return}
+    const c=v.slice(2),kind=r.dirOut?"exp":(ptype(pm)==="credit"||r.kind==="ret"?"ret":"inc");
+    const wasNone=r.src==="none";up(r.id,{cat:c,kind:r.kind==="tr"?kind:r.kind,src:"manual"});
+    const o=wasNone&&r.key?rows.filter(x=>x.id!==r.id&&x.key===r.key&&!x.removed&&x.src==="none"&&x.cat!==c&&x.dirOut===r.dirOut).map(x=>x.id):[];
+    setSimilar(o.length?{id:r.id,ids:o,cat:c,key:r.key}:(r.key&&wasNone?{id:r.id,ids:[],cat:c,key:r.key,rule:true}:null));
+    if(cc.indexOf(c)>-1&&!r.cari)openEdit({...r,cat:c})}
+  function applySimilar(){const s=similar;setRows(rs=>rs.map(r=>s.ids.indexOf(r.id)>-1?{...r,cat:s.cat,src:"manual"}:r));setRules(x=>x.filter(z=>z.k!==s.key).concat([{k:s.key,c:s.cat}]));say($t("Rule saved: ")+s.key+" → "+s.cat);setSimilar(null)}
+  function openEdit(r){setSheet({kind:"edit",id:r.id,f:{n:r.n,desc:r.desc||"",a:String(r.a),d:r.d,cari:r.cari||"",rl:!!r.rl,rd:r.rd||r.d},cari:cc.indexOf(r.cat)>-1||isPay(pm),err:""})}
+  function saveEdit(){const s=sheet,f=s.f,a=Number(String(f.a).replace(",","."));
+    if(!(a>0))return setSheet({...s,err:$t("Amount must be a positive number.")});
+    if(!f.n.trim())return setSheet({...s,err:$t("Business name is required.")});
+    if(s.cari&&!f.cari.trim())return setSheet({...s,err:$t("Cari is required for receivable / payable categories.")});
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(f.d))return setSheet({...s,err:$t("Transaction date is required.")});
+    up(s.id,{n:f.n.trim(),desc:f.desc.trim(),a:Math.round(a*100)/100,d:f.d,cari:f.cari.trim(),rl:f.rl,rd:f.rl?f.rd:""});setSheet(null)}
+  function openLink(r){const sg=r.sug;setSheet({kind:"link",id:r.id,type:r.link?r.link.type:sg?sg.type:(r.dirOut?"inst":"refund"),to:r.link?r.link.to:sg?sg.to:null,q:""})}
+  function applyLink(id,type,to){setRows(rs=>rs.map(r=>{if(r.id!==id)return r;const n={...r,link:{type,to},sug:null};
+    if(type==="refund"){n.kind="ret";if(to.cat&&exp.indexOf(to.cat)>-1){n.cat=to.cat;if(n.src==="none")n.src="manual"}}
+    else if(to.cat&&exp.indexOf(to.cat)>-1&&n.src==="none"){n.cat=to.cat;n.src="manual"}return n}));setSheet(null)}
+  async function save(){
+    const bad=rows.filter(r=>active(r)&&needCari(r));
+    if(bad.length){say($t("Add a cari to ")+bad.length+$t(" line(s) first"),true);setFilter("all");openEdit(bad[0]);return}
+    const badTr=rows.filter(r=>active(r)&&r.kind==="tr"&&(!r.acct||r.acct===pm));
+    if(badTr.length){say($t("Choose the other account for each transfer."),true);return}
+    setBusy(true);
+    try{const items=MX.payload(rows,pm);const r=await api("mass_save",{items,rules});
+      OVERVIEW_STALE();try{localStorage.removeItem("c:caris")}catch(e){}
+      setResult({lines:items.length,rows:r.rows,exp:act.filter(x=>x.kind==="exp").length,inc:act.filter(x=>x.kind==="inc"||x.kind==="ret").length,tr:nTr,auto:act.filter(x=>isExp(x)&&autoSrc(x)).length,manual:act.filter(x=>x.src==="manual").length,
+        diger:act.filter(x=>isExp(x)&&x.cat==="Diğer").length,linked:act.filter(x=>x.link).length,removed:rows.filter(x=>x.removed).length,dups:nDup,out:outSum,inn:inSum});
+      setStep("done");window.scrollTo(0,0)}
+    catch(e){say(e.message||String(e),true)}finally{setBusy(false)}}
+  function reset(){setStep("import");setFile(null);setPm("");setDet("");setRes(null);setRows([]);setResult(null);setErr("");setPerr("");parseRef.current=null;window.scrollTo(0,0)}
+
+  /* --- import --- */
+  if(step==="import"){
+    const ok=!!file&&!!pm&&!perr;
+    const pmOpts=pms.map(n=>({v:n,t:n,k:$t(ptype(n)==="credit"?"Credit":"Debit")}));
+    const kb=file?file.size/1024:0;
+    return h(Pg,{t:$t("Mass entry"),back,sub:$t("Step 1 of 3 · Import")},h(MxSteps,{n:1}),h(Er,{e:err}),
+      h("input",{ref:inp,type:"file",accept:".pdf,.csv,.xls,.xlsx,application/pdf,text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",style:{display:"none"},onChange:e=>{pick(e.target.files&&e.target.files[0]);e.target.value=""}}),
+      h("div",{className:"card"},h("div",{className:"lb"},$t("Statement file")),
+        file?h("div",{className:"mx-file"},h("span",{className:"mx-fic"},h(Ic,{n:"file",s:20})),h("div",{className:"mx-fn"},h("b",null,file.name),h("span",{className:"mono"},kb>=1024?(kb/1024).toFixed(1)+" MB":Math.max(1,Math.round(kb))+" KB")),
+            h("button",{className:"sb",onClick:()=>inp.current.click()},$t("Replace")),h("button",{className:"mx-xb","aria-label":$t("Remove file"),onClick:()=>{setFile(null);setDet("");setPerr("");parseRef.current=null}},h(Ic,{n:"x",s:14})))
+          :h("div",{className:"mx-drop"},h("span",{className:"mx-uic"},h(Ic,{n:"up",s:20})),h("b",null,$t("Choose your bank statement")),h("span",{className:"help",style:{margin:0}},$t("Downloaded from your bank app or internet banking.")),
+            h("div",{className:"mx-ext"},["PDF","CSV","XLS","XLSX"].map(x=>h("span",{key:x},x))),
+            h("button",{className:"btn",style:{marginTop:10,width:"100%"},onClick:()=>inp.current.click()},$t("Choose file"))),
+        perr?h("div",{className:"err"},perr):null,
+        det&&!perr?h("div",{className:"mx-det"},h("span",{className:"tag"},$t("Detected")),h("span",null,det)):null,
+        h("div",{className:"help"},$t("The file is read on this phone. Only the lines you save are sent to your sheet."))),
+      h("div",{className:"card"},h("div",{className:"lb"},$t("Which account is it for?")),
+        h("div",{className:"fld",style:{marginTop:8}},h(Dd,{value:pm,onChange:setPm,opts:pmOpts,cards:true,none:pm?null:$t("Choose an account")})),
+        h("div",{className:"help"},!pm?$t("Every line in the file is added to this account."):ptype(pm)==="credit"?$t("Card: purchases become expenses, payments to the card become transfers, refunds are linked to the purchase."):$t("Bank account: money out becomes expenses, money in becomes income. Payments to your cards become transfers."))),
+      h("div",{className:"mx-next"},[$t("Every line in the file is read."),$t("Known merchants get a category from your past entries."),$t("Lines already in Diligence are skipped."),$t("You check the list, then save.")].map(t=>h("div",{key:t},h("i"),h("span",null,t)))),
+      h("div",{className:"row",style:{marginTop:18}},h("button",{className:"btn gh",onClick:back},$t("Cancel")),h("button",{className:"btn",disabled:!ok,onClick:start},$t("Import statement"))))}
+
+  /* --- loading: just a bar --- */
+  if(step==="load")return h(Pg,{t:$t("Mass entry"),back:null},h("div",{className:"card mx-ld"},h("div",{className:"mx-pg",role:"progressbar","aria-valuemin":0,"aria-valuemax":100,"aria-valuenow":Math.round(prog*100),"aria-label":$t("Importing")},h("div",{style:{width:Math.round(prog*100)+"%"}}))));
+
+  /* --- done --- */
+  if(step==="done"){const r=result;
+    return h(Pg,{t:$t("Saved"),sub:pm+" · "+(file?file.name:"")},h(MxSteps,{n:4}),
+      h("div",{className:"mx-res"},h("div",{className:"mx-res-a"},h("span",{className:"mono-label"},$t("Added to Muavin")),h("div",{className:"mx-res-n"},r.lines,h("small",null,$t(" lines")))),
+        h("div",{className:"mx-res-b"},h("span",null,$t("Rows written")),h("span",null,r.rows))),
+      h("div",{className:"card"},
+        [[$t("Expenses"),r.exp+" · "+tl(r.out)],[$t("Income and refunds"),r.inc+" · "+tl(r.inn)],[$t("Transfers"),r.tr],[$t("Sorted automatically"),r.auto],[$t("Sorted by you"),r.manual],[$t("Still in Diğer"),r.diger],[$t("Linked to another expense"),r.linked],[$t("Removed by you"),r.removed],[$t("Already in Diligence (skipped)"),r.dups]].map(([a,b])=>h("div",{key:a,className:"br"},h("span",null,a),h("b",null,String(b))))),
+      h("div",{className:"row",style:{marginTop:16}},h("button",{className:"btn gh",onClick:reset},$t("Import another")),h("button",{className:"btn",onClick:()=>go("tx")},$t("See transactions"))))}
+
+  /* --- review --- */
+  const credit=ptype(pm)==="credit",meta=res&&res.meta||{};
+  const allSum=Math.round(rows.reduce((s,r)=>s+(r.dirOut?r.a:-r.a),0)*100)/100;
+  const chk=credit&&res&&res.kind==="pdf"&&meta.prev!=null&&meta.debt!=null?Math.round((meta.prev+allSum-meta.debt)*100)/100:null;
+  const tagOf=r=>r.kind==="tr"?h("span",{className:"tag mx-t-tr"},$t("Transfer")):r.src==="rule"||r.src==="history"?h("span",{className:"tag"},$t("Auto")):r.src==="manual"?h("span",{className:"tag mx-t-set"},$t("Set by you")):h("span",{className:"tag mx-t-sort"},$t("To sort"));
+  const optsFor=r=>{const cats=r.dirOut||r.kind==="ret"||credit?exp:inc;const o=cats.map(c=>({v:"c:"+c,t:(r.kind==="ret"?$t("Refund · "):"")+c}));
+    pms.filter(p=>p!==pm).forEach(p=>o.push({v:"t:"+p,t:(r.dirOut?"→ ":"← ")+p,k:$t("Transfer")}));
+    return o};
+  const valOf=r=>r.kind==="tr"?"t:"+r.acct:"c:"+r.cat;
+  const rowEl=r=>{const dim=isDup(r),nc=needCari(r),lk=r.link;
+    return h("div",{key:r.id,className:"mx-ln"+(dim?" dim":"")},
+      h("div",{className:"mx-l1"},
+        h("button",{className:"mx-xb","aria-label":$t("Remove")+" "+r.n,onClick:()=>remove(r)},h(Ic,{n:"x",s:14})),
+        h("div",{className:"mx-nm"},h("b",{title:r.raw},r.n),
+          h("div",{className:"mx-sub"},h("span",null,mxDate(r.d)),dim?h("span",{className:"tag mx-t-dup"},$t("In Diligence")):tagOf(r),
+            !dim&&r.src!=="none"&&r.why&&r.src!=="manual"?h("span",null,r.src==="history"?r.why:$t(r.why)):null,
+            r.inst?h("span",{className:"tag mx-t-set"},$t("Instalment ")+r.inst.no+"/"+r.inst.of):null,r.card?h("span",null,$t(r.card)):null,
+            nc&&!dim?h("span",{className:"tag mx-t-sort"},$t("Cari needed")):null,r.rl&&r.rd?h("span",null,$t("Recognized ")+mxDate(r.rd)):null),
+          r.desc?h("div",{className:"mx-sub",style:{fontFamily:"var(--sans)",fontSize:12}},r.desc):null),
+        h("div",{className:"mx-am"+(r.dirOut?"":" cr")},(r.dirOut?"":"+")+tl(r.a))),
+      dim?h("div",{className:"mx-strip"},h("span",{className:"mx-tx"},$t("Matches ")," ",h("b",null,r.dup.n||"–")," · "+mxDate(r.dup.d)+" · "+tl(r.dup.a)),h("button",{className:"sb sm",onClick:()=>up(r.id,{inc:true})},$t("Include anyway"))):
+      h(React.Fragment,null,
+        h("div",{className:"mx-l2"},
+          h("button",{className:"mx-ib","aria-label":$t("Edit")+" "+r.n,onClick:()=>openEdit(r)},h(Ic,{n:"pen",s:16})),
+          r.kind==="tr"?h("span",{className:"mx-ibx"}):h("button",{className:"mx-ib"+(lk?" on":""),"aria-label":$t("Link")+" "+r.n,onClick:()=>openLink(r)},h(Ic,{n:"chain",s:16})),
+          h("div",{className:"mx-dd"+(r.src==="none"&&r.kind!=="tr"?" todo":"")},h(Dd,{value:valOf(r),onChange:v=>setVal(r,v),opts:optsFor(r)}))),
+        lk?h("div",{className:"mx-lk"},h(Ic,{n:"chain",s:14}),h("span",null,(lk.type==="refund"?$t("Refund of "):lk.type==="inst"?$t("Instalment of "):$t("Same purchase as "))+lk.to.n+" · "+mxDate(lk.to.d)+(lk.to.src==="mv"?$t(" (in Diligence)"):"")),h("button",{"aria-label":$t("Remove link"),onClick:()=>up(r.id,{link:null})},h(Ic,{n:"x",s:12}))):null,
+        r.inst&&!lk?h("div",{className:"mx-lk"},h(Ic,{n:"stack",s:14}),h("span",null,$t("Saves ")+(r.inst.of-r.inst.no+1)+$t(" monthly instalments of ")+tl(r.a)+$t(", like the Add tab."))):null,
+        r.kind==="tr"?h("div",{className:"mx-lk"},h(Ic,{n:"arrow",s:14}),h("span",null,r.dirOut?pm+" → "+r.acct:r.acct+" → "+pm)):null,
+        r.sug&&!lk?h("div",{className:"mx-strip"},h("span",{className:"mx-tx"},$t("Looks like a refund of ")," ",h("b",null,r.sug.to.n)," ("+mxDate(r.sug.to.d)+")."),h("button",{className:"sb sm ok",onClick:()=>applyLink(r.id,"refund",r.sug.to)},$t("Link")),h("button",{className:"sb sm",onClick:()=>up(r.id,{sug:null})},$t("Dismiss"))):null,
+        similar&&similar.id===r.id?h("div",{className:"mx-strip"},h("span",{className:"mx-tx"},similar.ids.length?[$t("Put ")+similar.ids.length+$t(" more “")+similar.key+$t("” line(s) in "),h("b",{key:"b"},similar.cat),$t(" and remember it?")]:[$t("Remember “")+similar.key+$t("” as "),h("b",{key:"b"},similar.cat),$t(" for next imports?")]),
+          h("button",{className:"sb sm ok",onClick:applySimilar},similar.ids.length?$t("Apply"):$t("Remember")),h("button",{className:"sb sm",onClick:()=>setSimilar(null)},$t("Not now"))):null))};
+  const tile=(f,cls,lab,n)=>h("button",{key:f,className:"mx-tl "+cls+(filter===f?" sel":""),"aria-pressed":filter===f,onClick:()=>setFilt(f)},h("span",{className:"mono-label"},lab),h("span",{className:"mx-tv"},n));
+  const editS=sheet&&sheet.kind==="edit"?sheet:null,linkS=sheet&&sheet.kind==="link"?sheet:null,abortS=sheet&&sheet.kind==="abort";
+  const sf=(k,v)=>setSheet(s=>({...s,f:{...s.f,[k]:v}}));
+  const lr=linkS?rows.find(r=>r.id===linkS.id):null;
+  const cands=lr?(()=>{const q=compactQ(linkS.q);return purch.filter(p=>!(p.src==="imp"&&p.id===lr.id)&&!(p.src==="imp"&&rows.some(x=>x.id===p.id&&(x.removed||isDup(x))))&&(linkS.type!=="refund"||p.a>=lr.a-.01))
+      .filter(p=>!q||MX.compact(p.n).indexOf(q)>-1)
+      .map(p=>({...p,s:(lr.key&&p.key&&(p.key===lr.key||p.key.indexOf(lr.key)===0||lr.key.indexOf(p.key)===0)?2:0)+(p.src==="imp"?.5:0)}))
+      .sort((a,b)=>b.s-a.s||(b.d>a.d?1:-1)).slice(0,40)})():[];
+  return h(React.Fragment,null,
+    h(Pg,{t:$t("Review lines"),sub:pm+" · "+(file?file.name:"")},h(MxSteps,{n:2}),
+      coach?h("div",{className:"mx-coach"},h("span",{className:"mono-label"},$t("How to review")),h("h2",null,$t("Check each line before you save")),
+        h("div",{className:"mx-leg"},[["x",$t("Remove a line you do not want to import.")],["pen",$t("Edit the name, amount, date, note or cari.")],["chain",$t("Link a refund or an instalment to another expense.")],["chev",$t("Pick a category. Auto lines come from your rules and past entries; everything else starts in Diğer.")]].map(([i,t])=>h("div",{key:i},h("span",{className:"mx-k"},h(Ic,{n:i,s:14})),h("span",null,t)))),
+        h("button",{className:"btn",onClick:()=>{setCoach(false);try{localStorage.setItem("mx-coach","1")}catch(e){}}},$t("Got it"))):null,
+      chk!==null?h("div",{className:"card"},h("div",{className:"lb"},$t("Statement check")+(meta.cut?" · "+$t("cut-off ")+mxDate(meta.cut):"")),
+        h("div",{className:"br"},h("span",null,$t("Previous balance")),h("b",null,tl(meta.prev))),h("div",{className:"br"},h("span",null,$t("Lines on the statement")),h("b",null,(allSum<0?"−":"+")+tl(Math.abs(allSum)))),
+        h("div",{className:"br"},h("span",null,$t("Period debt")),h("b",{className:Math.abs(chk)<.05?"up":"dn"},tl(meta.debt)+(Math.abs(chk)<.05?" ✓":""))),
+        h("div",{className:"help"},Math.abs(chk)<.05?$t("Every line was read: the lines add up to the statement's own total."):$t("The lines differ from the statement total by ")+tl(Math.abs(chk))+$t(". Some lines may be missing; compare with the PDF before saving."))):null,
+      nDup?h("div",{className:"ban"},nDup+$t(" line(s) are already in Diligence and will be skipped. Each one shows the Muavin row it matches.")):null,
+      h("div",{className:"mx-tiles",style:{gridTemplateColumns:"repeat("+(nDup?4:3)+",1fr)"}},tile("all","cy",$t("All lines"),cnt.all),tile("auto","li",$t("Auto-sorted"),cnt.auto),tile("sort","co",$t("To sort"),cnt.sort),nDup?tile("dup","gr",$t("In Diligence"),cnt.dup):null),
+      h("div",{className:"card mx-list"},shown.length?shown.map(rowEl):h("div",{className:"help",style:{padding:"18px 4px",textAlign:"center"}},filter==="sort"?$t("Nothing left to sort."):$t("No lines in this view.")))),
+    h("div",{className:"mx-fbar"},h("div",{className:"mx-fin"},
+      h("div",{className:"mx-fsum"},h("span",null,h("b",null,act.length),$t(" lines")+(outSum?" · −"+tl(outSum):"")+(inSum?" · +"+tl(inSum):"")),h("span",null,nDup?nDup+$t(" skipped"):act.filter(r=>isExp(r)&&r.cat==="Diğer").length+$t(" in Diğer"))),
+      h("div",{className:"row"},h("button",{className:"btn mx-ab",onClick:()=>setSheet({kind:"abort"})},$t("Abort")),h("button",{className:"btn",disabled:busy||!act.length,onClick:save},busy?$t("Saving..."):act.length?$t("Save ")+act.length+$t(" lines"):$t("Nothing new"))))),
+    abortS?h(Sheet,{t:$t("Abort this import?"),x:act.length+$t(" lines will be discarded. Nothing has been saved yet."),label:$t("Abort import"),onOk:()=>{setSheet(null);back()},onNo:()=>setSheet(null)}):null,
+    editS?h(Dlg,{t:$t("Edit line"),onNo:()=>setSheet(null)},h("div",{className:"help"},rows.find(r=>r.id===editS.id).raw),h(Er,{e:editS.err}),
+      F($t("Business name"),I(editS.f.n,v=>sf("n",v),{id:"mx-n"})),
+      F($t("Description"),I(editS.f.desc,v=>sf("desc",v),{id:"mx-desc",placeholder:$t("e.g. Ticket / groceries / salary")})),
+      h("div",{className:"row"},F($t("Amount (₺)"),I(editS.f.a,v=>sf("a",v),{id:"mx-a",inputMode:"decimal"})),F($t("Date"),I(editS.f.d,v=>sf("d",v),{id:"mx-d",type:"date"}))),
+      editS.cari?F("Cari",h(React.Fragment,null,I(editS.f.cari,v=>sf("cari",v),{id:"mx-cari",list:"mx-caris",placeholder:$t("Who owes you / is owed")}),h("datalist",{id:"mx-caris"},caris.map(c=>h("option",{key:c,value:c}))))):null,
+      h("div",{className:"tg"},h("div",null,h("b",null,$t("Recognize later")),h("span",{className:"help"},$t("Book the expense in a different month."))),h(Sw,{on:editS.f.rl,set:v=>sf("rl",v),label:$t("Recognize later")})),
+      editS.f.rl?F($t("Recognition date"),I(editS.f.rd,v=>sf("rd",v),{id:"mx-rd",type:"date"})):null,
+      h("div",{className:"row",style:{marginTop:16}},h("button",{className:"btn gh",onClick:()=>setSheet(null)},$t("Cancel")),h("button",{className:"btn",onClick:saveEdit},$t("Save line")))):null,
+    linkS&&lr?h(Dlg,{t:$t("Link to another expense"),onNo:()=>setSheet(null)},h("div",{className:"help"},lr.n+" · "+(lr.dirOut?"":"+")+tl(lr.a)),
+      h("div",{className:"pills",style:{marginTop:10}},(lr.dirOut?[["inst",$t("Instalment")],["same",$t("Same purchase")]]:[["refund",$t("Refund")]]).map(([k,l])=>h("button",{key:k,className:"pill"+(linkS.type===k?" on":""),onClick:()=>setSheet(s=>({...s,type:k,to:null}))},l))),
+      h("div",{className:"help"},linkS.type==="refund"?$t("This line gives back money from an earlier purchase. It gets the purchase's ID and month, so that month nets down in Spend."):linkS.type==="inst"?$t("This line is one payment of an earlier purchase. It gets the purchase's ID and month, so the purchase stays one expense."):$t("This line belongs to the same purchase as another line, for example a split receipt.")),
+      h("div",{className:"fld"},I(linkS.q,v=>setSheet(s=>({...s,q:v})),{id:"mx-q",placeholder:$t("Search by name")})),
+      ["imp","mv"].map(src=>{const L2=cands.filter(c=>c.src===src);return L2.length?h(React.Fragment,{key:src},h("div",{className:"lb",style:{marginTop:12}},src==="imp"?$t("In this import"):$t("Already in Diligence")),
+        h("div",{className:"mx-cand"},L2.map(c=>h("button",{key:c.src+c.id,type:"button",className:"opt"+(linkS.to&&linkS.to.id===c.id&&linkS.to.src===c.src?" sel":""),onClick:()=>setSheet(s=>({...s,to:c}))},h("span",{className:"mx-cn"},h("b",null,c.n),h("small",null,mxDate(c.d)+(c.cat?" · "+c.cat:"")+(c.k>1?" · "+c.k+$t(" instalments"):""))),h("span",{className:"mx-ca"},tl(c.a)))))):null}),
+      !cands.length?h("div",{className:"help"},$t("No matching expenses found.")):null,
+      h("div",{className:"row",style:{marginTop:16}},h("button",{className:"btn gh",onClick:()=>setSheet(null)},$t("Cancel")),h("button",{className:"btn",disabled:!linkS.to,onClick:()=>applyLink(lr.id,linkS.type,linkS.to)},$t("Link")))):null)}
+const compactQ=s=>MX.compact(s||"");
+
 /* ---------- APP ---------- */
 function More({go,priv,setPriv}){
-  return h(Pg,{t:$t("More")},[["stk",$t("Consumables"),$t("Stock, restock and use")],["inv",$t("Investments"),$t("Portfolio and allocation")],["rep",$t("Reports"),$t("Income statement, balance sheet, ONCA")],["ins",$t("Insights"),$t("Spending trends and category moves")],["rec",$t("Reconciliation"),"Match a cash or card balance to the real amount"],["set",$t("Settings"),$t("Payment methods and categories")]].map(([k,t,x])=>h("div",{key:k,className:"card",style:{cursor:"pointer",display:"flex",alignItems:"center"},onClick:()=>go(k)},h("div",{style:{flex:1}},h("b",null,t),h("div",{className:"help",style:{marginTop:2}},x)),h("span",{className:"lb"},"›"))),
+  return h(Pg,{t:$t("More")},[["stk",$t("Consumables"),$t("Stock, restock and use")],["inv",$t("Investments"),$t("Portfolio and allocation")],["rep",$t("Reports"),$t("Income statement, balance sheet, ONCA")],["ins",$t("Insights"),$t("Spending trends and category moves")],["rec",$t("Reconciliation"),$t("Match a cash or card balance to the real amount")],["mass",$t("Mass entry"),$t("Import a bank statement (PDF, CSV, XLS, XLSX)")],["set",$t("Settings"),$t("Payment methods and categories")]].map(([k,t,x])=>h("div",{key:k,className:"card",style:{cursor:"pointer",display:"flex",alignItems:"center"},onClick:()=>go(k)},h("div",{style:{flex:1}},h("b",null,t),h("div",{className:"help",style:{marginTop:2}},x)),h("span",{className:"lb"},"›"))),
     h("div",{className:"card",style:{display:"flex",alignItems:"center",gap:12}},h("div",{style:{flex:1}},h("b",null,$t("Hide balances")),h("div",{className:"help",style:{marginTop:2}},$t("Hide amounts on Overview, Diligence and Investments (shown as ***,*)"))),h(Sw,{on:priv,set:setPriv,label:$t("Hide balances")})))}
 function Insights({back}){
   return h(Pg,{t:$t("Insights"),back},h("div",{className:"card"},h("div",{className:"lb"},$t("Coming soon")),h("div",{className:"help",style:{fontSize:14,marginTop:8}},$t("Insights will compare your months and point out the biggest category moves."))))}
@@ -1006,8 +1619,8 @@ function App(){
   const go=k=>{if(k!=="add")setEdit(null);setSc(k);window.scrollTo(0,0)};
   const privBtn=h("button",{className:"ibtn"+(priv?" on":""),onClick:()=>setPriv(!priv),title:$t("Hide balances"),"aria-label":$t("Hide balances"),"aria-pressed":priv},h(Ic,{n:priv?"eyeoff":"eye",s:18}));
   const back=()=>go("more");
-  const scr=sc==="home"?h(Home,{go,say}):sc==="tx"?h(Tx,{onEdit:r=>{setEdit(r);setSc("add")},L,say}):sc==="add"?h(Add,{edit,L,say,done:()=>{setEdit(null);setSc("tx")}}):sc==="inv"?h(Inv,{priv,back}):sc==="dil"?h(Dil,{L,say}):sc==="rep"?h(Reports,{back}):sc==="set"?h(Settings,{back,L,say,setPref}):sc==="ins"?h(Insights,{back}):sc==="rec"?h(Recon,{back,L,say}):sc==="stk"?h(Stock,{back,L,say}):h(More,{go,priv,setPriv});
-  const on=k=>(k==="more"?["more","inv","rep","set","stk","rec","ins"].includes(sc):sc===k);
+  const scr=sc==="home"?h(Home,{go,say}):sc==="tx"?h(Tx,{onEdit:r=>{setEdit(r);setSc("add")},L,say}):sc==="add"?h(Add,{edit,L,say,done:()=>{setEdit(null);setSc("tx")}}):sc==="inv"?h(Inv,{priv,back}):sc==="dil"?h(Dil,{L,say}):sc==="rep"?h(Reports,{back}):sc==="set"?h(Settings,{back,L,say,setPref}):sc==="ins"?h(Insights,{back}):sc==="rec"?h(Recon,{back,L,say}):sc==="stk"?h(Stock,{back,L,say}):sc==="mass"?h(Mass,{back,L,say,go}):h(More,{go,priv,setPriv});
+  const on=k=>(k==="more"?["more","inv","rep","set","stk","rec","ins","mass"].includes(sc):sc===k);
   const nb=(k,l,i)=>h("button",{className:"nb"+(on(k)?" on":""),onClick:()=>go(k)},h(Ic,{n:i}),l);
   return h("div",{className:"app"},h("header",{className:"appbar"},h("div",{className:"brand"},h(Mark,{s:26}),$t("Diligence")),privBtn),toast?h("div",{className:"toast"+(toast.bad?" bad":"")},toast.m):null,scr,
     h("div",{className:"nav"},nb("home",$t("Overview"),"home"),nb("tx",$t("Transactions"),"list"),h("button",{className:"fab",onClick:()=>go("add"),"aria-label":$t("Add")},h(Ic,{n:"plus"})),nb("dil",$t("Diligence"),"chart"),nb("more",$t("More"),"grid")))}
