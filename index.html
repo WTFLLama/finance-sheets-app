@@ -345,15 +345,12 @@ input[type=range].rg:focus-visible{outline:2px solid var(--txt);outline-offset:2
 .sp-coin{transform-box:fill-box;transform-origin:center;animation:sp-coin-in .65s cubic-bezier(.2,.9,.3,1.25) both}
 .sp-lens{transform-box:fill-box;transform-origin:center;animation:sp-lens-in .8s cubic-bezier(.2,.9,.3,1.15) .75s both,sp-float 2.4s ease-in-out 1.75s infinite}
 .sp-name{font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:.04em;color:var(--txt);animation:sp-fade .5s ease 1.4s both}
-.sp-dots{display:flex;gap:7px;animation:sp-fade .5s ease 1.4s both}
-.sp-dots i{width:7px;height:7px;border-radius:50%;background:var(--txt);opacity:.25;animation:sp-dot 1.2s ease-in-out infinite}
-.sp-dots i:nth-child(2){animation-delay:.15s}.sp-dots i:nth-child(3){animation-delay:.3s}
+.sp-ver{margin-top:-12px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;letter-spacing:.08em;color:var(--mut);animation:sp-fade .5s ease 1.6s both}
 @keyframes sp-coin-in{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
 @keyframes sp-lens-in{from{transform:translate(70px,-70px) scale(.5);opacity:0}55%{opacity:1}to{transform:translate(0,0) scale(1);opacity:1}}
 @keyframes sp-float{0%,100%{transform:translate(0,0)}50%{transform:translate(-6px,6px)}}
 @keyframes sp-fade{from{opacity:0}to{opacity:1}}
-@keyframes sp-dot{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-4px)}}
-@media(prefers-reduced-motion:reduce){.sp-ic,.sp-coin,.sp-lens,.sp-name,.sp-dots,.sp-dots i{animation:none}.sp-dots i{opacity:.6}}
+@media(prefers-reduced-motion:reduce){.sp-ic,.sp-coin,.sp-lens,.sp-name,.sp-ver{animation:none}}
 </style>
 <div id="splash" role="status" aria-label="Loading">
 <svg class="sp-ic" viewBox="0 0 512 512" aria-hidden="true">
@@ -389,7 +386,7 @@ input[type=range].rg:focus-visible{outline:2px solid var(--txt);outline-offset:2
 </g>
 </svg>
 <div class="sp-name">Diligence</div>
-<div class="sp-dots"><i></i><i></i><i></i></div>
+<div class="sp-ver">Alpha 1.0</div>
 </div>
 <script>window.__sp0=Date.now();setTimeout(function(){var s=document.getElementById("splash");if(s){s.classList.add("out");setTimeout(function(){s.remove()},500)}},8000)</script>
 <script>
