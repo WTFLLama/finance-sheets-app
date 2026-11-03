@@ -341,18 +341,19 @@ input[type=range].rg:focus-visible{outline:2px solid var(--txt);outline-offset:2
 <style>
 #splash{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;background:var(--bg);transition:opacity .45s ease,visibility .45s}
 #splash.out{opacity:0;visibility:hidden}
-.sp-ic{width:132px;height:132px;display:block;filter:drop-shadow(0 14px 28px rgba(0,0,0,.18));animation:sp-pop .6s cubic-bezier(.2,.9,.3,1.2) both}
-.sp-coin{transform-box:fill-box;transform-origin:center;animation:sp-flip 2.2s ease-in-out infinite}
-.sp-lens{animation:sp-float 2.2s ease-in-out infinite}
-.sp-name{font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:.04em;color:var(--txt)}
-.sp-dots{display:flex;gap:7px}
+.sp-ic{width:132px;height:132px;display:block;filter:drop-shadow(0 14px 28px rgba(0,0,0,.18))}
+.sp-coin{transform-box:fill-box;transform-origin:center;animation:sp-coin-in .65s cubic-bezier(.2,.9,.3,1.25) both}
+.sp-lens{transform-box:fill-box;transform-origin:center;animation:sp-lens-in .8s cubic-bezier(.2,.9,.3,1.15) .75s both,sp-float 2.4s ease-in-out 1.75s infinite}
+.sp-name{font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:.04em;color:var(--txt);animation:sp-fade .5s ease 1.4s both}
+.sp-dots{display:flex;gap:7px;animation:sp-fade .5s ease 1.4s both}
 .sp-dots i{width:7px;height:7px;border-radius:50%;background:var(--txt);opacity:.25;animation:sp-dot 1.2s ease-in-out infinite}
 .sp-dots i:nth-child(2){animation-delay:.15s}.sp-dots i:nth-child(3){animation-delay:.3s}
-@keyframes sp-pop{from{transform:scale(.7);opacity:0}to{transform:none;opacity:1}}
-@keyframes sp-flip{0%,45%{transform:scaleX(1)}60%{transform:scaleX(.08)}75%,100%{transform:scaleX(1)}}
-@keyframes sp-float{0%,100%{transform:translate(0,0)}50%{transform:translate(-10px,10px)}}
+@keyframes sp-coin-in{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes sp-lens-in{from{transform:translate(70px,-70px) scale(.5);opacity:0}55%{opacity:1}to{transform:translate(0,0) scale(1);opacity:1}}
+@keyframes sp-float{0%,100%{transform:translate(0,0)}50%{transform:translate(-6px,6px)}}
+@keyframes sp-fade{from{opacity:0}to{opacity:1}}
 @keyframes sp-dot{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-4px)}}
-@media(prefers-reduced-motion:reduce){.sp-ic,.sp-coin,.sp-lens,.sp-dots i{animation:none}.sp-dots i{opacity:.6}}
+@media(prefers-reduced-motion:reduce){.sp-ic,.sp-coin,.sp-lens,.sp-name,.sp-dots,.sp-dots i{animation:none}.sp-dots i{opacity:.6}}
 </style>
 <div id="splash" role="status" aria-label="Loading">
 <svg class="sp-ic" viewBox="0 0 512 512" aria-hidden="true">
@@ -1743,5 +1744,5 @@ function App(){
   return h("div",{className:"app"},h("header",{className:"appbar"},h("div",{className:"brand"},h(Mark,{s:26}),$t("Diligence")),privBtn),toast?h("div",{className:"toast"+(toast.bad?" bad":"")},toast.m):null,scr,
     h("div",{className:"nav"},nb("home",$t("Overview"),"home"),nb("tx",$t("Transactions"),"list"),h("button",{className:"fab",onClick:()=>go("add"),"aria-label":$t("Add")},h(Ic,{n:"plus"})),nb("dil",$t("Diligence"),"chart"),nb("more",$t("More"),"grid")))}
 ReactDOM.createRoot(document.getElementById("root")).render(h(App));
-(function(){var s=document.getElementById("splash");if(!s)return;var wait=Math.max(0,1400-(Date.now()-(window.__sp0||Date.now())));setTimeout(function(){s.classList.add("out");setTimeout(function(){s.remove()},500)},wait)})();
+(function(){var s=document.getElementById("splash");if(!s)return;var wait=Math.max(0,2000-(Date.now()-(window.__sp0||Date.now())));setTimeout(function(){s.classList.add("out");setTimeout(function(){s.remove()},500)},wait)})();
 </script></body></html>
