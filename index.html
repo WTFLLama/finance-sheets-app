@@ -413,7 +413,7 @@ const nfmt=(n,d)=>{const k=d==null?PREF.dec:d;return Number(n||0).toLocaleString
 const mv=s=>PRIV?MASK:s;
 const tl=n=>mv(nfmt(n))+" "+PREF.cur;
 const trNum=m=>{const n=Number(String(m).replace(/\./g,"").replace(",","."));return Number.isFinite(n)?n:0};
-const fmtStr=s=>String(s==null?"":s).replace(/-?\d{1,3}(?:\.\d{3})+(?:,\d+)?|-?\d+(?:,\d+)?/g,m=>PRIV?MASK:nfmt(trNum(m))).split("₺").join(PREF.cur);
+const fmtStr=s=>typeof s==="number"?(Number.isFinite(s)?(PRIV?MASK:nfmt(s)):"0"):String(s==null?"":s).replace(/-?\d+\.\d{1,2}(?![\d.,])|-?\d{1,3}(?:\.\d{3})+(?:,\d+)?|-?\d+(?:,\d+)?/g,m=>PRIV?MASK:nfmt(/^-?\d+\.\d{1,2}$/.test(m)?Number(m):trNum(m))).split("₺").join(PREF.cur);
 const sv=v=>{const n=amountValue(v);return /-/.test(String(v))?-n:n};
 const mlong=k=>{const p=k.split("-");return new Date(+p[0],p[1]-1,1).toLocaleDateString(LOCD(),{month:"long",year:"numeric"})};
 const mname=i=>new Date(2000,i,1).toLocaleDateString(LOC(),{month:"short"}).replace(".","");
