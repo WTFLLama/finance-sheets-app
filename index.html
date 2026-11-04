@@ -722,7 +722,7 @@ function Tx({onEdit,L,say}){
 
 
 /* ---------- RETURN ---------- */
-const NOT_RET=["İş Alacak","Sosyal Alacak","Diğer Alacak","Sosyal Borç","Transfer"];
+const NOT_RET=["İş Alacak","Sosyal Alacak","Diğer Alacak","Sosyal Borç","Transfer",INV_ACC];
 const retCats=r=>(r.categories||[]).filter(c=>NOT_RET.indexOf(c.category)===-1&&c.amount>0.005);
 const nf2=n=>nfmt(n);
 function RetDlg({r,L,onNo,done}){
