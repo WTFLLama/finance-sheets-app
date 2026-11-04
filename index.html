@@ -713,7 +713,7 @@ function Tx({onEdit,L,say}){
         h("div",null,(r.categories||[]).map(c=>h("span",{key:c.category,className:"chip"},em(c.category),c.category+" "+(r.installmentCount>1?tl(c.amount):fmtStr(c.amount))))),
         h("div",{className:"help mono"},r.transactionId),
         h("div",{className:"row",style:{marginTop:10,justifyContent:"flex-end"}},
-          r.transactionType==="expense"&&!tr&&r.installmentCount<=1&&r.netAmount>0.005&&r.paymentMethod!==INV_ACC&&retCats(r).length?h("button",{className:"sb",onClick:()=>setRt(r)},$t("Return")):null,
+          r.transactionType==="expense"&&!tr&&r.installmentCount<=1&&r.netAmount>0.005&&r.paymentMethod!==INV_ACC&&retCats(r,L).length?h("button",{className:"sb",onClick:()=>setRt(r)},$t("Return")):null,
           r.category1==="Komisyon"||r.installmentCount>1||r.returned>0||(tr&&!r.transferId)||r.paymentMethod===INV_ACC||r.transferToAccount===INV_ACC?null:h("button",{className:"sb",onClick:()=>onEdit(r)},$t("Edit")),
           h("button",{className:"sb dl",onClick:()=>setDel(r)},$t("Delete"))))}),
     del?h(Sheet,{t:del.transferId?$t("Delete this transfer?"):$t("Delete this transaction?"),x:del.transferId?$t("Both sides of the transfer will be deleted."):$t("This transaction will be permanently removed from Muavin."),onOk:confirm,onNo:()=>setDel(null)}):null,
@@ -722,11 +722,12 @@ function Tx({onEdit,L,say}){
 
 
 /* ---------- RETURN ---------- */
-const NOT_RET=["İş Alacak","Sosyal Alacak","Diğer Alacak","Sosyal Borç","Transfer",INV_ACC];
-const retCats=r=>(r.categories||[]).filter(c=>NOT_RET.indexOf(c.category)===-1&&c.amount>0.005);
+// Expense-list categories typed Debit (receivables, stock...) and Transfer are not real spending
+const nonSpend=(c,L)=>c==="Transfer"||L?.d?.types?.expense?.[c]==="debit";
+const retCats=(r,L)=>(r.categories||[]).filter(c=>!nonSpend(c.category,L)&&c.amount>0.005);
 const nf2=n=>nfmt(n);
 function RetDlg({r,L,onNo,done}){
-  const cats=retCats(r),total=cats.reduce((s,c)=>s+c.amount,0);
+  const cats=retCats(r,L),total=cats.reduce((s,c)=>s+c.amount,0);
   const[amt,setAmt]=useState(String(Math.round(total*100)/100)),[dt,setDt]=useState(today()),[pm,setPm]=useState(r.paymentMethod),[sp,setSp]=useState(null),[busy,setBusy]=useState(false),[err,setErr]=useState("");
   const a=Math.round((Number(amt)||0)*100)/100;
   // proportional split over what is still left in each category (last one takes the rounding remainder)
