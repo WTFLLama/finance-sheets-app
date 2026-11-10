@@ -1,0 +1,3367 @@
+{
+ "meta": {
+  "sonTarama": "2026-11-10",
+  "taramaNotu": "Kampanyalar bankaların resmî kampanya sayfalarından tek tek kontrol edildi. Yalnızca kartına uyduğu açıkça yazanlar eklendi. Doğrulanamayanlar 'Doğrulama bekliyor' bölümünde tutulur ve hesaplamalara katılmaz. Tüm mağazaya özel taksit ve marka kampanyalarının her biri eklenmedi; kategori ve büyük e-ticaret siteleri önceliklendirildi.",
+  "duyurular": [
+   {
+    "kart": "denizkart-black",
+    "baslik": "6 Aralık 2026'da Maximum'a geçiş",
+    "metin": "DenizBank kredi kartları 6 Aralık 2026'dan itibaren İş Bankası Maximum programına geçiyor. Bonus logolu kart kullanıma kapanacak; sana gönderilen yeni DenizBank kartıyla devam edeceksin. Biriken Bonus'ların değer kaybı olmadan MaxiPuan'a dönüşecek; kart limitin ve kart ücretin değişmiyor. Senin tercihinle uygulama, geçiş tamamlanmış ve kart Maximum Platinum gibi kabul edilmiş halde Maximum kampanyalarını DenizKart Black altında gösteriyor. Gerçekte bu kampanyalar 6 Aralık'tan önce kartına uygulanmaz.",
+    "link": "https://www.denizbank.com/kampanya/kart-kampanyalari/cok-yakinda",
+    "tarih": "2026-11-10"
+   }
+  ],
+  "kapsamDisi": [
+   {
+    "kart": "denizkart-black",
+    "ad": "Otomatik fatura talimatına 700 TL'ye varan nakit iade (1–30 Kasım 2026)",
+    "neden": "Yalnızca dijital kanaldan ilk kez kredi kartı başvurusu yapan yeni müşteriler için geçerli; mevcut DenizKart Black için uygun değil."
+   },
+   {
+    "kart": "rail-miles",
+    "ad": "World üye işyerlerinde restoran kampanyası (600 TL)",
+    "neden": "Kampanya koşullarında VakıfBank Worldcard'lar hariç tutuluyor."
+   },
+   {
+    "kart": "qnb",
+    "ad": "QNB Mobilet kampanyası",
+    "neden": "Resmî kampanya sayfası doğrulanamadı."
+   },
+   {
+    "kart": "rail-miles",
+    "ad": "Restoran harcamalarında %20'ye varan indirim (VakıfBank)",
+    "neden": "Yalnızca Reserve, Private ve Platinum Plus kartlarda geçerli; Rail&Miles dahil değil."
+   },
+   {
+    "kart": "bonus-genc",
+    "ad": "Garanti BBVA Genç'e özel hedefli teklifler (yemek platformları 300 TL, ulaşım kartı, iCloud, seçili e-ticaret 500 TL, giyim 500 TL)",
+    "neden": "Yalnızca banka tarafından iletişime geçilen 18–26 yaş müşterilere tanımlanıyor; sana tanımlıysa Garanti BBVA Mobil > Genç bölümünde görürsün."
+   },
+   {
+    "kart": "bonus-genc",
+    "ad": "Bonus restoran (500 TL), yurt dışı (1.250 TL) ve diğer genel Bonus kampanyaları",
+    "neden": "Koşul metninde Bonus Genç'in dahil olduğu açıkça yazmıyor; doğrulanmadan eklenmedi."
+   }
+  ]
+ },
+ "kampanyalar": [
+  {
+   "id": "bg-market-2611",
+   "kart": "bonus-genc",
+   "ad": "Bonus Genç'le market alışverişlerine 400 TL, Mobil Temassız veya QR ile ödemene 550 TL bonus!",
+   "kisaAd": "Market kampanyası",
+   "aciklama": "Bonus üye işyerlerinde yapılan her 500 TL ve üzeri market (gıda) harcamasına 80 TL bonus. Ödemeyi Mobil Temassız veya QR ile yaparsan her işleme ek 30 TL bonus.",
+   "kategoriler": [
+    "market"
+   ],
+   "avantajTuru": "bonus",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Bonus üye işyerlerindeki market (gıda) harcamaları",
+   "isyerleri": [],
+   "kazancMetni": "Her 500 TL+ işleme 80 TL bonus · QR / Mobil Temassız ile +30 TL",
+   "minHarcama": 500,
+   "maksOdul": 550,
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimGerekli": true,
+   "katilimKosulu": "İlk harcamadan önce BonusFlaş'ta kampanya sayfasından \"Hemen Katıl\" de ya da GENCMARKET yazıp 3340'a SMS gönder.",
+   "sms": {
+    "kelime": "GENCMARKET",
+    "numara": "3340",
+    "not": "SMS ücretlidir"
+   },
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/bonus-genc-market-kampanyasi",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-genc-market-kampanyasi",
+   "kosullar": [
+    "Taksitli işlemler kampanyaya dahil değildir.",
+    "Aynı gün aynı işyerinde yapılan işlemlerden yalnızca ilki dikkate alınır.",
+    "Temel ödül toplamda en fazla 400 TL (5 işlem), QR / Mobil Temassız ek ödülü en fazla 150 TL'dir."
+   ],
+   "puanKullanim": "Bonuslar 3 Aralık 2026 – 3 Ocak 2027 arasında kullanılabilir.",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 500,
+    "tutar": 80,
+    "maks": 400,
+    "ek": {
+     "kosul": "mobil-qr",
+     "tutar": 30,
+     "maks": 150
+    },
+    "toplamMaks": 550,
+    "taksitHaric": true
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "bg-restoran-2611",
+   "kart": "bonus-genc",
+   "ad": "Bonus Genç'le restoran, fast food ve kahve zincirlerinde 400 TL, Mobil Temassız veya QR ile ödemene 550 TL bonus!",
+   "kisaAd": "Restoran kampanyası",
+   "aciklama": "Restoran, fast food ve kahve zincirlerinde yapılan her 500 TL ve üzeri harcamaya 80 TL bonus. Mobil Temassız veya QR ile ödemede her işleme ek 30 TL bonus.",
+   "kategoriler": [
+    "restoran"
+   ],
+   "avantajTuru": "bonus",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Restoran, fast food ve kahve zincirleri",
+   "isyerleri": [],
+   "kazancMetni": "Her 500 TL+ işleme 80 TL bonus · QR / Mobil Temassız ile +30 TL",
+   "minHarcama": 500,
+   "maksOdul": 550,
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimGerekli": true,
+   "katilimKosulu": "BonusFlaş'ta kampanya sayfasından \"Hemen Katıl\" butonuna dokun (ücretsiz). Harcamalarından önce katılman önerilir.",
+   "sms": null,
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/bonus-genc-restoran-kampanyasi",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-genc-restoran-kampanyasi",
+   "kosullar": [
+    "Taksitli işlemler kampanyaya dahil değildir.",
+    "Temel ödül toplamda en fazla 400 TL (5 işlem), QR / Mobil Temassız ek ödülü en fazla 150 TL'dir."
+   ],
+   "puanKullanim": "Bonuslar 3 Aralık 2026 – 3 Ocak 2027 arasında kullanılabilir.",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 500,
+    "tutar": 80,
+    "maks": 400,
+    "ek": {
+     "kosul": "mobil-qr",
+     "tutar": 30,
+     "maks": 150
+    },
+    "toplamMaks": 550,
+    "taksitHaric": true
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "bg-giyim-2611",
+   "kart": "bonus-genc",
+   "ad": "Bonus Genç'le giyim alışverişine 500 TL bonus!",
+   "kisaAd": "Giyim kampanyası",
+   "aciklama": "Giyim sektöründe yapılan her 1.000 TL ve üzeri tek harcamaya 100 TL bonus; toplamda 500 TL'ye kadar.",
+   "kategoriler": [
+    "giyim"
+   ],
+   "avantajTuru": "bonus",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Giyim sektöründeki harcamalar",
+   "isyerleri": [],
+   "kazancMetni": "Her 1.000 TL+ işleme 100 TL bonus",
+   "minHarcama": 1000,
+   "maksOdul": 500,
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimGerekli": true,
+   "katilimKosulu": "Harcamadan önce BonusFlaş'tan katıl ya da GIYIMGENC yazıp 3340'a SMS gönder.",
+   "sms": {
+    "kelime": "GIYIMGENC",
+    "numara": "3340",
+    "not": ""
+   },
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/bonus-genc-giyim-kampanya",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-genc-giyim-kampanya",
+   "kosullar": [
+    "Taksitli işlemler kampanyaya dahil değildir.",
+    "Toplamda en fazla 5 işlem ödül kazandırır (5 × 100 TL)."
+   ],
+   "puanKullanim": "",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 1000,
+    "tutar": 100,
+    "maks": 500,
+    "taksitHaric": true
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "bg-amazon-2611",
+   "kart": "bonus-genc",
+   "ad": "Amazon'da 6.000 TL ve üzeri alışverişlerde 500 TL, 12.000 TL ve üzeri alışverişlerde 1.000 TL bonus!",
+   "kisaAd": "Amazon kampanyası",
+   "aciklama": "Amazon.com.tr'de tek seferde yapılan 6.000 TL ve üzeri alışverişe 500 TL, 12.000 TL ve üzeri alışverişe 1.000 TL bonus. Bonus Genç dahil Bonus kartlarda geçerli.",
+   "kategoriler": [
+    "eticaret"
+   ],
+   "avantajTuru": "bonus",
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca Amazon.com.tr",
+   "isyerleri": [
+    "Amazon"
+   ],
+   "kazancMetni": "6.000 TL+ alışverişe 500 TL · 12.000 TL+ alışverişe 1.000 TL bonus",
+   "minHarcama": 6000,
+   "maksOdul": 1000,
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimGerekli": true,
+   "katilimKosulu": "İlk harcamadan önce BonusFlaş'ta kampanya sayfasından \"Hemen Katıl\" de.",
+   "sms": null,
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/amazon-eticaret-bonus-kampanyalari",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/amazon-eticaret-bonus-kampanyalari",
+   "kosullar": [
+    "Müşteri başına bir kez yararlanılabilir.",
+    "Ödül tek alışverişin tutarına göre belirlenir; ayrı alışverişler toplanmaz."
+   ],
+   "puanKullanim": "Bonuslar 5 Ocak – 5 Şubat 2027 arasında kullanılabilir.",
+   "odul": {
+    "model": "kademe",
+    "kademeler": [
+     {
+      "esik": 6000,
+      "tutar": 500
+     },
+     {
+      "esik": 12000,
+      "tutar": 1000
+     }
+    ],
+    "tekSefer": true
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî sayfa (arama dizini kaydı)"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "bg-saglik-2611",
+   "kart": "bonus-genc",
+   "ad": "Hastane ve eczane ödemelerinize ücretsiz taksit fırsatı!",
+   "kisaAd": "Hastane & eczane taksiti",
+   "aciklama": "Hastane ve eczanelerde yapılan 2.000 TL – 1.000.000 TL arası peşin harcamalar 3 taksite bölünür; taksitli harcamalara +2 taksit eklenir. Bonus Genç dahil.",
+   "kategoriler": [
+    "saglik"
+   ],
+   "avantajTuru": "taksit",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Hastane ve eczane harcamaları",
+   "isyerleri": [],
+   "kazancMetni": "Peşin işleme 3 taksit · taksitli işleme +2 taksit",
+   "minHarcama": 2000,
+   "maksOdul": null,
+   "maksMetni": "İşlem en fazla 1.000.000 TL",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimGerekli": true,
+   "katilimKosulu": "Harcamadan önce BonusFlaş'tan katıl ya da SAGLIKTAKSIT yazıp 3340'a SMS gönder.",
+   "sms": {
+    "kelime": "SAGLIKTAKSIT",
+    "numara": "3340",
+    "not": ""
+   },
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/bonus-hastane-eczane-kampanyasi",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-hastane-eczane-kampanyasi",
+   "kosullar": [
+    "2.000 TL – 1.000.000 TL arasındaki hastane ve eczane işlemleri geçerlidir."
+   ],
+   "puanKullanim": "",
+   "odul": {
+    "model": "taksit",
+    "min": 2000,
+    "max": 1000000,
+    "metin": "Peşine 3 taksit / taksitliye +2 taksit"
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî sayfa (arama dizini kaydı)"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "bg-fatura-2611",
+   "kart": "bonus-genc",
+   "ad": "Otomatik fatura ödeme talimatınıza 800 TL'ye varan bonus!",
+   "kisaAd": "Otomatik fatura talimatı",
+   "aciklama": "Kampanya süresince verilen yeni otomatik fatura ödeme talimatlarına: 2 talimata 200 TL, 4 talimata 400 TL, 6 talimata toplam 800 TL bonus.",
+   "kategoriler": [
+    "diger"
+   ],
+   "avantajTuru": "bonus",
+   "tip": "eylem",
+   "kapsam": "genel",
+   "kapsamNotu": "Yeni otomatik fatura ödeme talimatları",
+   "isyerleri": [],
+   "kazancMetni": "2 talimata 200 TL · 4 talimata 400 TL · 6 talimata 800 TL bonus",
+   "minHarcama": null,
+   "minMetni": "En az 2 yeni talimat",
+   "maksOdul": 800,
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimGerekli": true,
+   "katilimKosulu": "Talimatı BonusFlaş, şube veya 444 0 333 üzerinden verirsen ayrıca SMS gerekmez. Diğer kanallarda 30 Kasım 23:59'a kadar FATURA yazıp 3340'a SMS gönder.",
+   "sms": {
+    "kelime": "FATURA",
+    "numara": "3340",
+    "not": ""
+   },
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/ofo-1126",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/ofo-1126",
+   "kosullar": [
+    "Talimatların 1 Mayıs 2027'ye kadar iptal edilmemesi ve en az 3 fatura tahsilatı yapılması gerekir; aksi halde bonus geri alınır."
+   ],
+   "puanKullanim": "Bonuslar 5 Aralık 2026'da yüklenir, 1 Mayıs 2027'ye kadar kullanılabilir.",
+   "odul": {
+    "model": "eylem",
+    "birim": "talimat",
+    "kademeler": [
+     {
+      "adet": 2,
+      "tutar": 200
+     },
+     {
+      "adet": 4,
+      "tutar": 400
+     },
+     {
+      "adet": 6,
+      "tutar": 800
+     }
+    ]
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "bg-zorlu-psm",
+   "kart": "bonus-genc",
+   "ad": "Bonus Genç'le, Zorlu PSM'nin düzenlediği etkinliklerde %50'ye varan indirim!",
+   "kisaAd": "Zorlu PSM bilet indirimi",
+   "aciklama": "Zorlu PSM'nin düzenlediği etkinliklerin biletlerinde, Passo'da \"Garanti BBVA Bonus Genç Bilet\" seçeneğiyle %50'ye varan indirim.",
+   "kategoriler": [
+    "eglence"
+   ],
+   "avantajTuru": "indirim",
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca Zorlu PSM'nin düzenlediği etkinlikler, Passo üzerinden",
+   "isyerleri": [
+    "Zorlu PSM (Passo)"
+   ],
+   "kazancMetni": "Bilet fiyatına %50'ye varan indirim",
+   "minHarcama": null,
+   "minMetni": "Alt sınır yok",
+   "maksOdul": null,
+   "maksMetni": "Kontenjanla sınırlı",
+   "baslangic": "2025-10-04",
+   "bitis": "2027-10-01",
+   "katilimGerekli": false,
+   "katilimKosulu": "Katılım gerekmez. Passo'da bilet türü olarak \"Garanti BBVA Bonus Genç Bilet\"i seç ve kartının ilk 6 hanesini gir.",
+   "sms": null,
+   "katilimLinki": null,
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-genc-indirim-kampanyasi",
+   "kosullar": [
+    "18–25 yaş arası Bonus Genç kart sahipleri içindir.",
+    "İndirim bilet fiyatına uygulanır; Passo hizmet bedeli hariçtir.",
+    "Kontenjanla sınırlıdır; diğer indirimlerle birleştirilemez."
+   ],
+   "puanKullanim": "",
+   "odul": {
+    "model": "yuzde",
+    "oran": 0.5
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "dk-egitim-2611",
+   "kart": "denizkart-black",
+   "ad": "Eğitim Ödemelerinize 6 taksit!",
+   "kisaAd": "Eğitim ödemelerine 6 taksit",
+   "aciklama": "Eğitim kurumlarına yapılan 100.000 TL – 2.000.000 TL arası peşin ödemeler 6 faizsiz taksite bölünür. Tüm DenizBank bireysel kredi kartlarında geçerli.",
+   "kategoriler": [
+    "diger"
+   ],
+   "avantajTuru": "taksit",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Eğitim kurumlarına yapılan peşin ödemeler",
+   "isyerleri": [],
+   "kazancMetni": "6 faizsiz taksit",
+   "minHarcama": 100000,
+   "maksOdul": null,
+   "maksMetni": "İşlem en fazla 2.000.000 TL · en fazla 2 kez",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimGerekli": true,
+   "katilimKosulu": "Harcamadan önce DenizKartım veya MobilDeniz'de \"Hemen Katıl\" de ya da EGITIM yazıp 3280'e SMS gönder.",
+   "sms": {
+    "kelime": "EGITIM",
+    "numara": "3280",
+    "not": ""
+   },
+   "katilimLinki": "https://www.denizkartim.com/kampanyalar/egitim-odemelerinize-6-taksit",
+   "resmiLink": "https://www.denizkartim.com/kampanyalar/egitim-odemelerinize-6-taksit",
+   "kosullar": [
+    "Kampanyadan en fazla 2 kez yararlanılabilir."
+   ],
+   "puanKullanim": "",
+   "odul": {
+    "model": "taksit",
+    "min": 100000,
+    "max": 2000000,
+    "metin": "6 faizsiz taksit",
+    "maksAdet": 2
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî sayfa (arama dizini kaydı)"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "dk-sigorta-2611",
+   "kart": "denizkart-black",
+   "ad": "Sigorta ve BES ödemelerinize 3 Taksit!",
+   "kisaAd": "Sigorta & BES'e 3 taksit",
+   "aciklama": "2.500 TL – 100.000 TL arası peşin sigorta ve BES ödemeleri 3 taksite bölünür.",
+   "kategoriler": [
+    "diger"
+   ],
+   "avantajTuru": "taksit",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Sigorta ve bireysel emeklilik (BES) ödemeleri",
+   "isyerleri": [],
+   "kazancMetni": "3 taksit",
+   "minHarcama": 2500,
+   "maksOdul": null,
+   "maksMetni": "İşlem en fazla 100.000 TL · en fazla 2 kez",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimGerekli": true,
+   "katilimKosulu": "Harcamadan önce DenizKartım veya MobilDeniz'de \"Hemen Katıl\" de.",
+   "sms": null,
+   "katilimLinki": "https://www.denizkartim.com/kampanyalar/sigorta-ve-bes-odemelerinize-3-taksit",
+   "resmiLink": "https://www.denizkartim.com/kampanyalar/sigorta-ve-bes-odemelerinize-3-taksit",
+   "kosullar": [
+    "Kampanyadan en fazla 2 kez yararlanılabilir."
+   ],
+   "puanKullanim": "",
+   "odul": {
+    "model": "taksit",
+    "min": 2500,
+    "max": 100000,
+    "metin": "3 taksit",
+    "maksAdet": 2
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî sayfa (arama dizini kaydı)"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "qnb-eticaret-2611",
+   "kart": "qnb",
+   "ad": "Kasım Ayı E-Ticaret Kampanyası ile 3.500 TL'ye Varan ParaPuan Kazanın!",
+   "kisaAd": "Kasım e-ticaret ParaPuan",
+   "aciklama": "amazon.com.tr, hepsiburada.com, n11.com ve trendyol.com'da yapılan her 2.500 TL ve üzeri tek alışverişe 250 TL ParaPuan (toplam 2.500 TL). Bu sitelerdeki toplam harcaman 25.000 TL'ye ulaşınca ek 1.000 TL ParaPuan.",
+   "kategoriler": [
+    "eticaret"
+   ],
+   "avantajTuru": "parapuan",
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "amazon.com.tr, hepsiburada.com, n11.com, trendyol.com",
+   "isyerleri": [
+    "Amazon",
+    "Hepsiburada",
+    "n11",
+    "Trendyol"
+   ],
+   "kazancMetni": "Her 2.500 TL+ alışverişe 250 TL ParaPuan · 25.000 TL toplamda +1.000 TL",
+   "minHarcama": 2500,
+   "maksOdul": 3500,
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimGerekli": true,
+   "katilimKosulu": "Harcamadan önce QNB Mobil > Kampanyalar'dan katıl ya da ETICARET yazıp 2273'e SMS gönder (0850 222 09 00 de olur).",
+   "sms": {
+    "kelime": "ETICARET",
+    "numara": "2273",
+    "not": ""
+   },
+   "katilimLinki": "https://www.qnbcard.com.tr/kampanyalar/kasim-ayi-e-ticaret-kampanyasi-ile-3500-tlye-varan-parapuan-kazanin-43597",
+   "resmiLink": "https://www.qnbcard.com.tr/kampanyalar/kasim-ayi-e-ticaret-kampanyasi-ile-3500-tlye-varan-parapuan-kazanin-43597",
+   "kosullar": [
+    "Aynı gün aynı işyerinde yalnızca ilk işlem ödül kazandırır.",
+    "Bu sitelerdeki market, yemek siparişi vb. alışverişler kampanyaya dahil değildir.",
+    "Temel ödül en fazla 2.500 TL; 25.000 TL toplam harcamada ek 1.000 TL; toplam en fazla 3.500 TL."
+   ],
+   "puanKullanim": "ParaPuanlar 31 Aralık 2026'ya kadar kullanılmalıdır; kullanılmayanlar 1 Ocak 2027'de geri alınır.",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 2500,
+    "tutar": 250,
+    "maks": 2500,
+    "kumulatif": {
+     "esik": 25000,
+     "tutar": 1000
+    },
+    "toplamMaks": 3500
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "qnb-kahve",
+   "kart": "qnb",
+   "ad": "Kahve Keyfinizin 200 TL'si QNB'den!",
+   "kisaAd": "Kahve uygulamalarında %25",
+   "aciklama": "Espressolab, Starbucks Türkiye ve Caffè Nero mobil uygulamalarındaki cüzdan yüklemeleri ve ödemelerde anında %25 indirim; aylık en fazla 200 TL.",
+   "kategoriler": [
+    "restoran"
+   ],
+   "avantajTuru": "indirim",
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca markaların mobil uygulamaları (mağaza POS'u hariç)",
+   "isyerleri": [
+    "Starbucks uygulaması",
+    "Espressolab uygulaması",
+    "Caffè Nero uygulaması"
+   ],
+   "kazancMetni": "%25 anında indirim · aylık en fazla 200 TL",
+   "minHarcama": null,
+   "minMetni": "Alt sınır yok",
+   "maksOdul": 200,
+   "maksMetni": "Aylık 200 TL",
+   "baslangic": null,
+   "bitis": "2027-02-28",
+   "katilimGerekli": true,
+   "katilimKosulu": "QNB Mobil'de kampanya sayfasından \"Hemen Katıl\" de ya da KAHVE yazıp 2273'e SMS gönder.",
+   "sms": {
+    "kelime": "KAHVE",
+    "numara": "2273",
+    "not": ""
+   },
+   "katilimLinki": "https://www.qnbcard.com.tr/kampanyalar/kahve-keyfinizin-200-tlsi-qnbden-43139",
+   "resmiLink": "https://www.qnbcard.com.tr/kampanyalar/kahve-keyfinizin-200-tlsi-qnbden-43139",
+   "kosullar": [
+    "Yalnızca Espressolab, Starbucks Türkiye ve Caffè Nero mobil uygulamalarında geçerlidir; mağazadaki POS ödemeleri dahil değildir.",
+    "İndirim aylık en fazla 200 TL'dir."
+   ],
+   "puanKullanim": "",
+   "odul": {
+    "model": "yuzde",
+    "oran": 0.25,
+    "donemMaks": 200
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "qnb-sarj-2611",
+   "kart": "qnb",
+   "ad": "Elektrikli Araç Şarj İstasyonlarında 500 TL'ye varan ParaPuan kazanın!",
+   "kisaAd": "EV şarj ParaPuan",
+   "aciklama": "Yurt içi elektrikli araç şarj istasyonlarında yapılan her 750 TL ve üzeri tek harcamaya 50 TL ParaPuan; toplamda 500 TL'ye kadar.",
+   "kategoriler": [
+    "akaryakit"
+   ],
+   "avantajTuru": "parapuan",
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca yurt içi elektrikli araç şarj istasyonları",
+   "isyerleri": [
+    "Elektrikli araç şarj istasyonları"
+   ],
+   "kazancMetni": "Her 750 TL+ şarj harcamasına 50 TL ParaPuan",
+   "minHarcama": 750,
+   "maksOdul": 500,
+   "baslangic": "2026-10-15",
+   "bitis": "2026-11-30",
+   "katilimGerekli": true,
+   "katilimKosulu": "Harcamadan önce SARJ yazıp 2273'e SMS gönder ya da QNB Mobil veya çağrı merkezinden katıl.",
+   "sms": {
+    "kelime": "SARJ",
+    "numara": "2273",
+    "not": ""
+   },
+   "katilimLinki": "https://www.qnbcard.com.tr/kampanyalar/elektrikli-arac-sarj-istasyonlarinda-500-tlye-varan-parapuan-kazanin-43443",
+   "resmiLink": "https://www.qnbcard.com.tr/kampanyalar/elektrikli-arac-sarj-istasyonlarinda-500-tlye-varan-parapuan-kazanin-43443",
+   "kosullar": [
+    "Toplamda en fazla 10 işlem ödül kazandırır (10 × 50 TL)."
+   ],
+   "puanKullanim": "ParaPuanlar 31 Aralık 2026'ya kadar kullanılmalıdır.",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 750,
+    "tutar": 50,
+    "maks": 500
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "qnb-dijital-2611",
+   "kart": "qnb",
+   "ad": "QNB Dijital Ödeme Çözümleriyle 750 TL İndirim Fırsatı!",
+   "kisaAd": "QR / Mobil Temassız 50 TL",
+   "aciklama": "Fiziksel POS'ta Karekod (QR) veya Mobil Temassız ile yapılan her 1.500 TL ve üzeri tek harcamaya 50 TL indirim; toplamda 750 TL'ye kadar. Sektör sınırı yok.",
+   "kategoriler": [
+    "diger",
+    "restoran",
+    "market",
+    "akaryakit",
+    "elektronik",
+    "giyim",
+    "saglik",
+    "eglence"
+   ],
+   "avantajTuru": "indirim",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Fiziksel POS'ta yalnızca QR (Karekod) veya Mobil Temassız ödemeler",
+   "isyerleri": [],
+   "kazancMetni": "Her 1.500 TL+ QR / Mobil Temassız işleme 50 TL indirim",
+   "minHarcama": 1500,
+   "maksOdul": 750,
+   "baslangic": null,
+   "bitis": "2026-11-30",
+   "katilimGerekli": true,
+   "katilimKosulu": "Harcamadan önce MOBİLODE yazıp 2273'e SMS gönder ya da QNB Mobil'den katıl.",
+   "sms": {
+    "kelime": "MOBİLODE",
+    "numara": "2273",
+    "not": ""
+   },
+   "katilimLinki": "https://www.qnbcard.com.tr/kampanyalar/qnb-dijital-odeme-cozumleriyle-750-tl-indirim-firsati-43613",
+   "resmiLink": "https://www.qnbcard.com.tr/kampanyalar/qnb-dijital-odeme-cozumleriyle-750-tl-indirim-firsati-43613",
+   "kosullar": [
+    "Yalnızca Karekod (QR) veya Mobil Temassız ödemeler geçerlidir; Mobil Temassız yalnızca Android 5.0 ve üzeri cihazlarda kullanılabilir (iPhone'da Karekod ile öde).",
+    "QNB Kredi Kartı ve QNB First'te geçerlidir; müşteri başına tek kart.",
+    "Toplamda en fazla 15 işlem ödül kazandırır (15 × 50 TL)."
+   ],
+   "puanKullanim": "",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 1500,
+    "tutar": 50,
+    "maks": 750,
+    "odemeSarti": "mobil-qr"
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "qnb-fatura-2611",
+   "kart": "qnb",
+   "ad": "Otomatik Fatura Ödeme Talimatı ParaPuan Kampanyası",
+   "kisaAd": "Fatura talimatı ParaPuan",
+   "aciklama": "Kampanya süresince QNB kredi kartına verilen her yeni otomatik fatura ödeme talimatına 300 TL ParaPuan; toplamda 1.500 TL'ye kadar.",
+   "kategoriler": [
+    "diger"
+   ],
+   "avantajTuru": "parapuan",
+   "tip": "eylem",
+   "kapsam": "genel",
+   "kapsamNotu": "Yeni otomatik fatura ödeme talimatları",
+   "isyerleri": [],
+   "kazancMetni": "Her yeni talimata 300 TL ParaPuan",
+   "minHarcama": null,
+   "minMetni": "1 yeni talimat",
+   "maksOdul": 1500,
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimGerekli": false,
+   "katilimKosulu": "Resmî metinde ayrı bir katılım adımı belirtilmemiştir; kampanya süresince yeni otomatik fatura talimatı vermen yeterlidir.",
+   "sms": null,
+   "katilimLinki": null,
+   "resmiLink": "https://www.qnb.com.tr/kampanyalar/724-kampanyalari/otomatik-fatura-odeme-talimati-parapuan-kampanyasi-18197",
+   "kosullar": [
+    "30 Nisan 2027'ye kadar en az 1 otomatik ödeme yapılmalı ve talimat 31 Mayıs 2027'ye kadar iptal edilmemelidir.",
+    "ParaPuanlar ödeme ayının son iş günü yüklenir ve 25 gün geçerlidir."
+   ],
+   "puanKullanim": "ParaPuanlar yüklendikten sonra 25 gün geçerlidir.",
+   "odul": {
+    "model": "eylem",
+    "birim": "talimat",
+    "adetBasi": 300,
+    "maks": 1500
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî sayfa (arama dizini kaydı)"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "qnb-greyder-2611",
+   "kart": "qnb",
+   "ad": "Greyder'de 750 TL ParaPuan!",
+   "kisaAd": "Greyder ParaPuan",
+   "aciklama": "Greyder mağazaları veya greyder.com.tr'de QNB kredi kartıyla yapılan ilk 10.000 TL ve üzeri tek alışverişe 750 TL ParaPuan.",
+   "kategoriler": [
+    "giyim"
+   ],
+   "avantajTuru": "parapuan",
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Greyder mağazaları ve greyder.com.tr",
+   "isyerleri": [
+    "Greyder"
+   ],
+   "kazancMetni": "10.000 TL+ ilk alışverişe 750 TL ParaPuan",
+   "minHarcama": 10000,
+   "maksOdul": 750,
+   "baslangic": "2026-10-20",
+   "bitis": "2026-11-30",
+   "katilimGerekli": true,
+   "katilimKosulu": "Harcamadan önce GREYDER yazıp 2273'e SMS gönder.",
+   "sms": {
+    "kelime": "GREYDER",
+    "numara": "2273",
+    "not": ""
+   },
+   "katilimLinki": "https://www.greyder.com.tr/kampanyalar-ve-duyurular",
+   "resmiLink": "https://www.greyder.com.tr/kampanyalar-ve-duyurular",
+   "kosullar": [
+    "Kampanya süresince yalnızca ilk uygun alışveriş ödül kazandırır.",
+    "ParaPuanlar QNB üye işyerlerinde kullanılabilir."
+   ],
+   "puanKullanim": "",
+   "odul": {
+    "model": "kademe",
+    "kademeler": [
+     {
+      "esik": 10000,
+      "tutar": 750
+     }
+    ],
+    "tekSefer": true
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "İşyerinin resmî kampanya sayfası (arama dizini kaydı)"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "rm-gida-2611",
+   "kart": "rail-miles",
+   "ad": "Gıda marketi alışverişlerinize 1.200 TL Worldpuan!",
+   "kisaAd": "Gıda marketi Worldpuan",
+   "aciklama": "World üye gıda marketi, kasap, manav ve şarküteri işyerlerinde ilk dahil her 2.000 TL ve üzeri tek alışverişe 100 TL Worldpuan; toplamda 1.200 TL'ye kadar.",
+   "kategoriler": [
+    "market"
+   ],
+   "avantajTuru": "worldpuan",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "World üye gıda marketi, kasap, manav ve şarküteri (World POS)",
+   "isyerleri": [],
+   "kazancMetni": "Her 2.000 TL+ alışverişe 100 TL Worldpuan",
+   "minHarcama": 2000,
+   "maksOdul": 1200,
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimGerekli": true,
+   "katilimKosulu": "VakıfBank Mobil > Kartınla Kazan'dan \"Hemen Katıl\" de ya da GIDA, bir boşluk ve kartının son 6 hanesini 5724'e SMS gönder (kampanya süresince, harcamadan önce veya sonra).",
+   "sms": {
+    "kelime": "GIDA",
+    "ek": "kartının son 6 hanesi",
+    "numara": "5724",
+    "not": ""
+   },
+   "katilimLinki": null,
+   "resmiLink": "https://www.vakifkart.com.tr/kampanyalar/gida-marketi-alisverislerinize-1200-tl-worldpuan-41168",
+   "kosullar": [
+    "Aynı gün aynı işyerinde yalnızca ilk işlem dikkate alınır.",
+    "Ticari, kampüs, Like Card ve Bankomat kartlar hariçtir."
+   ],
+   "puanKullanim": "Worldpuanlar 3 Aralık 2026'ya kadar yüklenir, 3 Ocak 2027'ye kadar geçerlidir.",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 2000,
+    "tutar": 100,
+    "maks": 1200
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "VakıfBank resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "rm-eticaret-2611",
+   "kart": "rail-miles",
+   "ad": "Seçili e-ticaret alışverişlerinize 900 TL Worldpuan!",
+   "kisaAd": "E-ticaret Worldpuan",
+   "aciklama": "Amazon.com.tr, Dolap, Hepsiburada, n11, İdefix, PttAVM, Trendyol ve Trendyol Milla'da her 3.500 TL ve üzeri tek alışverişe 150 TL Worldpuan; toplamda 900 TL'ye kadar.",
+   "kategoriler": [
+    "eticaret"
+   ],
+   "avantajTuru": "worldpuan",
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Amazon.com.tr, Dolap, Hepsiburada, İdefix, n11, PttAVM, Trendyol, Trendyol Milla",
+   "isyerleri": [
+    "Amazon",
+    "Dolap",
+    "Hepsiburada",
+    "İdefix",
+    "n11",
+    "PttAVM",
+    "Trendyol",
+    "Trendyol Milla"
+   ],
+   "kazancMetni": "Her 3.500 TL+ alışverişe 150 TL Worldpuan",
+   "minHarcama": 3500,
+   "maksOdul": 900,
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-15",
+   "katilimGerekli": true,
+   "katilimKosulu": "VakıfBank Mobil > Kartınla Kazan'dan katıl ya da ETICARET, bir boşluk ve kartının son 6 hanesini 5724'e SMS gönder (kampanya süresince, harcamadan önce veya sonra).",
+   "sms": {
+    "kelime": "ETICARET",
+    "ek": "kartının son 6 hanesi",
+    "numara": "5724",
+    "not": ""
+   },
+   "katilimLinki": null,
+   "resmiLink": "https://www.vakifkart.com.tr/kampanyalar/secili-e-ticaret-alisverislerinize-900-tl-worldpuan-41169",
+   "kosullar": [
+    "Aynı gün aynı işyerinde yalnızca ilk işlem sayılır.",
+    "Taksitli (faizli) alışverişler ve cüzdan yüklemeleri hariçtir."
+   ],
+   "puanKullanim": "Worldpuanlar 18 Kasım 2026'ya kadar yüklenir, 18 Aralık 2026'ya kadar geçerlidir.",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 3500,
+    "tutar": 150,
+    "maks": 900
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "VakıfBank resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "rm-giyim-2611",
+   "kart": "rail-miles",
+   "ad": "Giyim ve kozmetik alışverişlerinize toplamda 1.500 TL'ye varan puan fırsatı!",
+   "kisaAd": "Giyim & kozmetik Worldpuan",
+   "aciklama": "Yapı Kredi POS'u bulunan giyim, çok katlı mağaza, ayakkabı, aksesuar, optik, saat ve kozmetik işyerlerinde, ilk alışverişten sonra yapılan her 3.000 TL ve üzeri alışverişe 100 TL Worldpuan; VakıfBank Worldcard için toplamda 1.000 TL'ye kadar.",
+   "kategoriler": [
+    "giyim",
+    "saglik"
+   ],
+   "avantajTuru": "worldpuan",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Yapı Kredi POS'lu giyim, ayakkabı, aksesuar, optik, saat ve kozmetik işyerleri",
+   "isyerleri": [],
+   "kazancMetni": "İlk işlemden sonra her 3.000 TL+ alışverişe 100 TL Worldpuan",
+   "minHarcama": 3000,
+   "maksOdul": 1000,
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimGerekli": true,
+   "katilimKosulu": "Harcamadan önce GIYIM, bir boşluk ve kartının son 6 hanesini yazıp 5724'e SMS gönder.",
+   "sms": {
+    "kelime": "GIYIM",
+    "ek": "kartının son 6 hanesi",
+    "numara": "5724",
+    "not": ""
+   },
+   "katilimLinki": null,
+   "resmiLink": "https://www.tlcard.com.tr/banka-karti-kampanyalari/giyim-ve-kozmetik-alisverislerinize-toplamda-1500-tlye-varan-puan-firsati",
+   "kosullar": [
+    "Kampanya dönemindeki ilk alışveriş ödül kazandırmaz.",
+    "World Pay ek ödülü (500 TL) VakıfBank Worldcard için hesaba katılmamıştır."
+   ],
+   "puanKullanim": "",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 3000,
+    "tutar": 100,
+    "maks": 1000,
+    "ilkIslemOdulsuz": true
+   },
+   "dogrulama": {
+    "durum": "dogrulanmadi",
+    "tarih": "2026-11-10",
+    "yontem": "Yalnızca Yapı Kredi World ortak sayfasında görüldü; VakıfBank'ın kendi sayfasında doğrulanamadı"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "rm-tcdd-milpara",
+   "kart": "rail-miles",
+   "ad": "TCDD tren biletlerinde %3,5 MilPara",
+   "kisaAd": "TCDD biletlerinde %3,5 MilPara",
+   "aciklama": "Rail&Miles ile alınan TCDD Taşımacılık tren biletlerinde harcamanın %3,5'i MilPara olarak kazanılır; MilPara ile yine TCDD bileti alınabilir. Worldpuan kazanımıyla birlikte geçerlidir. Ankara YHT Garı'ndaki Rail&Miles CIP Lounge kart sahibi ve 1 misafiri için ücretsizdir.",
+   "kategoriler": [
+    "seyahat"
+   ],
+   "avantajTuru": "milpara",
+   "tip": "kart-ozelligi",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca TCDD Taşımacılık tren biletleri",
+   "isyerleri": [
+    "TCDD Taşımacılık"
+   ],
+   "kazancMetni": "Bilet harcamasının %3,5'i MilPara",
+   "minHarcama": null,
+   "minMetni": "Alt sınır yok",
+   "maksOdul": null,
+   "maksMetni": "Limit yok",
+   "baslangic": null,
+   "bitis": null,
+   "katilimGerekli": false,
+   "katilimKosulu": "Katılım gerekmez; kartın kalıcı özelliğidir.",
+   "sms": null,
+   "katilimLinki": null,
+   "resmiLink": "https://www.vakifkart.com.tr/kartlarimiz/ortak-markali/railmiles-kredi-karti-232",
+   "kosullar": [
+    "Sanal kart ve mobil temassız ile yapılan ödemeler hariçtir.",
+    "Hesaplamada 1 MilPara = 1 TL varsayılır; Yönet > Ayarlar'dan değiştirebilirsin."
+   ],
+   "puanKullanim": "MilPara ile TCDD Taşımacılık bileti alınabilir.",
+   "odul": {
+    "model": "yuzde",
+    "oran": 0.035,
+    "odemeHaric": "mobil-qr"
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kart sayfası incelendi"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "dk-market-dv",
+   "kart": "denizkart-black",
+   "ad": "Market Alışverişlerinize 750 TL İndirim!",
+   "kisaAd": "Market 750 TL indirim",
+   "aciklama": "DenizKartım'ın resmî kampanya listesinde yer alıyor; kampanya sayfası açılamadığı için tarih, katılım ve harcama koşulları doğrulanamadı.",
+   "kategoriler": [
+    "market"
+   ],
+   "avantajTuru": "indirim",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "isyerleri": [],
+   "kazancMetni": "750 TL'ye varan indirim (koşullar doğrulanmadı)",
+   "minHarcama": null,
+   "minMetni": "Doğrulanmadı",
+   "maksOdul": 750,
+   "baslangic": null,
+   "bitis": null,
+   "katilimGerekli": true,
+   "katilimKosulu": "Doğrulanmadı — katılım adımını resmî sayfadan kontrol et.",
+   "sms": null,
+   "katilimLinki": null,
+   "resmiLink": "https://www.denizkartim.com/bonus-kampanyalari",
+   "kosullar": [],
+   "odul": {
+    "model": "bilinmiyor"
+   },
+   "dogrulama": {
+    "durum": "dogrulanmadi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî listede görüldü; kampanya sayfası açılamadı"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "dk-eticaret-dv",
+   "kart": "denizkart-black",
+   "ad": "10.000 TL ve Üzeri E-Ticaret Alışverişlerinize 1.000 TL İndirim Fırsatı!",
+   "kisaAd": "E-ticarete 1.000 TL indirim",
+   "aciklama": "DenizKartım'ın resmî kampanya listesinde yer alıyor; tarih, katılım ve geçerli işyeri koşulları doğrulanamadı.",
+   "kategoriler": [
+    "eticaret"
+   ],
+   "avantajTuru": "indirim",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "isyerleri": [],
+   "kazancMetni": "10.000 TL+ alışverişe 1.000 TL indirim (koşullar doğrulanmadı)",
+   "minHarcama": 10000,
+   "maksOdul": 1000,
+   "baslangic": null,
+   "bitis": null,
+   "katilimGerekli": true,
+   "katilimKosulu": "Doğrulanmadı — katılım adımını resmî sayfadan kontrol et.",
+   "sms": null,
+   "katilimLinki": null,
+   "resmiLink": "https://www.denizkartim.com/bonus-kampanyalari",
+   "kosullar": [],
+   "odul": {
+    "model": "bilinmiyor"
+   },
+   "dogrulama": {
+    "durum": "dogrulanmadi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî listede görüldü; kampanya sayfası açılamadı"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "dk-elektronik-dv",
+   "kart": "denizkart-black",
+   "ad": "Elektronik Alışverişlerinize 3.500 TL İndirim!",
+   "kisaAd": "Elektroniğe 3.500 TL indirim",
+   "aciklama": "DenizKartım'ın resmî kampanya listesinde yer alıyor; tarih ve harcama koşulları doğrulanamadı.",
+   "kategoriler": [
+    "elektronik"
+   ],
+   "avantajTuru": "indirim",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "isyerleri": [],
+   "kazancMetni": "3.500 TL'ye varan indirim (koşullar doğrulanmadı)",
+   "minHarcama": null,
+   "minMetni": "Doğrulanmadı",
+   "maksOdul": 3500,
+   "baslangic": null,
+   "bitis": null,
+   "katilimGerekli": true,
+   "katilimKosulu": "Doğrulanmadı — katılım adımını resmî sayfadan kontrol et.",
+   "sms": null,
+   "katilimLinki": null,
+   "resmiLink": "https://www.denizkartim.com/bonus-kampanyalari",
+   "kosullar": [],
+   "odul": {
+    "model": "bilinmiyor"
+   },
+   "dogrulama": {
+    "durum": "dogrulanmadi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî listede görüldü; kampanya sayfası açılamadı"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "dk-akaryakit-dv",
+   "kart": "denizkart-black",
+   "ad": "Akaryakıt harcamalarınıza 500 TL'ye varan İndirim!",
+   "kisaAd": "Akaryakıta 500 TL indirim",
+   "aciklama": "DenizKartım'da resmî kampanya sayfası mevcut; sayfa açılamadığı için tarih ve koşullar doğrulanamadı.",
+   "kategoriler": [
+    "akaryakit"
+   ],
+   "avantajTuru": "indirim",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "isyerleri": [],
+   "kazancMetni": "500 TL'ye varan indirim (koşullar doğrulanmadı)",
+   "minHarcama": null,
+   "minMetni": "Doğrulanmadı",
+   "maksOdul": 500,
+   "baslangic": null,
+   "bitis": null,
+   "katilimGerekli": true,
+   "katilimKosulu": "Doğrulanmadı — katılım adımını resmî sayfadan kontrol et.",
+   "sms": null,
+   "katilimLinki": null,
+   "resmiLink": "https://www.denizkartim.com/kampanyalar/akaryakit-harcamalariniza-500-tlye-varan-indirim",
+   "kosullar": [],
+   "odul": {
+    "model": "bilinmiyor"
+   },
+   "dogrulama": {
+    "durum": "dogrulanmadi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî sayfa var; içerik açılamadı"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "dk-giyim-dv",
+   "kart": "denizkart-black",
+   "ad": "10.000 TL ve Üzeri Giyim, Aksesuar, Ayakkabı ve Optik Alışverişlerinize 1.000 TL İndirim Fırsatı!",
+   "kisaAd": "Giyime 1.000 TL indirim",
+   "aciklama": "DenizKartım'ın resmî kampanya listesinde yer alıyor; tarih ve katılım koşulları doğrulanamadı.",
+   "kategoriler": [
+    "giyim"
+   ],
+   "avantajTuru": "indirim",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "isyerleri": [],
+   "kazancMetni": "10.000 TL+ alışverişe 1.000 TL indirim (koşullar doğrulanmadı)",
+   "minHarcama": 10000,
+   "maksOdul": 1000,
+   "baslangic": null,
+   "bitis": null,
+   "katilimGerekli": true,
+   "katilimKosulu": "Doğrulanmadı — katılım adımını resmî sayfadan kontrol et.",
+   "sms": null,
+   "katilimLinki": null,
+   "resmiLink": "https://www.denizkartim.com/bonus-kampanyalari",
+   "kosullar": [],
+   "odul": {
+    "model": "bilinmiyor"
+   },
+   "dogrulama": {
+    "durum": "dogrulanmadi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî listede görüldü; kampanya sayfası açılamadı"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "dk-genel-dv",
+   "kart": "denizkart-black",
+   "ad": "20.000 TL ve Üzeri Alışverişlerinize 1.000 TL, Toplamda 3.000 TL İndirim Fırsatı!",
+   "kisaAd": "20.000 TL+ alışverişe 1.000 TL",
+   "aciklama": "DenizKartım'ın resmî kampanya listesinde yer alıyor; hangi sektörlerde geçerli olduğu, tarih ve katılım koşulları doğrulanamadı.",
+   "kategoriler": [
+    "diger"
+   ],
+   "avantajTuru": "indirim",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "isyerleri": [],
+   "kazancMetni": "20.000 TL+ alışverişe 1.000 TL, toplam 3.000 TL (koşullar doğrulanmadı)",
+   "minHarcama": 20000,
+   "maksOdul": 3000,
+   "baslangic": null,
+   "bitis": null,
+   "katilimGerekli": true,
+   "katilimKosulu": "Doğrulanmadı — katılım adımını resmî sayfadan kontrol et.",
+   "sms": null,
+   "katilimLinki": null,
+   "resmiLink": "https://www.denizkartim.com/bonus-kampanyalari",
+   "kosullar": [],
+   "odul": {
+    "model": "bilinmiyor"
+   },
+   "dogrulama": {
+    "durum": "dogrulanmadi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî listede görüldü; kampanya sayfası açılamadı"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "id": "dk-restoran-dv",
+   "kart": "denizkart-black",
+   "ad": "Restoran Ödemelerinize 500 TL İndirim!",
+   "kisaAd": "Restorana 500 TL indirim",
+   "aciklama": "DenizKartım'ın resmî kampanya listesinde yer alıyor; tarih, katılım ve harcama koşulları doğrulanamadı.",
+   "kategoriler": [
+    "restoran"
+   ],
+   "avantajTuru": "indirim",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "isyerleri": [],
+   "kazancMetni": "500 TL'ye varan indirim (koşullar doğrulanmadı)",
+   "minHarcama": null,
+   "minMetni": "Doğrulanmadı",
+   "maksOdul": 500,
+   "baslangic": null,
+   "bitis": null,
+   "katilimGerekli": true,
+   "katilimKosulu": "Doğrulanmadı — katılım adımını resmî sayfadan kontrol et.",
+   "sms": null,
+   "katilimLinki": null,
+   "resmiLink": "https://www.denizkartim.com/bonus-kampanyalari",
+   "kosullar": [],
+   "odul": {
+    "model": "bilinmiyor"
+   },
+   "dogrulama": {
+    "durum": "dogrulanmadi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî listede görüldü; kampanya sayfası açılamadı"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca listelenen markaların fiziksel mağazaları (online hariç)",
+   "isyerleri": [
+    "Zara",
+    "Massimo Dutti",
+    "Oysho",
+    "Bershka",
+    "Pull&Bear",
+    "Stradivarius",
+    "Lefties",
+    "Zara Home"
+   ],
+   "minHarcama": 15000,
+   "maksOdul": 1000,
+   "katilimGerekli": true,
+   "sms": null,
+   "katilimLinki": "https://www.qnbcard.com.tr/kampanyalar/zara-massimo-dutti-oysho-bershka-pullandbear-stradivarius-lefties-ve-zara-home-magazalarinda-1000-tl-parapuan-43599",
+   "kosullar": [
+    "Kampanya dönemindeki toplam harcama sayılır; hesaplayıcı yalnızca tek alışverişte 15.000 TL'yi geçince ödül gösterir.",
+    "Online alışverişler dahil değildir.",
+    "Taksit Kolay ve harcama öteleme kullanılamaz.",
+    "Miles&Smiles QNB ve QNB Fix kartları hariçtir."
+   ],
+   "puanKullanim": "ParaPuanlar 24 Kasım 2026'da yüklenir; Aralık 2026 sonuna kadar yalnızca bu markaların mağazalarında kullanılabilir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Zara, Massimo Dutti, Oysho, Bershka, Pull&Bear, Stradivarius, Lefties ve Zara Home fiziksel mağazalarında kampanya boyunca toplam 15.000 TL ve üzeri harcamaya bir kez 1.000 TL ParaPuan.",
+   "id": "qnb-zara-2611",
+   "kart": "qnb",
+   "ad": "Zara, Massimo Dutti, Oysho, Bershka, Pull&Bear, Stradivarius, Lefties ve Zara Home mağazalarında 1.000 TL ParaPuan!",
+   "kisaAd": "Zara grubu mağazalarında 1.000 TL",
+   "kategoriler": [
+    "giyim"
+   ],
+   "avantajTuru": "parapuan",
+   "kazancMetni": "Toplam 15.000 TL+ harcamaya 1.000 TL ParaPuan (bir kez)",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-23",
+   "katilimKosulu": "QNB Mobil > Diğer İşlemler > Kampanyalar'dan \"Hemen Katıl\" de.",
+   "resmiLink": "https://www.qnbcard.com.tr/kampanyalar/zara-massimo-dutti-oysho-bershka-pullandbear-stradivarius-lefties-ve-zara-home-magazalarinda-1000-tl-parapuan-43599",
+   "odul": {
+    "model": "kademe",
+    "kademeler": [
+     {
+      "esik": 15000,
+      "tutar": 1000
+     }
+    ],
+    "tekSefer": true
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "ChatGPT, Gemini, Claude, Midjourney",
+   "isyerleri": [
+    "ChatGPT",
+    "Gemini",
+    "Claude",
+    "Midjourney"
+   ],
+   "minHarcama": 750,
+   "maksOdul": 300,
+   "katilimGerekli": true,
+   "sms": {
+    "kelime": "YZEKA",
+    "numara": "2273",
+    "not": ""
+   },
+   "katilimLinki": "https://www.qnbcard.com.tr/kampanyalar/secili-yapay-zeka-platformlarinda-300-tlye-varan-parapuan-43451",
+   "kosullar": [
+    "Aynı gün aynı işyerinde yalnızca ilk işlem ödül kazandırır.",
+    "Diğer kampanyalarla birleştirilemez."
+   ],
+   "puanKullanim": "ParaPuanlar 31 Aralık 2026'ya kadar kullanılmalıdır.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "ChatGPT, Gemini, Claude ve Midjourney'de yapılan her 750 TL ve üzeri tek harcamaya 150 TL ParaPuan; toplamda 300 TL'ye kadar.",
+   "id": "qnb-yzeka-2611",
+   "kart": "qnb",
+   "ad": "Seçili Yapay Zekâ Platformlarında 300 TL'ye Varan ParaPuan!",
+   "kisaAd": "Yapay zekâ platformları",
+   "kategoriler": [
+    "diger"
+   ],
+   "avantajTuru": "parapuan",
+   "kazancMetni": "Her 750 TL+ harcamaya 150 TL ParaPuan",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "Harcamadan önce YZEKA yazıp 2273'e SMS gönder ya da QNB Mobil > Kampanyalar'dan katıl.",
+   "resmiLink": "https://www.qnbcard.com.tr/kampanyalar/secili-yapay-zeka-platformlarinda-300-tlye-varan-parapuan-43451",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 750,
+    "tutar": 150,
+    "maks": 300
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca Trendyol",
+   "isyerleri": [
+    "Trendyol"
+   ],
+   "minHarcama": 1000,
+   "maksOdul": null,
+   "katilimGerekli": false,
+   "sms": null,
+   "katilimLinki": null,
+   "kosullar": [
+    "Market, gıda, akaryakıt, kozmetik, cep telefonu ve hediye kartı gibi yasal olarak taksitlendirilemeyen ürünler hariçtir.",
+    "6'dan fazla taksitte vade farkı uygulanır."
+   ],
+   "puanKullanim": "",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Trendyol'da QNB kredi kartıyla: 1.000 TL+ alışverişe 3, 6.000 TL+ alışverişe 6 taksit (peşin fiyatına).",
+   "id": "qnb-trendyol-taksit",
+   "kart": "qnb",
+   "ad": "Trendyol'da peşin fiyatına 6 taksit!",
+   "kisaAd": "Trendyol taksit",
+   "kategoriler": [
+    "eticaret"
+   ],
+   "avantajTuru": "taksit",
+   "kazancMetni": "1.000 TL+ alışverişe 3, 6.000 TL+ alışverişe 6 taksit (peşin fiyatına)",
+   "maksMetni": "Üst sınır belirtilmemiş",
+   "baslangic": null,
+   "bitis": "2026-11-30",
+   "katilimKosulu": "Ayrı katılım gerekmez; QNB kredi kartıyla öde.",
+   "resmiLink": "https://www.qnbcard.com.tr/kampanyalar/trendyolda-pesin-fiyatina-6-taksit-43579",
+   "odul": {
+    "model": "taksit",
+    "min": 1000,
+    "max": null,
+    "metin": "1.000 TL+ 3, 6.000 TL+ 6 taksit"
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca Hepsiburada",
+   "isyerleri": [
+    "Hepsiburada"
+   ],
+   "minHarcama": 1000,
+   "maksOdul": null,
+   "katilimGerekli": false,
+   "sms": null,
+   "katilimLinki": null,
+   "kosullar": [
+    "Market, gıda, akaryakıt, kozmetik, cep telefonu ve hediye kartı gibi yasal olarak taksitlendirilemeyen ürünler hariçtir.",
+    "6'dan fazla taksitte vade farkı uygulanır."
+   ],
+   "puanKullanim": "",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Hepsiburada'da QNB kredi kartıyla: 1.000 TL+ alışverişe 3, 6.000 TL+ alışverişe 6 taksit (peşin fiyatına).",
+   "id": "qnb-hepsiburada-taksit",
+   "kart": "qnb",
+   "ad": "Hepsiburada'da peşin fiyatına 6 taksit!",
+   "kisaAd": "Hepsiburada taksit",
+   "kategoriler": [
+    "eticaret"
+   ],
+   "avantajTuru": "taksit",
+   "kazancMetni": "1.000 TL+ alışverişe 3, 6.000 TL+ alışverişe 6 taksit (peşin fiyatına)",
+   "maksMetni": "Üst sınır belirtilmemiş",
+   "baslangic": null,
+   "bitis": "2026-11-30",
+   "katilimKosulu": "Ayrı katılım gerekmez; QNB kredi kartıyla öde.",
+   "resmiLink": "https://www.qnbcard.com.tr/kampanyalar/hepsiburadada-pesin-fiyatina-6-taksit-43589",
+   "odul": {
+    "model": "taksit",
+    "min": 1000,
+    "max": null,
+    "metin": "1.000 TL+ 3, 6.000 TL+ 6 taksit"
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca Amazon",
+   "isyerleri": [
+    "Amazon"
+   ],
+   "minHarcama": 1000,
+   "maksOdul": null,
+   "katilimGerekli": false,
+   "sms": null,
+   "katilimLinki": null,
+   "kosullar": [
+    "Market, gıda, akaryakıt, kozmetik, cep telefonu ve hediye kartı gibi yasal olarak taksitlendirilemeyen ürünler hariçtir.",
+    "6'dan fazla taksitte vade farkı uygulanır."
+   ],
+   "puanKullanim": "",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Amazon'da QNB kredi kartıyla: 1.000 TL+ alışverişe 6 taksit (peşin fiyatına).",
+   "id": "qnb-amazon-taksit",
+   "kart": "qnb",
+   "ad": "Amazon'da peşin fiyatına 6 taksit!",
+   "kisaAd": "Amazon taksit",
+   "kategoriler": [
+    "eticaret"
+   ],
+   "avantajTuru": "taksit",
+   "kazancMetni": "1.000 TL+ alışverişe 6 taksit (peşin fiyatına)",
+   "maksMetni": "Üst sınır belirtilmemiş",
+   "baslangic": null,
+   "bitis": "2026-11-30",
+   "katilimKosulu": "Ayrı katılım gerekmez; QNB kredi kartıyla öde.",
+   "resmiLink": "https://www.qnbcard.com.tr/kampanyalar/amazonda-pesin-fiyatina-6-taksit-43141",
+   "odul": {
+    "model": "taksit",
+    "min": 1000,
+    "max": null,
+    "metin": "1.000 TL+ 6 taksit"
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Dyson mağazaları ve dyson.com.tr",
+   "isyerleri": [
+    "Dyson"
+   ],
+   "minHarcama": null,
+   "maksOdul": null,
+   "katilimGerekli": false,
+   "sms": null,
+   "katilimLinki": null,
+   "kosullar": [],
+   "puanKullanim": "",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Dyson mağazaları ve dyson.com.tr'de QNB kredi kartıyla peşin fiyatına 9 taksit.",
+   "id": "qnb-dyson-taksit",
+   "kart": "qnb",
+   "ad": "Dyson'da Peşin Fiyatına 9 Taksit!",
+   "kisaAd": "Dyson 9 taksit",
+   "kategoriler": [
+    "elektronik"
+   ],
+   "avantajTuru": "taksit",
+   "kazancMetni": "Peşin fiyatına 9 taksit",
+   "minMetni": "Belirtilmemiş",
+   "maksMetni": "Belirtilmemiş",
+   "baslangic": null,
+   "bitis": "2026-12-31",
+   "katilimKosulu": "Ayrı katılım gerekmez; QNB kredi kartıyla öde.",
+   "resmiLink": "https://www.qnbcard.com.tr/kampanyalar/dysonda-pesin-fiyatina-9-taksit-43241",
+   "odul": {
+    "model": "taksit",
+    "min": null,
+    "max": null,
+    "metin": "9 taksit (peşin fiyatına)"
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca QNB Terminal Kadıköy'deki seçili restoran ve kafeler",
+   "isyerleri": [
+    "QNB Terminal Kadıköy"
+   ],
+   "minHarcama": null,
+   "maksOdul": 2000,
+   "katilimGerekli": false,
+   "sms": null,
+   "katilimLinki": null,
+   "kosullar": [
+    "İşlem başına en fazla 1.000 TL, aylık en fazla 2.000 TL indirim.",
+    "QNB First Plus müşterilerine %15, Private müşterilerine %20 uygulanır; hesaplama %10 ile yapılır."
+   ],
+   "puanKullanim": "",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "QNB Terminal Kadıköy'deki seçili restoran ve kafelerde ve 7DE7 uygulaması cüzdan yüklemelerinde %10 indirim (First Plus %15, Private %20).",
+   "id": "qnb-terminal-kadikoy",
+   "kart": "qnb",
+   "ad": "QNB Terminal Kadıköy Restoran Harcamalarında %10'dan Başlayan İndirim!",
+   "kisaAd": "Terminal Kadıköy %10",
+   "kategoriler": [
+    "restoran"
+   ],
+   "avantajTuru": "indirim",
+   "kazancMetni": "%10 indirim · işlem başına 1.000 TL, aylık 2.000 TL'ye kadar",
+   "minMetni": "Alt sınır yok",
+   "maksMetni": "Aylık 2.000 TL",
+   "baslangic": "2026-07-01",
+   "bitis": "2026-12-31",
+   "katilimKosulu": "Katılım gerekmez; QNB kredi kartıyla öde.",
+   "resmiLink": "https://www.qnbcard.com.tr/kampanyalar/qnb-terminal-kadikoy-restoran-harcamalarinda-10dan-baslayan-indirim-42833",
+   "odul": {
+    "model": "yuzde",
+    "oran": 0.1,
+    "donemMaks": 2000
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Steam, iTunes, GeForce NOW Game+",
+   "isyerleri": [
+    "Steam",
+    "iTunes",
+    "GeForce NOW"
+   ],
+   "minHarcama": 300,
+   "maksOdul": 500,
+   "katilimGerekli": true,
+   "sms": null,
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/bonus-genc-steam-kampanyasi",
+   "kosullar": [
+    "Taksitli işlemler dahil değildir.",
+    "Dijital cüzdan yüklemeleri ve cüzdanla yapılan harcamalar hariçtir.",
+    "Aynı gün aynı işyerinde yalnızca ilk işlem sayılır."
+   ],
+   "puanKullanim": "Bonuslar 3 Aralık 2026 – 3 Ocak 2027 arasında kullanılabilir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Steam, iTunes ve GeForce NOW Game+ harcamalarında her 300 TL ve üzeri işleme 100 TL bonus; toplamda 500 TL'ye kadar.",
+   "id": "bg-oyun-2611",
+   "kart": "bonus-genc",
+   "ad": "Bonus Genç'le, oyun harcamalarından toplam 500 TL bonus kazan!",
+   "kisaAd": "Steam / iTunes / GeForce NOW",
+   "kategoriler": [
+    "eglence"
+   ],
+   "avantajTuru": "bonus",
+   "kazancMetni": "Her 300 TL+ işleme 100 TL bonus",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "BonusFlaş'ta \"Hemen Katıl\" de.",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-genc-steam-kampanyasi",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 300,
+    "tutar": 100,
+    "maks": 500,
+    "taksitHaric": true
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Bonus üye kırtasiye ve ofis malzemesi işyerleri",
+   "isyerleri": [],
+   "minHarcama": 500,
+   "maksOdul": 300,
+   "katilimGerekli": true,
+   "sms": {
+    "kelime": "GENCKIRTASIYE",
+    "numara": "3340",
+    "not": "SMS ücretlidir"
+   },
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/bonus-genc-kirtasiye-kampanyalari",
+   "kosullar": [
+    "Başlık 500 TL dese de koşullarda müşteri başına üst sınır 300 TL yazıyor; uygulama 300 TL'yi esas alır.",
+    "Taksitli işlemler dahil değildir."
+   ],
+   "puanKullanim": "Bonuslar 3 Aralık 2026 – 3 Ocak 2027 arasında kullanılabilir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Bonus üye kırtasiye ve ofis malzemesi işyerlerinde her 500 TL ve üzeri tek alışverişe 100 TL bonus.",
+   "id": "bg-kirtasiye-2611",
+   "kart": "bonus-genc",
+   "ad": "Bonus Genç'le kırtasiye harcamalarına toplam 500 TL bonus!",
+   "kisaAd": "Kırtasiye kampanyası",
+   "kategoriler": [
+    "diger"
+   ],
+   "avantajTuru": "bonus",
+   "kazancMetni": "Her 500 TL+ alışverişe 100 TL bonus",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "İlk harcamadan önce BonusFlaş'ta \"Hemen Katıl\" de ya da GENCKIRTASIYE yazıp 3340'a SMS gönder.",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-genc-kirtasiye-kampanyalari",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 500,
+    "tutar": 100,
+    "maks": 300,
+    "taksitHaric": true
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca Bonus Çarşı DeFacto",
+   "isyerleri": [
+    "Bonus Çarşı DeFacto"
+   ],
+   "minHarcama": 2500,
+   "maksOdul": 500,
+   "katilimGerekli": true,
+   "sms": null,
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/bonus-genc-defacto-kampanyasi",
+   "kosullar": [
+    "Peşin ve taksitli işlemler dahildir."
+   ],
+   "puanKullanim": "Bonuslar 15 Aralık 2026 – 15 Ocak 2027 arasında kullanılabilir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Bonus Çarşı DeFacto'da 2.500 TL ve üzeri alışverişe bir kez 500 TL bonus.",
+   "id": "bg-defacto-carsi-2611",
+   "kart": "bonus-genc",
+   "ad": "Bonus Çarşı DeFacto'da 2.500 TL'ye 500 TL bonus!",
+   "kisaAd": "Bonus Çarşı DeFacto",
+   "kategoriler": [
+    "giyim",
+    "eticaret"
+   ],
+   "avantajTuru": "bonus",
+   "kazancMetni": "2.500 TL+ alışverişe 500 TL bonus (bir kez)",
+   "baslangic": "2026-11-03",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "İlk harcamadan önce BonusFlaş'ta \"Hemen Katıl\" de.",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-genc-defacto-kampanyasi",
+   "odul": {
+    "model": "kademe",
+    "kademeler": [
+     {
+      "esik": 2500,
+      "tutar": 500
+     }
+    ],
+    "tekSefer": true
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca DeFacto online (site ve uygulama)",
+   "isyerleri": [
+    "DeFacto"
+   ],
+   "minHarcama": 2000,
+   "maksOdul": 250,
+   "katilimGerekli": true,
+   "sms": null,
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/bonus-genc-defacto-kampanya",
+   "kosullar": [
+    "Takvim ayında bir kez kullanılabilir.",
+    "Peşin ve taksitli işlemler dahildir."
+   ],
+   "puanKullanim": "",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "DeFacto online alışverişlerinde 2.000 TL ve üzeri sepete 250 TL indirim; ayda bir kez.",
+   "id": "bg-defacto-online-2611",
+   "kart": "bonus-genc",
+   "ad": "DeFacto'da giyim alışverişlerinizde geçerli, 2.000 TL ve üzeri alışverişlerde 250 TL indirim!",
+   "kisaAd": "DeFacto online 250 TL indirim",
+   "kategoriler": [
+    "giyim",
+    "eticaret"
+   ],
+   "avantajTuru": "indirim",
+   "kazancMetni": "2.000 TL+ alışverişe 250 TL indirim",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "BonusFlaş'ta \"Hemen Katıl\" deyip aldığın kodu DeFacto sepetindeki \"İndirim Kodu\" alanına gir (üye girişi gerekir).",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-genc-defacto-kampanya",
+   "odul": {
+    "model": "kademe",
+    "kademeler": [
+     {
+      "esik": 2000,
+      "tutar": 250
+     }
+    ],
+    "tekSefer": true
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca Starbucks (Garanti BBVA POS)",
+   "isyerleri": [
+    "Starbucks"
+   ],
+   "minHarcama": 300,
+   "maksOdul": 300,
+   "katilimGerekli": true,
+   "sms": null,
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/bonus-genc-starbucks-kampanyasi",
+   "kosullar": [
+    "12–29 yaş arası kart sahipleri içindir.",
+    "Aynı gün aynı işyerinde yalnızca ilk işlem sayılır.",
+    "Dijital cüzdan yüklemeleri hariçtir."
+   ],
+   "puanKullanim": "Bonuslar 3 Aralık 2026 – 3 Ocak 2027 arasında kullanılabilir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Starbucks'de her 300 TL ve üzeri harcamaya 50 TL bonus; toplamda 300 TL'ye kadar (12–29 yaş).",
+   "id": "bg-starbucks-genc-2611",
+   "kart": "bonus-genc",
+   "ad": "Bonus'tan gençlere özel Starbucks'ta 300 TL bonus!",
+   "kisaAd": "Starbucks gençlere özel",
+   "kategoriler": [
+    "restoran"
+   ],
+   "avantajTuru": "bonus",
+   "kazancMetni": "Her 300 TL+ harcamaya 50 TL bonus",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "İlk harcamadan önce BonusFlaş'ta \"Hemen Katıl\" de.",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-genc-starbucks-kampanyasi",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 300,
+    "tutar": 50,
+    "maks": 300
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca Coffy (Garanti BBVA POS)",
+   "isyerleri": [
+    "Coffy"
+   ],
+   "minHarcama": 300,
+   "maksOdul": 300,
+   "katilimGerekli": true,
+   "sms": null,
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/bonus-genc-coffy-kampanya",
+   "kosullar": [
+    "12–29 yaş arası kart sahipleri içindir.",
+    "Aynı gün aynı işyerinde yalnızca ilk işlem sayılır.",
+    "Dijital cüzdan yüklemeleri hariçtir."
+   ],
+   "puanKullanim": "Bonuslar 3 Aralık 2026 – 3 Ocak 2027 arasında kullanılabilir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Coffy'de her 300 TL ve üzeri harcamaya 50 TL bonus; toplamda 300 TL'ye kadar (12–29 yaş).",
+   "id": "bg-coffy-2611",
+   "kart": "bonus-genc",
+   "ad": "Bonus'tan gençlere özel Coffy'de 300 TL bonus!",
+   "kisaAd": "Coffy gençlere özel",
+   "kategoriler": [
+    "restoran"
+   ],
+   "avantajTuru": "bonus",
+   "kazancMetni": "Her 300 TL+ harcamaya 50 TL bonus",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "İlk harcamadan önce BonusFlaş'ta \"Hemen Katıl\" de.",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-genc-coffy-kampanya",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 300,
+    "tutar": 50,
+    "maks": 300
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca Migros Hemen",
+   "isyerleri": [
+    "Migros Hemen"
+   ],
+   "minHarcama": 1000,
+   "maksOdul": 400,
+   "katilimGerekli": true,
+   "sms": null,
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/migros-hemen-gp-kampanyasi",
+   "kosullar": [
+    "Sayfada hem 'en fazla 400 TL' hem 'bir kez yararlanılır' ifadesi var; kesin olan ilk işlemdeki 100 TL'dir.",
+    "Alkol, tütün, elektronik ve taksitli işlemler hariçtir."
+   ],
+   "puanKullanim": "Bonuslar 3 Aralık 2026 – 3 Ocak 2027 arasında kullanılabilir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Migros Hemen'de her 1.000 TL ve üzeri alışverişe 100 TL bonus (18–29 yaş).",
+   "id": "bg-migros-hemen-2611",
+   "kart": "bonus-genc",
+   "ad": "Bonus'tan gençlere özel Migros Hemen'de 400 TL bonus!",
+   "kisaAd": "Migros Hemen gençlere özel",
+   "kategoriler": [
+    "market"
+   ],
+   "avantajTuru": "bonus",
+   "kazancMetni": "Her 1.000 TL+ alışverişe 100 TL bonus",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "İlk harcamadan önce BonusFlaş'ta \"Hemen Katıl\" de.",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/migros-hemen-gp-kampanyasi",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 1000,
+    "tutar": 100,
+    "maks": 400,
+    "taksitHaric": true
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Bonus üye marketlerde gıda alışverişleri",
+   "isyerleri": [],
+   "minHarcama": 2000,
+   "maksOdul": 1500,
+   "katilimGerekli": true,
+   "sms": {
+    "kelime": "EVET GIDA",
+    "ek": "kartının son 6 hanesi",
+    "numara": "3340",
+    "not": "SMS ücretlidir"
+   },
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/bonus-market-alisveris-kampanyasi",
+   "kosullar": [
+    "Aynı gün aynı işyerinde yalnızca ilk işlem sayılır.",
+    "Sayfada Flexi ve Bonus Genç için açıklanmamış bir '120 TL' ibaresi var; katılmadan önce BonusFlaş'ta kontrol et."
+   ],
+   "puanKullanim": "Bonuslar 3 Aralık 2026 – 3 Ocak 2027 arasında kullanılabilir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Bonus üye marketlerde her 2.000 TL ve üzeri gıda alışverişine 100 TL bonus (toplam 1.200 TL); BonusFlaş ile (QR / Mobil Temassız / GarantiPay) ödemede işlem başına +25 TL (toplam 300 TL).",
+   "id": "bg-market-genel-2611",
+   "kart": "bonus-genc",
+   "ad": "Market alışverişlerinize 1.200 TL, BonusFlaş ile ödemelere 1.500 TL bonus!",
+   "kisaAd": "Bonus market 1.500 TL",
+   "kategoriler": [
+    "market"
+   ],
+   "avantajTuru": "bonus",
+   "kazancMetni": "Her 2.000 TL+ alışverişe 100 TL · BonusFlaş ile +25 TL",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "Bonus Genç için katılım: BonusFlaş'ta kartı seçip \"Hemen Katıl\" de ya da SMS'te anahtar kelimenin önüne EVET, sonuna boşluk ve kartının son 6 hanesini ekle. Anahtar kelime: GIDA.",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-market-alisveris-kampanyasi",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 2000,
+    "tutar": 100,
+    "maks": 1200,
+    "ek": {
+     "kosul": "mobil-qr",
+     "tutar": 25,
+     "maks": 300
+    },
+    "toplamMaks": 1500
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Bonus üye marketlerde gıda alışverişleri",
+   "isyerleri": [],
+   "minHarcama": 30000,
+   "maksOdul": 1300,
+   "katilimGerekli": true,
+   "sms": {
+    "kelime": "EVET BONUSGIDA",
+    "ek": "kartının son 6 hanesi",
+    "numara": "3340",
+    "not": "SMS ücretlidir"
+   },
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/bonus-market-alisveris-kampanya",
+   "kosullar": [
+    "Müşteri başına bir kez."
+   ],
+   "puanKullanim": "Bonuslar 3 Aralık 2026 – 3 Ocak 2027 arasında kullanılabilir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Bonus üye marketlerde tek seferde 30.000 TL ve üzeri gıda alışverişine 1.250 TL bonus; BonusFlaş ile ödemede +50 TL.",
+   "id": "bg-market-buyuk-2611",
+   "kart": "bonus-genc",
+   "ad": "Market alışverişinize 1.250 TL, BonusFlaş ile ödemeye 1.300 TL bonus!",
+   "kisaAd": "Tek seferde 30.000 TL market",
+   "kategoriler": [
+    "market"
+   ],
+   "avantajTuru": "bonus",
+   "kazancMetni": "30.000 TL+ tek alışverişe 1.250 TL bonus (bir kez)",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "Bonus Genç için katılım: BonusFlaş'ta kartı seçip \"Hemen Katıl\" de ya da SMS'te anahtar kelimenin önüne EVET, sonuna boşluk ve kartının son 6 hanesini ekle. Anahtar kelime: BONUSGIDA.",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-market-alisveris-kampanya",
+   "odul": {
+    "model": "kademe",
+    "kademeler": [
+     {
+      "esik": 30000,
+      "tutar": 1250
+     }
+    ],
+    "tekSefer": true
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Amazon.com.tr, ereyon, Hepsiburada, n11, Pazarama, PttAVM, Trendyol (Trendyol Market hariç)",
+   "isyerleri": [
+    "Amazon",
+    "ereyon",
+    "Hepsiburada",
+    "n11",
+    "Pazarama",
+    "PttAVM",
+    "Trendyol"
+   ],
+   "minHarcama": 15000,
+   "maksOdul": 1250,
+   "katilimGerekli": true,
+   "sms": {
+    "kelime": "EVET KASIMBONUS",
+    "ek": "kartının son 6 hanesi",
+    "numara": "3340",
+    "not": "SMS ücretlidir"
+   },
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/bonus-alisveris-eticaret-kampanyasi",
+   "kosullar": [
+    "Müşteri başına bir kez."
+   ],
+   "puanKullanim": "Bonuslar 3 Aralık 2026 – 3 Ocak 2027 arasında kullanılabilir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Seçili e-ticaret sitelerinde tek seferde 15.000 TL+ alışverişe 500 TL, 30.000 TL+ alışverişe 800 TL, 50.000 TL+ alışverişe 1.250 TL bonus (bir kez).",
+   "id": "bg-eticaret-kademe-2611",
+   "kart": "bonus-genc",
+   "ad": "E-ticaret alışverişlerine 1.250 TL bonus!",
+   "kisaAd": "E-ticaret 1.250 TL",
+   "kategoriler": [
+    "eticaret"
+   ],
+   "avantajTuru": "bonus",
+   "kazancMetni": "15.000 TL+ → 500 · 30.000 TL+ → 800 · 50.000 TL+ → 1.250 TL bonus",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "Bonus Genç için katılım: BonusFlaş'ta kartı seçip \"Hemen Katıl\" de ya da SMS'te anahtar kelimenin önüne EVET, sonuna boşluk ve kartının son 6 hanesini ekle. Anahtar kelime: KASIMBONUS.",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-alisveris-eticaret-kampanyasi",
+   "odul": {
+    "model": "kademe",
+    "kademeler": [
+     {
+      "esik": 15000,
+      "tutar": 500
+     },
+     {
+      "esik": 30000,
+      "tutar": 800
+     },
+     {
+      "esik": 50000,
+      "tutar": 1250
+     }
+    ],
+    "tekSefer": true
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "ereyon, Hepsiburada, İdefix, n11, Pazarama, PttAVM (yalnızca GarantiPay), Trendyol",
+   "isyerleri": [
+    "ereyon",
+    "Hepsiburada",
+    "İdefix",
+    "n11",
+    "Pazarama",
+    "PttAVM",
+    "Trendyol"
+   ],
+   "minHarcama": 3500,
+   "maksOdul": 1200,
+   "katilimGerekli": true,
+   "sms": {
+    "kelime": "EVET ETICARETKASIM",
+    "ek": "kartının son 6 hanesi",
+    "numara": "3340",
+    "not": "SMS ücretlidir"
+   },
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/bonus-eticaret-gp-kampanyasi",
+   "kosullar": [
+    "GarantiPay ek ödülü hesaplamaya katılmaz.",
+    "PttAVM alışverişleri yalnızca GarantiPay ile geçerlidir."
+   ],
+   "puanKullanim": "Bonuslar 3 Aralık 2026 – 3 Ocak 2027 arasında kullanılabilir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Seçili e-ticaret sitelerinde her 3.500 TL ve üzeri tek alışverişe 175 TL bonus (toplam 1.050 TL); GarantiPay ile ödemede işlem başına +25 TL (toplam 150 TL).",
+   "id": "bg-eticaret-gp-2611",
+   "kart": "bonus-genc",
+   "ad": "E-ticaret alışverişlerine 1.050 TL, GarantiPay ile 1.200 TL bonus!",
+   "kisaAd": "E-ticaret her 3.500 TL'ye 175 TL",
+   "kategoriler": [
+    "eticaret"
+   ],
+   "avantajTuru": "bonus",
+   "kazancMetni": "Her 3.500 TL+ alışverişe 175 TL bonus · GarantiPay ile +25 TL",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "Bonus Genç için katılım: BonusFlaş'ta kartı seçip \"Hemen Katıl\" de ya da SMS'te anahtar kelimenin önüne EVET, sonuna boşluk ve kartının son 6 hanesini ekle. Anahtar kelime: ETICARETKASIM.",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-eticaret-gp-kampanyasi",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 3500,
+    "tutar": 175,
+    "maks": 1050
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Bonus üye giyim, aksesuar, kozmetik, ayakkabı ve çanta işyerleri",
+   "isyerleri": [],
+   "minHarcama": 3000,
+   "maksOdul": 1500,
+   "katilimGerekli": true,
+   "sms": {
+    "kelime": "EVET KAZAN",
+    "ek": "kartının son 6 hanesi",
+    "numara": "3340",
+    "not": "SMS ücretlidir"
+   },
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/bonus-giyim-canta-kampanyalari",
+   "kosullar": [
+    "Aynı gün aynı işyerinde yalnızca ilk işlem sayılır.",
+    "GarantiPay ek ödülü hesaplamaya katılmaz."
+   ],
+   "puanKullanim": "Bonuslar 3 Aralık 2026 – 3 Ocak 2027 arasında kullanılabilir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Bonus üye giyim, aksesuar, kozmetik, ayakkabı ve çanta işyerlerinde her 3.000 TL ve üzeri tek alışverişe 120 TL bonus; GarantiPay ile +30 TL; toplamda 1.500 TL'ye kadar.",
+   "id": "bg-giyim-genel-2611",
+   "kart": "bonus-genc",
+   "ad": "Giyim, ayakkabı ve çanta alışverişlerinize toplam 1.500 TL bonus!",
+   "kisaAd": "Giyim & aksesuar 1.500 TL",
+   "kategoriler": [
+    "giyim",
+    "saglik"
+   ],
+   "avantajTuru": "bonus",
+   "kazancMetni": "Her 3.000 TL+ alışverişe 120 TL bonus · GarantiPay ile +30 TL",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "Bonus Genç için katılım: BonusFlaş'ta kartı seçip \"Hemen Katıl\" de ya da SMS'te anahtar kelimenin önüne EVET, sonuna boşluk ve kartının son 6 hanesini ekle. Anahtar kelime: KAZAN.",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-giyim-canta-kampanyalari",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 3000,
+    "tutar": 120,
+    "maks": 1500
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Uber Eats Trendyol Go ve GetirYemek by Uber Eats (market siparişleri hariç)",
+   "isyerleri": [
+    "Trendyol Go",
+    "GetirYemek"
+   ],
+   "minHarcama": 900,
+   "maksOdul": 500,
+   "katilimGerekli": true,
+   "sms": null,
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/trendyol-go-bonus-kampanyasi",
+   "kosullar": [
+    "Market siparişleri dahil değildir."
+   ],
+   "puanKullanim": "Kullanılmayan bonuslar 6 Ocak 2027'de geri alınır.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Uber Eats Trendyol Go ve GetirYemek by Uber Eats'te 900 TL ve üzeri yemek siparişlerine %15 bonus; toplamda 500 TL'ye kadar.",
+   "id": "bg-yemek-siparis-2611",
+   "kart": "bonus-genc",
+   "ad": "Uber Eats Trendyol Go ve GetirYemek by Uber Eats yemek siparişlerinizde %15 bonus ayrıcalığı!",
+   "kisaAd": "Yemek siparişine %15 bonus",
+   "kategoriler": [
+    "yemek"
+   ],
+   "avantajTuru": "bonus",
+   "kazancMetni": "900 TL+ siparişe %15 bonus · en fazla 500 TL",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "İlk siparişten önce BonusFlaş'ta \"Hemen Katıl\" de.",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/trendyol-go-bonus-kampanyasi",
+   "odul": {
+    "model": "yuzde",
+    "oran": 0.15,
+    "esik": 900,
+    "toplamMaks": 500
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Bonus üye otomotiv, lastik, bakım ve yedek parça işyerleri",
+   "isyerleri": [],
+   "minHarcama": 10000,
+   "maksOdul": 600,
+   "katilimGerekli": true,
+   "sms": {
+    "kelime": "EVET OTOMOTIVKASIM",
+    "ek": "kartının son 6 hanesi",
+    "numara": "3340",
+    "not": "SMS ücretlidir"
+   },
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/bonus-otomotiv-lastik-kampanya",
+   "kosullar": [
+    "Müşteri başına bir kez.",
+    "Peşin ve taksitli işlemler dahildir.",
+    "Sayfada Bonus Genç ve Flexi için açıklanmamış bir '60 TL' ibaresi var; katılmadan önce kontrol et."
+   ],
+   "puanKullanim": "Bonuslar 3 Aralık 2026 – 3 Ocak 2027 arasında kullanılabilir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Bonus üye otomotiv, lastik, bakım ve yedek parça işyerlerinde 10.000–49.999 TL alışverişe 300 TL, 50.000 TL ve üzeri alışverişe 600 TL bonus (bir kez).",
+   "id": "bg-otomotiv-2611",
+   "kart": "bonus-genc",
+   "ad": "Otomotiv, Lastik, Bakım ve Yedek Parça alışverişinize 600 TL bonus!",
+   "kisaAd": "Otomotiv & lastik",
+   "kategoriler": [
+    "akaryakit"
+   ],
+   "avantajTuru": "bonus",
+   "kazancMetni": "10.000 TL+ → 300 TL · 50.000 TL+ → 600 TL bonus",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "Bonus Genç için katılım: BonusFlaş'ta kartı seçip \"Hemen Katıl\" de ya da SMS'te anahtar kelimenin önüne EVET, sonuna boşluk ve kartının son 6 hanesini ekle. Anahtar kelime: OTOMOTIVKASIM.",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-otomotiv-lastik-kampanya",
+   "odul": {
+    "model": "kademe",
+    "kademeler": [
+     {
+      "esik": 10000,
+      "tutar": 300
+     },
+     {
+      "esik": 50000,
+      "tutar": 600
+     }
+    ],
+    "tekSefer": true
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Katılımcı Petrol Ofisi istasyonları",
+   "isyerleri": [
+    "Petrol Ofisi"
+   ],
+   "minHarcama": 1600,
+   "maksOdul": 500,
+   "katilimGerekli": false,
+   "sms": null,
+   "katilimLinki": null,
+   "kosullar": [
+    "Ödül 4. uygun alışverişte oluşur; hesaplayıcı tek işlem bazında kazanç göstermez.",
+    "Taksitli işlemler dahil değildir."
+   ],
+   "puanKullanim": "Bonuslar 22 Kasım – 22 Aralık 2026 arasında kullanılabilir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Katılımcı Petrol Ofisi istasyonlarında farklı günlerde yapılan 4 adet 1.600 TL ve üzeri akaryakıt/otogaz alışverişine 450 TL bonus; BonusFlaş ile QR / Mobil Temassız ödemede +50 TL.",
+   "id": "bg-petrol-ofisi-2610",
+   "kart": "bonus-genc",
+   "ad": "Petrol Ofisi'nde 450 TL bonus!",
+   "kisaAd": "Petrol Ofisi 450 TL",
+   "kategoriler": [
+    "akaryakit"
+   ],
+   "avantajTuru": "bonus",
+   "kazancMetni": "Farklı günlerde 4 × 1.600 TL+ alışverişe 450 TL bonus (QR / Mobil ile 500 TL)",
+   "baslangic": "2026-10-01",
+   "bitis": "2026-11-15",
+   "katilimKosulu": "Bonus Genç için katılım gerekmez.",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/petrol-ofisi-bonus-kampanya",
+   "odul": {
+    "model": "bilinmiyor"
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Bonus üye beyaz eşya ve elektronik işyerleri",
+   "isyerleri": [],
+   "minHarcama": 15000,
+   "maksOdul": 1750,
+   "katilimGerekli": true,
+   "sms": {
+    "kelime": "EVET ELEKTRONIKBONUS",
+    "ek": "kartının son 6 hanesi",
+    "numara": "3340",
+    "not": "SMS ücretlidir"
+   },
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/bonus-beyaz-esya-kampanya",
+   "kosullar": [
+    "Müşteri başına bir kez.",
+    "Peşin ve taksitli işlemler dahildir.",
+    "Sayfa toplam alışverişten söz ediyor olabilir; hesaplayıcı tek alışverişe göre gösterir."
+   ],
+   "puanKullanim": "Bonuslar 3 Aralık 2026 – 3 Ocak 2027 arasında kullanılabilir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Bonus üye beyaz eşya ve elektronik işyerlerinde 15.000 TL+ alışverişe 400 TL, 20.000 TL+ 600 TL, 50.000 TL+ 1.000 TL, 100.000 TL+ 1.750 TL bonus (bir kez).",
+   "id": "bg-elektronik-2611",
+   "kart": "bonus-genc",
+   "ad": "Bonus'a özel beyaz eşya ve elektronik alışverişlerinize 1.750 TL bonus!",
+   "kisaAd": "Beyaz eşya & elektronik",
+   "kategoriler": [
+    "elektronik"
+   ],
+   "avantajTuru": "bonus",
+   "kazancMetni": "15.000 TL+ → 400 · 20.000 → 600 · 50.000 → 1.000 · 100.000 → 1.750 TL",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "Bonus Genç için katılım: BonusFlaş'ta kartı seçip \"Hemen Katıl\" de ya da SMS'te anahtar kelimenin önüne EVET, sonuna boşluk ve kartının son 6 hanesini ekle. Anahtar kelime: ELEKTRONIKBONUS.",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/bonus-beyaz-esya-kampanya",
+   "odul": {
+    "model": "kademe",
+    "kademeler": [
+     {
+      "esik": 15000,
+      "tutar": 400
+     },
+     {
+      "esik": 20000,
+      "tutar": 600
+     },
+     {
+      "esik": 50000,
+      "tutar": 1000
+     },
+     {
+      "esik": 100000,
+      "tutar": 1750
+     }
+    ],
+    "tekSefer": true
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca Shell Recharge Türkiye uygulaması",
+   "isyerleri": [
+    "Shell Recharge"
+   ],
+   "minHarcama": 500,
+   "maksOdul": 750,
+   "katilimGerekli": true,
+   "sms": null,
+   "katilimLinki": "https://www.bonus.com.tr/kampanyalar/shell-recharge-bonus-kampanya",
+   "kosullar": [
+    "Günde yalnızca bir işlem bonus kazandırır."
+   ],
+   "puanKullanim": "Bonuslar 3 Aralık 2026 – 3 Ocak 2027 arasında kullanılabilir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Shell Recharge Türkiye uygulamasında 500 TL ve üzeri şarj ödemelerine %50 bonus; günde bir kez, toplamda 750 TL'ye kadar.",
+   "id": "bg-shell-recharge",
+   "kart": "bonus-genc",
+   "ad": "Shell Recharge'da 500 TL ve üzeri alışverişe %50 bonus!",
+   "kisaAd": "Shell Recharge %50",
+   "kategoriler": [
+    "akaryakit"
+   ],
+   "avantajTuru": "bonus",
+   "kazancMetni": "500 TL+ ödemeye %50 bonus · en fazla 750 TL",
+   "baslangic": "2026-10-23",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "İlk ödemeden önce BonusFlaş'ta \"Hemen Katıl\" de ve Shell Recharge uygulamasına üye ol.",
+   "resmiLink": "https://www.bonus.com.tr/kampanyalar/shell-recharge-bonus-kampanya",
+   "odul": {
+    "model": "yuzde",
+    "oran": 0.5,
+    "esik": 500,
+    "toplamMaks": 750
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca Pazarama Market (web ve uygulama)",
+   "isyerleri": [
+    "Pazarama Market"
+   ],
+   "minHarcama": 1000,
+   "maksOdul": 600,
+   "katilimGerekli": true,
+   "sms": null,
+   "katilimLinki": null,
+   "kosullar": [
+    "VakıfBank bireysel kredi kartlarında geçerlidir.",
+    "Diğer kampanyalarla birleştirilemez."
+   ],
+   "puanKullanim": "",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Pazarama Market'te (site ve uygulama) her 1.000 TL ve üzeri tek alışverişe 200 TL ekstre indirimi; toplamda 600 TL'ye kadar.",
+   "id": "rm-pazarama-market-2611",
+   "kart": "rail-miles",
+   "ad": "Pazarama Market'te 600 TL Ekstre İndirimi!",
+   "kisaAd": "Pazarama Market 200 TL",
+   "kategoriler": [
+    "market"
+   ],
+   "avantajTuru": "indirim",
+   "kazancMetni": "Her 1.000 TL+ alışverişe 200 TL indirim",
+   "baslangic": "2026-11-10",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "Harcamadan önce VakıfBank Mobil > Kartınla Kazan'dan \"Hemen Katıl\" de.",
+   "resmiLink": "https://www.vakifkart.com.tr/kampanyalar/pazarama-markette-600-tl-ekstre-indirimi-41201",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 1000,
+    "tutar": 200,
+    "maks": 600
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "pazarama.com ve Pazarama uygulaması",
+   "isyerleri": [
+    "Pazarama"
+   ],
+   "minHarcama": 3500,
+   "maksOdul": 500,
+   "katilimGerekli": true,
+   "sms": null,
+   "katilimLinki": null,
+   "kosullar": [
+    "Pazarama Tatil, takı, mücevher, altın, dijital kod ve market alışverişleri hariçtir.",
+    "Diğer kampanyalarla birleştirilemez."
+   ],
+   "puanKullanim": "",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "pazarama.com ve Pazarama uygulamasında tek seferde 3.500 TL ve üzeri alışverişe bir kez 500 TL ekstre indirimi.",
+   "id": "rm-pazarama-2611",
+   "kart": "rail-miles",
+   "ad": "Pazarama'dan 3.500 TL ve üzeri alışverişinize 500 TL ekstre indirimi!",
+   "kisaAd": "Pazarama 500 TL",
+   "kategoriler": [
+    "eticaret"
+   ],
+   "avantajTuru": "indirim",
+   "kazancMetni": "3.500 TL+ alışverişe 500 TL indirim (bir kez)",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-15",
+   "katilimKosulu": "Harcamadan önce VakıfBank Mobil > Kartınla Kazan'dan \"Hemen Katıl\" de.",
+   "resmiLink": "https://www.vakifkart.com.tr/kampanyalar/pazaramadan-3500-tl-ve-uzeri-alisverisinize-500-tl-ekstre-indirimi-41066",
+   "odul": {
+    "model": "kademe",
+    "kademeler": [
+     {
+      "esik": 3500,
+      "tutar": 500
+     }
+    ],
+    "tekSefer": true
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Yalnızca bu ürünleri satan web siteleri ve uygulamalar (pazaryerleri ve çok kategorili mağazalar hariç)",
+   "isyerleri": [],
+   "minHarcama": 20000,
+   "maksOdul": 4500,
+   "katilimGerekli": true,
+   "sms": null,
+   "katilimLinki": null,
+   "kosullar": [
+    "Her sektörde en fazla 1.500 TL.",
+    "Fiziksel mağazalar, pazaryerleri ve çok kategorili mağazalar hariçtir."
+   ],
+   "puanKullanim": "Worldpuanlar işlemin ertesi günü yüklenir, 30 gün geçerlidir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "Elektronik, beyaz eşya ve mobilya satan sitelerde/uygulamalarda tek seferde 20.000 TL+ alışverişe 600 TL, 50.000 TL+ alışverişe 1.500 TL Worldpuan; her sektörde en fazla 1.500 TL, toplam 4.500 TL.",
+   "id": "rm-elektronik-2611",
+   "kart": "rail-miles",
+   "ad": "Elektronik, beyaz eşya ve mobilya alışverişlerinize 4.500 TL Worldpuan!",
+   "kisaAd": "Online elektronik & beyaz eşya",
+   "kategoriler": [
+    "elektronik",
+    "diger"
+   ],
+   "avantajTuru": "worldpuan",
+   "kazancMetni": "20.000 TL+ → 600 TL · 50.000 TL+ → 1.500 TL Worldpuan",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "Harcamadan önce VakıfBank Mobil > Kartınla Kazan'dan \"Hemen Katıl\" de. Katılmadan yapılan harcamalar sayılmaz.",
+   "resmiLink": "https://www.vakifkart.com.tr/kampanyalar/elektronik-beyaz-esya-ve-mobilya-alisverislerinize-4500-tl-worldpuan-41098",
+   "odul": {
+    "model": "kademe",
+    "kademeler": [
+     {
+      "esik": 20000,
+      "tutar": 600
+     },
+     {
+      "esik": 50000,
+      "tutar": 1500
+     }
+    ]
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Yalnızca VakıfBank Mobil Temassız (Android, NFC); QR hariç",
+   "isyerleri": [],
+   "minHarcama": 900,
+   "maksOdul": 300,
+   "katilimGerekli": true,
+   "sms": null,
+   "katilimLinki": null,
+   "kosullar": [
+    "Yalnızca NFC'li Android 5.0+ telefonlarda çalışır; iPhone'da kullanılamaz.",
+    "QR ile ödemeler dahil değildir; günde bir işlem sayılır."
+   ],
+   "puanKullanim": "Worldpuanlar 4 Aralık 2026'ya kadar yüklenir, 4 Ocak 2027'ye kadar geçerlidir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "VakıfBank Mobil Temassız Ödeme ile farklı günlerde yapılan her 900 TL ve üzeri tek işleme 25 TL Worldpuan; toplamda 300 TL'ye kadar.",
+   "id": "rm-mobil-temassiz-2611",
+   "kart": "rail-miles",
+   "ad": "Mobil Temassız Ödeme ile 300 TL Worldpuan!",
+   "kisaAd": "Mobil Temassız 25 TL",
+   "kategoriler": [
+    "diger",
+    "restoran",
+    "market",
+    "akaryakit",
+    "giyim",
+    "saglik",
+    "eglence",
+    "elektronik"
+   ],
+   "avantajTuru": "worldpuan",
+   "kazancMetni": "Her 900 TL+ mobil temassız işleme 25 TL Worldpuan",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "katilimKosulu": "VakıfBank Mobil > Kartınla Kazan'dan \"Hemen Katıl\" de (harcamadan önce veya sonra, kampanya süresince).",
+   "resmiLink": "https://www.vakifkart.com.tr/kampanyalar/mobil-temassiz-odeme-ile-300-tl-worldpuan-41132",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 900,
+    "tutar": 25,
+    "maks": 300,
+    "odemeSarti": "mobil-qr"
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca mediamarkt.com.tr (mağazalar hariç)",
+   "isyerleri": [
+    "MediaMarkt (online)"
+   ],
+   "minHarcama": 25000,
+   "maksOdul": 2035,
+   "katilimGerekli": true,
+   "sms": null,
+   "katilimLinki": null,
+   "kosullar": [
+    "Kazanılan Worldpuan e-ticarette kullanılamaz.",
+    "Diğer kampanyalarla birleştirilemez."
+   ],
+   "puanKullanim": "Worldpuanlar 27 Kasım 2026'ya kadar yüklenir, 28 Aralık 2026'ya kadar geçerlidir.",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî kampanya sayfası incelendi"
+   },
+   "kaynak": "resmi",
+   "aciklama": "mediamarkt.com.tr'de tek seferde 25.000 TL ve üzeri alışverişe bir kez 2.035 TL Worldpuan.",
+   "id": "rm-mediamarkt-2611",
+   "kart": "rail-miles",
+   "ad": "mediamarkt.com'dan 25.000 TL ve üzeri alışverişinize 2.035 TL Worldpuan!",
+   "kisaAd": "MediaMarkt online 2.035 TL",
+   "kategoriler": [
+    "elektronik"
+   ],
+   "avantajTuru": "worldpuan",
+   "kazancMetni": "25.000 TL+ alışverişe 2.035 TL Worldpuan (bir kez)",
+   "baslangic": "2026-11-09",
+   "bitis": "2026-11-20",
+   "katilimKosulu": "VakıfBank Mobil > Kartınla Kazan'dan \"Hemen Katıl\" de (kampanya süresince, harcamadan önce veya sonra).",
+   "resmiLink": "https://www.vakifkart.com.tr/kampanyalar/mediamarktcomdan-25000-tl-ve-uzeri-alisverisinize-2035-tl-worldpuan-41093",
+   "odul": {
+    "model": "kademe",
+    "kademeler": [
+     {
+      "esik": 25000,
+      "tutar": 2035
+     }
+    ],
+    "tekSefer": true
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "",
+   "isyerleri": [],
+   "minHarcama": null,
+   "maksOdul": null,
+   "katilimGerekli": true,
+   "sms": null,
+   "katilimLinki": null,
+   "kosullar": [],
+   "puanKullanim": "",
+   "dogrulama": {
+    "durum": "dogrulanmadi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî listede görüldü; sayfa otomatik erişime kapalı"
+   },
+   "kaynak": "resmi",
+   "aciklama": "DenizKartım'ın resmî kampanya listesinde yer alıyor; site otomatik erişime kapalı olduğu için tarih ve koşullar doğrulanamadı.",
+   "id": "dk-vergi-dv",
+   "kart": "denizkart-black",
+   "ad": "Vergi Ödemelerinize 4'e Varan Taksit!",
+   "kisaAd": "Vergiye 4 taksit",
+   "kategoriler": [
+    "diger"
+   ],
+   "avantajTuru": "taksit",
+   "kazancMetni": "4'e varan taksit (koşullar doğrulanmadı)",
+   "minMetni": "Doğrulanmadı",
+   "baslangic": null,
+   "bitis": null,
+   "katilimKosulu": "Doğrulanmadı — katılım adımını resmî sayfadan kontrol et.",
+   "resmiLink": "https://www.denizkartim.com/kampanyalar/vergi-odemelerinize-4e-varan-taksit",
+   "odul": {
+    "model": "bilinmiyor"
+   }
+  },
+  {
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "",
+   "isyerleri": [],
+   "minHarcama": null,
+   "maksOdul": 1000,
+   "katilimGerekli": true,
+   "sms": null,
+   "katilimLinki": null,
+   "kosullar": [],
+   "puanKullanim": "",
+   "dogrulama": {
+    "durum": "dogrulanmadi",
+    "tarih": "2026-11-10",
+    "yontem": "Resmî listede görüldü; sayfa otomatik erişime kapalı"
+   },
+   "kaynak": "resmi",
+   "aciklama": "DenizKartım'ın resmî kampanya listesinde yer alıyor; site otomatik erişime kapalı olduğu için tarih ve koşullar doğrulanamadı.",
+   "id": "dk-yurtdisi-dv",
+   "kart": "denizkart-black",
+   "ad": "Yurt Dışı Alışverişlerinize 1.000 TL'ye Varan İndirim!",
+   "kisaAd": "Yurt dışına 1.000 TL",
+   "kategoriler": [
+    "diger"
+   ],
+   "avantajTuru": "indirim",
+   "kazancMetni": "1.000 TL'ye varan indirim (koşullar doğrulanmadı)",
+   "minMetni": "Doğrulanmadı",
+   "baslangic": null,
+   "bitis": null,
+   "katilimKosulu": "Doğrulanmadı — katılım adımını resmî sayfadan kontrol et.",
+   "resmiLink": "https://www.denizkartim.com/kampanyalar/yurt-disi-alisverislerinize-1000tlye-varan-indirim",
+   "odul": {
+    "model": "bilinmiyor"
+   }
+  },
+  {
+   "id": "qnb-kazananlar-restoran",
+   "kart": "qnb",
+   "ad": "QNB Kazananlar Kulübü: restoran harcamalarında %10 indirim",
+   "kisaAd": "Kazananlar Kulübü restoran %10",
+   "aciklama": "Kazananlar Kulübü üyelerine, o ay hediye olarak restoran avantajını seçtiklerinde yurt içi restoran harcamalarının %10'u kart hesabına indirim olarak yansır; aylık en fazla 500 TL, yılda 6.000 TL.",
+   "kategoriler": [
+    "restoran"
+   ],
+   "avantajTuru": "indirim",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Yurt içi restoran harcamaları",
+   "isyerleri": [],
+   "kazancMetni": "Restoran harcamasının %10'u · aylık en fazla 500 TL",
+   "minHarcama": null,
+   "minMetni": "Alt sınır yok",
+   "maksOdul": 500,
+   "maksMetni": "Aylık 500 TL",
+   "baslangic": null,
+   "bitis": "2026-12-31",
+   "katilimGerekli": true,
+   "katilimKosulu": "Kazananlar Kulübü üyesi olup QNB Mobil > Kazananlar Kulübü'nden restoran hediyesini her ay yeniden seçmen gerekir; indirim katılım SMS'inden sonraki harcamalarda başlar.",
+   "sms": null,
+   "katilimLinki": "https://www.qnb.com.tr/qnb-kazananlar-kulubu",
+   "resmiLink": "https://www.qnb.com.tr/qnb-kazananlar-kulubu",
+   "kosullar": [
+    "Hediye her ay yeniden seçilmelidir; ayda yalnızca seçilen tek kampanyanın indirimi geçerlidir (restoran ya da e-ticaret).",
+    "Kulüpte kalmak için bir takvim ayında listelenen kriterlerden en az 4'ünü sağlamak gerekir.",
+    "Ek kartlar, yurt dışı ve ParaPuan ile yapılan harcamalar hariçtir."
+   ],
+   "puanKullanim": "İndirim harcamanın ekstre hareketlerinde görünmesiyle aynı ay karta yansır.",
+   "odul": {
+    "model": "yuzde",
+    "oran": 0.1,
+    "donemMaks": 500
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "QNB Kazananlar Kulübü resmî sayfası incelendi"
+   },
+   "kaynak": "resmi"
+  },
+  {
+   "kart": "denizkart-black",
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca etstur.com, Maximum POS",
+   "isyerleri": [
+    "etstur.com"
+   ],
+   "minHarcama": null,
+   "maksOdul": null,
+   "katilimGerekli": false,
+   "sms": null,
+   "katilimLinki": null,
+   "puanKullanim": "",
+   "kaynak": "resmi",
+   "baslangic": "2026-01-01",
+   "id": "dk-max-ets-ucak",
+   "ad": "Yurt İçi Uçak Biletlerinde Peşin Fiyatına 6 Aya Varan Taksit Fırsatı ETS'de!",
+   "kisaAd": "ETS uçak bileti 6 taksit",
+   "aciklama": "etstur.com'da Maximum kartla alınan yurt içi uçak biletlerinde peşin fiyatına 3 veya 6 taksit (KKTC uçuşlarında 3 taksit).",
+   "kategoriler": [
+    "seyahat"
+   ],
+   "avantajTuru": "taksit",
+   "kazancMetni": "Yurt içi uçuşta peşin fiyatına 6 taksit",
+   "minMetni": "Belirtilmemiş",
+   "maksMetni": "Belirtilmemiş",
+   "bitis": "2026-12-31",
+   "katilimKosulu": "Katılım gerekmez; etstur.com'da Maximum kartla öde.",
+   "resmiLink": "https://www.isbank.com.tr/kampanyalar/maximum-ile-yurtici-ucak-biletlerinde-taksit-firsati-etsde",
+   "kosullar": [
+    "Varsayım: Maximum geçişi tamamlanmış ve DenizKart Black Maximum Platinum gibi kabul edilmiş halde gösteriliyor (senin tercihin). Gerçekte kartın 6 Aralık 2026'ya kadar Maximum kampanyalarından yararlanamaz; koşullar DenizBank kartlarını henüz açıkça saymıyor.",
+    "Yurt dışı uçuşlarda taksit yoktur.",
+    "MaxiPuan ile yapılan ödemeler hariçtir."
+   ],
+   "odul": {
+    "model": "taksit",
+    "min": null,
+    "max": null,
+    "metin": "6 taksit (peşin fiyatına)"
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "İş Bankası resmî kampanya sayfası incelendi · kart uygunluğu varsayım"
+   }
+  },
+  {
+   "kart": "denizkart-black",
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca ucuzabilet.com, Maximum POS",
+   "isyerleri": [
+    "Ucuzabilet.com"
+   ],
+   "minHarcama": null,
+   "maksOdul": null,
+   "katilimGerekli": false,
+   "sms": null,
+   "katilimLinki": null,
+   "puanKullanim": "",
+   "kaynak": "resmi",
+   "baslangic": "2026-01-01",
+   "id": "dk-max-ucuzabilet",
+   "ad": "Ucuzabilet.com'da Peşin Fiyatına 3 Aya Varan Taksit Fırsatı!",
+   "kisaAd": "Ucuzabilet 3 taksit",
+   "aciklama": "ucuzabilet.com'da Maximum kartla alınan yurt içi uçak ve otobüs biletlerinde peşin fiyatına 3 taksit.",
+   "kategoriler": [
+    "seyahat"
+   ],
+   "avantajTuru": "taksit",
+   "kazancMetni": "Yurt içi uçak/otobüs biletine 3 taksit",
+   "minMetni": "Belirtilmemiş",
+   "maksMetni": "Belirtilmemiş",
+   "bitis": "2026-12-31",
+   "katilimKosulu": "Katılım gerekmez; ucuzabilet.com'da Maximum kartla öde.",
+   "resmiLink": "https://www.isbank.com.tr/kampanyalar/ucuzabiletcomda-pesin-fiyatina-taksit-firsati",
+   "kosullar": [
+    "Varsayım: Maximum geçişi tamamlanmış ve DenizKart Black Maximum Platinum gibi kabul edilmiş halde gösteriliyor (senin tercihin). Gerçekte kartın 6 Aralık 2026'ya kadar Maximum kampanyalarından yararlanamaz; koşullar DenizBank kartlarını henüz açıkça saymıyor.",
+    "Yurt dışı biletlerde taksit yoktur."
+   ],
+   "odul": {
+    "model": "taksit",
+    "min": null,
+    "max": null,
+    "metin": "3 taksit (peşin fiyatına)"
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "İş Bankası resmî kampanya sayfası incelendi · kart uygunluğu varsayım"
+   }
+  },
+  {
+   "kart": "denizkart-black",
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Sabiha Gökçen Plaza Premium Lounge (iç ve dış hatlar)",
+   "isyerleri": [
+    "Sabiha Gökçen Lounge"
+   ],
+   "minHarcama": null,
+   "maksOdul": null,
+   "katilimGerekli": false,
+   "sms": null,
+   "katilimLinki": null,
+   "puanKullanim": "",
+   "kaynak": "resmi",
+   "baslangic": null,
+   "id": "dk-max-saw-lounge",
+   "ad": "Sabiha Gökçen Havalimanı'nda İndirimli Lounge Hizmeti Ayrıcalığı",
+   "kisaAd": "Sabiha Gökçen lounge %50",
+   "aciklama": "Sabiha Gökçen'deki Plaza Premium Lounge'larda (iç ve dış hatlar) bireysel giriş ücretine %50 indirim; kart sahibi ve 3 misafire kadar.",
+   "kategoriler": [
+    "seyahat"
+   ],
+   "avantajTuru": "indirim",
+   "kazancMetni": "Lounge girişine %50 indirim",
+   "minMetni": "Alt sınır yok",
+   "maksMetni": "Kart sahibi + 3 misafir",
+   "bitis": null,
+   "katilimKosulu": "Katılım gerekmez; İşCep > Seyahatim > SAW Havalimanı'ndan öde ya da girişte kartı göster.",
+   "resmiLink": "https://www.isbank.com.tr/kampanyalar/sabiha-gokcen-havalimaninda-indirimli-lounge-hizmeti-ayricaligi",
+   "kosullar": [
+    "Varsayım: Maximum geçişi tamamlanmış ve DenizKart Black Maximum Platinum gibi kabul edilmiş halde gösteriliyor (senin tercihin). Gerçekte kartın 6 Aralık 2026'ya kadar Maximum kampanyalarından yararlanamaz; koşullar DenizBank kartlarını henüz açıkça saymıyor.",
+    "Aidatlı bireysel kredi kartlarında geçerlidir.",
+    "Sayfada bitiş tarihi yazmıyor."
+   ],
+   "odul": {
+    "model": "yuzde",
+    "oran": 0.5
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "İş Bankası resmî kampanya sayfası incelendi · kart uygunluğu varsayım"
+   }
+  },
+  {
+   "kart": "denizkart-black",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Amazon Prime üyeliği",
+   "isyerleri": [],
+   "minHarcama": null,
+   "maksOdul": null,
+   "katilimGerekli": true,
+   "sms": null,
+   "katilimLinki": "https://www.isbank.com.tr/kampanyalar/12-aya-varan-amazon-prime-uyeligi",
+   "puanKullanim": "",
+   "kaynak": "resmi",
+   "baslangic": null,
+   "id": "dk-max-amazon-prime",
+   "ad": "6 Aya Varan Amazon Prime Üyeliği (Maximum Kart)",
+   "kisaAd": "6 ay Amazon Prime",
+   "aciklama": "Maximum kart sahiplerine 6 ay ücretsiz Amazon Prime (Maximiles/Privia Black kartlara 12 ay). Son 3 ayda en az bir kart harcaması gerekir.",
+   "kategoriler": [
+    "eticaret",
+    "eglence"
+   ],
+   "avantajTuru": "indirim",
+   "kazancMetni": "6 ay ücretsiz Amazon Prime",
+   "minMetni": "Son 3 ayda en az 1 harcama",
+   "maksMetni": "Müşteri başına bir kez",
+   "bitis": "2027-04-30",
+   "katilimKosulu": "İşCep veya Maximum Mobil > Kampanyalar'dan \"KATIL\" de, SMS'le gelen bağlantıyı 30 Nisan 2027'ye kadar etkinleştir.",
+   "resmiLink": "https://www.isbank.com.tr/kampanyalar/12-aya-varan-amazon-prime-uyeligi",
+   "kosullar": [
+    "Varsayım: Maximum geçişi tamamlanmış ve DenizKart Black Maximum Platinum gibi kabul edilmiş halde gösteriliyor (senin tercihin). Gerçekte kartın 6 Aralık 2026'ya kadar Maximum kampanyalarından yararlanamaz; koşullar DenizBank kartlarını henüz açıkça saymıyor.",
+    "Süre sonunda iptal etmezsen Amazon aylık 69,90 TL ücret alır.",
+    "Aidatsız kartlar ve ek kartlar hariçtir."
+   ],
+   "odul": {
+    "model": "bilinmiyor"
+   },
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "İş Bankası resmî kampanya sayfası incelendi · kart uygunluğu varsayım"
+   }
+  },
+  {
+   "kart": "denizkart-black",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Maximum üye marketler",
+   "isyerleri": [],
+   "minHarcama": 15000,
+   "maksOdul": 1300,
+   "katilimGerekli": true,
+   "katilimKosulu": "İşCep veya Maximum Mobil > Kampanyalar'dan \"KATIL\" de (kampanya süresince, harcamadan önce veya sonra).",
+   "sms": null,
+   "puanKullanim": "MaxiPuanlar 4 Aralık 2026'da yüklenir, 31 Aralık 2026'ya kadar kullanılabilir.",
+   "kaynak": "resmi",
+   "avantajTuru": "maxipuan",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "id": "dk-max-market-buyuk-2611",
+   "ad": "15.000 TL ve Üzeri Market Alışverişinize 1.300 TL'ye Varan MaxiPuan!",
+   "kisaAd": "Maximum market 15.000 TL+",
+   "aciklama": "Maximum üye marketlerde ilk tek seferde 15.000 TL ve üzeri peşin alışverişe 750 TL, 25.000 TL ve üzeri alışverişe 1.250 TL MaxiPuan (TROY kartla +50 TL).",
+   "kategoriler": [
+    "market"
+   ],
+   "kazancMetni": "15.000 TL+ → 750 TL · 25.000 TL+ → 1.250 TL MaxiPuan (bir kez)",
+   "resmiLink": "https://www.maximum.com.tr/kampanyalar/market-alisverisinize-maxipuan",
+   "kosullar": [
+    "Varsayım: Maximum geçişi tamamlanmış ve DenizKart Black Maximum Platinum gibi kabul edilmiş halde gösteriliyor (senin tercihin). Gerçekte kartın 6 Aralık 2026'ya kadar Maximum kampanyalarından yararlanamaz; koşullar DenizBank kartlarını henüz açıkça saymıyor.",
+    "Müşteri başına bir kez.",
+    "Elektronik ve beyaz eşya gibi market dışı ürünler hariçtir."
+   ],
+   "odul": {
+    "model": "kademe",
+    "kademeler": [
+     {
+      "esik": 15000,
+      "tutar": 750
+     },
+     {
+      "esik": 25000,
+      "tutar": 1250
+     }
+    ],
+    "tekSefer": true
+   },
+   "katilimLinki": "https://www.maximum.com.tr/kampanyalar/market-alisverisinize-maxipuan",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Maximum/İş Bankası resmî kampanya sayfası incelendi · kart uygunluğu varsayım"
+   }
+  },
+  {
+   "kart": "denizkart-black",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Maximum üye marketler",
+   "isyerleri": [],
+   "minHarcama": 2000,
+   "maksOdul": 1500,
+   "katilimGerekli": true,
+   "katilimKosulu": "İşCep veya Maximum Mobil > Kampanyalar'dan \"KATIL\" de (kampanya süresince, harcamadan önce veya sonra).",
+   "sms": null,
+   "puanKullanim": "MaxiPuanlar 4 Aralık 2026'da yüklenir, 31 Aralık 2026'ya kadar kullanılabilir.",
+   "kaynak": "resmi",
+   "avantajTuru": "maxipuan",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "id": "dk-max-market-2000-2611",
+   "ad": "2.000 TL ve üzeri Market Alışverişlerinize 1.500 TL'ye varan MaxiPuan!",
+   "kisaAd": "Maximum market 2.000 TL'ye 125 TL",
+   "aciklama": "Maximum üye marketlerde farklı günlerde yapılan her 2.000 TL ve üzeri tek alışverişe 125 TL MaxiPuan; toplamda 1.500 TL'ye kadar.",
+   "kategoriler": [
+    "market"
+   ],
+   "kazancMetni": "Her 2.000 TL+ alışverişe 125 TL MaxiPuan",
+   "resmiLink": "https://www.maximum.com.tr/kampanyalar/maximum-kartinizla-market-alisverislerinize-maxipuan-hediye",
+   "kosullar": [
+    "Varsayım: Maximum geçişi tamamlanmış ve DenizKart Black Maximum Platinum gibi kabul edilmiş halde gösteriliyor (senin tercihin). Gerçekte kartın 6 Aralık 2026'ya kadar Maximum kampanyalarından yararlanamaz; koşullar DenizBank kartlarını henüz açıkça saymıyor.",
+    "Günde yalnızca ilk alışveriş sayılır.",
+    "Sayfa ilk uygun alışverişin de ödül kazandırıp kazandırmadığını net söylemiyor."
+   ],
+   "odul": {
+    "model": "islemBasi",
+    "esik": 2000,
+    "tutar": 125,
+    "maks": 1500
+   },
+   "katilimLinki": "https://www.maximum.com.tr/kampanyalar/maximum-kartinizla-market-alisverislerinize-maxipuan-hediye",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Maximum/İş Bankası resmî kampanya sayfası incelendi · kart uygunluğu varsayım"
+   }
+  },
+  {
+   "kart": "denizkart-black",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Maximum üye marketler",
+   "isyerleri": [],
+   "minHarcama": null,
+   "maksOdul": 750,
+   "katilimGerekli": true,
+   "katilimKosulu": "İşCep veya Maximum Mobil > Kampanyalar'dan \"KATIL\" de (kampanya süresince, harcamadan önce veya sonra).",
+   "sms": null,
+   "puanKullanim": "MaxiPuanlar 4 Aralık 2026'da yüklenir, 31 Aralık 2026'ya kadar kullanılabilir.",
+   "kaynak": "resmi",
+   "avantajTuru": "maxipuan",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "id": "dk-max-market-birikimli-2611",
+   "ad": "Market Alışverişlerinize 750 TL MaxiPuan Fırsatı!",
+   "kisaAd": "Maximum birikimli market 750 TL",
+   "aciklama": "Maximum üye marketlerde 2.000 TL'nin altındaki alışverişlerin toplamı 15.000 TL'ye ulaşınca 750 TL MaxiPuan.",
+   "kategoriler": [
+    "market"
+   ],
+   "kazancMetni": "2.000 TL altı alışverişlerin toplamı 15.000 TL'ye ulaşınca 750 TL MaxiPuan",
+   "minMetni": "Toplam 15.000 TL",
+   "resmiLink": "https://www.maximum.com.tr/kampanyalar/maximumdan-birikimli-market-alisverislerinize-maxipuan-kampanyasi",
+   "kosullar": [
+    "Varsayım: Maximum geçişi tamamlanmış ve DenizKart Black Maximum Platinum gibi kabul edilmiş halde gösteriliyor (senin tercihin). Gerçekte kartın 6 Aralık 2026'ya kadar Maximum kampanyalarından yararlanamaz; koşullar DenizBank kartlarını henüz açıkça saymıyor.",
+    "Ödül toplam harcamaya bağlı olduğu için hesaplayıcı tek işlem kazancı göstermez."
+   ],
+   "odul": {
+    "model": "bilinmiyor"
+   },
+   "katilimLinki": "https://www.maximum.com.tr/kampanyalar/maximumdan-birikimli-market-alisverislerinize-maxipuan-kampanyasi",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Maximum/İş Bankası resmî kampanya sayfası incelendi · kart uygunluğu varsayım"
+   }
+  },
+  {
+   "kart": "denizkart-black",
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Amazon.com.tr, Hepsiburada, İncehesap.com, n11, Trendyol",
+   "isyerleri": [
+    "Amazon",
+    "Hepsiburada",
+    "İncehesap",
+    "n11",
+    "Trendyol"
+   ],
+   "minHarcama": 3000,
+   "maksOdul": 3000,
+   "katilimGerekli": true,
+   "katilimKosulu": "İşCep veya Maximum Mobil > Kampanyalar'dan \"KATIL\" de (kampanya süresince, harcamadan önce veya sonra).",
+   "sms": null,
+   "puanKullanim": "MaxiPuanlar 17 Aralık 2026'da yüklenir, 31 Ocak 2027'ye kadar kullanılabilir.",
+   "kaynak": "resmi",
+   "avantajTuru": "maxipuan",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "id": "dk-max-eticaret-2611",
+   "ad": "Amazon.com.tr, Hepsiburada, İncehesap.com, n11 ve Trendyol'dan yapacağınız alışverişinize MaxiPuan!",
+   "kisaAd": "Maximum e-ticaret 3.000 TL",
+   "aciklama": "Bu sitelerde ikinci alışverişten itibaren her 3.000 TL ve üzeri alışverişe 300 TL MaxiPuan; toplamda 3.000 TL'ye kadar.",
+   "kategoriler": [
+    "eticaret"
+   ],
+   "kazancMetni": "İkinci alışverişten itibaren her 3.000 TL+ alışverişe 300 TL MaxiPuan",
+   "resmiLink": "https://www.maximum.com.tr/kampanyalar/e-ticaret-alisverislerinizde-maxipuan-kampanyasi",
+   "kosullar": [
+    "Varsayım: Maximum geçişi tamamlanmış ve DenizKart Black Maximum Platinum gibi kabul edilmiş halde gösteriliyor (senin tercihin). Gerçekte kartın 6 Aralık 2026'ya kadar Maximum kampanyalarından yararlanamaz; koşullar DenizBank kartlarını henüz açıkça saymıyor.",
+    "İlk uygun alışveriş ödül kazandırmaz."
+   ],
+   "odul": {
+    "model": "islemBasi",
+    "esik": 3000,
+    "tutar": 300,
+    "maks": 3000,
+    "ilkIslemOdulsuz": true
+   },
+   "katilimLinki": "https://www.maximum.com.tr/kampanyalar/e-ticaret-alisverislerinizde-maxipuan-kampanyasi",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Maximum/İş Bankası resmî kampanya sayfası incelendi · kart uygunluğu varsayım"
+   }
+  },
+  {
+   "kart": "denizkart-black",
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "CarrefourSA (mağaza, uygulama, carrefoursa.com)",
+   "isyerleri": [
+    "CarrefourSA"
+   ],
+   "minHarcama": 3000,
+   "maksOdul": 700,
+   "katilimGerekli": true,
+   "katilimKosulu": "İşCep veya Maximum Mobil > Kampanyalar'dan \"KATIL\" de (kampanya süresince, harcamadan önce veya sonra).",
+   "sms": null,
+   "puanKullanim": "MaxiPuanlar 8 Aralık 2026'da yüklenir; yalnızca CarrefourSA'da, 31 Ocak 2027'ye kadar kullanılabilir.",
+   "kaynak": "resmi",
+   "avantajTuru": "maxipuan",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "id": "dk-max-carrefoursa-2611",
+   "ad": "CarrefourSA'da 700 TL MaxiPuan Fırsatı!",
+   "kisaAd": "CarrefourSA 300 TL",
+   "aciklama": "CarrefourSA mağaza, uygulama ve sitesinde her 3.000 TL ve üzeri market alışverişine 300 TL MaxiPuan; mobil temassız veya TR Karekod ile +50 TL; toplamda 700 TL'ye kadar.",
+   "kategoriler": [
+    "market"
+   ],
+   "kazancMetni": "Her 3.000 TL+ alışverişe 300 TL · QR / Mobil ile +50 TL",
+   "resmiLink": "https://www.maximum.com.tr/kampanyalar/carrefoursada-maxipuan-firsati",
+   "odul": {
+    "model": "islemBasi",
+    "esik": 3000,
+    "tutar": 300,
+    "maks": 600,
+    "ek": {
+     "kosul": "mobil-qr",
+     "tutar": 50,
+     "maks": 100
+    },
+    "toplamMaks": 700
+   },
+   "katilimLinki": "https://www.maximum.com.tr/kampanyalar/carrefoursada-maxipuan-firsati",
+   "kosullar": [
+    "Varsayım: Maximum geçişi tamamlanmış ve DenizKart Black Maximum Platinum gibi kabul edilmiş halde gösteriliyor (senin tercihin). Gerçekte kartın 6 Aralık 2026'ya kadar Maximum kampanyalarından yararlanamaz; koşullar DenizBank kartlarını henüz açıkça saymıyor."
+   ],
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Maximum/İş Bankası resmî kampanya sayfası incelendi · kart uygunluğu varsayım"
+   }
+  },
+  {
+   "kart": "denizkart-black",
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Yalnızca lastikcim.com.tr, Michelin lastikler",
+   "isyerleri": [
+    "Lastikcim.com"
+   ],
+   "minHarcama": 19000,
+   "maksOdul": 4000,
+   "katilimGerekli": true,
+   "katilimKosulu": "İşCep veya Maximum Mobil > Kampanyalar'dan \"KATIL\" de (kampanya süresince, harcamadan önce veya sonra).",
+   "sms": null,
+   "puanKullanim": "MaxiPuanlar 17 Aralık 2026'da yüklenir, 31 Ocak 2027'ye kadar kullanılabilir.",
+   "kaynak": "resmi",
+   "avantajTuru": "maxipuan",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "id": "dk-max-lastikcim-2611",
+   "ad": "Lastikcim.com'da Michelin Lastik Alışverişinize 4.000 TL MaxiPuan Fırsatı",
+   "kisaAd": "Lastikcim Michelin",
+   "aciklama": "Lastikcim.com'da tek seferde Michelin lastik alışverişinde 19.000 TL+ → 2.000 TL, 28.000 TL+ → 3.000 TL, 37.000 TL+ → 4.000 TL MaxiPuan (bir kez).",
+   "kategoriler": [
+    "akaryakit"
+   ],
+   "kazancMetni": "19.000 TL+ → 2.000 · 28.000 TL+ → 3.000 · 37.000 TL+ → 4.000 TL MaxiPuan",
+   "resmiLink": "https://www.isbank.com.tr/kampanyalar/lastikcimcomda-maxipuan-firsati",
+   "odul": {
+    "model": "kademe",
+    "kademeler": [
+     {
+      "esik": 19000,
+      "tutar": 2000
+     },
+     {
+      "esik": 28000,
+      "tutar": 3000
+     },
+     {
+      "esik": 37000,
+      "tutar": 4000
+     }
+    ],
+    "tekSefer": true
+   },
+   "katilimLinki": "https://www.isbank.com.tr/kampanyalar/lastikcimcomda-maxipuan-firsati",
+   "kosullar": [
+    "Varsayım: Maximum geçişi tamamlanmış ve DenizKart Black Maximum Platinum gibi kabul edilmiş halde gösteriliyor (senin tercihin). Gerçekte kartın 6 Aralık 2026'ya kadar Maximum kampanyalarından yararlanamaz; koşullar DenizBank kartlarını henüz açıkça saymıyor."
+   ],
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Maximum/İş Bankası resmî kampanya sayfası incelendi · kart uygunluğu varsayım"
+   }
+  },
+  {
+   "kart": "denizkart-black",
+   "tip": "harcama",
+   "kapsam": "secili",
+   "kapsamNotu": "Maximum üye Shell istasyonları",
+   "isyerleri": [
+    "Shell"
+   ],
+   "minHarcama": 1500,
+   "maksOdul": 500,
+   "katilimGerekli": true,
+   "katilimKosulu": "İşCep > Kampanyalar'dan \"KATIL\" de.",
+   "sms": null,
+   "puanKullanim": "MaxiPuanlar 20 Kasım 2026'da yüklenir; yalnızca Shell'de, 31 Aralık 2026'ya kadar kullanılabilir.",
+   "kaynak": "resmi",
+   "avantajTuru": "maxipuan",
+   "baslangic": "2026-10-01",
+   "bitis": "2026-11-15",
+   "id": "dk-max-shell-2610",
+   "ad": "Shell'de 500 TL MaxiPuan!",
+   "kisaAd": "Shell 500 TL",
+   "aciklama": "Maximum üye Shell istasyonlarında 4. kez 1.500 TL ve üzeri akaryakıt/LPG alışverişine 450 TL MaxiPuan; en az bir ödeme Mobil Temassız veya QR ise +50 TL.",
+   "kategoriler": [
+    "akaryakit"
+   ],
+   "kazancMetni": "4 × 1.500 TL+ yakıta 450 TL MaxiPuan (QR / Mobil ile 500 TL)",
+   "resmiLink": "https://www.isbank.com.tr/kampanyalar/shell-maxipuan-kampanyasi",
+   "kosullar": [
+    "Varsayım: Maximum geçişi tamamlanmış ve DenizKart Black Maximum Platinum gibi kabul edilmiş halde gösteriliyor (senin tercihin). Gerçekte kartın 6 Aralık 2026'ya kadar Maximum kampanyalarından yararlanamaz; koşullar DenizBank kartlarını henüz açıkça saymıyor.",
+    "Ödül 4. uygun alışverişte oluşur; hesaplayıcı tek işlem kazancı göstermez."
+   ],
+   "odul": {
+    "model": "bilinmiyor"
+   },
+   "katilimLinki": "https://www.isbank.com.tr/kampanyalar/shell-maxipuan-kampanyasi",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Maximum/İş Bankası resmî kampanya sayfası incelendi · kart uygunluğu varsayım"
+   }
+  },
+  {
+   "kart": "denizkart-black",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Emlak, gelir, MTV, GMSİV vergileri ve tapu harcı",
+   "isyerleri": [],
+   "minHarcama": 2000,
+   "maksOdul": null,
+   "katilimGerekli": true,
+   "katilimKosulu": "Ödemeden sonra İşCep > Kartlar > Dönemiçi Hareketlerim'den işlemi seçip \"Taksitlendir\" de (7 Aralık 2026'ya ve ekstre kesimine kadar).",
+   "sms": null,
+   "puanKullanim": "",
+   "kaynak": "resmi",
+   "avantajTuru": "taksit",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "id": "dk-max-vergi-2611",
+   "ad": "Emlak Vergisi, Gelir Vergisi, MTV ve Tapu Harcı Ödemelerinize Sonradan 3 Aya Varan Taksit!",
+   "kisaAd": "Vergiye 3 taksit (Maximum)",
+   "aciklama": "İşCep, İnternet Şubesi veya gib.gov.tr'den peşin ödenen vergilerde 2.000–25.000 TL arasına 3, 25.000–5.000.000 TL arasına 2 faizsiz taksit.",
+   "kategoriler": [
+    "diger"
+   ],
+   "kazancMetni": "2.000–25.000 TL → 3 taksit · 25.000 TL+ → 2 taksit",
+   "maksMetni": "İşlem en fazla 5.000.000 TL · en fazla 5 ödeme",
+   "resmiLink": "https://www.isbank.com.tr/kampanyalar/gelir-motorlu-tasitlar-tapu-harc-ve-emlak-vergisi-odemelerinize-sonradan-taksit-firsati",
+   "kosullar": [
+    "Varsayım: Maximum geçişi tamamlanmış ve DenizKart Black Maximum Platinum gibi kabul edilmiş halde gösteriliyor (senin tercihin). Gerçekte kartın 6 Aralık 2026'ya kadar Maximum kampanyalarından yararlanamaz; koşullar DenizBank kartlarını henüz açıkça saymıyor.",
+    "3 taksit en fazla 3, 2 taksit en fazla 2 kez kullanılabilir."
+   ],
+   "odul": {
+    "model": "taksit",
+    "min": 2000,
+    "max": 5000000,
+    "metin": "3 taksite kadar (faizsiz)",
+    "maksAdet": 5
+   },
+   "katilimLinki": "https://www.isbank.com.tr/kampanyalar/gelir-motorlu-tasitlar-tapu-harc-ve-emlak-vergisi-odemelerinize-sonradan-taksit-firsati",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Maximum/İş Bankası resmî kampanya sayfası incelendi · kart uygunluğu varsayım"
+   }
+  },
+  {
+   "kart": "denizkart-black",
+   "tip": "harcama",
+   "kapsam": "genel",
+   "kapsamNotu": "Sağlık kurumları ve eczaneler",
+   "isyerleri": [],
+   "minHarcama": 5000,
+   "maksOdul": null,
+   "katilimGerekli": true,
+   "katilimKosulu": "Harcamadan sonra İşCep veya Maximum Mobil'den işlemi seçip \"Taksitlendir\" de (30 Kasım'a ve ekstre kesimine kadar).",
+   "sms": null,
+   "puanKullanim": "",
+   "kaynak": "resmi",
+   "avantajTuru": "taksit",
+   "baslangic": "2026-11-01",
+   "bitis": "2026-11-30",
+   "id": "dk-max-saglik-2611",
+   "ad": "Sağlık Harcamalarına Faizsiz Taksit Fırsatı!",
+   "kisaAd": "Sağlığa 3 taksit (Maximum)",
+   "aciklama": "Hastane, diş hekimi vb. sağlık kurumlarında 5.000–500.000 TL, eczanelerde 5.000–50.000 TL arası harcamalara 3 faizsiz taksit.",
+   "kategoriler": [
+    "saglik"
+   ],
+   "kazancMetni": "3 faizsiz taksit",
+   "maksMetni": "İşlem en fazla 500.000 TL · en fazla 3 işlem",
+   "resmiLink": "https://www.maximum.com.tr/kampanyalar/saglik-odemelerinizi-faizsiz-taksitlendirin",
+   "kosullar": [
+    "Varsayım: Maximum geçişi tamamlanmış ve DenizKart Black Maximum Platinum gibi kabul edilmiş halde gösteriliyor (senin tercihin). Gerçekte kartın 6 Aralık 2026'ya kadar Maximum kampanyalarından yararlanamaz; koşullar DenizBank kartlarını henüz açıkça saymıyor.",
+    "Optik, işitme cihazı, estetik merkezleri ve e-ticaret hariçtir."
+   ],
+   "odul": {
+    "model": "taksit",
+    "min": 5000,
+    "max": 500000,
+    "metin": "3 taksit (faizsiz)",
+    "maksAdet": 3
+   },
+   "katilimLinki": "https://www.maximum.com.tr/kampanyalar/saglik-odemelerinizi-faizsiz-taksitlendirin",
+   "dogrulama": {
+    "durum": "dogrulandi",
+    "tarih": "2026-11-10",
+    "yontem": "Maximum/İş Bankası resmî kampanya sayfası incelendi · kart uygunluğu varsayım"
+   }
+  }
+ ]
+}
