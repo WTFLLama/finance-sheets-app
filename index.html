@@ -435,7 +435,13 @@ async function api(path,body,params){
 /* settings sync: these keys are also kept in the "Settings" sheet, so they survive reinstalling the app */
 const SYNC=["pref","catEm","dil","priv","mx-l4","mx-coach","capture"];
 let SQ={},SYT=null;
-const flushSync=()=>{clearTimeout(SYT);SYT=null;const v=SQ;SQ={};if(!Object.keys(v).length)return;api("settings_set",{values:v}).catch(()=>{Object.keys(v).forEach(k=>{if(!(k in SQ))SQ[k]=v[k]});if(!SYT)SYT=setTimeout(flushSync,15000)})};
+// Settings sheet layout: one row per setting (theme, lang, dec, cur, glass, dil, priv, mx_coach, catEm, mx-l4, capture)
+const PREF_KEYS=["theme","lang","dec","cur","glass"];
+const toSheet=(k,v)=>{if(k==="pref"){let p={};try{p=JSON.parse(v)||{}}catch(e){}const o={};PREF_KEYS.forEach(x=>{if(p[x]!=null)o[x]=String(p[x])});return o}if(k==="mx-coach")return{mx_coach:v};return{[k]:v}};
+const fromSheet=sv=>{const o={...sv};delete o.mx_coach;PREF_KEYS.forEach(x=>delete o[x]);
+  if(PREF_KEYS.some(x=>typeof sv[x]==="string"&&sv[x]!=="")){let p={};try{p=JSON.parse(lsGet("pref"))||{}}catch(e){}PREF_KEYS.forEach(x=>{const v=sv[x];if(typeof v==="string"&&v!=="")p[x]=x==="dec"||x==="glass"?Number(v):v});o.pref=JSON.stringify(p)}
+  if(typeof sv.mx_coach==="string"&&sv.mx_coach!=="")o["mx-coach"]=sv.mx_coach;return o};
+const flushSync=()=>{clearTimeout(SYT);SYT=null;const v=SQ;SQ={};if(!Object.keys(v).length)return;api("settings_set",{values:Object.assign({},...Object.keys(v).map(k=>toSheet(k,v[k])))}).catch(()=>{Object.keys(v).forEach(k=>{if(!(k in SQ))SQ[k]=v[k]});if(!SYT)SYT=setTimeout(flushSync,15000)})};
 const lsSet=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}if(SYNC.indexOf(k)>-1){SQ[k]=v;clearTimeout(SYT);SYT=setTimeout(flushSync,1200)}};
 const lsGet=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
 /* ---------- preferences + language ---------- */
@@ -1955,7 +1961,7 @@ function App(){
   useEffect(()=>{try{localStorage.setItem("priv",priv?"1":"0")}catch(e){}},[priv]);
   const setPrivS=v=>{setPriv(v);lsSet("priv",v?"1":"0")};
   // settings from the Sheet win on start; keys the Sheet does not have yet are sent up from this phone
-  useEffect(()=>{let dead=false;api("settings").then(sv=>{if(dead||!sv)return;const up={};let ch=false;
+  useEffect(()=>{let dead=false;api("settings").then(sv0=>{if(dead||!sv0)return;const sv=fromSheet(sv0);const up={};let ch=false;
     SYNC.forEach(k=>{const loc=lsGet(k);if(typeof sv[k]==="string"&&sv[k]!==""){if(sv[k]!==loc){try{localStorage.setItem(k,sv[k])}catch(e){}ch=true}}else if(loc!=null&&!(k in SQ))up[k]=loc});
     if(Object.keys(up).length){Object.assign(SQ,up);flushSync()}
     if(ch){PREF=readPref();CEM=readCem();document.documentElement.lang=PREF.lang;applyTheme();setPriv(lsGet("priv")==="1");bump(n=>n+1)}}).catch(()=>{});return()=>{dead=true}},[]);
