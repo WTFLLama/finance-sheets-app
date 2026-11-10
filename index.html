@@ -428,7 +428,7 @@ input[type=range].rg:focus-visible{outline:2px solid var(--txt);outline-offset:2
 <script>window.__sp0=Date.now();setTimeout(function(){var s=document.getElementById("splash");if(s){s.classList.add("out");setTimeout(function(){s.remove()},500)}},8000)</script>
 <script>
 const h=React.createElement,{useState,useEffect,useMemo}=React;
-const API="https://script.google.com/macros/s/AKfycbw1uKIczhCi5z3T7wc2Ozj-cg7qPdh5tWOd5k0OEfZRmPdvAjmIalcvIUa7mJ-fo-8-vw/exec";
+const API="https://script.google.com/macros/s/AKfycby_7C3gATUjVjrLhcDdnnRu70MQtULb4q0WauoKuE6MErnJvVEicug8jrXPse8_FGbsBg/exec";
 async function api(path,body,params){
   const r=body?await fetch(API,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({path,...body})}):await fetch(API+"?"+new URLSearchParams({path,...params}));
   const j=await r.json();if(!j.ok)throw new Error(j.error||"API error");return j.data}
